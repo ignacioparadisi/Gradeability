@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19F96" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+    <entity name="Assignment" representedClassName="Assignment" parentEntity="Gradable" syncable="YES"/>
+    <entity name="Gradable" representedClassName="Gradable" isAbstract="YES" syncable="YES">
+        <attribute name="dateCreated" attributeType="Date" defaultDateTimeInterval="612317520" usesScalarValueType="NO"/>
+        <attribute name="grade" attributeType="Float" minValueString="0" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="maxGrade" attributeType="Float" minValueString="0" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="minGrade" attributeType="Float" minValueString="0" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="name" attributeType="String" defaultValueString=""/>
+    </entity>
+    <entity name="Subject" representedClassName="Subject" parentEntity="Gradable" syncable="YES"/>
+    <entity name="Term" representedClassName="Term" parentEntity="Gradable" syncable="YES">
+        <attribute name="isCurrent" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+    </entity>
+    <elements>
+        <element name="Gradable" positionX="-27" positionY="18" width="128" height="118"/>
+        <element name="Assignment" positionX="18" positionY="63" width="128" height="43"/>
+        <element name="Subject" positionX="54" positionY="99" width="128" height="43"/>
+        <element name="Term" positionX="18" positionY="63" width="128" height="58"/>
+    </elements>
+</model>
