@@ -19,9 +19,9 @@ extension Assignment {
 
     @NSManaged public var deadline: Date?
     @NSManaged public var percentage: Float
+    @NSManaged public var assignment: Assignment?
     @NSManaged public var assignments: NSSet?
     @NSManaged public var subject: Subject?
-    @NSManaged public var assignment: Assignment?
 
 }
 

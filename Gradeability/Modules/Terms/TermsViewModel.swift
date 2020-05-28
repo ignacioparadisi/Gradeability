@@ -8,7 +8,8 @@
 
 import Foundation
 
-class TermsViewModel {
+class TermsViewModel: GradableViewModelRepresentable {
+    
     // MARK: Private Properties
     private var terms: [Term] = [] {
         didSet {
@@ -20,6 +21,9 @@ class TermsViewModel {
     var errorDidHappen: (() -> Void)?
     var numberOfRows: Int {
         return terms.count
+    }
+    var title: String {
+        return "Terms"
     }
     
     func fetch() {
@@ -34,4 +38,11 @@ class TermsViewModel {
         let term = terms[indexPath.row]
         return term.name
     }
+    
+    func nextViewModelForRow(at indexPath: IndexPath) -> GradableViewModelRepresentable? {
+        let term = terms[indexPath.row]
+        let viewModel = SubjectsViewModel(term: term)
+        return viewModel
+    }
+    
 }

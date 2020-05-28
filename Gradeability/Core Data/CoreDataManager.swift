@@ -81,6 +81,7 @@ class CoreDataManager {
         
         for jsonDictionary in jsonArray {
             let term = Term(context: context)
+            term.id = UUID()
             term.name = jsonDictionary["name"] as? String
             term.grade = jsonDictionary["grade"] as! Float
             term.maxGrade = jsonDictionary["maxGrade"] as! Float
@@ -91,6 +92,7 @@ class CoreDataManager {
             let subjectsArray = jsonDictionary["subjects"] as! [[String: Any]]
             for subjectDictionary in subjectsArray {
                 let subject = Subject(context: context)
+                subject.id = UUID()
                 subject.term = term
                 subject.name = subjectDictionary["name"] as? String
                 subject.grade = subjectDictionary["grade"] as! Float
@@ -100,6 +102,7 @@ class CoreDataManager {
                 let assignmentsArray = subjectDictionary["assignments"] as! [[String: Any]]
                 for assignmentDictionary in assignmentsArray {
                     let assignment = Assignment(context: context)
+                    assignment.id = UUID()
                     assignment.subject = subject
                     assignment.name = assignmentDictionary["name"] as? String
                     assignment.grade = assignmentDictionary["grade"] as! Float
@@ -114,7 +117,7 @@ class CoreDataManager {
         saveContext()
     }
     
-    // - MARK: Terms
+    // MARK: - Terms
     func fetchTerms() throws -> [Term] {
         let fetchRequest: NSFetchRequest<Term> = Term.fetchRequest()
         let sortDescriptor = NSSortDescriptor(key: #keyPath(Term.dateCreated), ascending: true)
@@ -122,5 +125,20 @@ class CoreDataManager {
         return try context.fetch(fetchRequest)
     }
     
+    // MARK: - Subjects
+    func fetchSubjects(for term: Term) throws -> [Subject] {
+        let fetchRequest: NSFetchRequest<Subject> = Subject.fetchRequest()
+        let predicate: NSPredicate = NSPredicate(format: "%K == %@", #keyPath(Subject.term.id), term.id! as CVarArg)
+        fetchRequest.predicate = predicate
+        return try context.fetch(fetchRequest)
+    }
+    
+    // MARK: - Assignments
+    func fetchAssignments(for subject: Subject) throws -> [Assignment] {
+        let fetchRequest: NSFetchRequest<Assignment> = Assignment.fetchRequest()
+        let predicate: NSPredicate = NSPredicate(format: "%K == %@", #keyPath(Assignment.subject.id), subject.id! as CVarArg)
+        fetchRequest.predicate = predicate
+        return try context.fetch(fetchRequest)
+    }
 
 }

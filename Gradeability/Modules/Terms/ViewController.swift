@@ -11,24 +11,33 @@ import UIKit
 class ViewController: UIViewController {
 
     private let tableView: UITableView = UITableView(frame: .zero, style: .insetGrouped)
-    private let viewModel = TermsViewModel()
+    private var viewModel: GradableViewModelRepresentable
+    
+    init(viewModel: GradableViewModelRepresentable) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.prefersLargeTitles = true
-        title = "Terms"
+        title = viewModel.title
         
         setupViewModel()
         
         view.addSubview(tableView)
         tableView.dataSource = self
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.topAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor)
-        ])
+        tableView.delegate = self
+        tableView.anchor
+            .topToSuperview()
+            .trailingToSuperview()
+            .bottomToSuperview()
+            .leadingToSuperview()
+            .activate()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cellIdentifier")
         
         viewModel.fetch()
@@ -53,6 +62,14 @@ extension ViewController: UITableViewDataSource {
         cell.accessoryType = .disclosureIndicator
         cell.textLabel?.text = viewModel.textForRow(at: indexPath)
         return cell
+    }
+}
+
+extension ViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let nextViewModel = viewModel.nextViewModelForRow(at: indexPath) else { return }
+        let viewController = ViewController(viewModel: nextViewModel)
+        navigationController?.pushViewController(viewController, animated: true)
     }
 }
 
