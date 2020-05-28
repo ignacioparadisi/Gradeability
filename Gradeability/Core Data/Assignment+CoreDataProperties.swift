@@ -2,7 +2,7 @@
 //  Assignment+CoreDataProperties.swift
 //  Gradeability
 //
-//  Created by Ignacio Paradisi on 5/27/20.
+//  Created by Ignacio Paradisi on 5/28/20.
 //  Copyright © 2020 Ignacio Paradisi. All rights reserved.
 //
 //
@@ -17,5 +17,27 @@ extension Assignment {
         return NSFetchRequest<Assignment>(entityName: "Assignment")
     }
 
+    @NSManaged public var deadline: Date?
+    @NSManaged public var percentage: Float
+    @NSManaged public var assignments: NSSet?
+    @NSManaged public var subject: Subject?
+    @NSManaged public var assignment: Assignment?
+
+}
+
+// MARK: Generated accessors for assignments
+extension Assignment {
+
+    @objc(addAssignmentsObject:)
+    @NSManaged public func addToAssignments(_ value: Assignment)
+
+    @objc(removeAssignmentsObject:)
+    @NSManaged public func removeFromAssignments(_ value: Assignment)
+
+    @objc(addAssignments:)
+    @NSManaged public func addToAssignments(_ values: NSSet)
+
+    @objc(removeAssignments:)
+    @NSManaged public func removeFromAssignments(_ values: NSSet)
 
 }

@@ -1,62 +1,1343 @@
-
 [{
     "name": "Semestre 1",
     "maxGrade": 20.0,
     "minGrade": 10.0,
     "grade": 18.0,
-    "isCurrent": true
+    "isCurrent": true,
+    "subjects": [{
+        "name": "Matemática Básica",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 19.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }, {
+        "name": "Geometría Plana y Trigonometría",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 16.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }, {
+        "name": "Introducción a la Informática",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 20.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }, {
+        "name": "Comprensión y Producción de Textos",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 12.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }, {
+        "name": "Identidad, Liderazgo y Compromiso I",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 10.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }]
 }, {
     "name": "Semestre 2",
     "maxGrade": 20.0,
     "minGrade": 10.0,
     "grade": 15.0,
-    "isCurrent": false
+    "isCurrent": false,
+    "subjects": [{
+        "name": "Cálculo I",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 19.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }, {
+        "name": "Lógica Computacional",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 16.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }, {
+        "name": "Algoritmos y Programación I",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 20.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }, {
+        "name": "Identidad, Liderazgo y Compromiso II",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 10.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }]
 }, {
     "name": "Semestre 3",
     "maxGrade": 20.0,
     "minGrade": 10.0,
     "grade": 12.0,
-    "isCurrent": false
+    "isCurrent": false,
+    "subjects": [{
+        "name": "Cálculo II",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 19.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }, {
+        "name": "Física General",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 16.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }, {
+        "name": "Matemáticas Discretas",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 20.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }, {
+        "name": "Algoritmos y Programación II",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 12.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }]
 }, {
     "name": "Semestre 4",
     "maxGrade": 20.0,
     "minGrade": 10.0,
     "grade": 10.0,
-    "isCurrent": false
+    "isCurrent": false,
+    "subjects": [{
+        "name": "Cálculo III",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 19.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }, {
+        "name": "Laboratorio de Física Eléctrica",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 16.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }, {
+        "name": "Física Eléctrica",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 20.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }, {
+        "name": "Estructura del Computador",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 12.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }, {
+        "name": "Algoritmos y Programación III",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 10.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }, {
+        "name": "Ecología, Ambiente y Sustentabilidad",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 10.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }]
 }, {
     "name": "Semestre 5",
     "maxGrade": 20.0,
     "minGrade": 10.0,
     "grade": 1.0,
-    "isCurrent": false
+    "isCurrent": false,
+    "subjects": [{
+        "name": "Cálculo IV",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 19.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }, {
+        "name": "Circuitos Electrónicos",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 16.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }, {
+        "name": "Sistemas de Operación",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 20.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }, {
+        "name": "Ingeniería del Software",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 12.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }, {
+        "name": "Interacción Humano-Computador",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 10.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }]
 }, {
     "name": "Semestre 6",
     "maxGrade": 20.0,
     "minGrade": 10.0,
     "grade": 5.0,
-    "isCurrent": false
+    "isCurrent": false,
+    "subjects": [{
+        "name": "Cálculo Numérico",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 19.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }, {
+        "name": "Estadística y Probabilidades",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 16.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }, {
+        "name": "Arquitectura del Computador",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 20.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }, {
+        "name": "Redes de Computadores I",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 12.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }, {
+        "name": "Sistemas de Bases de Datos I",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 10.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }]
 }, {
     "name": "Semestre 7",
     "maxGrade": 20.0,
     "minGrade": 10.0,
     "grade": 20.0,
-    "isCurrent": false
+    "isCurrent": false,
+    "subjects": [{
+        "name": "Programación Lineal",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 19.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }, {
+        "name": "Contabilidad General",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 16.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }, {
+        "name": "Redes de Computadores II",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 20.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }, {
+        "name": "Sistemas de Bases de Datos II",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 12.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }, {
+        "name": "Metodología del Software",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 10.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }, {
+        "name": "Inglés I",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 10.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }]
 }, {
     "name": "Semestre 8",
     "maxGrade": 20.0,
     "minGrade": 10.0,
     "grade": 19.0,
-    "isCurrent": false
+    "isCurrent": false,
+    "subjects": [{
+        "name": "Investigación de Operaciones",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 19.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }, {
+        "name": "Ingeniería Económica",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 16.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }, {
+        "name": "Redes de Computadores III",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 20.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }, {
+        "name": "Desarrollo del Software",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 12.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }, {
+        "name": "Seminario de Trabajo de Grado",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 10.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }, {
+        "name": "Inglés II",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 10.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }]
 }, {
     "name": "Semestre 9",
     "maxGrade": 20.0,
     "minGrade": 10.0,
     "grade": 12.0,
-    "isCurrent": false
+    "isCurrent": false,
+    "subjects": [{
+        "name": "Innovación y Emprendimiento",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 19.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }, {
+        "name": "Seguridad Computacional",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 16.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }, {
+        "name": "Sistemas Distribuidos",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 20.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }, {
+        "name": "Pasantía",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 12.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }, {
+        "name": "Inglés Técnico",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 10.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }, {
+        "name": "Electiva I",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 10.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }, {
+        "name": "Electiva II",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 10.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }]
 }, {
     "name": "Semestre 10",
     "maxGrade": 20.0,
     "minGrade": 10.0,
     "grade": 8.0,
-    "isCurrent": false
+    "isCurrent": false,
+    "subjects": [{
+        "name": "Evaluación de Sistemas Informáticos",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 19.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }, {
+        "name": "Ética Profesional",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 16.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }, {
+        "name": "Gestión de Proyectos de Software",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 20.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }, {
+        "name": "Trabajo de Grado",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 12.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }, {
+        "name": "Electiva III",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 10.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }]
 }]

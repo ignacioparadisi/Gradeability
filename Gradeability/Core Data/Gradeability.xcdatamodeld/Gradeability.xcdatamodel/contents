@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19F96" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
-    <entity name="Assignment" representedClassName="Assignment" parentEntity="Gradable" syncable="YES"/>
+    <entity name="Assignment" representedClassName="Assignment" parentEntity="Gradable" syncable="YES">
+        <attribute name="deadline" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="percentage" optional="YES" attributeType="Float" minValueString="0" maxValueString="1" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="assignment" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Assignment" inverseName="assignments" inverseEntity="Assignment"/>
+        <relationship name="assignments" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Assignment" inverseName="assignment" inverseEntity="Assignment"/>
+        <relationship name="subject" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Subject" inverseName="assignments" inverseEntity="Subject"/>
+    </entity>
     <entity name="Gradable" representedClassName="Gradable" isAbstract="YES" syncable="YES">
         <attribute name="dateCreated" attributeType="Date" defaultDateTimeInterval="612317520" usesScalarValueType="NO"/>
         <attribute name="grade" attributeType="Float" minValueString="0" defaultValueString="0.0" usesScalarValueType="YES"/>
@@ -8,14 +14,18 @@
         <attribute name="minGrade" attributeType="Float" minValueString="0" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="name" attributeType="String" defaultValueString=""/>
     </entity>
-    <entity name="Subject" representedClassName="Subject" parentEntity="Gradable" syncable="YES"/>
+    <entity name="Subject" representedClassName="Subject" parentEntity="Gradable" syncable="YES">
+        <relationship name="assignments" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Assignment" inverseName="subject" inverseEntity="Assignment"/>
+        <relationship name="term" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Term" inverseName="subjects" inverseEntity="Term"/>
+    </entity>
     <entity name="Term" representedClassName="Term" parentEntity="Gradable" syncable="YES">
         <attribute name="isCurrent" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <relationship name="subjects" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Subject" inverseName="term" inverseEntity="Subject"/>
     </entity>
     <elements>
-        <element name="Gradable" positionX="-27" positionY="18" width="128" height="118"/>
-        <element name="Assignment" positionX="18" positionY="63" width="128" height="43"/>
-        <element name="Subject" positionX="54" positionY="99" width="128" height="43"/>
-        <element name="Term" positionX="18" positionY="63" width="128" height="58"/>
+        <element name="Assignment" positionX="225.7734375" positionY="176.5078125" width="128" height="118"/>
+        <element name="Gradable" positionX="61.7734375" positionY="-1.5703125" width="128" height="118"/>
+        <element name="Subject" positionX="60.6328125" positionY="209.73828125" width="128" height="73"/>
+        <element name="Term" positionX="-119.59765625" positionY="206.9765625" width="128" height="73"/>
     </elements>
 </model>

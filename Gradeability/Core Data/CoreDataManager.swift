@@ -80,20 +80,36 @@ class CoreDataManager {
         let jsonArray = try! JSONSerialization.jsonObject(with: jsonData, options: [.allowFragments]) as! [[String: Any]]
         
         for jsonDictionary in jsonArray {
-            let name = jsonDictionary["name"] as? String
-            let grade = jsonDictionary["grade"] as! Float
-            let maxGrade = jsonDictionary["maxGrade"] as! Float
-            let minGrade = jsonDictionary["minGrade"] as! Float
-            let isCurrent = jsonDictionary["isCurrent"] as! Bool
-            
-            
             let term = Term(context: context)
-            term.name = name
-            term.grade = grade
-            term.maxGrade = maxGrade
-            term.minGrade = minGrade
-            term.isCurrent = isCurrent
+            term.name = jsonDictionary["name"] as? String
+            term.grade = jsonDictionary["grade"] as! Float
+            term.maxGrade = jsonDictionary["maxGrade"] as! Float
+            term.minGrade = jsonDictionary["minGrade"] as! Float
+            term.isCurrent = jsonDictionary["isCurrent"] as! Bool
             term.dateCreated = Date()
+            
+            let subjectsArray = jsonDictionary["subjects"] as! [[String: Any]]
+            for subjectDictionary in subjectsArray {
+                let subject = Subject(context: context)
+                subject.term = term
+                subject.name = subjectDictionary["name"] as? String
+                subject.grade = subjectDictionary["grade"] as! Float
+                subject.maxGrade = subjectDictionary["maxGrade"] as! Float
+                subject.minGrade = subjectDictionary["minGrade"] as! Float
+                
+                let assignmentsArray = subjectDictionary["assignments"] as! [[String: Any]]
+                for assignmentDictionary in assignmentsArray {
+                    let assignment = Assignment(context: context)
+                    assignment.subject = subject
+                    assignment.name = assignmentDictionary["name"] as? String
+                    assignment.grade = assignmentDictionary["grade"] as! Float
+                    assignment.maxGrade = assignmentDictionary["maxGrade"] as! Float
+                    assignment.minGrade = assignmentDictionary["minGrade"] as! Float
+                    let percentage = assignmentDictionary["percentage"] as! NSNumber
+                    assignment.percentage = Float(truncating: percentage)
+                    assignment.deadline = Date()
+                }
+            }
         }
         saveContext()
     }
