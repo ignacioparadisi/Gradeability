@@ -1,0 +1,62 @@
+
+[{
+    "name": "Semestre 1",
+    "maxGrade": 20.0,
+    "minGrade": 10.0,
+    "grade": 18.0,
+    "isCurrent": true
+}, {
+    "name": "Semestre 2",
+    "maxGrade": 20.0,
+    "minGrade": 10.0,
+    "grade": 15.0,
+    "isCurrent": false
+}, {
+    "name": "Semestre 3",
+    "maxGrade": 20.0,
+    "minGrade": 10.0,
+    "grade": 12.0,
+    "isCurrent": false
+}, {
+    "name": "Semestre 4",
+    "maxGrade": 20.0,
+    "minGrade": 10.0,
+    "grade": 10.0,
+    "isCurrent": false
+}, {
+    "name": "Semestre 5",
+    "maxGrade": 20.0,
+    "minGrade": 10.0,
+    "grade": 1.0,
+    "isCurrent": false
+}, {
+    "name": "Semestre 6",
+    "maxGrade": 20.0,
+    "minGrade": 10.0,
+    "grade": 5.0,
+    "isCurrent": false
+}, {
+    "name": "Semestre 7",
+    "maxGrade": 20.0,
+    "minGrade": 10.0,
+    "grade": 20.0,
+    "isCurrent": false
+}, {
+    "name": "Semestre 8",
+    "maxGrade": 20.0,
+    "minGrade": 10.0,
+    "grade": 19.0,
+    "isCurrent": false
+}, {
+    "name": "Semestre 9",
+    "maxGrade": 20.0,
+    "minGrade": 10.0,
+    "grade": 12.0,
+    "isCurrent": false
+}, {
+    "name": "Semestre 10",
+    "maxGrade": 20.0,
+    "minGrade": 10.0,
+    "grade": 8.0,
+    "isCurrent": false
+}]

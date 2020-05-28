@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3296EA08247F570E00A04FE0 /* DummyTerms.json in Resources */ = {isa = PBXBuildFile; fileRef = 3296EA07247F570E00A04FE0 /* DummyTerms.json */; };
+		3296EA0A247F5BA400A04FE0 /* TermsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3296EA09247F5BA400A04FE0 /* TermsViewModel.swift */; };
 		32E34EFF247F383500BFD25A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E34EFE247F383500BFD25A /* AppDelegate.swift */; };
 		32E34F01247F383500BFD25A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E34F00247F383500BFD25A /* SceneDelegate.swift */; };
 		32E34F03247F383500BFD25A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E34F02247F383500BFD25A /* ViewController.swift */; };
@@ -44,6 +46,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3296EA07247F570E00A04FE0 /* DummyTerms.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = DummyTerms.json; sourceTree = "<group>"; };
+		3296EA09247F5BA400A04FE0 /* TermsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsViewModel.swift; sourceTree = "<group>"; };
 		32E34EFB247F383500BFD25A /* Gradeability.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gradeability.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		32E34EFE247F383500BFD25A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		32E34F00247F383500BFD25A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -95,6 +99,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3296EA06247F56F500A04FE0 /* Dummy Data */ = {
+			isa = PBXGroup;
+			children = (
+				3296EA07247F570E00A04FE0 /* DummyTerms.json */,
+			);
+			path = "Dummy Data";
+			sourceTree = "<group>";
+		};
 		32E34EF2247F383500BFD25A = {
 			isa = PBXGroup;
 			children = (
@@ -118,6 +130,7 @@
 		32E34EFD247F383500BFD25A /* Gradeability */ = {
 			isa = PBXGroup;
 			children = (
+				3296EA09247F5BA400A04FE0 /* TermsViewModel.swift */,
 				32E34F32247F38B800BFD25A /* Gradeability.entitlements */,
 				32E34F31247F389C00BFD25A /* Core Data */,
 				32E34EFE247F383500BFD25A /* AppDelegate.swift */,
@@ -151,6 +164,7 @@
 		32E34F31247F389C00BFD25A /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
+				3296EA06247F56F500A04FE0 /* Dummy Data */,
 				32E34F33247F3A1100BFD25A /* Term+CoreDataClass.swift */,
 				32E34F34247F3A1100BFD25A /* Term+CoreDataProperties.swift */,
 				32E34F35247F3A1100BFD25A /* Subject+CoreDataClass.swift */,
@@ -270,6 +284,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				32E34F0E247F383600BFD25A /* LaunchScreen.storyboard in Resources */,
+				3296EA08247F570E00A04FE0 /* DummyTerms.json in Resources */,
 				32E34F0B247F383600BFD25A /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -307,6 +322,7 @@
 				32E34F40247F3A1100BFD25A /* Assignment+CoreDataProperties.swift in Sources */,
 				32E34F01247F383500BFD25A /* SceneDelegate.swift in Sources */,
 				32E34F3B247F3A1100BFD25A /* Term+CoreDataClass.swift in Sources */,
+				3296EA0A247F5BA400A04FE0 /* TermsViewModel.swift in Sources */,
 				32E34F3F247F3A1100BFD25A /* Assignment+CoreDataClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -476,6 +492,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8T85WESY64;
 				INFOPLIST_FILE = Gradeability/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -496,6 +513,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8T85WESY64;
 				INFOPLIST_FILE = Gradeability/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

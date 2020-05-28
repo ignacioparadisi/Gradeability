@@ -45,9 +45,12 @@ class CoreDataManager {
     }()
 
     // MARK: - Core Data Saving support
+    
+    private var context: NSManagedObjectContext {
+        return persistentContainer.viewContext
+    }
 
     func saveContext () {
-        let context = persistentContainer.viewContext
         if context.hasChanges {
             do {
                 try context.save()
@@ -59,5 +62,49 @@ class CoreDataManager {
             }
         }
     }
+    
+    // - MARK: Import Dummy JSON
+    func importTermsFromJSON() {
+        let fetchRequest: NSFetchRequest<Term> = Term.fetchRequest()
+        let count = try! context.count(for: fetchRequest)
+        
+        guard count == 0 else { return }
+        
+        let results = try! context.fetch(fetchRequest)
+        results.forEach { context.delete($0) }
+        saveContext()
+        
+        let jsonURL = Bundle.main.url(forResource: "DummyTerms", withExtension: "json")!
+        let jsonData = try! Data(contentsOf: jsonURL)
+        
+        let jsonArray = try! JSONSerialization.jsonObject(with: jsonData, options: [.allowFragments]) as! [[String: Any]]
+        
+        for jsonDictionary in jsonArray {
+            let name = jsonDictionary["name"] as? String
+            let grade = jsonDictionary["grade"] as! Float
+            let maxGrade = jsonDictionary["maxGrade"] as! Float
+            let minGrade = jsonDictionary["minGrade"] as! Float
+            let isCurrent = jsonDictionary["isCurrent"] as! Bool
+            
+            
+            let term = Term(context: context)
+            term.name = name
+            term.grade = grade
+            term.maxGrade = maxGrade
+            term.minGrade = minGrade
+            term.isCurrent = isCurrent
+            term.dateCreated = Date()
+        }
+        saveContext()
+    }
+    
+    // - MARK: Terms
+    func fetchTerms() throws -> [Term] {
+        let fetchRequest: NSFetchRequest<Term> = Term.fetchRequest()
+        let sortDescriptor = NSSortDescriptor(key: #keyPath(Term.dateCreated), ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        return try context.fetch(fetchRequest)
+    }
+    
 
 }
