@@ -23,7 +23,7 @@ class MainSplitViewController: UISplitViewController {
             let subjectsViewModel = SubjectsViewModel(term: term)
             subjectsViewModel.fetch()
             let masterViewController = UINavigationController(rootViewController: GradablesViewController(viewModel: subjectsViewModel))
-            if let assignmentsViewModel = subjectsViewModel.nextViewModelForRow(at: IndexPath(row: 0, section: 0)) {
+            if let (assignmentsViewModel, _) = subjectsViewModel.nextViewModelForRow(at: IndexPath(row: 0, section: 0)) {
                 let detailViewController = UINavigationController(rootViewController: GradablesViewController(viewModel: assignmentsViewModel))
                 viewControllers = [masterViewController, detailViewController]
             }

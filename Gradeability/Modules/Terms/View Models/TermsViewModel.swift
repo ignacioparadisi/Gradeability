@@ -29,6 +29,10 @@ class TermsViewModel: GradableViewModelRepresentable {
     var title: String {
         return "Terms"
     }
+    /// Title for the gradables section
+    var sectionTitle: String {
+        return "Terms"
+    }
     
     // MARK: Functions
     /// Fetches the Subjects.
@@ -50,10 +54,10 @@ class TermsViewModel: GradableViewModelRepresentable {
     
     /// Gets the View Model for the `UIViewController` to be displayed next when the user selects a `UITableViewCell`.
     /// - Parameter indexPath: IndexPath for the cell selected.
-    func nextViewModelForRow(at indexPath: IndexPath) -> GradableViewModelRepresentable? {
+    func nextViewModelForRow(at indexPath: IndexPath) -> (viewModel: GradableViewModelRepresentable, navigationStyle: NavigationStyle)? {
         let term = terms[indexPath.row]
         let viewModel = SubjectsViewModel(term: term)
-        return viewModel
+        return (viewModel, .push)
     }
     
 }

@@ -8,10 +8,18 @@
 
 import Foundation
 
+enum NavigationStyle {
+    case present
+    case push
+    case detail
+}
+
 protocol GradableViewModelRepresentable {
     // MARK: Properties
     /// Title for the `UIViewController`.
     var title: String { get }
+    /// Title for the gradables section
+    var sectionTitle: String { get }
     /// Number of rows for the `UITableView`.
     var numberOfRows: Int { get }
     /// Closure called when the data changes so the UI can be updated.
@@ -26,5 +34,5 @@ protocol GradableViewModelRepresentable {
     func viewModelForRow(at indexPath: IndexPath) -> GradableCellViewModelRepresentable
     /// Gets the View Model for the `UIViewController` to be displayed next when the user selects a `UITableViewCell`.
     /// - Parameter indexPath: IndexPath for the cell selected.
-    func nextViewModelForRow(at indexPath: IndexPath) -> GradableViewModelRepresentable?
+    func nextViewModelForRow(at indexPath: IndexPath) -> (viewModel: GradableViewModelRepresentable, navigationStyle: NavigationStyle)?
 }

@@ -81,14 +81,28 @@ extension GradablesViewController: UITableViewDataSource {
         cell.detailTextLabel?.text = cellViewModel.detail
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return viewModel.sectionTitle
+    }
 }
 
 // MARK: - UITableViewDelegate
 extension GradablesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let nextViewModel = viewModel.nextViewModelForRow(at: indexPath) else { return }
+        guard let (nextViewModel, navigationStyle) = viewModel.nextViewModelForRow(at: indexPath) else { return }
         let viewController = GradablesViewController(viewModel: nextViewModel)
-        navigationController?.pushViewController(viewController, animated: true)
+        switch navigationStyle {
+        case .push:
+            navigationController?.pushViewController(viewController, animated: true)
+        case .detail:
+            let navigationController = UINavigationController(rootViewController: viewController)
+            showDetailViewController(navigationController, sender: self)
+        case .present:
+            let navigationController = UINavigationController(rootViewController: viewController)
+            present(navigationController, animated: true)
+        }
+        
     }
 }
 
