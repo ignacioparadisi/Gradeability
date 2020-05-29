@@ -17,10 +17,17 @@ class TermsViewModel: GradableViewModelRepresentable {
             dataDidChange?()
         }
     }
+    private var isLoading: Bool = false {
+        didSet {
+            loadingDidChange?(isLoading)
+        }
+    }
     
     // MARK: Internal Properties
     /// Closure called when `terms` changes so the UI can be updated.
     var dataDidChange: (() -> Void)?
+    /// Closure called when data loading changes so the UI can be updated.
+    var loadingDidChange: ((Bool) -> Void)?
     /// Number of rows for the `UITableView`.
     var numberOfRows: Int {
         return terms.count
@@ -37,10 +44,16 @@ class TermsViewModel: GradableViewModelRepresentable {
     // MARK: Functions
     /// Fetches the Subjects.
     func fetch() {
-        do {
-            terms = try CoreDataManager.shared.fetchTerms()
-        } catch {
-            print(error.localizedDescription)
+        if isLoading { return }
+        isLoading = true
+        CoreDataManager.shared.fetchTerms { [weak self] result in
+            self?.isLoading = false
+            switch result {
+            case .success(let terms):
+                self?.terms = terms
+            case .failure:
+                break
+            }
         }
     }
     

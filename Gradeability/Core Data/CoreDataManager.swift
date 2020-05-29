@@ -121,11 +121,22 @@ class CoreDataManager {
     }
     
     // MARK: - Terms
-    func fetchTerms() throws -> [Term] {
+    func fetchTerms(result: @escaping (Result<[Term], Error>) -> Void) {
         let fetchRequest: NSFetchRequest<Term> = Term.fetchRequest()
         let sortDescriptor = NSSortDescriptor(key: #keyPath(Term.dateCreated), ascending: true)
         fetchRequest.sortDescriptors = [sortDescriptor]
-        return try context.fetch(fetchRequest)
+        let asyncFetchRequest: NSAsynchronousFetchRequest = NSAsynchronousFetchRequest(fetchRequest: fetchRequest) { fetchResult in
+            DispatchQueue.main.async {
+                if let terms = fetchResult.finalResult {
+                    result(.success(terms))
+                }
+            }
+        }
+        do {
+            try context.execute(asyncFetchRequest)
+        } catch {
+            print(error.localizedDescription)
+        }
     }
     func fetchCurrentTerm() throws -> Term? {
         let fetchRequest: NSFetchRequest<Term> = Term.fetchRequest()

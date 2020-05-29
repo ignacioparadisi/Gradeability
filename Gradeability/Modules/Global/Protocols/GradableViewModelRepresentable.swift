@@ -24,6 +24,8 @@ protocol GradableViewModelRepresentable {
     var numberOfRows: Int { get }
     /// Closure called when the data changes so the UI can be updated.
     var dataDidChange: (() -> Void)? { get set }
+    /// Closure called when data loading changes so the UI can be updated.
+    var loadingDidChange: ((Bool) -> Void)? { get set }
     
     // MARK: Functions
     /// Fetches the data.

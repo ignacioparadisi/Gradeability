@@ -23,6 +23,8 @@ class SubjectsViewModel: GradableViewModelRepresentable {
     // MARK: Internal Properties
     /// Closure called when `subjects` changes so the UI can be updated.
     var dataDidChange: (() -> Void)?
+    /// Closure called when data loading changes so the UI can be updated.
+    var loadingDidChange: ((Bool) -> Void)?
     /// Number of rows for the `UITableView`.
     var numberOfRows: Int {
         return subjects.count
