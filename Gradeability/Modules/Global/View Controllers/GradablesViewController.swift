@@ -28,9 +28,7 @@ class GradablesViewController: UIViewController {
     /// Add the `tableView` to the `view` and set's it up.
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBar.prefersLargeTitles = true
-        title = viewModel.title
-        
+        setupNavigationBar()
         setupViewModel()
         
         view.addSubview(tableView)
@@ -45,6 +43,17 @@ class GradablesViewController: UIViewController {
         tableView.register(GradableTableViewCell.self)
         
         viewModel.fetch()
+    }
+    
+    private func setupNavigationBar() {
+        navigationController?.navigationBar.prefersLargeTitles = true
+        title = viewModel.title
+        guard let addImage = UIImage(systemName: "plus.circle.fill", withConfiguration: UIImage.SymbolConfiguration(weight: .bold)) else { return }
+        guard let optionsImage = UIImage(systemName: "ellipsis.circle.fill", withConfiguration: UIImage.SymbolConfiguration(weight: .bold)) else { return }
+        navigationItem.setRightBarButtonItems([
+            UIBarButtonItem(image: addImage, style: .plain, target: self, action: nil),
+            UIBarButtonItem(image: optionsImage, style: .plain, target: self, action: nil)
+        ], animated: false)
     }
     
     /// Setup all View Model's closures to update the UI
