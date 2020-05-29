@@ -9,19 +9,23 @@
 import UIKit
 
 class GradablesViewController: UIViewController {
-
+    // MARK: Private Properties
+    /// `UITableView` to display the information.
     private let tableView: UITableView = UITableView(frame: .zero, style: .insetGrouped)
+    /// View Model that holds the data.
     private var viewModel: GradableViewModelRepresentable
     
+    // MARK: Initializers
     init(viewModel: GradableViewModelRepresentable) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: Functions
+    /// Add the `tableView` to the `view` and set's it up.
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.prefersLargeTitles = true
@@ -43,6 +47,7 @@ class GradablesViewController: UIViewController {
         viewModel.fetch()
     }
     
+    /// Setup all View Model's closures to update the UI
     private func setupViewModel() {
         viewModel.dataDidChange = { [weak self] in
             self?.tableView.reloadData()
@@ -52,6 +57,7 @@ class GradablesViewController: UIViewController {
 
 }
 
+// MARK: - UITableViewDataSource
 extension GradablesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.numberOfRows
@@ -67,6 +73,7 @@ extension GradablesViewController: UITableViewDataSource {
     }
 }
 
+// MARK: - UITableViewDelegate
 extension GradablesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let nextViewModel = viewModel.nextViewModelForRow(at: indexPath) else { return }

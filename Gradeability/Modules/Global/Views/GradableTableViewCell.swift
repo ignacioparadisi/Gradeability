@@ -10,6 +10,7 @@ import UIKit
 
 class GradableTableViewCell: UITableViewCell, ReusableView {
 
+    // MARK: Initializers
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
     }
