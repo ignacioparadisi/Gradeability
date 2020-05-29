@@ -19,8 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let windowsScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowsScene)
-        let termsViewModel = TermsViewModel()
-        window?.rootViewController = UINavigationController(rootViewController: GradablesViewController(viewModel: termsViewModel))
+        window?.rootViewController = MainSplitViewController()
         window?.makeKeyAndVisible()
     }
 

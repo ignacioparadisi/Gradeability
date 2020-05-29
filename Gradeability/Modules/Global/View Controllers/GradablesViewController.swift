@@ -45,6 +45,7 @@ class GradablesViewController: UIViewController {
         viewModel.fetch()
     }
     
+    /// Sets the Title and Bar Buttons to the Navigation Bar
     private func setupNavigationBar() {
         navigationController?.navigationBar.prefersLargeTitles = true
         title = viewModel.title

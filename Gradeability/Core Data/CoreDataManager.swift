@@ -127,12 +127,20 @@ class CoreDataManager {
         fetchRequest.sortDescriptors = [sortDescriptor]
         return try context.fetch(fetchRequest)
     }
+    func fetchCurrentTerm() throws -> Term? {
+        let fetchRequest: NSFetchRequest<Term> = Term.fetchRequest()
+        let predicate: NSPredicate = NSPredicate(format: "%K == %@", #keyPath(Term.isCurrent), "true")
+        fetchRequest.predicate = predicate
+        return try context.fetch(fetchRequest).first
+    }
     
     // MARK: - Subjects
     func fetchSubjects(for term: Term) throws -> [Subject] {
         let fetchRequest: NSFetchRequest<Subject> = Subject.fetchRequest()
         let predicate: NSPredicate = NSPredicate(format: "%K == %@", #keyPath(Subject.term.id), term.id! as CVarArg)
+        let sortDescriptor = NSSortDescriptor(key: #keyPath(Subject.dateCreated), ascending: true)
         fetchRequest.predicate = predicate
+        fetchRequest.sortDescriptors = [sortDescriptor]
         return try context.fetch(fetchRequest)
     }
     
@@ -140,7 +148,9 @@ class CoreDataManager {
     func fetchAssignments(for subject: Subject) throws -> [Assignment] {
         let fetchRequest: NSFetchRequest<Assignment> = Assignment.fetchRequest()
         let predicate: NSPredicate = NSPredicate(format: "%K == %@", #keyPath(Assignment.subject.id), subject.id! as CVarArg)
+        let sortDescriptor = NSSortDescriptor(key: #keyPath(Assignment.dateCreated), ascending: true)
         fetchRequest.predicate = predicate
+        fetchRequest.sortDescriptors = [sortDescriptor]
         return try context.fetch(fetchRequest)
     }
 
