@@ -13,6 +13,11 @@ protocol GradableViewModelRepresentable {
     var numberOfRows: Int { get }
     var dataDidChange: (() -> Void)? { get set }
     func fetch()
-    func textForRow(at indexPath: IndexPath) -> String?
+    func viewModelForRow(at indexPath: IndexPath) -> GradableCellViewModelRepresentable
     func nextViewModelForRow(at indexPath: IndexPath) -> GradableViewModelRepresentable?
+}
+
+protocol GradableCellViewModelRepresentable {
+    var name: String { get }
+    var detail: String { get }
 }

@@ -16,6 +16,7 @@
         <attribute name="name" attributeType="String" defaultValueString=""/>
     </entity>
     <entity name="Subject" representedClassName="Subject" parentEntity="Gradable" syncable="YES">
+        <attribute name="teacherName" optional="YES" attributeType="String"/>
         <relationship name="assignments" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Assignment" inverseName="subject" inverseEntity="Assignment"/>
         <relationship name="term" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Term" inverseName="subjects" inverseEntity="Term"/>
     </entity>
@@ -26,7 +27,7 @@
     <elements>
         <element name="Assignment" positionX="225.7734375" positionY="176.5078125" width="128" height="118"/>
         <element name="Gradable" positionX="61.7734375" positionY="-1.5703125" width="128" height="133"/>
-        <element name="Subject" positionX="60.6328125" positionY="209.73828125" width="128" height="73"/>
+        <element name="Subject" positionX="60.6328125" positionY="209.73828125" width="128" height="88"/>
         <element name="Term" positionX="-119.59765625" positionY="206.9765625" width="128" height="73"/>
     </elements>
 </model>

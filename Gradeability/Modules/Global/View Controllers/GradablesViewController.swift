@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class GradablesViewController: UIViewController {
 
     private let tableView: UITableView = UITableView(frame: .zero, style: .insetGrouped)
     private var viewModel: GradableViewModelRepresentable
@@ -38,7 +38,7 @@ class ViewController: UIViewController {
             .bottomToSuperview()
             .leadingToSuperview()
             .activate()
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cellIdentifier")
+        tableView.register(GradableTableViewCell.self)
         
         viewModel.fetch()
     }
@@ -52,23 +52,25 @@ class ViewController: UIViewController {
 
 }
 
-extension ViewController: UITableViewDataSource {
+extension GradablesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.numberOfRows
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cellIdentifier", for: indexPath)
+        let cellViewModel = viewModel.viewModelForRow(at: indexPath)
+        let cell = tableView.dequeueReusableCell(for: indexPath) as GradableTableViewCell
         cell.accessoryType = .disclosureIndicator
-        cell.textLabel?.text = viewModel.textForRow(at: indexPath)
+        cell.textLabel?.text = cellViewModel.name
+        cell.detailTextLabel?.text = cellViewModel.detail
         return cell
     }
 }
 
-extension ViewController: UITableViewDelegate {
+extension GradablesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let nextViewModel = viewModel.nextViewModelForRow(at: indexPath) else { return }
-        let viewController = ViewController(viewModel: nextViewModel)
+        let viewController = GradablesViewController(viewModel: nextViewModel)
         navigationController?.pushViewController(viewController, animated: true)
     }
 }

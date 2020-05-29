@@ -6,6 +6,7 @@
     "isCurrent": true,
     "subjects": [{
         "name": "Matemática Básica",
+        "teacherName": "Milagros Vilacha",
         "maxGrade": 20.0,
         "minGrade": 10.0,
         "grade": 19.0,
@@ -30,6 +31,7 @@
         }]
     }, {
         "name": "Geometría Plana y Trigonometría",
+        "teacherName": "José Fajardo",
         "maxGrade": 20.0,
         "minGrade": 10.0,
         "grade": 16.0,
@@ -54,6 +56,7 @@
         }]
     }, {
         "name": "Introducción a la Informática",
+        "teacherName": "Omar Hernández",
         "maxGrade": 20.0,
         "minGrade": 10.0,
         "grade": 20.0,
@@ -78,6 +81,7 @@
         }]
     }, {
         "name": "Comprensión y Producción de Textos",
+        "teacherName": "Hilda López",
         "maxGrade": 20.0,
         "minGrade": 10.0,
         "grade": 12.0,
@@ -102,6 +106,7 @@
         }]
     }, {
         "name": "Identidad, Liderazgo y Compromiso I",
+        "teacherName": "Grecia Martinez",
         "maxGrade": 20.0,
         "minGrade": 10.0,
         "grade": 10.0,
@@ -133,6 +138,7 @@
     "isCurrent": false,
     "subjects": [{
         "name": "Cálculo I",
+        "teacherName": "Milagros Vilacha",
         "maxGrade": 20.0,
         "minGrade": 10.0,
         "grade": 19.0,
@@ -157,6 +163,7 @@
         }]
     }, {
         "name": "Lógica Computacional",
+        "teacherName": "Silvina",
         "maxGrade": 20.0,
         "minGrade": 10.0,
         "grade": 16.0,
@@ -181,6 +188,7 @@
         }]
     }, {
         "name": "Algoritmos y Programación I",
+        "teacherName": "Omar Hernández",
         "maxGrade": 20.0,
         "minGrade": 10.0,
         "grade": 20.0,
@@ -205,6 +213,7 @@
         }]
     }, {
         "name": "Identidad, Liderazgo y Compromiso II",
+        "teacherName": "Pily",
         "maxGrade": 20.0,
         "minGrade": 10.0,
         "grade": 10.0,
@@ -236,6 +245,7 @@
     "isCurrent": false,
     "subjects": [{
         "name": "Cálculo II",
+        "teacherName": "Liliana Lupo",
         "maxGrade": 20.0,
         "minGrade": 10.0,
         "grade": 19.0,
@@ -260,6 +270,7 @@
         }]
     }, {
         "name": "Física General",
+        "teacherName": "Benedicto",
         "maxGrade": 20.0,
         "minGrade": 10.0,
         "grade": 16.0,
@@ -284,6 +295,7 @@
         }]
     }, {
         "name": "Matemáticas Discretas",
+        "teacherName": "Silvina",
         "maxGrade": 20.0,
         "minGrade": 10.0,
         "grade": 20.0,
@@ -308,6 +320,7 @@
         }]
     }, {
         "name": "Algoritmos y Programación II",
+        "teacherName": "Omar Hernández",
         "maxGrade": 20.0,
         "minGrade": 10.0,
         "grade": 12.0,
@@ -339,6 +352,7 @@
     "isCurrent": false,
     "subjects": [{
         "name": "Cálculo III",
+        "teacherName": "Kahela Bastidas",
         "maxGrade": 20.0,
         "minGrade": 10.0,
         "grade": 19.0,
@@ -363,6 +377,7 @@
         }]
     }, {
         "name": "Laboratorio de Física Eléctrica",
+        "teacherName": "Igor Chavez",
         "maxGrade": 20.0,
         "minGrade": 10.0,
         "grade": 16.0,
@@ -387,6 +402,7 @@
         }]
     }, {
         "name": "Física Eléctrica",
+        "teacherName": "Rafael de Guglielmo",
         "maxGrade": 20.0,
         "minGrade": 10.0,
         "grade": 20.0,
@@ -411,6 +427,7 @@
         }]
     }, {
         "name": "Estructura del Computador",
+        "teacherName": "Laura Navarro",
         "maxGrade": 20.0,
         "minGrade": 10.0,
         "grade": 12.0,
@@ -435,6 +452,7 @@
         }]
     }, {
         "name": "Algoritmos y Programación III",
+        "teacherName": "Lia Mendoza",
         "maxGrade": 20.0,
         "minGrade": 10.0,
         "grade": 10.0,
@@ -459,6 +477,7 @@
         }]
     }, {
         "name": "Ecología, Ambiente y Sustentabilidad",
+        "teacherName": "Antonietta Melone",
         "maxGrade": 20.0,
         "minGrade": 10.0,
         "grade": 10.0,
@@ -490,6 +509,7 @@
     "isCurrent": false,
     "subjects": [{
         "name": "Cálculo IV",
+        "teacherName": "Jorge Omar",
         "maxGrade": 20.0,
         "minGrade": 10.0,
         "grade": 19.0,
@@ -514,6 +534,7 @@
         }]
     }, {
         "name": "Circuitos Electrónicos",
+        "teacherName": "Biagio Cante",
         "maxGrade": 20.0,
         "minGrade": 10.0,
         "grade": 16.0,
@@ -538,6 +559,7 @@
         }]
     }, {
         "name": "Sistemas de Operación",
+        "teacherName": "Carlos Gómez",
         "maxGrade": 20.0,
         "minGrade": 10.0,
         "grade": 20.0,
@@ -562,6 +584,7 @@
         }]
     }, {
         "name": "Ingeniería del Software",
+        "teacherName": "Carlos B",
         "maxGrade": 20.0,
         "minGrade": 10.0,
         "grade": 12.0,
@@ -586,6 +609,7 @@
         }]
     }, {
         "name": "Interacción Humano-Computador",
+        "teacherName": "Rafael Lara",
         "maxGrade": 20.0,
         "minGrade": 10.0,
         "grade": 10.0,
@@ -617,6 +641,7 @@
     "isCurrent": false,
     "subjects": [{
         "name": "Cálculo Numérico",
+        "teacherName": "José Guevara",
         "maxGrade": 20.0,
         "minGrade": 10.0,
         "grade": 19.0,
@@ -641,6 +666,7 @@
         }]
     }, {
         "name": "Estadística y Probabilidades",
+        "teacherName": "José Campos",
         "maxGrade": 20.0,
         "minGrade": 10.0,
         "grade": 16.0,
@@ -665,6 +691,7 @@
         }]
     }, {
         "name": "Arquitectura del Computador",
+        "teacherName": "Ramón Porras",
         "maxGrade": 20.0,
         "minGrade": 10.0,
         "grade": 20.0,
@@ -689,6 +716,7 @@
         }]
     }, {
         "name": "Redes de Computadores I",
+        "teacherName": "Luz Murillo",
         "maxGrade": 20.0,
         "minGrade": 10.0,
         "grade": 12.0,
@@ -713,6 +741,7 @@
         }]
     }, {
         "name": "Sistemas de Bases de Datos I",
+        "teacherName": "Ana Karina Fernandes y Susana García",
         "maxGrade": 20.0,
         "minGrade": 10.0,
         "grade": 10.0,
@@ -744,6 +773,7 @@
     "isCurrent": false,
     "subjects": [{
         "name": "Programación Lineal",
+        "teacherName": "José Quintero",
         "maxGrade": 20.0,
         "minGrade": 10.0,
         "grade": 19.0,
@@ -768,6 +798,7 @@
         }]
     }, {
         "name": "Contabilidad General",
+        "teacherName": "Avila",
         "maxGrade": 20.0,
         "minGrade": 10.0,
         "grade": 16.0,
@@ -792,6 +823,7 @@
         }]
     }, {
         "name": "Redes de Computadores II",
+        "teacherName": "Luz Murillo",
         "maxGrade": 20.0,
         "minGrade": 10.0,
         "grade": 20.0,
@@ -816,6 +848,7 @@
         }]
     }, {
         "name": "Sistemas de Bases de Datos II",
+        "teacherName": "Felipe Hernández",
         "maxGrade": 20.0,
         "minGrade": 10.0,
         "grade": 12.0,
@@ -840,6 +873,7 @@
         }]
     }, {
         "name": "Metodología del Software",
+        "teacherName": "Fanny Hernández",
         "maxGrade": 20.0,
         "minGrade": 10.0,
         "grade": 10.0,
@@ -895,6 +929,7 @@
     "isCurrent": false,
     "subjects": [{
         "name": "Investigación de Operaciones",
+        "teacherName": "José Quintero",
         "maxGrade": 20.0,
         "minGrade": 10.0,
         "grade": 19.0,
@@ -919,6 +954,7 @@
         }]
     }, {
         "name": "Ingeniería Económica",
+        "teacherName": "María Suarez",
         "maxGrade": 20.0,
         "minGrade": 10.0,
         "grade": 16.0,
@@ -943,6 +979,7 @@
         }]
     }, {
         "name": "Redes de Computadores III",
+        "teacherName": "Luz Murillo",
         "maxGrade": 20.0,
         "minGrade": 10.0,
         "grade": 20.0,
@@ -967,6 +1004,7 @@
         }]
     }, {
         "name": "Desarrollo del Software",
+        "teacherName": "Carlos Magurno",
         "maxGrade": 20.0,
         "minGrade": 10.0,
         "grade": 12.0,
@@ -991,6 +1029,7 @@
         }]
     }, {
         "name": "Seminario de Trabajo de Grado",
+        "teacherName": "Fanny Hernández",
         "maxGrade": 20.0,
         "minGrade": 10.0,
         "grade": 10.0,
@@ -1046,6 +1085,7 @@
     "isCurrent": false,
     "subjects": [{
         "name": "Innovación y Emprendimiento",
+        "teacherName": "Yoel González",
         "maxGrade": 20.0,
         "minGrade": 10.0,
         "grade": 19.0,
@@ -1070,6 +1110,7 @@
         }]
     }, {
         "name": "Seguridad Computacional",
+        "teacherName": "Gabriel Romero",
         "maxGrade": 20.0,
         "minGrade": 10.0,
         "grade": 16.0,
@@ -1094,6 +1135,7 @@
         }]
     }, {
         "name": "Sistemas Distribuidos",
+        "teacherName": "Rodrigo Castro",
         "maxGrade": 20.0,
         "minGrade": 10.0,
         "grade": 20.0,
@@ -1165,7 +1207,8 @@
             "percentage": 0.34
         }]
     }, {
-        "name": "Electiva I",
+        "name": "Programación en Android",
+        "teacherName": "Carlos Gonzalez",
         "maxGrade": 20.0,
         "minGrade": 10.0,
         "grade": 10.0,
@@ -1189,7 +1232,8 @@
             "percentage": 0.34
         }]
     }, {
-        "name": "Electiva II",
+        "name": "Programación en Python",
+        "teacherName": "José Castillo",
         "maxGrade": 20.0,
         "minGrade": 10.0,
         "grade": 10.0,
@@ -1221,6 +1265,7 @@
     "isCurrent": false,
     "subjects": [{
         "name": "Evaluación de Sistemas Informáticos",
+        "teacherName": "Jorge Pérez",
         "maxGrade": 20.0,
         "minGrade": 10.0,
         "grade": 19.0,
@@ -1245,6 +1290,7 @@
         }]
     }, {
         "name": "Ética Profesional",
+        "teacherName": "María Isabel López",
         "maxGrade": 20.0,
         "minGrade": 10.0,
         "grade": 16.0,
@@ -1269,6 +1315,7 @@
         }]
     }, {
         "name": "Gestión de Proyectos de Software",
+        "teacherName": "Nelson Rodriguez",
         "maxGrade": 20.0,
         "minGrade": 10.0,
         "grade": 20.0,

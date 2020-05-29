@@ -20,7 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowsScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowsScene)
         let termsViewModel = TermsViewModel()
-        window?.rootViewController = UINavigationController(rootViewController: ViewController(viewModel: termsViewModel))
+        window?.rootViewController = UINavigationController(rootViewController: GradablesViewController(viewModel: termsViewModel))
         window?.makeKeyAndVisible()
     }
 

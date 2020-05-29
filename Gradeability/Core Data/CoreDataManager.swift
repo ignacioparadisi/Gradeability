@@ -98,6 +98,9 @@ class CoreDataManager {
                 subject.grade = subjectDictionary["grade"] as! Float
                 subject.maxGrade = subjectDictionary["maxGrade"] as! Float
                 subject.minGrade = subjectDictionary["minGrade"] as! Float
+                if let teacherName = subjectDictionary["teacherName"] as? String {
+                    subject.teacherName = teacherName
+                }
                 
                 let assignmentsArray = subjectDictionary["assignments"] as! [[String: Any]]
                 for assignmentDictionary in assignmentsArray {

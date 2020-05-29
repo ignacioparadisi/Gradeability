@@ -39,9 +39,9 @@ class AssignmentsViewModel: GradableViewModelRepresentable {
         }
     }
     
-    func textForRow(at indexPath: IndexPath) -> String? {
-        let subject = assignments[indexPath.row]
-        return subject.name
+    func viewModelForRow(at indexPath: IndexPath) -> GradableCellViewModelRepresentable {
+        let assignment = assignments[indexPath.row]
+        return GradableCellViewModel(assignment: assignment)
     }
     
     func nextViewModelForRow(at indexPath: IndexPath) -> GradableViewModelRepresentable? {
