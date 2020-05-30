@@ -17,7 +17,7 @@
     </entity>
     <entity name="Subject" representedClassName="Subject" parentEntity="Gradable" syncable="YES">
         <attribute name="teacherName" optional="YES" attributeType="String"/>
-        <relationship name="assignments" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Assignment" inverseName="subject" inverseEntity="Assignment"/>
+        <relationship name="assignments" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Assignment" inverseName="subject" inverseEntity="Assignment"/>
         <relationship name="term" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Term" inverseName="subjects" inverseEntity="Term"/>
     </entity>
     <entity name="Term" representedClassName="Term" parentEntity="Gradable" syncable="YES">

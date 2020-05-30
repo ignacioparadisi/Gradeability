@@ -30,10 +30,15 @@ class GradablesViewController: UIViewController {
         super.viewDidLoad()
         setupNavigationBar()
         setupViewModel()
-        
-        view.addSubview(tableView)
+        setupTableView()
+        viewModel.fetch()
+    }
+    
+    private func setupTableView() {
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.cellLayoutMarginsFollowReadableWidth = true
+        view.addSubview(tableView)
         tableView.anchor
             .topToSuperview()
             .trailingToSuperview()
@@ -41,8 +46,6 @@ class GradablesViewController: UIViewController {
             .leadingToSuperview()
             .activate()
         tableView.register(GradableTableViewCell.self)
-        
-        viewModel.fetch()
     }
     
     /// Sets the Title and Bar Buttons to the Navigation Bar
@@ -50,21 +53,38 @@ class GradablesViewController: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         title = viewModel.title
         guard let addImage = UIImage(systemName: "plus.circle.fill", withConfiguration: UIImage.SymbolConfiguration(weight: .bold)) else { return }
-        guard let optionsImage = UIImage(systemName: "ellipsis.circle.fill", withConfiguration: UIImage.SymbolConfiguration(weight: .bold)) else { return }
+        guard let optionsImage = UIImage(systemName: "ellipsis.circle") else { return }
         navigationItem.setRightBarButtonItems([
             UIBarButtonItem(image: addImage, style: .plain, target: self, action: nil),
-            UIBarButtonItem(image: optionsImage, style: .plain, target: self, action: #selector(showOptionsAlert))
+            UIBarButtonItem(image: optionsImage, style: .plain, target: self, action: #selector(showOptionsAlert(_:)))
         ], animated: false)
+        
+        if let viewModel = viewModel as? SubjectsViewModel,
+            viewModel.isMasterController {
+            navigationItem.setLeftBarButton(
+                UIBarButtonItem(title: "All Terms", style: .plain, target: self, action: #selector(showAllTerms)),
+            animated: false)
+        }
     }
     
     /// Setup all View Model's closures to update the UI
     private func setupViewModel() {
         viewModel.dataDidChange = { [weak self] in
+            self?.title = self?.viewModel.title
             self?.tableView.reloadData()
         }
     }
     
-    @objc func showOptionsAlert() {
+    /// Present `GradablesViewController` for showing all Terms
+    @objc private func showAllTerms() {
+        let viewModel = self.viewModel as! SubjectsViewModel
+        let termsViewModel = viewModel.termsViewModel
+        let viewController = GradablesViewController(viewModel: termsViewModel)
+        present(UINavigationController(rootViewController: viewController), animated: true)
+    }
+    
+    // TODO: Find a way to create the alert controller from the view model
+    @objc private func showOptionsAlert(_ sender: UIBarButtonItem?) {
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let viewTermsAction = UIAlertAction(title: "View All Terms", style: .default) { [weak self] _ in
             let termsViewModel = TermsViewModel()
@@ -75,6 +95,10 @@ class GradablesViewController: UIViewController {
         
         alertController.addAction(viewTermsAction)
         alertController.addAction(cancelAction)
+        
+        if let popoverController = alertController.popoverPresentationController {
+            popoverController.barButtonItem = sender
+        }
         
         present(alertController, animated: true)
     }
@@ -102,6 +126,12 @@ extension GradablesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return viewModel.sectionTitle
     }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            
+        }
+    }
 }
 
 // MARK: - UITableViewDelegate
@@ -125,6 +155,7 @@ extension GradablesViewController: UITableViewDelegate {
 
 // MARK: = UIContextMenuInteractionDelegate
 extension GradablesViewController: UIContextMenuInteractionDelegate {
+    
     func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
         let locationInTableView = interaction.location(in: tableView)
         guard let indexPath = tableView.indexPathForRow(at: locationInTableView) else { return nil }
@@ -132,7 +163,6 @@ extension GradablesViewController: UIContextMenuInteractionDelegate {
             return self?.viewModel.createContextualMenuForRow(at: indexPath)
         }
     }
-    
-    
+
 }
 

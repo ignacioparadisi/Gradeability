@@ -38,4 +38,5 @@ protocol GradableViewModelRepresentable {
     /// - Parameter indexPath: IndexPath for the cell selected.
     func nextViewModelForRow(at indexPath: IndexPath) -> (viewModel: GradableViewModelRepresentable, navigationStyle: NavigationStyle)?
     func createContextualMenuForRow(at indexPath: IndexPath) -> UIMenu?
+    func deleteItem(at indexPath: IndexPath)
 }

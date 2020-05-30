@@ -120,6 +120,25 @@ class CoreDataManager {
         saveContext()
     }
     
+    func delete(_ object: Gradable) {
+        context.delete(object)
+        saveContext()
+        let fetchRequest: NSFetchRequest<Assignment> = Assignment.fetchRequest()
+        do {
+            let count = try context.count(for: fetchRequest)
+            print(count)
+        } catch {
+            print(error.localizedDescription)
+        }
+//        do {
+//            try context.delete(object)
+//        } catch {
+//            // TODO: Return custom error
+//            print(error.localizedDescription)
+//        }
+        
+    }
+    
     // MARK: - Terms
     func fetchTerms(result: @escaping (Result<[Term], Error>) -> Void) {
         let fetchRequest: NSFetchRequest<Term> = Term.fetchRequest()
@@ -141,7 +160,7 @@ class CoreDataManager {
     
     func fetchCurrentTerm() throws -> Term? {
         let fetchRequest: NSFetchRequest<Term> = Term.fetchRequest()
-        let predicate: NSPredicate = NSPredicate(format: "%K == %@", #keyPath(Term.isCurrent), "true")
+        let predicate: NSPredicate = NSPredicate(format: "%K == %@", #keyPath(Term.isCurrent), NSNumber(value: true))
         fetchRequest.predicate = predicate
         return try context.fetch(fetchRequest).first
     }

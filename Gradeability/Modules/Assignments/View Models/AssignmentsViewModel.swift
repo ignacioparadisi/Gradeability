@@ -68,7 +68,26 @@ class AssignmentsViewModel: GradableViewModelRepresentable {
     }
     
     func createContextualMenuForRow(at indexPath: IndexPath) -> UIMenu? {
-        return nil
+        let assignment = assignments[indexPath.row]
+        var rootChildren: [UIMenuElement] = []
+        let editAction = UIAction(title: "Edit", image: UIImage(systemName: "square.and.pencil")) { _ in
+            
+        }
+        let deleteAction = UIAction(title: "Delete", image: UIImage(systemName: "trash"), attributes: .destructive) { _ in
+            CoreDataManager.shared.delete(assignment)
+            self.fetch()
+        }
+        rootChildren.append(editAction)
+        rootChildren.append(deleteAction)
+        
+        let menu = UIMenu(title: "", children: rootChildren)
+        return menu
+    }
+    
+    func deleteItem(at indexPath: IndexPath) {
+        let assignment = assignments[indexPath.row]
+        CoreDataManager.shared.delete(assignment)
+        fetch()
     }
     
 }
