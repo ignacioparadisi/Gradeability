@@ -6,7 +6,7 @@
 //  Copyright © 2020 Ignacio Paradisi. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class TermsViewModel: GradableViewModelRepresentable {
     
@@ -40,7 +40,6 @@ class TermsViewModel: GradableViewModelRepresentable {
     var sectionTitle: String {
         return "Terms"
     }
-    
     // MARK: Functions
     /// Fetches the Subjects.
     func fetch() {
@@ -71,6 +70,30 @@ class TermsViewModel: GradableViewModelRepresentable {
         let term = terms[indexPath.row]
         let viewModel = SubjectsViewModel(term: term)
         return (viewModel, .push)
+    }
+    
+    func createContextualMenuForRow(at indexPath: IndexPath) -> UIMenu? {
+        // Set current Term to not be the current
+        let currentTerm = terms.filter { $0.isCurrent }.first
+        currentTerm?.isCurrent = false
+        // Get the new current Term
+        let term = terms[indexPath.row]
+        var rootChildren: [UIMenuElement] = []
+        let currentAction = UIAction(title: "Set Current", image: UIImage(systemName: "pin")) { [weak self] _ in
+            term.isCurrent = true
+            CoreDataManager.shared.saveContext()
+            self?.dataDidChange?()
+        }
+        if !term.isCurrent {
+            rootChildren.append(currentAction)
+        }
+        
+        if rootChildren.isEmpty {
+            return nil
+        }
+        
+        let menu = UIMenu(title: "", children: rootChildren)
+        return menu
     }
     
 }

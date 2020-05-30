@@ -6,7 +6,7 @@
 //  Copyright © 2020 Ignacio Paradisi. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 protocol GradableCellViewModelRepresentable {
     // MARK: Properties
@@ -14,4 +14,5 @@ protocol GradableCellViewModelRepresentable {
     var name: String { get }
     /// Detail to be displayed.
     var detail: String { get }
+    var accessoryType: UITableViewCell.AccessoryType { get }
 }

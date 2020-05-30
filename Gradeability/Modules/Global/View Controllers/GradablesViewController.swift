@@ -53,7 +53,7 @@ class GradablesViewController: UIViewController {
         guard let optionsImage = UIImage(systemName: "ellipsis.circle.fill", withConfiguration: UIImage.SymbolConfiguration(weight: .bold)) else { return }
         navigationItem.setRightBarButtonItems([
             UIBarButtonItem(image: addImage, style: .plain, target: self, action: nil),
-            UIBarButtonItem(image: optionsImage, style: .plain, target: self, action: nil)
+            UIBarButtonItem(image: optionsImage, style: .plain, target: self, action: #selector(showOptionsAlert))
         ], animated: false)
     }
     
@@ -62,6 +62,21 @@ class GradablesViewController: UIViewController {
         viewModel.dataDidChange = { [weak self] in
             self?.tableView.reloadData()
         }
+    }
+    
+    @objc func showOptionsAlert() {
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let viewTermsAction = UIAlertAction(title: "View All Terms", style: .default) { [weak self] _ in
+            let termsViewModel = TermsViewModel()
+            let viewController = GradablesViewController(viewModel: termsViewModel)
+            self?.present(UINavigationController(rootViewController: viewController), animated: true)
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        
+        alertController.addAction(viewTermsAction)
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true)
     }
 
 
@@ -75,10 +90,12 @@ extension GradablesViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellViewModel = viewModel.viewModelForRow(at: indexPath)
+        let contextMenuInteraction = UIContextMenuInteraction(delegate: self)
         let cell = tableView.dequeueReusableCell(for: indexPath) as GradableTableViewCell
-        cell.accessoryType = .disclosureIndicator
+        cell.accessoryType = cellViewModel.accessoryType
         cell.textLabel?.text = cellViewModel.name
         cell.detailTextLabel?.text = cellViewModel.detail
+        cell.addInteraction(contextMenuInteraction)
         return cell
     }
     
@@ -104,5 +121,18 @@ extension GradablesViewController: UITableViewDelegate {
         }
         
     }
+}
+
+// MARK: = UIContextMenuInteractionDelegate
+extension GradablesViewController: UIContextMenuInteractionDelegate {
+    func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
+        let locationInTableView = interaction.location(in: tableView)
+        guard let indexPath = tableView.indexPathForRow(at: locationInTableView) else { return nil }
+        return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { [weak self] _ in
+            return self?.viewModel.createContextualMenuForRow(at: indexPath)
+        }
+    }
+    
+    
 }
 

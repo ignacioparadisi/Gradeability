@@ -6,7 +6,7 @@
 //  Copyright © 2020 Ignacio Paradisi. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class SubjectsViewModel: GradableViewModelRepresentable {
 
@@ -69,4 +69,7 @@ class SubjectsViewModel: GradableViewModelRepresentable {
         return (viewModel, .detail)
     }
     
+    func createContextualMenuForRow(at indexPath: IndexPath) -> UIMenu? {
+        return nil
+    }
 }

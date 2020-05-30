@@ -138,6 +138,7 @@ class CoreDataManager {
             print(error.localizedDescription)
         }
     }
+    
     func fetchCurrentTerm() throws -> Term? {
         let fetchRequest: NSFetchRequest<Term> = Term.fetchRequest()
         let predicate: NSPredicate = NSPredicate(format: "%K == %@", #keyPath(Term.isCurrent), "true")
