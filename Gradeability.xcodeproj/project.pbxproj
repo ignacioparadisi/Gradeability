@@ -36,6 +36,9 @@
 		32E34F41247F3A1100BFD25A /* Gradable+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E34F39247F3A1100BFD25A /* Gradable+CoreDataClass.swift */; };
 		32E34F42247F3A1100BFD25A /* Gradable+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E34F3A247F3A1100BFD25A /* Gradable+CoreDataProperties.swift */; };
 		32E34F44247F3ABA00BFD25A /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E34F43247F3ABA00BFD25A /* CoreDataManager.swift */; };
+		32F86A102482CEC50058E56E /* TermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F86A0F2482CEC50058E56E /* TermsViewController.swift */; };
+		32F86A122482CF300058E56E /* SubjectsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F86A112482CF300058E56E /* SubjectsViewController.swift */; };
+		32F86A142482CF5E0058E56E /* AssignmentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F86A132482CF5E0058E56E /* AssignmentsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +95,9 @@
 		32E34F39247F3A1100BFD25A /* Gradable+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Gradable+CoreDataClass.swift"; sourceTree = "<group>"; };
 		32E34F3A247F3A1100BFD25A /* Gradable+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Gradable+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		32E34F43247F3ABA00BFD25A /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		32F86A0F2482CEC50058E56E /* TermsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsViewController.swift; sourceTree = "<group>"; };
+		32F86A112482CF300058E56E /* SubjectsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectsViewController.swift; sourceTree = "<group>"; };
+		32F86A132482CF5E0058E56E /* AssignmentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +164,7 @@
 		3293A88E247FFCD80054D150 /* Terms */ = {
 			isa = PBXGroup;
 			children = (
+				32F86A0E2482CEAE0058E56E /* View Controllers */,
 				329D12A824812B3700A0173A /* View Models */,
 			);
 			path = Terms;
@@ -181,6 +188,7 @@
 		329D129C247FFF0A00A0173A /* Subjects */ = {
 			isa = PBXGroup;
 			children = (
+				32F86A0D2482CEA70058E56E /* View Controllers */,
 				329D12A724812B3100A0173A /* View Models */,
 			);
 			path = Subjects;
@@ -189,6 +197,7 @@
 		329D129D247FFF0F00A0173A /* Assignments */ = {
 			isa = PBXGroup;
 			children = (
+				32F86A0C2482CEA50058E56E /* View Controllers */,
 				329D12A624812B2B00A0173A /* View Models */,
 			);
 			path = Assignments;
@@ -329,6 +338,30 @@
 			path = "Core Data";
 			sourceTree = "<group>";
 		};
+		32F86A0C2482CEA50058E56E /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				32F86A132482CF5E0058E56E /* AssignmentsViewController.swift */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		32F86A0D2482CEA70058E56E /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				32F86A112482CF300058E56E /* SubjectsViewController.swift */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		32F86A0E2482CEAE0058E56E /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				32F86A0F2482CEC50058E56E /* TermsViewController.swift */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -460,6 +493,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				32F86A142482CF5E0058E56E /* AssignmentsViewController.swift in Sources */,
 				32E34F03247F383500BFD25A /* GradablesViewController.swift in Sources */,
 				329D12A1247FFF3100A0173A /* AssignmentsViewModel.swift in Sources */,
 				324E14F224812E2E0089ECFC /* UITableView+Extension.swift in Sources */,
@@ -469,11 +503,13 @@
 				32E34F09247F383500BFD25A /* Gradeability.xcdatamodeld in Sources */,
 				32E34F3C247F3A1100BFD25A /* Term+CoreDataProperties.swift in Sources */,
 				324E14F924813DC50089ECFC /* MainSplitViewController.swift in Sources */,
+				32F86A102482CEC50058E56E /* TermsViewController.swift in Sources */,
 				32E34F3E247F3A1100BFD25A /* Subject+CoreDataProperties.swift in Sources */,
 				32E34F44247F3ABA00BFD25A /* CoreDataManager.swift in Sources */,
 				32E34F3D247F3A1100BFD25A /* Subject+CoreDataClass.swift in Sources */,
 				329D129B247FFDBC00A0173A /* GradableViewModelRepresentable.swift in Sources */,
 				329D129F247FFF2300A0173A /* SubjectsViewModel.swift in Sources */,
+				32F86A122482CF300058E56E /* SubjectsViewController.swift in Sources */,
 				324E14F7248133CD0089ECFC /* GradableCellViewModelRepresentable.swift in Sources */,
 				32E34F40247F3A1100BFD25A /* Assignment+CoreDataProperties.swift in Sources */,
 				32E34F01247F383500BFD25A /* SceneDelegate.swift in Sources */,

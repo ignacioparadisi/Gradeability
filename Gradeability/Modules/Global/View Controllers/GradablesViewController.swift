@@ -11,7 +11,7 @@ import UIKit
 class GradablesViewController: UIViewController {
     // MARK: Private Properties
     /// `UITableView` to display the information.
-    private let tableView: UITableView = UITableView(frame: .zero, style: .insetGrouped)
+    let tableView: UITableView = UITableView(frame: .zero, style: .insetGrouped)
     /// View Model that holds the data.
     private var viewModel: GradableViewModelRepresentable
     
@@ -55,16 +55,9 @@ class GradablesViewController: UIViewController {
         guard let addImage = UIImage(systemName: "plus.circle.fill", withConfiguration: UIImage.SymbolConfiguration(weight: .bold)) else { return }
         guard let optionsImage = UIImage(systemName: "ellipsis.circle") else { return }
         navigationItem.setRightBarButtonItems([
-            UIBarButtonItem(image: addImage, style: .plain, target: self, action: nil),
-            UIBarButtonItem(image: optionsImage, style: .plain, target: self, action: #selector(showOptionsAlert(_:)))
+            UIBarButtonItem(image: addImage, style: .plain, target: self, action: #selector(didTapAddButton(_:))),
+            UIBarButtonItem(image: optionsImage, style: .plain, target: self, action: #selector(didTapOptionsButton(_:)))
         ], animated: false)
-        
-        if let viewModel = viewModel as? SubjectsViewModel,
-            viewModel.isMasterController {
-            navigationItem.setLeftBarButton(
-                UIBarButtonItem(title: "All Terms", style: .plain, target: self, action: #selector(showAllTerms)),
-            animated: false)
-        }
     }
     
     /// Setup all View Model's closures to update the UI
@@ -75,32 +68,11 @@ class GradablesViewController: UIViewController {
         }
     }
     
-    /// Present `GradablesViewController` for showing all Terms
-    @objc private func showAllTerms() {
-        let viewModel = self.viewModel as! SubjectsViewModel
-        let termsViewModel = viewModel.termsViewModel
-        let viewController = GradablesViewController(viewModel: termsViewModel)
-        present(UINavigationController(rootViewController: viewController), animated: true)
+    @objc func didTapOptionsButton(_ sender: UIBarButtonItem?) {
     }
     
-    // TODO: Find a way to create the alert controller from the view model
-    @objc private func showOptionsAlert(_ sender: UIBarButtonItem?) {
-        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        let viewTermsAction = UIAlertAction(title: "View All Terms", style: .default) { [weak self] _ in
-            let termsViewModel = TermsViewModel()
-            let viewController = GradablesViewController(viewModel: termsViewModel)
-            self?.present(UINavigationController(rootViewController: viewController), animated: true)
-        }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+    @objc func didTapAddButton(_ sender: UIBarButtonItem?) {
         
-        alertController.addAction(viewTermsAction)
-        alertController.addAction(cancelAction)
-        
-        if let popoverController = alertController.popoverPresentationController {
-            popoverController.barButtonItem = sender
-        }
-        
-        present(alertController, animated: true)
     }
 
 
@@ -137,18 +109,6 @@ extension GradablesViewController: UITableViewDataSource {
 // MARK: - UITableViewDelegate
 extension GradablesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let (nextViewModel, navigationStyle) = viewModel.nextViewModelForRow(at: indexPath) else { return }
-        let viewController = GradablesViewController(viewModel: nextViewModel)
-        switch navigationStyle {
-        case .push:
-            navigationController?.pushViewController(viewController, animated: true)
-        case .detail:
-            let navigationController = UINavigationController(rootViewController: viewController)
-            showDetailViewController(navigationController, sender: self)
-        case .present:
-            let navigationController = UINavigationController(rootViewController: viewController)
-            present(navigationController, animated: true)
-        }
         
     }
 }
