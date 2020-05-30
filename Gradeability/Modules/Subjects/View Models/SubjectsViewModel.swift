@@ -14,11 +14,7 @@ class SubjectsViewModel: GradableViewModelRepresentable {
     /// Parent Term of the Subjects
     private var term: Term
     /// Subjects to be displayed.
-    private var subjects: [Subject] = [] {
-        didSet {
-            dataDidChange?()
-        }
-    }
+    private var subjects: [Subject] = []
     
     // MARK: Internal Properties
     var isMasterController: Bool = true
@@ -54,6 +50,7 @@ class SubjectsViewModel: GradableViewModelRepresentable {
     func fetch() {
         do {
             subjects = try CoreDataManager.shared.fetchSubjects(for: term)
+            dataDidChange?()
         } catch {
             print(error.localizedDescription)
         }
@@ -100,7 +97,7 @@ class SubjectsViewModel: GradableViewModelRepresentable {
     func deleteItem(at indexPath: IndexPath) {
         let subject = subjects[indexPath.row]
         CoreDataManager.shared.delete(subject)
-        fetch()
+        subjects.remove(at: indexPath.row)
     }
     
 }

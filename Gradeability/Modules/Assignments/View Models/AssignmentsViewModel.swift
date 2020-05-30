@@ -14,11 +14,7 @@ class AssignmentsViewModel: GradableViewModelRepresentable {
     /// Parent Subject of the Assignments.
     private let subject: Subject
     /// Assignments to be displayed.
-    private var assignments: [Assignment] = [] {
-        didSet {
-            dataDidChange?()
-        }
-    }
+    private var assignments: [Assignment] = []
     
     // MARK: Internal Properties
     /// Closure called when `assignments` changes so the UI can be updated.
@@ -48,6 +44,7 @@ class AssignmentsViewModel: GradableViewModelRepresentable {
     func fetch() {
         do {
             assignments = try CoreDataManager.shared.fetchAssignments(for: subject)
+            dataDidChange?()
         } catch {
             print(error.localizedDescription)
         }
@@ -87,7 +84,7 @@ class AssignmentsViewModel: GradableViewModelRepresentable {
     func deleteItem(at indexPath: IndexPath) {
         let assignment = assignments[indexPath.row]
         CoreDataManager.shared.delete(assignment)
-        fetch()
+        assignments.remove(at: indexPath.row)
     }
     
 }

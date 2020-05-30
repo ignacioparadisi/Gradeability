@@ -16,11 +16,7 @@ class TermsViewModel: GradableViewModelRepresentable {
     
     // MARK: Private Properties
     /// Terms to be displayed.
-    private var terms: [Term] = [] {
-        didSet {
-            dataDidChange?()
-        }
-    }
+    private var terms: [Term] = []
     private var isLoading: Bool = false {
         didSet {
             loadingDidChange?(isLoading)
@@ -55,6 +51,7 @@ class TermsViewModel: GradableViewModelRepresentable {
             switch result {
             case .success(let terms):
                 self?.terms = terms
+                self?.dataDidChange?()
             case .failure:
                 break
             }
@@ -113,7 +110,7 @@ class TermsViewModel: GradableViewModelRepresentable {
     func deleteItem(at indexPath: IndexPath) {
         let term = terms[indexPath.row]
         CoreDataManager.shared.delete(term)
-        fetch()
+        terms.remove(at: indexPath.row)
     }
     
     

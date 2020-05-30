@@ -101,7 +101,8 @@ extension GradablesViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            
+            viewModel.deleteItem(at: indexPath)
+            tableView.deleteRows(at: [indexPath], with: .left)
         }
     }
 }

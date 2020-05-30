@@ -184,5 +184,28 @@ class CoreDataManager {
         fetchRequest.sortDescriptors = [sortDescriptor]
         return try context.fetch(fetchRequest)
     }
+    
+    func createAssignment(id: UUID?, name: String?, grade: Float?, maxGrade: Float, minGrade: Float, deadline: Date?, percentage: Float, subject: Subject?, assignment: Assignment?, assignments: NSSet?, dateCreated: Date?) {
+        let newAssignment = Assignment(context: context)
+        if let id = id {
+            newAssignment.id = id
+        } else {
+            newAssignment.id = UUID()
+        }
+        newAssignment.subject = subject
+        newAssignment.name = name
+        if let grade = grade {
+            newAssignment.grade = grade
+        }
+        newAssignment.maxGrade = maxGrade
+        newAssignment.minGrade = minGrade
+        newAssignment.percentage = percentage
+        newAssignment.deadline = deadline
+        newAssignment.assignment = assignment
+        newAssignment.assignments = assignments
+        newAssignment.dateCreated = dateCreated
+        
+        saveContext()
+    }
 
 }

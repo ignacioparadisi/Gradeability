@@ -42,6 +42,10 @@ extension SubjectsViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let (nextViewModel, _) = viewModel.nextViewModelForRow(at: indexPath) else { return }
         let viewController = AssignmentsViewController(viewModel: nextViewModel as! AssignmentsViewModel)
-        navigationController?.pushViewController(viewController, animated: true)
+        if viewModel.isMasterController {
+            showDetailViewController(UINavigationController(rootViewController: viewController), sender: nil)
+        } else {
+            navigationController?.pushViewController(viewController, animated: true)
+        }
     }
 }
