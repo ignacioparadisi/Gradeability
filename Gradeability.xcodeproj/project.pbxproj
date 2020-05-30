@@ -39,6 +39,7 @@
 		32F86A102482CEC50058E56E /* TermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F86A0F2482CEC50058E56E /* TermsViewController.swift */; };
 		32F86A122482CF300058E56E /* SubjectsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F86A112482CF300058E56E /* SubjectsViewController.swift */; };
 		32F86A142482CF5E0058E56E /* AssignmentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F86A132482CF5E0058E56E /* AssignmentsViewController.swift */; };
+		32F86A162482EEB00058E56E /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F86A152482EEB00058E56E /* WelcomeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,6 +99,7 @@
 		32F86A0F2482CEC50058E56E /* TermsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsViewController.swift; sourceTree = "<group>"; };
 		32F86A112482CF300058E56E /* SubjectsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectsViewController.swift; sourceTree = "<group>"; };
 		32F86A132482CF5E0058E56E /* AssignmentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentsViewController.swift; sourceTree = "<group>"; };
+		32F86A152482EEB00058E56E /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -227,6 +229,7 @@
 			children = (
 				32E34F02247F383500BFD25A /* GradablesViewController.swift */,
 				324E14F824813DC50089ECFC /* MainSplitViewController.swift */,
+				32F86A152482EEB00058E56E /* WelcomeViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -506,6 +509,7 @@
 				32F86A102482CEC50058E56E /* TermsViewController.swift in Sources */,
 				32E34F3E247F3A1100BFD25A /* Subject+CoreDataProperties.swift in Sources */,
 				32E34F44247F3ABA00BFD25A /* CoreDataManager.swift in Sources */,
+				32F86A162482EEB00058E56E /* WelcomeViewController.swift in Sources */,
 				32E34F3D247F3A1100BFD25A /* Subject+CoreDataClass.swift in Sources */,
 				329D129B247FFDBC00A0173A /* GradableViewModelRepresentable.swift in Sources */,
 				329D129F247FFF2300A0173A /* SubjectsViewModel.swift in Sources */,

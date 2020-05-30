@@ -41,6 +41,13 @@ class MainSplitViewController: UISplitViewController {
         preferredDisplayMode = .allVisible
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let viewController = WelcomeViewController()
+        viewController.isModalInPresentation = true
+        present(viewController, animated: true)
+    }
+    
 }
 
 extension MainSplitViewController: UISplitViewControllerDelegate {
