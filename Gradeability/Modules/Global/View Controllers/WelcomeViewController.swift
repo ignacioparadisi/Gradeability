@@ -18,6 +18,8 @@ class WelcomeViewController: UIViewController {
     private let buttonBackgroundView = UIView()
     /// Blur view placed behind the create button. This view is clear when the content of the `contentView` is smaller than the scroll view
     private let blurView = UIView()
+    private let leadingMargin: CGFloat = 30
+    private let trailingMargin: CGFloat = -30
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,7 +66,9 @@ class WelcomeViewController: UIViewController {
         titleLabel.text = "Welcome to\nGradeability"
         
         let descriptionLabel = UILabel()
-        descriptionLabel.text = "To get started, you first need to create a new Term."
+        descriptionLabel.text = """
+        Description
+        """
         descriptionLabel.numberOfLines = 0
         
         contentView.addSubview(titleLabel)
@@ -72,8 +76,8 @@ class WelcomeViewController: UIViewController {
         
         titleLabel.anchor
             .topToSuperview(constant: 50, toSafeArea: true)
-            .trailingToSuperview(constant: -50, toSafeArea: true)
-            .leadingToSuperview(constant: 50, toSafeArea: true)
+            .trailingToSuperview(constant: trailingMargin, toSafeArea: true)
+            .leadingToSuperview(constant: leadingMargin, toSafeArea: true)
             .activate()
         
         descriptionLabel.anchor
@@ -93,8 +97,15 @@ class WelcomeViewController: UIViewController {
         createButton.layer.cornerRadius = 10
         createButton.clipsToBounds = true
         createButton.backgroundColor = .systemBlue
+        createButton.addTarget(self, action: #selector(goToCreateTerm), for: .touchUpInside)
+        
+        let descriptionLabel = UILabel()
+        descriptionLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
+        descriptionLabel.text = "To get started, you first need to create a new Term."
+        descriptionLabel.numberOfLines = 0
         
         buttonBackgroundView.addSubview(blurView)
+        buttonBackgroundView.addSubview(descriptionLabel)
         buttonBackgroundView.addSubview(createButton)
         
         blurView.anchor.edgesToSuperview().activate()
@@ -105,12 +116,18 @@ class WelcomeViewController: UIViewController {
         blurView.addSubview(blurEffectView)
         blurView.alpha = 0
         
+        descriptionLabel.anchor
+            .topToSuperview(constant: 20)
+            .trailingToSuperview(constant: trailingMargin, toSafeArea: true)
+            .leadingToSuperview(constant: leadingMargin, toSafeArea: true)
+            .activate()
+        
         createButton.anchor
             .centerXToSuperview()
-            .topToSuperview(constant: 50)
-            .trailingToSuperview(constant: -50, toSafeArea: true)
+            .top(to: descriptionLabel.bottomAnchor, constant: 20)
+            .trailingToSuperview(constant: trailingMargin, toSafeArea: true)
             .bottomToSuperview(constant: -50, toSafeArea: true)
-            .leadingToSuperview(constant: 50, toSafeArea: true)
+            .leadingToSuperview(constant: leadingMargin, toSafeArea: true)
             .height(constant: 50)
             .activate()
     }
@@ -134,6 +151,10 @@ class WelcomeViewController: UIViewController {
         UIView.animate(withDuration: 0.1) {
             self.blurView.alpha = alpha
         }
+    }
+    
+    @objc private func goToCreateTerm() {
+        dismiss(animated: true)
     }
 
 }
