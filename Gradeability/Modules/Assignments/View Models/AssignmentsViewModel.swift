@@ -86,7 +86,7 @@ class AssignmentsViewModel: GradableViewModelRepresentable {
     }
     
     func createAssignment() {
-        CoreDataFactory.createAssignmentManager.createAssignment(name: "Prueba", maxGrade: 20, minGrade: 10, grade: 0, deadline: Date(), percentage: 1, subject: subject, assignment: nil, assignments: nil)
+        CoreDataFactory.createAssignmentManager.createAssignment(name: "Prueba", maxGrade: 20, minGrade: 10, grade: 20, deadline: Date(), percentage: 0.5, subject: subject, assignment: nil, assignments: nil)
     }
     
     func deleteItem(at indexPath: IndexPath) {
