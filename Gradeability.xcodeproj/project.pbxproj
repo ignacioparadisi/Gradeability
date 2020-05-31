@@ -35,7 +35,15 @@
 		32E34F40247F3A1100BFD25A /* Assignment+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E34F38247F3A1100BFD25A /* Assignment+CoreDataProperties.swift */; };
 		32E34F41247F3A1100BFD25A /* Gradable+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E34F39247F3A1100BFD25A /* Gradable+CoreDataClass.swift */; };
 		32E34F42247F3A1100BFD25A /* Gradable+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E34F3A247F3A1100BFD25A /* Gradable+CoreDataProperties.swift */; };
-		32E34F44247F3ABA00BFD25A /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E34F43247F3ABA00BFD25A /* CoreDataManager.swift */; };
+		32E59DB424832C9C00B4F67C /* CoreDataFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E59DB324832C9C00B4F67C /* CoreDataFactory.swift */; };
+		32E59DB72483313400B4F67C /* TermCoreDataManagerRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E59DB62483313400B4F67C /* TermCoreDataManagerRepresentable.swift */; };
+		32E59DB92483313E00B4F67C /* SubjectCoreDataManagerRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E59DB82483313E00B4F67C /* SubjectCoreDataManagerRepresentable.swift */; };
+		32E59DBB2483314600B4F67C /* AssignmentCoreDataManagerRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E59DBA2483314600B4F67C /* AssignmentCoreDataManagerRepresentable.swift */; };
+		32E59DBE2483316300B4F67C /* TermCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E59DBD2483316300B4F67C /* TermCoreDataManager.swift */; };
+		32E59DC02483316D00B4F67C /* SubjectCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E59DBF2483316D00B4F67C /* SubjectCoreDataManager.swift */; };
+		32E59DC22483317700B4F67C /* AssignmentCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E59DC12483317700B4F67C /* AssignmentCoreDataManager.swift */; };
+		32E59DC4248332D000B4F67C /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E59DC3248332D000B4F67C /* CoreDataManager.swift */; };
+		32E59DC62483330200B4F67C /* CoreDataManagerRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E59DC52483330200B4F67C /* CoreDataManagerRepresentable.swift */; };
 		32F86A102482CEC50058E56E /* TermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F86A0F2482CEC50058E56E /* TermsViewController.swift */; };
 		32F86A122482CF300058E56E /* SubjectsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F86A112482CF300058E56E /* SubjectsViewController.swift */; };
 		32F86A142482CF5E0058E56E /* AssignmentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F86A132482CF5E0058E56E /* AssignmentsViewController.swift */; };
@@ -95,7 +103,15 @@
 		32E34F38247F3A1100BFD25A /* Assignment+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Assignment+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		32E34F39247F3A1100BFD25A /* Gradable+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Gradable+CoreDataClass.swift"; sourceTree = "<group>"; };
 		32E34F3A247F3A1100BFD25A /* Gradable+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Gradable+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		32E34F43247F3ABA00BFD25A /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		32E59DB324832C9C00B4F67C /* CoreDataFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataFactory.swift; sourceTree = "<group>"; };
+		32E59DB62483313400B4F67C /* TermCoreDataManagerRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermCoreDataManagerRepresentable.swift; sourceTree = "<group>"; };
+		32E59DB82483313E00B4F67C /* SubjectCoreDataManagerRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectCoreDataManagerRepresentable.swift; sourceTree = "<group>"; };
+		32E59DBA2483314600B4F67C /* AssignmentCoreDataManagerRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentCoreDataManagerRepresentable.swift; sourceTree = "<group>"; };
+		32E59DBD2483316300B4F67C /* TermCoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermCoreDataManager.swift; sourceTree = "<group>"; };
+		32E59DBF2483316D00B4F67C /* SubjectCoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectCoreDataManager.swift; sourceTree = "<group>"; };
+		32E59DC12483317700B4F67C /* AssignmentCoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentCoreDataManager.swift; sourceTree = "<group>"; };
+		32E59DC3248332D000B4F67C /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		32E59DC52483330200B4F67C /* CoreDataManagerRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManagerRepresentable.swift; sourceTree = "<group>"; };
 		32F86A0F2482CEC50058E56E /* TermsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsViewController.swift; sourceTree = "<group>"; };
 		32F86A112482CF300058E56E /* SubjectsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectsViewController.swift; sourceTree = "<group>"; };
 		32F86A132482CF5E0058E56E /* AssignmentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentsViewController.swift; sourceTree = "<group>"; };
@@ -326,8 +342,10 @@
 		32E34F31247F389C00BFD25A /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
+				32E59DB52483311F00B4F67C /* Protocols */,
+				32E59DBC2483314D00B4F67C /* Managers */,
 				3296EA06247F56F500A04FE0 /* Dummy Data */,
-				32E34F43247F3ABA00BFD25A /* CoreDataManager.swift */,
+				32E59DB324832C9C00B4F67C /* CoreDataFactory.swift */,
 				32E34F33247F3A1100BFD25A /* Term+CoreDataClass.swift */,
 				32E34F34247F3A1100BFD25A /* Term+CoreDataProperties.swift */,
 				32E34F35247F3A1100BFD25A /* Subject+CoreDataClass.swift */,
@@ -339,6 +357,28 @@
 				32E34F07247F383500BFD25A /* Gradeability.xcdatamodeld */,
 			);
 			path = "Core Data";
+			sourceTree = "<group>";
+		};
+		32E59DB52483311F00B4F67C /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				32E59DC52483330200B4F67C /* CoreDataManagerRepresentable.swift */,
+				32E59DB62483313400B4F67C /* TermCoreDataManagerRepresentable.swift */,
+				32E59DB82483313E00B4F67C /* SubjectCoreDataManagerRepresentable.swift */,
+				32E59DBA2483314600B4F67C /* AssignmentCoreDataManagerRepresentable.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		32E59DBC2483314D00B4F67C /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				32E59DC3248332D000B4F67C /* CoreDataManager.swift */,
+				32E59DBD2483316300B4F67C /* TermCoreDataManager.swift */,
+				32E59DBF2483316D00B4F67C /* SubjectCoreDataManager.swift */,
+				32E59DC12483317700B4F67C /* AssignmentCoreDataManager.swift */,
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 		32F86A0C2482CEA50058E56E /* View Controllers */ = {
@@ -497,6 +537,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				32F86A142482CF5E0058E56E /* AssignmentsViewController.swift in Sources */,
+				32E59DC22483317700B4F67C /* AssignmentCoreDataManager.swift in Sources */,
+				32E59DB92483313E00B4F67C /* SubjectCoreDataManagerRepresentable.swift in Sources */,
 				32E34F03247F383500BFD25A /* GradablesViewController.swift in Sources */,
 				329D12A1247FFF3100A0173A /* AssignmentsViewModel.swift in Sources */,
 				324E14F224812E2E0089ECFC /* UITableView+Extension.swift in Sources */,
@@ -505,24 +547,30 @@
 				32E34F42247F3A1100BFD25A /* Gradable+CoreDataProperties.swift in Sources */,
 				32E34F09247F383500BFD25A /* Gradeability.xcdatamodeld in Sources */,
 				32E34F3C247F3A1100BFD25A /* Term+CoreDataProperties.swift in Sources */,
+				32E59DBB2483314600B4F67C /* AssignmentCoreDataManagerRepresentable.swift in Sources */,
+				32E59DBE2483316300B4F67C /* TermCoreDataManager.swift in Sources */,
 				324E14F924813DC50089ECFC /* MainSplitViewController.swift in Sources */,
+				32E59DB424832C9C00B4F67C /* CoreDataFactory.swift in Sources */,
 				32F86A102482CEC50058E56E /* TermsViewController.swift in Sources */,
 				32E34F3E247F3A1100BFD25A /* Subject+CoreDataProperties.swift in Sources */,
-				32E34F44247F3ABA00BFD25A /* CoreDataManager.swift in Sources */,
 				32F86A162482EEB00058E56E /* WelcomeViewController.swift in Sources */,
 				32E34F3D247F3A1100BFD25A /* Subject+CoreDataClass.swift in Sources */,
 				329D129B247FFDBC00A0173A /* GradableViewModelRepresentable.swift in Sources */,
+				32E59DB72483313400B4F67C /* TermCoreDataManagerRepresentable.swift in Sources */,
 				329D129F247FFF2300A0173A /* SubjectsViewModel.swift in Sources */,
 				32F86A122482CF300058E56E /* SubjectsViewController.swift in Sources */,
+				32E59DC62483330200B4F67C /* CoreDataManagerRepresentable.swift in Sources */,
 				324E14F7248133CD0089ECFC /* GradableCellViewModelRepresentable.swift in Sources */,
 				32E34F40247F3A1100BFD25A /* Assignment+CoreDataProperties.swift in Sources */,
 				32E34F01247F383500BFD25A /* SceneDelegate.swift in Sources */,
 				324E14F524812E550089ECFC /* ReusableView.swift in Sources */,
 				32E34F3B247F3A1100BFD25A /* Term+CoreDataClass.swift in Sources */,
 				324E14F024812E080089ECFC /* GradableTableViewCell.swift in Sources */,
+				32E59DC02483316D00B4F67C /* SubjectCoreDataManager.swift in Sources */,
 				324E14ED24812C060089ECFC /* GradableCellViewModel.swift in Sources */,
 				3293A88D247FFC9C0054D150 /* NSLayoutAnchor+Extension.swift in Sources */,
 				3296EA0A247F5BA400A04FE0 /* TermsViewModel.swift in Sources */,
+				32E59DC4248332D000B4F67C /* CoreDataManager.swift in Sources */,
 				32E34F3F247F3A1100BFD25A /* Assignment+CoreDataClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

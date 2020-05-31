@@ -49,7 +49,7 @@ class SubjectsViewModel: GradableViewModelRepresentable {
     /// Fetches the Subjects.
     func fetch() {
         do {
-            subjects = try CoreDataManager.shared.fetchSubjects(for: term)
+            subjects = try CoreDataFactory.createSubjectManager.fetch(for: term)
             dataDidChange?()
         } catch {
             print(error.localizedDescription)

@@ -14,7 +14,7 @@ class MainSplitViewController: UISplitViewController {
         super.init(nibName: nil, bundle: nil)
         var term: Term?
         do {
-            term = try CoreDataManager.shared.fetchCurrentTerm()
+            term = try CoreDataFactory.createTermManager.getCurrent()
         } catch {
             print(error.localizedDescription)
         }

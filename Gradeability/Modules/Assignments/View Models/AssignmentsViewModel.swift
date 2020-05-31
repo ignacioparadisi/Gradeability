@@ -43,7 +43,7 @@ class AssignmentsViewModel: GradableViewModelRepresentable {
     /// Fetches the Assignments.
     func fetch() {
         do {
-            assignments = try CoreDataManager.shared.fetchAssignments(for: subject)
+            assignments = try CoreDataFactory.createAssignmentManager.fetch(for: subject)
             dataDidChange?()
         } catch {
             print(error.localizedDescription)

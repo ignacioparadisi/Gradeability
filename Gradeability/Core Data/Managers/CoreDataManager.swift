@@ -2,18 +2,20 @@
 //  CoreDataManager.swift
 //  Gradeability
 //
-//  Created by Ignacio Paradisi on 5/27/20.
+//  Created by Ignacio Paradisi on 5/30/20.
 //  Copyright © 2020 Ignacio Paradisi. All rights reserved.
 //
 
 import Foundation
 import CoreData
 
-class CoreDataManager {
-    /// `CoreDataManager` instance of the Singleton
-    static var shared: CoreDataManager = CoreDataManager()
-    
-    private init() {}
+class CoreDataManager: CoreDataManagerRepresentable {
+    class var shared: CoreDataManager {
+        struct Singleton {
+            static let instance = CoreDataManager()
+        }
+        return Singleton.instance
+    }
     
     // MARK: - Core Data stack
 
@@ -46,7 +48,7 @@ class CoreDataManager {
 
     // MARK: - Core Data Saving support
     
-    private var context: NSManagedObjectContext {
+    var context: NSManagedObjectContext {
         return persistentContainer.viewContext
     }
 
@@ -64,6 +66,7 @@ class CoreDataManager {
     }
     
     // - MARK: Import Dummy JSON
+    // TODO: Delete this method later
     func importTermsFromJSON() {
         let fetchRequest: NSFetchRequest<Term> = Term.fetchRequest()
         let count = try! context.count(for: fetchRequest)
@@ -120,91 +123,10 @@ class CoreDataManager {
         saveContext()
     }
     
+    /// Deletes an object from Core Data
+    /// - Parameter object: Object to be deleted
     func delete(_ object: Gradable) {
         context.delete(object)
-        saveContext()
-        let fetchRequest: NSFetchRequest<Assignment> = Assignment.fetchRequest()
-        do {
-            let count = try context.count(for: fetchRequest)
-            print(count)
-        } catch {
-            print(error.localizedDescription)
-        }
-//        do {
-//            try context.delete(object)
-//        } catch {
-//            // TODO: Return custom error
-//            print(error.localizedDescription)
-//        }
-        
-    }
-    
-    // MARK: - Terms
-    func fetchTerms(result: @escaping (Result<[Term], Error>) -> Void) {
-        let fetchRequest: NSFetchRequest<Term> = Term.fetchRequest()
-        let sortDescriptor = NSSortDescriptor(key: #keyPath(Term.dateCreated), ascending: true)
-        fetchRequest.sortDescriptors = [sortDescriptor]
-        let asyncFetchRequest: NSAsynchronousFetchRequest = NSAsynchronousFetchRequest(fetchRequest: fetchRequest) { fetchResult in
-            DispatchQueue.main.async {
-                if let terms = fetchResult.finalResult {
-                    result(.success(terms))
-                }
-            }
-        }
-        do {
-            try context.execute(asyncFetchRequest)
-        } catch {
-            print(error.localizedDescription)
-        }
-    }
-    
-    func fetchCurrentTerm() throws -> Term? {
-        let fetchRequest: NSFetchRequest<Term> = Term.fetchRequest()
-        let predicate: NSPredicate = NSPredicate(format: "%K == %@", #keyPath(Term.isCurrent), NSNumber(value: true))
-        fetchRequest.predicate = predicate
-        return try context.fetch(fetchRequest).first
-    }
-    
-    // MARK: - Subjects
-    func fetchSubjects(for term: Term) throws -> [Subject] {
-        let fetchRequest: NSFetchRequest<Subject> = Subject.fetchRequest()
-        let predicate: NSPredicate = NSPredicate(format: "%K == %@", #keyPath(Subject.term.id), term.id! as CVarArg)
-        let sortDescriptor = NSSortDescriptor(key: #keyPath(Subject.dateCreated), ascending: true)
-        fetchRequest.predicate = predicate
-        fetchRequest.sortDescriptors = [sortDescriptor]
-        return try context.fetch(fetchRequest)
-    }
-    
-    // MARK: - Assignments
-    func fetchAssignments(for subject: Subject) throws -> [Assignment] {
-        let fetchRequest: NSFetchRequest<Assignment> = Assignment.fetchRequest()
-        let predicate: NSPredicate = NSPredicate(format: "%K == %@", #keyPath(Assignment.subject.id), subject.id! as CVarArg)
-        let sortDescriptor = NSSortDescriptor(key: #keyPath(Assignment.dateCreated), ascending: true)
-        fetchRequest.predicate = predicate
-        fetchRequest.sortDescriptors = [sortDescriptor]
-        return try context.fetch(fetchRequest)
-    }
-    
-    func createAssignment(id: UUID?, name: String?, grade: Float?, maxGrade: Float, minGrade: Float, deadline: Date?, percentage: Float, subject: Subject?, assignment: Assignment?, assignments: NSSet?, dateCreated: Date?) {
-        let newAssignment = Assignment(context: context)
-        if let id = id {
-            newAssignment.id = id
-        } else {
-            newAssignment.id = UUID()
-        }
-        newAssignment.subject = subject
-        newAssignment.name = name
-        if let grade = grade {
-            newAssignment.grade = grade
-        }
-        newAssignment.maxGrade = maxGrade
-        newAssignment.minGrade = minGrade
-        newAssignment.percentage = percentage
-        newAssignment.deadline = deadline
-        newAssignment.assignment = assignment
-        newAssignment.assignments = assignments
-        newAssignment.dateCreated = dateCreated
-        
         saveContext()
     }
 
