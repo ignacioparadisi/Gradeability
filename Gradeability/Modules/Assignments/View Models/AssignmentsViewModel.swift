@@ -12,7 +12,7 @@ class AssignmentsViewModel: GradableViewModelRepresentable {
 
     // MARK: Private Properties
     /// Parent Subject of the Assignments.
-    private let subject: Subject
+    private var subject: Subject?
     /// Assignments to be displayed.
     private var assignments: [Assignment] = []
     
@@ -27,7 +27,7 @@ class AssignmentsViewModel: GradableViewModelRepresentable {
     }
     /// Subject's name to be displayed as the `UIViewController` title.
     var title: String {
-        return subject.name ?? ""
+        return subject?.name ?? ""
     }
     /// Title for the gradables section
     var sectionTitle: String {
@@ -35,13 +35,14 @@ class AssignmentsViewModel: GradableViewModelRepresentable {
     }
     
     // MARK: Initializers
-    init(subject: Subject) {
+    init(subject: Subject? = nil) {
         self.subject = subject
     }
     
     // MARK: Functions
     /// Fetches the Assignments.
     func fetch() {
+        guard let subject = subject else { return }
         CoreDataFactory.createAssignmentManager.fetch(for: subject) { [weak self] result in
             switch result {
             case .success(let assignments):
@@ -90,4 +91,11 @@ class AssignmentsViewModel: GradableViewModelRepresentable {
         assignments.remove(at: indexPath.row)
     }
     
+}
+
+extension AssignmentsViewModel: SubjectsViewModelDelegate {
+    func didFetchSubjects(_ subjects: [Subject]) {
+        subject = subjects[0]
+        fetch()
+    }
 }

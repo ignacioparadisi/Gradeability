@@ -11,6 +11,7 @@ import UIKit
 class MainSplitViewController: UISplitViewController {
     
     private let loadingView = UIView()
+    private let createTermView = UIView()
 
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nil, bundle: nil)
@@ -25,7 +26,11 @@ class MainSplitViewController: UISplitViewController {
         delegate = self
         primaryBackgroundStyle = .sidebar
         preferredDisplayMode = .allVisible
-        
+        // setupLoadingView()
+        fetchDataForViewControllers()
+    }
+    
+    private func setupLoadingView() {
         loadingView.backgroundColor = .systemGroupedBackground
         view.addSubview(loadingView)
         loadingView.anchor.edgesToSuperview().activate()
@@ -54,8 +59,6 @@ class MainSplitViewController: UISplitViewController {
         centerView.anchor.centerToSuperview().activate()
         
         activityIndicator.startAnimating()
-        
-        fetchDataForViewControllers()
     }
     
     private func fetchDataForViewControllers() {
@@ -67,21 +70,84 @@ class MainSplitViewController: UISplitViewController {
         }
         
         if let term = term {
+            let assignmentsViewModel = AssignmentsViewModel()
             let subjectsViewModel = SubjectsViewModel(term: term)
-            subjectsViewModel.fetch()
-            subjectsViewModel.dataDidChange = { [weak self] in
-                let masterViewController = UINavigationController(rootViewController: SubjectsViewController(viewModel: subjectsViewModel))
-                if let assignmentsViewModel = subjectsViewModel.nextViewModelForRow(at: IndexPath(row: 0, section: 0)) {
-                    let detailViewController = UINavigationController(rootViewController: AssignmentsViewController(viewModel: assignmentsViewModel as! AssignmentsViewModel))
-                    self?.viewControllers = [masterViewController, detailViewController]
-                    self?.loadingView.removeFromSuperview()
-                }
-            }
+            subjectsViewModel.delegate = assignmentsViewModel
+            let subjectsViewController = SubjectsViewController(viewModel: subjectsViewModel)
+            let assignmentsViewController = AssignmentsViewController(viewModel: assignmentsViewModel)
+            let masterViewController = UINavigationController(rootViewController: subjectsViewController)
+            
+            let detailViewController = UINavigationController(rootViewController: assignmentsViewController)
+            viewControllers = [masterViewController, detailViewController]
+            // loadingView.removeFromSuperview()
+        } else {
+            setupCreateTermView()
         }
+    }
+    
+    private func setupCreateTermView() {
+        let imageView = UIImageView()
+        let label = UILabel()
+        let button = UIButton()
+        
+        imageView.image = UIImage(systemName: "calendar.circle.fill")
+        imageView.contentMode = .scaleAspectFit
+        imageView.tintColor = .systemGray2
+        label.textAlignment = .center
+        label.font = UIFont.preferredFont(forTextStyle: .subheadline)
+        
+        label.text = "To get started create a Term."
+        label.numberOfLines = 2
+        
+        button.setTitle("Create Term", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = .systemBlue
+        button.layer.cornerRadius = 10
+        button.clipsToBounds = true
+        
+        view.addSubview(createTermView)
+        createTermView.addSubview(imageView)
+        createTermView.addSubview(label)
+        createTermView.addSubview(button)
+        
+        createTermView.anchor
+            .top(greaterOrEqual: view.safeAreaLayoutGuide.topAnchor, constant: 50)
+            .trailing(to: view.safeAreaLayoutGuide.trailingAnchor, constant: -30)
+            .bottom(lessOrEqual: view.safeAreaLayoutGuide.bottomAnchor, constant: -50)
+            .leading(to: view.safeAreaLayoutGuide.leadingAnchor, constant: 30)
+            .centerToSuperview()
+            .activate()
+        
+        imageView.anchor
+            .topToSuperview()
+            .centerXToSuperview()
+            .height(constant: min(view.frame.height, view.frame.width) * 0.6)
+            .width(to: imageView.heightAnchor)
+            .activate()
+        
+        label.anchor
+            .top(to: imageView.bottomAnchor, constant: 40)
+            .trailingToSuperview()
+            .leadingToSuperview()
+            .activate()
+        
+        button.anchor
+            .top(to: label.bottomAnchor, constant: 30)
+            .trailing(lessOrEqual: createTermView.trailingAnchor)
+            .leading(lessOrEqual: createTermView.leadingAnchor)
+            .bottomToSuperview()
+            .centerXToSuperview()
+            .height(constant: 44)
+            .width(lessThanOrEqualToConstant: 400)
+            .activate()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        // showWelcomeView()
+    }
+    
+    private func showWelcomeView() {
         let viewController = WelcomeViewController()
         viewController.isModalInPresentation = true
         present(viewController, animated: true)

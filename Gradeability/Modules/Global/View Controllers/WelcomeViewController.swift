@@ -128,7 +128,7 @@ class WelcomeViewController: UIViewController {
             .trailingToSuperview(constant: trailingMargin, toSafeArea: true)
             .bottomToSuperview(constant: -50, toSafeArea: true)
             .leadingToSuperview(constant: leadingMargin, toSafeArea: true)
-            .height(constant: 50)
+            .height(constant: 44)
             .activate()
     }
     

@@ -239,6 +239,9 @@ public struct Anchor {
     public func height(greaterThanOrEqualToConstant constant: CGFloat) -> Anchor {
         return update(edge: .height, constraint: view.heightAnchor.constraint(greaterThanOrEqualToConstant: constant))
     }
+    public func height(lessThanOrEqualToConstant constant: CGFloat) -> Anchor {
+        return update(edge: .height, constraint: view.heightAnchor.constraint(lessThanOrEqualToConstant: constant))
+    }
     public func width(constant: CGFloat, priority: UILayoutPriority? = nil) -> Anchor {
         return update(edge: .width, constraint: view.widthAnchor.constraint(equalToConstant: constant), priority: priority)
     }
@@ -247,6 +250,9 @@ public struct Anchor {
     }
     public func width(greaterThanOrEqualToConstant constant: CGFloat) -> Anchor {
         return update(edge: .width, constraint: view.widthAnchor.constraint(greaterThanOrEqualToConstant: constant))
+    }
+    public func width(lessThanOrEqualToConstant constant: CGFloat) -> Anchor {
+        return update(edge: .width, constraint: view.widthAnchor.constraint(lessThanOrEqualToConstant: constant))
     }
     // MARK: Axis anchors
     public func centerX(to axis: NSLayoutXAxisAnchor, constant: CGFloat = 0) -> Anchor {
