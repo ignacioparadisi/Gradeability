@@ -101,7 +101,7 @@ class SubjectsViewModel: GradableViewModelRepresentable {
     }
     
     func createSubject() {
-        SubjectCoreDataManager.shared.create(term: term!, name: "Materia", maxGrade: 20, minGrade: 10, teacherName: "Carlitos Perez")
+        CoreDataFactory.createSubjectManager.create(term: term!, name: "Materia", maxGrade: 20, minGrade: 10, teacherName: "Carlitos Perez")
     }
     
     func deleteItem(at indexPath: IndexPath) {

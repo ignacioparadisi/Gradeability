@@ -16,7 +16,7 @@ class CoreDataManager: CoreDataManagerRepresentable {
     private init() {}
     
     // MARK: - Core Data stack
-
+    
     lazy var persistentContainer: NSPersistentCloudKitContainer = {
         /*
          The persistent container for the application. This implementation

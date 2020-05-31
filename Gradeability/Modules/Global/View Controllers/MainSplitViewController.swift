@@ -10,7 +10,7 @@ import UIKit
 
 class MainSplitViewController: UISplitViewController {
     
-    private let loadingView = UIView()
+    var loadingView: LoadingView?
     private var emptyView: EmptyGradablesView?
     
     override func viewDidLoad() {
@@ -27,36 +27,19 @@ class MainSplitViewController: UISplitViewController {
         // showWelcomeView()
     }
 
-    // TODO: Probably delete this method
-    private func setupLoadingView() {
-        loadingView.backgroundColor = .systemGroupedBackground
-        view.addSubview(loadingView)
-        loadingView.anchor.edgesToSuperview().activate()
-        
-        let centerView = UIView()
-        let activityIndicator = UIActivityIndicatorView()
-        let loadingLabel = UILabel()
-        loadingLabel.font = UIFont.preferredFont(forTextStyle: .footnote)
-        loadingLabel.text = "LOADING"
-        
-        centerView.addSubview(activityIndicator)
-        centerView.addSubview(loadingLabel)
-        
-        activityIndicator.anchor
-            .topToSuperview()
-            .centerXToSuperview()
-            .activate()
-        loadingLabel.anchor
-            .top(to: activityIndicator.bottomAnchor, constant: 10)
-            .trailingToSuperview()
-            .bottomToSuperview()
-            .leadingToSuperview()
-            .activate()
-        
-        loadingView.addSubview(centerView)
-        centerView.anchor.centerToSuperview().activate()
-        
-        activityIndicator.startAnimating()
+    func showLoadingView() {
+        loadingView = LoadingView()
+        view.addSubview(loadingView!)
+        loadingView?.anchor.edgesToSuperview().activate()
+    }
+    
+    func removeLoadingView() {
+        UIView.animate(withDuration: 0.3, animations: { [weak self] in
+            self?.loadingView?.alpha = 0
+        }, completion: { [weak self] _ in
+            self?.loadingView?.removeFromSuperview()
+            self?.loadingView = nil
+        })
     }
     
     /// Setup view controllers for the `SplitViewController`
@@ -94,7 +77,7 @@ class MainSplitViewController: UISplitViewController {
     }
     
     private func goToCreateTerm() {
-        TermCoreDataManager.shared.create(name: "Semestre", maxGrade: 20, minGrade: 10)
+        CoreDataFactory.createTermManager.create(name: "Semestre", maxGrade: 20, minGrade: 10)
         setupSplitViewControllers()
         UIView.animate(withDuration: 0.1, animations: { [weak self] in
             self?.emptyView?.alpha = 0

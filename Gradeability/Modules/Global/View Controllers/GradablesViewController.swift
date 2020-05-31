@@ -12,6 +12,7 @@ class GradablesViewController: UIViewController {
     // MARK: Private Properties
     /// `UITableView` to display the information.
     let tableView: UITableView = UITableView(frame: .zero, style: .insetGrouped)
+    var loadingView: LoadingView?
     /// View Model that holds the data.
     private var viewModel: GradableViewModelRepresentable
     
@@ -31,10 +32,6 @@ class GradablesViewController: UIViewController {
         setupNavigationBar()
         setupViewModel()
         setupTableView()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
         viewModel.fetch()
     }
     
@@ -70,6 +67,21 @@ class GradablesViewController: UIViewController {
             self?.title = self?.viewModel.title
             self?.tableView.reloadData()
         }
+    }
+    
+    func showLoadingView() {
+        loadingView = LoadingView()
+        view.addSubview(loadingView!)
+        loadingView?.anchor.edgesToSuperview().activate()
+    }
+    
+    func removeLoadingView() {
+        UIView.animate(withDuration: 0.1, animations: { [weak self] in
+            self?.loadingView?.alpha = 0
+        }, completion: { [weak self] _ in
+            self?.loadingView?.removeFromSuperview()
+            self?.loadingView = nil
+        })
     }
     
     @objc func didTapOptionsButton(_ sender: UIBarButtonItem?) {
