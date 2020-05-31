@@ -50,6 +50,11 @@ class SubjectsViewModel: GradableViewModelRepresentable {
         self.term = term
     }
     
+    func setTerm(_ term: Term?) {
+        self.term = term
+        fetch()
+    }
+    
     // MARK: Functions
     /// Fetches the Subjects.
     func fetch() {

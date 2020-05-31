@@ -12,13 +12,13 @@ class MainSplitViewController: UISplitViewController {
     
     var loadingView: LoadingView?
     private var emptyView: EmptyGradablesView?
+    private var subjectsViewModel: SubjectsViewModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         delegate = self
         primaryBackgroundStyle = .sidebar
         preferredDisplayMode = .allVisible
-        // setupLoadingView()
         setupSplitViewControllers()
     }
     
@@ -45,24 +45,18 @@ class MainSplitViewController: UISplitViewController {
     /// Setup view controllers for the `SplitViewController`
     private func setupSplitViewControllers() {
         var term: Term?
-        do {
-            term = try CoreDataFactory.createTermManager.getCurrent()
-        } catch {
-            print(error.localizedDescription)
-        }
+        term = CoreDataFactory.createTermManager.getCurrent()
+
+        let assignmentsViewModel = AssignmentsViewModel()
+        subjectsViewModel = SubjectsViewModel(term: term)
+        subjectsViewModel?.delegate = assignmentsViewModel
+        let subjectsViewController = SubjectsViewController(viewModel: subjectsViewModel!)
+        let assignmentsViewController = AssignmentsViewController(viewModel: assignmentsViewModel)
+        let masterViewController = UINavigationController(rootViewController: subjectsViewController)
+        let detailViewController = UINavigationController(rootViewController: assignmentsViewController)
+        viewControllers = [masterViewController, detailViewController]
         
-        if let term = term {
-            let assignmentsViewModel = AssignmentsViewModel()
-            let subjectsViewModel = SubjectsViewModel(term: term)
-            subjectsViewModel.delegate = assignmentsViewModel
-            let subjectsViewController = SubjectsViewController(viewModel: subjectsViewModel)
-            let assignmentsViewController = AssignmentsViewController(viewModel: assignmentsViewModel)
-            let masterViewController = UINavigationController(rootViewController: subjectsViewController)
-            
-            let detailViewController = UINavigationController(rootViewController: assignmentsViewController)
-            viewControllers = [masterViewController, detailViewController]
-            // loadingView.removeFromSuperview()
-        } else {
+        if term == nil {
             showCreateTermView()
         }
     }
@@ -78,12 +72,13 @@ class MainSplitViewController: UISplitViewController {
     
     private func goToCreateTerm() {
         CoreDataFactory.createTermManager.create(name: "Semestre", maxGrade: 20, minGrade: 10)
-        setupSplitViewControllers()
+        subjectsViewModel?.setTerm(CoreDataFactory.createTermManager.getCurrent())
         UIView.animate(withDuration: 0.1, animations: { [weak self] in
             self?.emptyView?.alpha = 0
         }, completion: { [weak self] _ in
             self?.emptyView?.removeFromSuperview()
             self?.emptyView = nil
+            self?.subjectsViewModel = nil
         })
     }
     
