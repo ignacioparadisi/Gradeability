@@ -100,6 +100,10 @@ class SubjectsViewModel: GradableViewModelRepresentable {
         return menu
     }
     
+    func createSubject() {
+        SubjectCoreDataManager.shared.create(term: term!, name: "Materia", maxGrade: 20, minGrade: 10, teacherName: "Carlitos Perez")
+    }
+    
     func deleteItem(at indexPath: IndexPath) {
         let subject = subjects[indexPath.row]
         CoreDataManager.shared.delete(subject)

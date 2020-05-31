@@ -9,16 +9,11 @@
 import Foundation
 import CoreData
 
-class AssignmentCoreDataManager: CoreDataManager, AssignmentCoreDataManagerRepresentable {
+class AssignmentCoreDataManager: AssignmentCoreDataManagerRepresentable {
     
-    override class var shared: AssignmentCoreDataManager {
-        struct Singleton {
-            static let instance = AssignmentCoreDataManager()
-        }
-        return Singleton.instance
-    }
+    static var shared: AssignmentCoreDataManager  = AssignmentCoreDataManager()
     
-    override private init() {}
+    private init() {}
     
     /// Fetches all assignments for a subject.
     /// - Parameters:
@@ -38,7 +33,7 @@ class AssignmentCoreDataManager: CoreDataManager, AssignmentCoreDataManagerRepre
             }
         }
         do {
-            try context.execute(asyncFetchRequest)
+            try CoreDataManager.shared.context.execute(asyncFetchRequest)
         } catch {
             result(.failure(error))
         }
@@ -57,32 +52,25 @@ class AssignmentCoreDataManager: CoreDataManager, AssignmentCoreDataManagerRepre
     ///   - assignment: Parent assignment.
     ///   - assignments: Children assignments.
     ///   - dateCreated: Date when the assignment was created (in case the assignment already exists).
-    func createAssignment(id: UUID?, name: String?, grade: Float?, maxGrade: Float, minGrade: Float, deadline: Date?, percentage: Float, subject: Subject?, assignment: Assignment?, assignments: NSSet?, dateCreated: Date?) {
-        let newAssignment = Assignment(context: context)
-        if let id = id {
-            newAssignment.id = id
-        } else {
-            newAssignment.id = UUID()
-        }
-        newAssignment.subject = subject
-        newAssignment.name = name
-        if let grade = grade {
-            newAssignment.grade = grade
-        }
-        newAssignment.maxGrade = maxGrade
-        newAssignment.minGrade = minGrade
-        newAssignment.percentage = percentage
-        newAssignment.deadline = deadline
-        newAssignment.assignment = assignment
-        newAssignment.assignments = assignments
-        newAssignment.dateCreated = dateCreated
-        
-        saveContext()
+    func createAssignment(name: String?, maxGrade: Float, minGrade: Float, grade: Float = 0, deadline: Date?, percentage: Float, subject: Subject?, assignment: Assignment? = nil, assignments: NSSet? = nil) {
+        let assignment = Assignment(context: CoreDataManager.shared.context)
+        assignment.id = UUID()
+        assignment.subject = subject
+        assignment.name = name
+        assignment.grade = grade
+        assignment.maxGrade = maxGrade
+        assignment.minGrade = minGrade
+        assignment.percentage = percentage
+        assignment.deadline = deadline
+        assignment.assignment = assignment
+        assignment.assignments = assignments
+        assignment.dateCreated = Date()
+        CoreDataManager.shared.saveContext()
     }
     
     /// Deletes an assignment from `CoreData`.
     /// - Parameter assignment: Assignment to be deleted.
     func delete(_ assignment: Assignment) {
-        super.delete(assignment)
+        CoreDataManager.shared.delete(assignment)
     }
 }

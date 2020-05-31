@@ -14,6 +14,7 @@ protocol SubjectCoreDataManagerRepresentable {
     ///   - term: Term where the assignments belong.
     ///   - result: Result with the error or subjects fetched
     func fetch(for term: Term, result: @escaping (Result<[Subject], Error>) -> Void)
+    func create(term: Term, name: String, maxGrade: Float, minGrade: Float, teacherName: String?)
     /// Deletes a subject from `CoreData`
     /// - Parameter subject: Subject to be deleted
     func delete(_ subject: Subject)

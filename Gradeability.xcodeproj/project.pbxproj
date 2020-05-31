@@ -19,6 +19,7 @@
 		329D129B247FFDBC00A0173A /* GradableViewModelRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329D129A247FFDBC00A0173A /* GradableViewModelRepresentable.swift */; };
 		329D129F247FFF2300A0173A /* SubjectsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329D129E247FFF2300A0173A /* SubjectsViewModel.swift */; };
 		329D12A1247FFF3100A0173A /* AssignmentsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329D12A0247FFF3100A0173A /* AssignmentsViewModel.swift */; };
+		32B54D84248404E80083B734 /* EmptyGradablesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B54D83248404E80083B734 /* EmptyGradablesViewController.swift */; };
 		32E34EFF247F383500BFD25A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E34EFE247F383500BFD25A /* AppDelegate.swift */; };
 		32E34F01247F383500BFD25A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E34F00247F383500BFD25A /* SceneDelegate.swift */; };
 		32E34F03247F383500BFD25A /* GradablesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E34F02247F383500BFD25A /* GradablesViewController.swift */; };
@@ -80,6 +81,7 @@
 		329D129A247FFDBC00A0173A /* GradableViewModelRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradableViewModelRepresentable.swift; sourceTree = "<group>"; };
 		329D129E247FFF2300A0173A /* SubjectsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectsViewModel.swift; sourceTree = "<group>"; };
 		329D12A0247FFF3100A0173A /* AssignmentsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentsViewModel.swift; sourceTree = "<group>"; };
+		32B54D83248404E80083B734 /* EmptyGradablesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyGradablesViewController.swift; sourceTree = "<group>"; };
 		32E34EFB247F383500BFD25A /* Gradeability.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gradeability.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		32E34EFE247F383500BFD25A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		32E34F00247F383500BFD25A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -246,6 +248,7 @@
 				32E34F02247F383500BFD25A /* GradablesViewController.swift */,
 				324E14F824813DC50089ECFC /* MainSplitViewController.swift */,
 				32F86A152482EEB00058E56E /* WelcomeViewController.swift */,
+				32B54D83248404E80083B734 /* EmptyGradablesViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -566,6 +569,7 @@
 				324E14F524812E550089ECFC /* ReusableView.swift in Sources */,
 				32E34F3B247F3A1100BFD25A /* Term+CoreDataClass.swift in Sources */,
 				324E14F024812E080089ECFC /* GradableTableViewCell.swift in Sources */,
+				32B54D84248404E80083B734 /* EmptyGradablesViewController.swift in Sources */,
 				32E59DC02483316D00B4F67C /* SubjectCoreDataManager.swift in Sources */,
 				324E14ED24812C060089ECFC /* GradableCellViewModel.swift in Sources */,
 				3293A88D247FFC9C0054D150 /* NSLayoutAnchor+Extension.swift in Sources */,

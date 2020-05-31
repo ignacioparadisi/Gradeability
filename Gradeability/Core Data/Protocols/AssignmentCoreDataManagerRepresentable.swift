@@ -16,7 +16,6 @@ protocol AssignmentCoreDataManagerRepresentable {
     func fetch(for subject: Subject, result: @escaping (Result<[Assignment], Error>) -> Void)
     /// Creates a new assignment and saves it in CoreData.
     /// - Parameters:
-    ///   - id: ID for the assignment (In case the assignment already exists).
     ///   - name: Name for the assignment.
     ///   - grade: Grade for the assignment.
     ///   - maxGrade: Maximum grade for the assignment.
@@ -26,8 +25,7 @@ protocol AssignmentCoreDataManagerRepresentable {
     ///   - subject: Subject where the assignment belongs.
     ///   - assignment: Parent assignment.
     ///   - assignments: Children assignments.
-    ///   - dateCreated: Date when the assignment was created (in case the assignment already exists).
-    func createAssignment(id: UUID?, name: String?, grade: Float?, maxGrade: Float, minGrade: Float, deadline: Date?, percentage: Float, subject: Subject?, assignment: Assignment?, assignments: NSSet?, dateCreated: Date?)
+    func createAssignment(name: String?, maxGrade: Float, minGrade: Float, grade: Float, deadline: Date?, percentage: Float, subject: Subject?, assignment: Assignment?, assignments: NSSet?)
     /// Deletes an assignment from `CoreData`.
     /// - Parameter assignment: Assignment to be deleted.
     func delete(_ assignment: Assignment)

@@ -9,16 +9,11 @@
 import Foundation
 import CoreData
 
-class TermCoreDataManager: CoreDataManager, TermCoreDataManagerRepresentable {
+class TermCoreDataManager: TermCoreDataManagerRepresentable {
     
-    override class var shared: TermCoreDataManager {
-        struct Singleton {
-            static let instance = TermCoreDataManager()
-        }
-        return Singleton.instance
-    }
+    static var shared: TermCoreDataManager  = TermCoreDataManager()
     
-    override private init() {}
+    private init() {}
     
     /// Fetch all terms
     /// - Parameter result: Result with the error or terms fetched
@@ -34,23 +29,41 @@ class TermCoreDataManager: CoreDataManager, TermCoreDataManagerRepresentable {
             }
         }
         do {
-            try context.execute(asyncFetchRequest)
+            try CoreDataManager.shared.context.execute(asyncFetchRequest)
         } catch {
             print(error.localizedDescription)
         }
     }
     
     /// Fetches the current term
-    func getCurrent() throws -> Term? {
+    func getCurrent() -> Term? {
         let fetchRequest: NSFetchRequest<Term> = Term.fetchRequest()
         let predicate: NSPredicate = NSPredicate(format: "%K == %@", #keyPath(Term.isCurrent), NSNumber(value: true))
         fetchRequest.predicate = predicate
-        return try context.fetch(fetchRequest).first
+        do {
+            return try CoreDataManager.shared.context.fetch(fetchRequest).first
+        } catch {
+            return nil
+        }
+        
+    }
+    
+    func create(name: String, maxGrade: Float, minGrade: Float) {
+        let term = Term(context: CoreDataManager.shared.context)
+        if getCurrent() == nil {
+            term.isCurrent = true
+        }
+        term.id = UUID()
+        term.name = name
+        term.maxGrade = maxGrade
+        term.minGrade = minGrade
+        term.dateCreated = Date()
+        CoreDataManager.shared.saveContext()
     }
     
     /// Deletes a term from `CoreData`.
     /// - Parameter term: Term to be deleted.
     func delete(_ term: Term) {
-        super.delete(term)
+        CoreDataManager.shared.delete(term)
     }
 }

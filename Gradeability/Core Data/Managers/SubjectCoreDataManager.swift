@@ -9,16 +9,11 @@
 import Foundation
 import CoreData
 
-class SubjectCoreDataManager: CoreDataManager, SubjectCoreDataManagerRepresentable {
+class SubjectCoreDataManager: SubjectCoreDataManagerRepresentable {
     
-    override class var shared: SubjectCoreDataManager {
-        struct Singleton {
-            static let instance = SubjectCoreDataManager()
-        }
-        return Singleton.instance
-    }
+    static var shared: SubjectCoreDataManager  = SubjectCoreDataManager()
     
-    private override init() {}
+    private init() {}
     
     /// Fetches all subjects for a term.
     /// - Parameters:
@@ -38,15 +33,27 @@ class SubjectCoreDataManager: CoreDataManager, SubjectCoreDataManagerRepresentab
             }
         }
         do {
-            try context.execute(asyncFetchRequest)
+            try CoreDataManager.shared.context.execute(asyncFetchRequest)
         } catch {
             result(.failure(error))
         }
     }
     
+    func create(term: Term, name: String, maxGrade: Float, minGrade: Float, teacherName: String?) {
+        let subject = Subject(context: CoreDataManager.shared.context)
+        subject.term = term
+        subject.id = UUID()
+        subject.name = name
+        subject.maxGrade = maxGrade
+        subject.minGrade = minGrade
+        subject.teacherName = teacherName
+        subject.dateCreated = Date()
+        CoreDataManager.shared.saveContext()
+    }
+    
     /// Deletes a subject from `CoreData`.
     /// - Parameter subject: Subject to be deleted.
     func delete(_ subject: Subject) {
-        super.delete(subject)
+        CoreDataManager.shared.delete(subject)
     }
 }

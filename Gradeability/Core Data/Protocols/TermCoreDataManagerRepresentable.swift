@@ -14,6 +14,7 @@ protocol TermCoreDataManagerRepresentable {
     func fetch(result: @escaping (Result<[Term], Error>) -> Void)
     /// Fetches the current term
     func getCurrent() throws -> Term?
+    func create(name: String, maxGrade: Float, minGrade: Float)
     /// Deletes a term from `CoreData`.
     /// - Parameter term: Term to be deleted.
     func delete(_ term: Term)

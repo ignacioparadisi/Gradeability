@@ -31,6 +31,10 @@ class GradablesViewController: UIViewController {
         setupNavigationBar()
         setupViewModel()
         setupTableView()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         viewModel.fetch()
     }
     
@@ -61,7 +65,7 @@ class GradablesViewController: UIViewController {
     }
     
     /// Setup all View Model's closures to update the UI
-    private func setupViewModel() {
+    func setupViewModel() {
         viewModel.dataDidChange = { [weak self] in
             self?.title = self?.viewModel.title
             self?.tableView.reloadData()

@@ -10,12 +10,10 @@ import Foundation
 import CoreData
 
 class CoreDataManager: CoreDataManagerRepresentable {
-    class var shared: CoreDataManager {
-        struct Singleton {
-            static let instance = CoreDataManager()
-        }
-        return Singleton.instance
-    }
+    
+    static var shared: CoreDataManager = CoreDataManager()
+    
+    private init() {}
     
     // MARK: - Core Data stack
 

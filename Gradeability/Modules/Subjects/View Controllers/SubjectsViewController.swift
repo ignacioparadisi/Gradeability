@@ -10,10 +10,15 @@ import UIKit
 
 class SubjectsViewController: GradablesViewController {
     private let viewModel: SubjectsViewModel
+    private var emptyView: EmptyGradablesView?
     
     init(viewModel: SubjectsViewModel) {
         self.viewModel = viewModel
         super.init(viewModel: viewModel)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func viewDidLoad() {
@@ -24,9 +29,25 @@ class SubjectsViewController: GradablesViewController {
             animated: false)
         }
     }
+
+    /// Setup all View Model's closures to update the UI
+    override func setupViewModel() {
+        viewModel.dataDidChange = { [weak self] in
+            if self?.viewModel.numberOfRows == 0 {
+                self?.showEmptyView()
+            }
+            self?.title = self?.viewModel.title
+            self?.tableView.reloadData()
+        }
+    }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    private func showEmptyView() {
+        emptyView = EmptyGradablesView(imageName: "book.circle.fill",
+                                       description: "It seems that you don't have any subject in this term.",
+                                       buttonTitle: "Create Subject")
+        emptyView?.delegate = self
+        view.addSubview(emptyView!)
+        emptyView?.anchor.edgesToSuperview().activate()
     }
     
     /// Present `GradablesViewController` for showing all Terms
@@ -47,5 +68,18 @@ extension SubjectsViewController {
         } else {
             navigationController?.pushViewController(viewController, animated: true)
         }
+    }
+}
+
+extension SubjectsViewController: EmptyGradablesViewDelegate {
+    func didTapButton() {
+        viewModel.createSubject()
+        viewModel.fetch()
+        UIView.animate(withDuration: 0.1, animations: { [weak self] in
+            self?.emptyView?.alpha = 0
+        }, completion: { [weak self] _ in
+            self?.emptyView?.removeFromSuperview()
+            self?.emptyView = nil
+        })
     }
 }

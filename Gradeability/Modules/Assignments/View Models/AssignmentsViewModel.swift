@@ -85,6 +85,10 @@ class AssignmentsViewModel: GradableViewModelRepresentable {
         return menu
     }
     
+    func createAssignment() {
+        CoreDataFactory.createAssignmentManager.createAssignment(name: "Prueba", maxGrade: 20, minGrade: 10, grade: 0, deadline: Date(), percentage: 1, subject: subject, assignment: nil, assignments: nil)
+    }
+    
     func deleteItem(at indexPath: IndexPath) {
         let assignment = assignments[indexPath.row]
         CoreDataManager.shared.delete(assignment)
@@ -95,6 +99,7 @@ class AssignmentsViewModel: GradableViewModelRepresentable {
 
 extension AssignmentsViewModel: SubjectsViewModelDelegate {
     func didFetchSubjects(_ subjects: [Subject]) {
+        guard !subjects.isEmpty else { return }
         subject = subjects[0]
         fetch()
     }
