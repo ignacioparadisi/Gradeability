@@ -69,14 +69,10 @@ class SubjectsViewModel: GradableViewModelRepresentable {
     
     /// Gets the View Model for the `UIViewController` to be displayed next when the user selects a `UITableViewCell`.
     /// - Parameter indexPath: IndexPath for the cell selected.
-    func nextViewModelForRow(at indexPath: IndexPath) -> (viewModel: GradableViewModelRepresentable, navigationStyle: NavigationStyle)?  {
+    func nextViewModelForRow(at indexPath: IndexPath) -> GradableViewModelRepresentable?  {
         let subject = subjects[indexPath.row]
         let viewModel = AssignmentsViewModel(subject: subject)
-        if isMasterController {
-            return (viewModel, .detail)
-        } else {
-            return (viewModel, .push)
-        }
+        return viewModel
         
     }
     

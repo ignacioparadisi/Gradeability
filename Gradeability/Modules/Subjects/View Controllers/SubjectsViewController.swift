@@ -40,7 +40,7 @@ class SubjectsViewController: GradablesViewController {
 // MARK: - UITableViewDelegate
 extension SubjectsViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let (nextViewModel, _) = viewModel.nextViewModelForRow(at: indexPath) else { return }
+        guard let nextViewModel = viewModel.nextViewModelForRow(at: indexPath) else { return }
         let viewController = AssignmentsViewController(viewModel: nextViewModel as! AssignmentsViewModel)
         if viewModel.isMasterController {
             showDetailViewController(UINavigationController(rootViewController: viewController), sender: nil)

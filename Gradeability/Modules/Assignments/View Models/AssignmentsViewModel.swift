@@ -63,7 +63,7 @@ class AssignmentsViewModel: GradableViewModelRepresentable {
     
     /// Gets the View Model for the `UIViewController` to be displayed next when the user selects a `UITableViewCell`.
     /// - Parameter indexPath: IndexPath for the cell selected.
-    func nextViewModelForRow(at indexPath: IndexPath) -> (viewModel: GradableViewModelRepresentable, navigationStyle: NavigationStyle)? {
+    func nextViewModelForRow(at indexPath: IndexPath) -> GradableViewModelRepresentable? {
         return nil
     }
     

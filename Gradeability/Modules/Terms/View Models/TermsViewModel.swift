@@ -68,11 +68,11 @@ class TermsViewModel: GradableViewModelRepresentable {
     
     /// Gets the View Model for the `UIViewController` to be displayed next when the user selects a `UITableViewCell`.
     /// - Parameter indexPath: IndexPath for the cell selected.
-    func nextViewModelForRow(at indexPath: IndexPath) -> (viewModel: GradableViewModelRepresentable, navigationStyle: NavigationStyle)? {
+    func nextViewModelForRow(at indexPath: IndexPath) -> GradableViewModelRepresentable? {
         let term = terms[indexPath.row]
         let viewModel = SubjectsViewModel(term: term)
         viewModel.isMasterController = false
-        return (viewModel, .push)
+        return viewModel
     }
     
     func createContextualMenuForRow(at indexPath: IndexPath) -> UIMenu? {

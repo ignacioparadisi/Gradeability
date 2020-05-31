@@ -33,7 +33,7 @@ class TermsViewController: GradablesViewController {
 // MARK: - UITableViewDelegate
 extension TermsViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let (nextViewModel, _) = viewModel.nextViewModelForRow(at: indexPath) else { return }
+        guard let nextViewModel = viewModel.nextViewModelForRow(at: indexPath) else { return }
         let viewController = SubjectsViewController(viewModel: nextViewModel as! SubjectsViewModel)
         navigationController?.pushViewController(viewController, animated: true)
     }
