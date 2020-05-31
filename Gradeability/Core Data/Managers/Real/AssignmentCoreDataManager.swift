@@ -66,6 +66,37 @@ class AssignmentCoreDataManager: AssignmentCoreDataManagerRepresentable {
         assignment.assignments = assignments
         assignment.dateCreated = Date()
         CoreDataManager.shared.saveContext()
+        
+        calculateGrade(for: subject)
+    }
+    
+    func calculateGrade(for subject: Subject?) {
+        let fetchRequest: NSFetchRequest<NSDictionary> = NSFetchRequest<NSDictionary>(entityName: "Assignment")
+        fetchRequest.resultType = .dictionaryResultType
+        let predicate = NSPredicate(format: "%K == %@" , #keyPath(Assignment.subject.id), subject!.id! as CVarArg)
+        fetchRequest.predicate = predicate
+        let expressionDescription = NSExpressionDescription()
+        expressionDescription.name = "grade"
+        let multiplyExpression = NSExpression(forFunction: "multiply:by:",
+                     arguments: [
+                        NSExpression(forKeyPath: #keyPath(Assignment.grade)),
+                        NSExpression(forKeyPath: #keyPath(Assignment.percentage))
+                    ])
+        expressionDescription.expression = multiplyExpression
+        expressionDescription.expressionResultType = .integer32AttributeType
+        fetchRequest.propertiesToFetch = [expressionDescription]
+        
+        do {
+            let results = try CoreDataManager.shared.context.fetch(fetchRequest)
+            var grade: Float = 0
+            for result in results {
+                grade += result["grade"] as! Float
+            }
+            subject?.grade = grade
+            CoreDataManager.shared.saveContext()
+        } catch let error as NSError {
+            print("count not fetched \(error), \(error.userInfo)")
+        }
     }
     
     /// Deletes an assignment from `CoreData`.

@@ -67,35 +67,24 @@ class TestAssignmentCoreDataManager: AssignmentCoreDataManagerRepresentable {
         assignment.dateCreated = Date()
         TestCoreDataManager.shared.saveContext()
         
-        let assignment2 = Assignment(context: TestCoreDataManager.shared.context)
-        assignment2.id = UUID()
-        assignment2.subject = subject
-        assignment2.name = name
-        assignment2.grade = 10
-        assignment2.maxGrade = maxGrade
-        assignment2.minGrade = minGrade
-        assignment2.percentage = 0.5
-        assignment2.deadline = deadline
-        assignment2.assignment = assignment
-        assignment2.assignments = assignments
-        assignment2.dateCreated = Date()
-        TestCoreDataManager.shared.saveContext()
-        
+        calculateGrade(for: subject)
+    }
+    
+    func calculateGrade(for subject: Subject?) {
         let fetchRequest: NSFetchRequest<NSDictionary> = NSFetchRequest<NSDictionary>(entityName: "Assignment")
+        fetchRequest.resultType = .dictionaryResultType
         let predicate = NSPredicate(format: "%K == %@" , #keyPath(Assignment.subject.id), subject!.id! as CVarArg)
         fetchRequest.predicate = predicate
-        fetchRequest.resultType = .dictionaryResultType
-        let sumExpressionDesc = NSExpressionDescription()
-        sumExpressionDesc.name = "grade"
-        sumExpressionDesc.expression =
-            NSExpression(forFunction: "multiply:by:",
-                         arguments: [
-                            NSExpression(forKeyPath: #keyPath(Assignment.grade)),
-                            NSExpression(forKeyPath: #keyPath(Assignment.percentage))
-            ])
-        sumExpressionDesc.expressionResultType =
-            .integer32AttributeType
-        fetchRequest.propertiesToFetch = [sumExpressionDesc]
+        let expressionDescription = NSExpressionDescription()
+        expressionDescription.name = "grade"
+        let multiplyExpression = NSExpression(forFunction: "multiply:by:",
+                     arguments: [
+                        NSExpression(forKeyPath: #keyPath(Assignment.grade)),
+                        NSExpression(forKeyPath: #keyPath(Assignment.percentage))
+                    ])
+        expressionDescription.expression = multiplyExpression
+        expressionDescription.expressionResultType = .integer32AttributeType
+        fetchRequest.propertiesToFetch = [expressionDescription]
         
         do {
             let results = try TestCoreDataManager.shared.context.fetch(fetchRequest)
@@ -108,7 +97,6 @@ class TestAssignmentCoreDataManager: AssignmentCoreDataManagerRepresentable {
         } catch let error as NSError {
             print("count not fetched \(error), \(error.userInfo)")
         }
-    
     }
     
     /// Deletes an assignment from `CoreData`.
