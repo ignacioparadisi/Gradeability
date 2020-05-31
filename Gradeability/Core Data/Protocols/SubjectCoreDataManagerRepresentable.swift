@@ -9,6 +9,12 @@
 import Foundation
 
 protocol SubjectCoreDataManagerRepresentable {
-    func fetch(for term: Term) throws -> [Subject]
+    /// Fetches all subjects for a term.
+    /// - Parameters:
+    ///   - term: Term where the assignments belong.
+    ///   - result: Result with the error or subjects fetched
+    func fetch(for term: Term, result: @escaping (Result<[Subject], Error>) -> Void)
+    /// Deletes a subject from `CoreData`
+    /// - Parameter subject: Subject to be deleted
     func delete(_ subject: Subject)
 }

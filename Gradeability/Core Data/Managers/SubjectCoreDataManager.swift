@@ -20,15 +20,32 @@ class SubjectCoreDataManager: CoreDataManager, SubjectCoreDataManagerRepresentab
     
     private override init() {}
     
-    func fetch(for term: Term) throws -> [Subject] {
+    /// Fetches all subjects for a term.
+    /// - Parameters:
+    ///   - term: Term where the assignments belong.
+    ///   - result: Result with the error or subjects fetched.
+    func fetch(for term: Term, result: @escaping (Result<[Subject], Error>) -> Void) {
         let fetchRequest: NSFetchRequest<Subject> = Subject.fetchRequest()
         let predicate: NSPredicate = NSPredicate(format: "%K == %@", #keyPath(Subject.term.id), term.id! as CVarArg)
-        let sortDescriptor = NSSortDescriptor(key: #keyPath(Subject.dateCreated), ascending: true)
+        let sortDescriptor = NSSortDescriptor(key: #keyPath(Assignment.dateCreated), ascending: true)
         fetchRequest.predicate = predicate
         fetchRequest.sortDescriptors = [sortDescriptor]
-        return try context.fetch(fetchRequest)
+        let asyncFetchRequest: NSAsynchronousFetchRequest = NSAsynchronousFetchRequest(fetchRequest: fetchRequest) { fetchResult in
+            DispatchQueue.main.async {
+                if let subjects = fetchResult.finalResult {
+                    result(.success(subjects))
+                }
+            }
+        }
+        do {
+            try context.execute(asyncFetchRequest)
+        } catch {
+            result(.failure(error))
+        }
     }
     
+    /// Deletes a subject from `CoreData`.
+    /// - Parameter subject: Subject to be deleted.
     func delete(_ subject: Subject) {
         super.delete(subject)
     }

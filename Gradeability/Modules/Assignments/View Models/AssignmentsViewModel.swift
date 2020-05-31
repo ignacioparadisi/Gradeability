@@ -42,11 +42,14 @@ class AssignmentsViewModel: GradableViewModelRepresentable {
     // MARK: Functions
     /// Fetches the Assignments.
     func fetch() {
-        do {
-            assignments = try CoreDataFactory.createAssignmentManager.fetch(for: subject)
-            dataDidChange?()
-        } catch {
-            print(error.localizedDescription)
+        CoreDataFactory.createAssignmentManager.fetch(for: subject) { [weak self] result in
+            switch result {
+            case .success(let assignments):
+                self?.assignments = assignments
+                self?.dataDidChange?()
+            case .failure:
+                break
+            }
         }
     }
     

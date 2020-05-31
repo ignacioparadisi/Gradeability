@@ -48,11 +48,14 @@ class SubjectsViewModel: GradableViewModelRepresentable {
     // MARK: Functions
     /// Fetches the Subjects.
     func fetch() {
-        do {
-            subjects = try CoreDataFactory.createSubjectManager.fetch(for: term)
-            dataDidChange?()
-        } catch {
-            print(error.localizedDescription)
+        CoreDataFactory.createSubjectManager.fetch(for: term) { [weak self] result in
+            switch result {
+            case .success(let subjects):
+                self?.subjects = subjects
+                self?.dataDidChange?()
+            case .failure:
+                break
+            }
         }
     }
     
