@@ -49,6 +49,23 @@ class TestSubjectCoreDataManager: SubjectCoreDataManagerRepresentable {
         subject.teacherName = teacherName
         subject.dateCreated = Date()
         TestCoreDataManager.shared.saveContext()
+        
+        calculateGrade(for: term)
+    }
+    
+    func calculateGrade(for term: Term?) {
+        let fetchRequest: NSFetchRequest<Subject> = Subject.fetchRequest()
+        let predicate = NSPredicate(format: "%K == %@" , #keyPath(Subject.term.id), term!.id! as CVarArg)
+        fetchRequest.predicate = predicate
+          
+        do {
+            let subjects = try TestCoreDataManager.shared.context.fetch(fetchRequest)
+            let grade: Float = subjects.map({ $0.grade }).reduce(0.0, +) / Float(subjects.count)
+            term?.grade = grade
+            TestCoreDataManager.shared.saveContext()
+        } catch let error as NSError {
+            print("count not fetched \(error), \(error.userInfo)")
+        }
     }
     
     /// Deletes a subject from `CoreData`.

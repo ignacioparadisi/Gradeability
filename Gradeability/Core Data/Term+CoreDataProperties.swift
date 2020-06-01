@@ -2,7 +2,7 @@
 //  Term+CoreDataProperties.swift
 //  Gradeability
 //
-//  Created by Ignacio Paradisi on 5/28/20.
+//  Created by Ignacio Paradisi on 5/31/20.
 //  Copyright © 2020 Ignacio Paradisi. All rights reserved.
 //
 //

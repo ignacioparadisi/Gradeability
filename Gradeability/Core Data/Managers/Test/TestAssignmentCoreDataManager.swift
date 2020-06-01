@@ -94,6 +94,7 @@ class TestAssignmentCoreDataManager: AssignmentCoreDataManagerRepresentable {
             }
             subject?.grade = grade
             TestCoreDataManager.shared.saveContext()
+            TestSubjectCoreDataManager.shared.calculateGrade(for: subject?.term)
         } catch let error as NSError {
             print("count not fetched \(error), \(error.userInfo)")
         }
