@@ -33,7 +33,7 @@ class SubjectCoreDataManager: SubjectCoreDataManagerRepresentable {
             }
         }
         do {
-            try CoreDataManager.shared.context.execute(asyncFetchRequest)
+            try CoreDataManagerFactory.createManager.context.execute(asyncFetchRequest)
         } catch {
             result(.failure(error))
         }
@@ -48,12 +48,12 @@ class SubjectCoreDataManager: SubjectCoreDataManagerRepresentable {
         subject.minGrade = minGrade
         subject.teacherName = teacherName
         subject.dateCreated = Date()
-        CoreDataManager.shared.saveContext()
+        CoreDataManagerFactory.createManager.saveContext()
     }
     
     /// Deletes a subject from `CoreData`.
     /// - Parameter subject: Subject to be deleted.
     func delete(_ subject: Subject) {
-        CoreDataManager.shared.delete(subject)
+        CoreDataManagerFactory.createManager.delete(subject)
     }
 }

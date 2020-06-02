@@ -59,7 +59,7 @@ class SubjectsViewModel: GradableViewModelRepresentable {
     /// Fetches the Subjects.
     func fetch() {
         guard let term = term else { return }
-        CoreDataFactory.createSubjectManager.fetch(for: term) { [weak self] result in
+        SubjectCoreDataManager.shared.fetch(for: term) { [weak self] result in
             switch result {
             case .success(let subjects):
                 self?.subjects = subjects
@@ -106,7 +106,7 @@ class SubjectsViewModel: GradableViewModelRepresentable {
     }
     
     func createSubject() {
-        CoreDataFactory.createSubjectManager.create(term: term!, name: "Materia", maxGrade: 20, minGrade: 10, teacherName: "Carlitos Perez")
+        SubjectCoreDataManager.shared.create(term: term!, name: "Materia", maxGrade: 20, minGrade: 10, teacherName: "Carlitos Perez")
     }
     
     func deleteItem(at indexPath: IndexPath) {

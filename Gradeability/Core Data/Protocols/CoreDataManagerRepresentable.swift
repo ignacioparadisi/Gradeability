@@ -13,4 +13,5 @@ protocol CoreDataManagerRepresentable {
     var persistentContainer: NSPersistentCloudKitContainer { get set }
     var context: NSManagedObjectContext { get }
     func saveContext ()
+    func delete(_ object: Gradable)
 }

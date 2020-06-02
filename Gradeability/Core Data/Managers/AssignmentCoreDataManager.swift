@@ -33,7 +33,7 @@ class AssignmentCoreDataManager: AssignmentCoreDataManagerRepresentable {
             }
         }
         do {
-            try CoreDataManager.shared.context.execute(asyncFetchRequest)
+            try CoreDataManagerFactory.createManager.context.execute(asyncFetchRequest)
         } catch {
             result(.failure(error))
         }
@@ -53,7 +53,7 @@ class AssignmentCoreDataManager: AssignmentCoreDataManagerRepresentable {
     ///   - assignments: Children assignments.
     ///   - dateCreated: Date when the assignment was created (in case the assignment already exists).
     func createAssignment(name: String?, maxGrade: Float, minGrade: Float, grade: Float = 0, deadline: Date?, percentage: Float, subject: Subject?, assignment: Assignment? = nil, assignments: NSSet? = nil) {
-        let assignment = Assignment(context: CoreDataManager.shared.context)
+        let assignment = Assignment(context:CoreDataManagerFactory.createManager.context)
         assignment.id = UUID()
         assignment.subject = subject
         assignment.name = name
@@ -65,7 +65,7 @@ class AssignmentCoreDataManager: AssignmentCoreDataManagerRepresentable {
         assignment.assignment = assignment
         assignment.assignments = assignments
         assignment.dateCreated = Date()
-        CoreDataManager.shared.saveContext()
+        CoreDataManagerFactory.createManager.saveContext()
         
         calculateGrade(for: subject)
     }
@@ -87,7 +87,7 @@ class AssignmentCoreDataManager: AssignmentCoreDataManagerRepresentable {
         fetchRequest.propertiesToFetch = [expressionDescription]
         
         do {
-            let results = try CoreDataManager.shared.context.fetch(fetchRequest)
+            let results = try CoreDataManagerFactory.createManager.context.fetch(fetchRequest)
             var grade: Float = 0
             for result in results {
                 grade += result["grade"] as! Float
@@ -102,6 +102,6 @@ class AssignmentCoreDataManager: AssignmentCoreDataManagerRepresentable {
     /// Deletes an assignment from `CoreData`.
     /// - Parameter assignment: Assignment to be deleted.
     func delete(_ assignment: Assignment) {
-        CoreDataManager.shared.delete(assignment)
+        CoreDataManagerFactory.createManager.delete(assignment)
     }
 }

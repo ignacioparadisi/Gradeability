@@ -1,17 +1,17 @@
 //
-//  TestTermCoreDataManager.swift
+//  TermCoreDataManager.swift
 //  Gradeability
 //
-//  Created by Ignacio Paradisi on 5/31/20.
+//  Created by Ignacio Paradisi on 5/30/20.
 //  Copyright © 2020 Ignacio Paradisi. All rights reserved.
 //
 
 import Foundation
 import CoreData
 
-class TestTermCoreDataManager: TermCoreDataManagerRepresentable {
+class TermCoreDataManager: TermCoreDataManagerRepresentable {
     
-    static var shared: TestTermCoreDataManager  = TestTermCoreDataManager()
+    static var shared: TermCoreDataManager  = TermCoreDataManager()
     
     private init() {}
     
@@ -29,7 +29,7 @@ class TestTermCoreDataManager: TermCoreDataManagerRepresentable {
             }
         }
         do {
-            try TestCoreDataManager.shared.context.execute(asyncFetchRequest)
+            try CoreDataManagerFactory.createManager.context.execute(asyncFetchRequest)
         } catch {
             print(error.localizedDescription)
         }
@@ -41,7 +41,7 @@ class TestTermCoreDataManager: TermCoreDataManagerRepresentable {
         let predicate: NSPredicate = NSPredicate(format: "%K == %@", #keyPath(Term.isCurrent), NSNumber(value: true))
         fetchRequest.predicate = predicate
         do {
-            return try TestCoreDataManager.shared.context.fetch(fetchRequest).first
+            return try CoreDataManagerFactory.createManager.context.fetch(fetchRequest).first
         } catch {
             return nil
         }
@@ -49,7 +49,7 @@ class TestTermCoreDataManager: TermCoreDataManagerRepresentable {
     }
     
     func create(name: String, maxGrade: Float, minGrade: Float) {
-        let term = Term(context: TestCoreDataManager.shared.context)
+        let term = Term(context: CoreDataManagerFactory.createManager.context)
         if getCurrent() == nil {
             term.isCurrent = true
         }
@@ -58,12 +58,12 @@ class TestTermCoreDataManager: TermCoreDataManagerRepresentable {
         term.maxGrade = maxGrade
         term.minGrade = minGrade
         term.dateCreated = Date()
-        TestCoreDataManager.shared.saveContext()
+        CoreDataManagerFactory.createManager.saveContext()
     }
     
     /// Deletes a term from `CoreData`.
     /// - Parameter term: Term to be deleted.
     func delete(_ term: Term) {
-        TestCoreDataManager.shared.delete(term)
+        CoreDataManagerFactory.createManager.delete(term)
     }
 }

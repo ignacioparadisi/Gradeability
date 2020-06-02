@@ -46,7 +46,7 @@ class TermsViewModel: GradableViewModelRepresentable {
     func fetch() {
         if isLoading { return }
         isLoading = true
-        CoreDataFactory.createTermManager.fetch { [weak self] result in
+        TermCoreDataManager.shared.fetch { [weak self] result in
             self?.isLoading = false
             switch result {
             case .success(let terms):

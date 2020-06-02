@@ -45,7 +45,7 @@ class MainSplitViewController: UISplitViewController {
     /// Setup view controllers for the `SplitViewController`
     private func setupSplitViewControllers() {
         var term: Term?
-        term = CoreDataFactory.createTermManager.getCurrent()
+        term = TermCoreDataManager.shared.getCurrent()
 
         let assignmentsViewModel = AssignmentsViewModel()
         subjectsViewModel = SubjectsViewModel(term: term)
@@ -71,8 +71,8 @@ class MainSplitViewController: UISplitViewController {
     }
     
     private func goToCreateTerm() {
-        CoreDataFactory.createTermManager.create(name: "Semestre", maxGrade: 20, minGrade: 10)
-        subjectsViewModel?.setTerm(CoreDataFactory.createTermManager.getCurrent())
+        TermCoreDataManager.shared.create(name: "Semestre", maxGrade: 20, minGrade: 10)
+        subjectsViewModel?.setTerm(TermCoreDataManager.shared.getCurrent())
         UIView.animate(withDuration: 0.1, animations: { [weak self] in
             self?.emptyView?.alpha = 0
         }, completion: { [weak self] _ in

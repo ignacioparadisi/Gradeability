@@ -43,7 +43,7 @@ class AssignmentsViewModel: GradableViewModelRepresentable {
     /// Fetches the Assignments.
     func fetch() {
         guard let subject = subject else { return }
-        CoreDataFactory.createAssignmentManager.fetch(for: subject) { [weak self] result in
+        AssignmentCoreDataManager.shared.fetch(for: subject) { [weak self] result in
             switch result {
             case .success(let assignments):
                 self?.assignments = assignments
@@ -86,7 +86,7 @@ class AssignmentsViewModel: GradableViewModelRepresentable {
     }
     
     func createAssignment() {
-        CoreDataFactory.createAssignmentManager.createAssignment(name: "Prueba", maxGrade: 20, minGrade: 10, grade: 20, deadline: Date(), percentage: 0.5, subject: subject, assignment: nil, assignments: nil)
+        AssignmentCoreDataManager.shared.createAssignment(name: "Prueba", maxGrade: 20, minGrade: 10, grade: 20, deadline: Date(), percentage: 0.5, subject: subject, assignment: nil, assignments: nil)
     }
     
     func deleteItem(at indexPath: IndexPath) {

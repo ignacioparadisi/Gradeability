@@ -8,7 +8,7 @@
 
 import Foundation
 
-class CoreDataFactory {
+class CoreDataManagerFactory {
     private static var isTesting: Bool {
         return true
     }
