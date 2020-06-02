@@ -11,6 +11,11 @@ import UIKit
 class SubjectsViewController: GradablesViewController {
     private let viewModel: SubjectsViewModel
     private var emptyView: EmptyGradablesView?
+    /// Sections displayed in the table view
+    enum Sections: Int, CaseIterable {
+        case grade
+        case subjects
+    }
     
     init(viewModel: SubjectsViewModel) {
         self.viewModel = viewModel
@@ -23,6 +28,7 @@ class SubjectsViewController: GradablesViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.register(GradesCardTableViewCell.self)
         if viewModel.isMasterController {
             navigationItem.setLeftBarButton(
                 UIBarButtonItem(title: "All Terms", style: .plain, target: self, action: #selector(showAllTerms)),
@@ -33,7 +39,7 @@ class SubjectsViewController: GradablesViewController {
     /// Setup all View Model's closures to update the UI
     override func setupViewModel() {
         viewModel.dataDidChange = { [weak self] in
-            if self?.viewModel.numberOfRows == 0 {
+            if self?.viewModel.numberOfRows(in: 1) == 0 {
                 self?.showEmptyView()
             }
             self?.title = self?.viewModel.title
@@ -58,8 +64,40 @@ class SubjectsViewController: GradablesViewController {
     }
 }
 
+// MARK: - UITableViewDataSource
+extension SubjectsViewController {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return viewModel.numberOfSections
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return viewModel.numberOfRows(in: section)
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let section = Sections(rawValue: indexPath.section) else { return UITableViewCell() }
+        switch section {
+        case .grade:
+            let cell = tableView.dequeueReusableCell(for: indexPath) as GradesCardTableViewCell
+            guard let viewModel = self.viewModel.gradeCardViewModelForRow(at: indexPath) else { return UITableViewCell() }
+            cell.configure(with: viewModel)
+            return cell
+        case .subjects:
+            let cellViewModel = viewModel.gradableViewModelForRow(at: indexPath)
+            let contextMenuInteraction = UIContextMenuInteraction(delegate: self)
+            let cell = tableView.dequeueReusableCell(for: indexPath) as GradableTableViewCell
+            cell.accessoryType = cellViewModel.accessoryType
+            cell.textLabel?.text = cellViewModel.name
+            cell.detailTextLabel?.text = cellViewModel.detail
+            cell.addInteraction(contextMenuInteraction)
+            return cell
+        }
+    }
+}
+
 // MARK: - UITableViewDelegate
 extension SubjectsViewController {
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let nextViewModel = viewModel.nextViewModelForRow(at: indexPath) else { return }
         let viewController = AssignmentsViewController(viewModel: nextViewModel as! AssignmentsViewModel)
@@ -69,6 +107,7 @@ extension SubjectsViewController {
             navigationController?.pushViewController(viewController, animated: true)
         }
     }
+    
 }
 
 extension SubjectsViewController: EmptyGradablesViewDelegate {

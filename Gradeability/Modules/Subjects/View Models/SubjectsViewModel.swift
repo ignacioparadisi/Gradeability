@@ -14,6 +14,8 @@ protocol SubjectsViewModelDelegate: class {
 
 class SubjectsViewModel: GradableViewModelRepresentable {
 
+    private typealias Sections = SubjectsViewController.Sections
+    
     // MARK: Private Properties
     /// Parent Term of the Subjects
     private var term: Term?
@@ -27,9 +29,8 @@ class SubjectsViewModel: GradableViewModelRepresentable {
     var dataDidChange: (() -> Void)?
     /// Closure called when data loading changes so the UI can be updated.
     var loadingDidChange: ((Bool) -> Void)?
-    /// Number of rows for the `UITableView`.
-    var numberOfRows: Int {
-        return subjects.count
+    var numberOfSections: Int {
+        return Sections.allCases.count
     }
     /// Term's name to be displayed as the `UIViewController` title.
     var title: String {
@@ -71,12 +72,30 @@ class SubjectsViewModel: GradableViewModelRepresentable {
         }
     }
     
+    func numberOfRows(in section: Int) -> Int {
+        guard let section = Sections(rawValue: section) else { return 0 }
+        switch section {
+        case .grade:
+            return 1
+        case .subjects:
+            return subjects.count
+        }
+    }
+    
     /// Gets the View Model for the `UITableViewCell` at the specified `IndexPath`.
     /// - Parameter indexPath: IndexPath where the View Model belongs.
     /// - Returns: The View Model for the specified `IndexPath`.
-    func viewModelForRow(at indexPath: IndexPath) -> GradableCellViewModelRepresentable {
+    func gradableViewModelForRow(at indexPath: IndexPath) -> GradableCellViewModelRepresentable {
         let subject = subjects[indexPath.row]
         return GradableCellViewModel(subject: subject)
+    }
+    
+    func gradeCardViewModelForRow(at indexPath: IndexPath) -> GradesCardTableViewCellRepresentable? {
+        guard let term = term else { return nil }
+        let gradeCardViewModel = GradeCardViewModel(gradable: term, type: "Grade", message: "You are doing great!")
+        let maxGradeCardViewModel = GradeCardViewModel(gradable: term, type: "Max Grade", message: "You are doing great!")
+        return GradesCardTableViewCellViewModel(gradeCardViewModel: gradeCardViewModel,
+                                                maxGradeCardViewModel: maxGradeCardViewModel)
     }
     
     /// Gets the View Model for the `UIViewController` to be displayed next when the user selects a `UITableViewCell`.

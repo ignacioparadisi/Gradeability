@@ -97,11 +97,11 @@ class GradablesViewController: UIViewController {
 // MARK: - UITableViewDataSource
 extension GradablesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.numberOfRows
+        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cellViewModel = viewModel.viewModelForRow(at: indexPath)
+        let cellViewModel = viewModel.gradableViewModelForRow(at: indexPath)
         let contextMenuInteraction = UIContextMenuInteraction(delegate: self)
         let cell = tableView.dequeueReusableCell(for: indexPath) as GradableTableViewCell
         cell.accessoryType = cellViewModel.accessoryType

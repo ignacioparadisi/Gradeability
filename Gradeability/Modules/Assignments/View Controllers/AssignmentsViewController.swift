@@ -11,6 +11,12 @@ import UIKit
 class AssignmentsViewController: GradablesViewController {
     private let viewModel: AssignmentsViewModel
     private var emptyView: EmptyGradablesView?
+    /// Sections displayed in the table view
+    enum Sections: Int, CaseIterable {
+        case grade
+        case assignments
+    }
+    
     
     init(viewModel: AssignmentsViewModel) {
         self.viewModel = viewModel
@@ -21,10 +27,15 @@ class AssignmentsViewController: GradablesViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        tableView.register(GradesCardTableViewCell.self)
+    }
+    
     /// Setup all View Model's closures to update the UI
     override func setupViewModel() {
         viewModel.dataDidChange = { [weak self] in
-            if self?.viewModel.numberOfRows == 0 {
+            if self?.viewModel.numberOfRows(in: 1) == 0 {
                 self?.showEmptyView()
             }
             self?.title = self?.viewModel.title
@@ -42,6 +53,40 @@ class AssignmentsViewController: GradablesViewController {
     }
 }
 
+// MARK: - UITableViewDataSource
+extension AssignmentsViewController {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return viewModel.numberOfSections
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return viewModel.numberOfRows(in: section)
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let section = Sections(rawValue: indexPath.section) else { return UITableViewCell() }
+        switch section {
+        case .grade:
+            let cell = tableView.dequeueReusableCell(for: indexPath) as GradesCardTableViewCell
+            guard let viewModel = self.viewModel.gradeCardViewModelForRow(at: indexPath) else { return UITableViewCell() }
+            cell.configure(with: viewModel)
+            return cell
+        case .assignments:
+            let cellViewModel = viewModel.gradableViewModelForRow(at: indexPath)
+            let contextMenuInteraction = UIContextMenuInteraction(delegate: self)
+            let cell = tableView.dequeueReusableCell(for: indexPath) as GradableTableViewCell
+            cell.accessoryType = cellViewModel.accessoryType
+            cell.textLabel?.text = cellViewModel.name
+            cell.detailTextLabel?.text = cellViewModel.detail
+            cell.addInteraction(contextMenuInteraction)
+            return cell
+        }
+    }
+    
+}
+
+// MARK: - EmptyGradablesViewDelegate
 extension AssignmentsViewController: EmptyGradablesViewDelegate {
     func didTapButton() {
         viewModel.createAssignment()

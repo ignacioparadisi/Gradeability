@@ -14,6 +14,8 @@ protocol TermsViewModelDelegate: class {
 
 class TermsViewModel: GradableViewModelRepresentable {
     
+    private typealias Sections = TermsViewController.Sections
+    
     // MARK: Private Properties
     /// Terms to be displayed.
     private var terms: [Term] = []
@@ -29,9 +31,8 @@ class TermsViewModel: GradableViewModelRepresentable {
     var dataDidChange: (() -> Void)?
     /// Closure called when data loading changes so the UI can be updated.
     var loadingDidChange: ((Bool) -> Void)?
-    /// Number of rows for the `UITableView`.
-    var numberOfRows: Int {
-        return terms.count
+    var numberOfSections: Int {
+        return Sections.allCases.count
     }
     /// Title for the `UIViewController`.
     var title: String {
@@ -58,10 +59,18 @@ class TermsViewModel: GradableViewModelRepresentable {
         }
     }
     
+    func numberOfRows(in section: Int) -> Int {
+        guard let section = Sections(rawValue: section) else { return 0 }
+        switch section {
+        case .terms:
+            return terms.count
+        }
+    }
+    
     /// Gets the View Model for the `UITableViewCell` at the specified `IndexPath`.
     /// - Parameter indexPath: IndexPath where the View Model belongs.
     /// - Returns: The View Model for the specified `IndexPath`.
-    func viewModelForRow(at indexPath: IndexPath) -> GradableCellViewModelRepresentable {
+    func gradableViewModelForRow(at indexPath: IndexPath) -> GradableCellViewModelRepresentable {
         let term = terms[indexPath.row]
         return GradableCellViewModel(term: term)
     }
