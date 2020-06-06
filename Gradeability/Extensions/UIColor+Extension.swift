@@ -29,7 +29,7 @@ extension UIColor {
     }
     
     /// Creates a color lighter than self
-    /// - Parameter percentage: Percentage of lighness
+    /// - Parameter percentage: Percentage of lightness
     /// - Returns: Color lighter than self
     func lighter(by percentage: CGFloat = 30.0) -> UIColor? {
         return self.adjust(by: abs(percentage) )

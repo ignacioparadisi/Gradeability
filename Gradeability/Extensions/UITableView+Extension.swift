@@ -27,22 +27,24 @@ extension UITableView {
     }
 }
 
-//extension UITableViewCell {
-//    func addHoverGesture() {
-//        let hoverGesture = UIHoverGestureRecognizer(target: self, action: #selector(setHoverColor(_:)))
-//        contentView.addGestureRecognizer(hoverGesture)
-//    }
-//    
-//    /// Set the background color of the cell when hovering over it
-//    /// - Parameter gesture: Hover gesture
-//    @objc private func setHoverColor(_ gesture: UIHoverGestureRecognizer) {
-//        switch gesture.state {
-//        case .began, .changed:
-//            contentView.backgroundColor = .systemGray2
-//        case .ended:
-//            contentView.backgroundColor = .clear
-//        default:
-//            break
-//        }
-//    }
-//}
+extension UITableViewCell {
+    
+    /// Adds a hover gesture to the cell
+    func addHoverGesture() {
+        let hoverGesture = UIHoverGestureRecognizer(target: self, action: #selector(setHoverColor(_:)))
+        contentView.addGestureRecognizer(hoverGesture)
+    }
+    
+    /// Set the background color of the cell when hovering over it
+    /// - Parameter gesture: Hover gesture
+    @objc private func setHoverColor(_ gesture: UIHoverGestureRecognizer) {
+        switch gesture.state {
+        case .began, .changed:
+            contentView.backgroundColor = .systemGray2
+        case .ended:
+            contentView.backgroundColor = .clear
+        default:
+            break
+        }
+    }
+}

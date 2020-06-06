@@ -38,10 +38,6 @@ class TermsViewModel: GradableViewModelRepresentable {
     var title: String {
         return "Terms"
     }
-    /// Title for the gradables section
-    var sectionTitle: String {
-        return "Terms"
-    }
     // MARK: Functions
     /// Fetches the Subjects.
     func fetch() {
@@ -62,8 +58,21 @@ class TermsViewModel: GradableViewModelRepresentable {
     func numberOfRows(in section: Int) -> Int {
         guard let section = Sections(rawValue: section) else { return 0 }
         switch section {
-        case .terms:
+        case .grade:
+            return 0
+        case .gradables:
             return terms.count
+        }
+    }
+    
+    /// Title for the gradables section
+    func title(for section: Int) -> String? {
+        guard let section = Sections(rawValue: section) else { return nil }
+        switch section {
+        case .grade:
+            return nil
+        case .gradables:
+            return "Terms"
         }
     }
     

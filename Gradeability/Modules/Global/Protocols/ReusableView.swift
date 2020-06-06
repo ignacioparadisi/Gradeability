@@ -10,10 +10,12 @@ import UIKit
 
 /// Adds a reuse identifier to the View
 protocol ReusableView: class {
+    /// Identifier for reusable `UITableViewCells`.
     static var reusableIdentifier: String { get }
 }
 
 extension ReusableView where Self: UIView {
+    /// Identifier for reusable `UITableViewCells`.
     static var reusableIdentifier: String {
         return String(describing: self)
     }

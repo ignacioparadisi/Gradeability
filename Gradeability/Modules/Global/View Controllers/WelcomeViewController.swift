@@ -10,6 +10,7 @@ import UIKit
 
 class WelcomeViewController: UIViewController {
     
+    // MARK: Properties
     /// Scroll View where that holds the `contentView`
     private let scrollView: UIScrollView = UIScrollView()
     /// View that holds all the information displayed in the `scrollView`
@@ -18,9 +19,12 @@ class WelcomeViewController: UIViewController {
     private let buttonBackgroundView = UIView()
     /// Blur view placed behind the create button. This view is clear when the content of the `contentView` is smaller than the scroll view
     private let blurView = UIView()
+    /// Leading margin for content
     private let leadingMargin: CGFloat = 30
+    /// Trailing margin for content
     private let trailingMargin: CGFloat = -30
 
+    // MARK: Functions
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
@@ -61,8 +65,7 @@ class WelcomeViewController: UIViewController {
         let titleLabel = UILabel()
         titleLabel.textAlignment = .center
         titleLabel.numberOfLines = 2
-        titleLabel.font = UIFont.preferredFont(forTextStyle: .largeTitle)
-        titleLabel.font = UIFont.boldSystemFont(ofSize: titleLabel.font.pointSize)
+        titleLabel.font = UIFont.preferredFont(forTextStyle: .largeTitle).bold
         titleLabel.text = "Welcome to\nGradeability"
         
         let descriptionLabel = UILabel()
@@ -132,6 +135,19 @@ class WelcomeViewController: UIViewController {
             .activate()
     }
     
+    @objc private func goToCreateTerm() {
+        dismiss(animated: true)
+    }
+
+}
+
+// MARK: - UIScrollViewDelegate
+extension WelcomeViewController: UIScrollViewDelegate {
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        updateButtonBackgroundView(scrollView: scrollView)
+    }
+    
     /// Set `blurView`'s alfa to 1 or 0 depending on scroll position
     /// - Parameter scrollView: UIScrollView that's been scrolled
     func updateButtonBackgroundView(scrollView: UIScrollView) {
@@ -153,14 +169,4 @@ class WelcomeViewController: UIViewController {
         }
     }
     
-    @objc private func goToCreateTerm() {
-        dismiss(animated: true)
-    }
-
-}
-
-extension WelcomeViewController: UIScrollViewDelegate {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        updateButtonBackgroundView(scrollView: scrollView)
-    }
 }

@@ -8,10 +8,6 @@
 
 import UIKit
 
-protocol SubjectsViewModelDelegate: class {
-    func didFetchSubjects(_ subjects: [Subject])
-}
-
 class SubjectsViewModel: GradableViewModelRepresentable {
 
     private typealias Sections = SubjectsViewController.Sections
@@ -21,7 +17,6 @@ class SubjectsViewModel: GradableViewModelRepresentable {
     private var term: Term?
     /// Subjects to be displayed.
     private var subjects: [Subject] = []
-    weak var delegate: SubjectsViewModelDelegate?
     
     // MARK: Internal Properties
     var isMasterController: Bool = true
@@ -65,7 +60,6 @@ class SubjectsViewModel: GradableViewModelRepresentable {
             case .success(let subjects):
                 self?.subjects = subjects
                 self?.dataDidChange?()
-                self?.delegate?.didFetchSubjects(subjects)
             case .failure:
                 break
             }
@@ -77,8 +71,19 @@ class SubjectsViewModel: GradableViewModelRepresentable {
         switch section {
         case .grade:
             return 1
-        case .subjects:
+        case .gradables:
             return subjects.count
+        }
+    }
+    
+    /// Title for the gradables section
+    func title(for section: Int) -> String? {
+        guard let section = Sections(rawValue: section) else { return nil }
+        switch section {
+        case .grade:
+            return nil
+        case .gradables:
+            return "Subjects"
         }
     }
     

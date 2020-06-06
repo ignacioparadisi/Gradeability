@@ -11,11 +11,6 @@ import UIKit
 class SubjectsViewController: GradablesViewController {
     private let viewModel: SubjectsViewModel
     private var emptyView: EmptyGradablesView?
-    /// Sections displayed in the table view
-    enum Sections: Int, CaseIterable {
-        case grade
-        case subjects
-    }
     
     init(viewModel: SubjectsViewModel) {
         self.viewModel = viewModel
@@ -62,17 +57,16 @@ class SubjectsViewController: GradablesViewController {
         let viewController = TermsViewController(viewModel: termsViewModel)
         present(UINavigationController(rootViewController: viewController), animated: true)
     }
+    
+    override func didTapAddButton(_ sender: UIBarButtonItem?) {
+        let viewController = UINavigationController(rootViewController: CreateSubjectViewController())
+        present(viewController, animated: true)
+    }
+    
 }
 
 // MARK: - UITableViewDataSource
 extension SubjectsViewController {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return viewModel.numberOfSections
-    }
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.numberOfRows(in: section)
-    }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let section = Sections(rawValue: indexPath.section) else { return UITableViewCell() }
@@ -82,7 +76,7 @@ extension SubjectsViewController {
             guard let viewModel = self.viewModel.gradeCardViewModelForRow(at: indexPath) else { return UITableViewCell() }
             cell.configure(with: viewModel)
             return cell
-        case .subjects:
+        case .gradables:
             let cellViewModel = viewModel.gradableViewModelForRow(at: indexPath)
             let contextMenuInteraction = UIContextMenuInteraction(delegate: self)
             let cell = tableView.dequeueReusableCell(for: indexPath) as GradableTableViewCell
@@ -93,6 +87,7 @@ extension SubjectsViewController {
             return cell
         }
     }
+    
 }
 
 // MARK: - UITableViewDelegate

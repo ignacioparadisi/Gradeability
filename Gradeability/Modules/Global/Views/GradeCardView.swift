@@ -10,12 +10,24 @@ import UIKit
 
 class GradeCardView: UIView {
     
+    // MARK: Properties
+    /// View that holds the labels
     private let cardTopView = UIView()
+    /// Gradient view
     private let cardGradientView = GradientView()
-    private var gradeLabel: UILabel!
-    private var gradeTypeLabel: UILabel!
-    private var messageLabel: UILabel!
+    /// Label for the grade
+    private var gradeLabel: UILabel = UILabel()
+    /// Label for the grade type. Grade or Max Grade
+    private var gradeTypeLabel: UILabel = UILabel()
+    /// Label for the message
+    private var messageLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.preferredFont(forTextStyle: .caption1)
+        label.numberOfLines = 0
+        return label
+    }()
     
+    // MARK: Initializers
     override init(frame: CGRect) {
         super.init(frame: frame)
         layer.cornerRadius = 10
@@ -32,7 +44,6 @@ class GradeCardView: UIView {
             .edgesToSuperview(insets: UIEdgeInsets(top: 4, left: 4, bottom: -4, right: -4))
             .activate()
         
-        // TODO: Delete this line after implementing the models
         setupView()
         
         let gesture = UIHoverGestureRecognizer(target: self, action: #selector(handleHover(_:)))
@@ -43,12 +54,10 @@ class GradeCardView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: Functions
+    /// Setup the subviews
     private func setupView() {
         let containerView = UIView()
-        gradeLabel = createGradeLabel()
-        gradeTypeLabel = createGradeTypeLabel()
-        messageLabel = createMessageLabel()
-        
         containerView.addSubview(gradeLabel)
         containerView.addSubview(gradeTypeLabel)
         containerView.addSubview(messageLabel)
@@ -76,7 +85,13 @@ class GradeCardView: UIView {
             .activate()
     }
     
+    /// Configure the view with the information stored in the view model
+    /// - Parameter viewModel: View Model that holds the view's information
     func configure(with viewModel: GradeCardViewModel) {
+        let sizeMultiplier = frame.width / 375
+        let multiplier = (sizeMultiplier > 1) ? 1 : sizeMultiplier
+        gradeLabel.font = UIFont.boldSystemFont(ofSize: 80.0 * multiplier)
+        
         backgroundColor = viewModel.color
         cardGradientView.color = viewModel.color
         cardTopView.backgroundColor = viewModel.color
@@ -85,23 +100,8 @@ class GradeCardView: UIView {
         messageLabel.text = viewModel.message
     }
     
-    private func createGradeLabel() -> UILabel {
-        let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 80.0)
-        return label
-    }
-    
-    private func createGradeTypeLabel() -> UILabel {
-        let label = UILabel()
-        return label
-    }
-    
-    private func createMessageLabel() -> UILabel {
-        let label = UILabel()
-        label.font = UIFont.preferredFont(forTextStyle: .caption1)
-        return label
-    }
-    
+    /// Handle gradient position on mouse hover
+    /// - Parameter recognizer: Hover recognizer to get the pointer's position
     @objc private func handleHover(_ recognizer: UIHoverGestureRecognizer) {
         switch recognizer.state {
         case .began, .changed:

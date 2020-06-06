@@ -30,10 +30,6 @@ class AssignmentsViewModel: GradableViewModelRepresentable {
     var title: String {
         return subject?.name ?? ""
     }
-    /// Title for the gradables section
-    var sectionTitle: String {
-        return "Assignments"
-    }
     
     // MARK: Initializers
     init(subject: Subject? = nil) {
@@ -55,13 +51,27 @@ class AssignmentsViewModel: GradableViewModelRepresentable {
         }
     }
     
+    /// Get number of rows for a specific section of the table view
+    /// - Parameter section: Section where the number of rows belong
+    /// - Returns: The number of rows for the section
     func numberOfRows(in section: Int) -> Int {
         guard let section = Sections(rawValue: section) else { return 0 }
         switch section {
         case .grade:
             return 1
-        case .assignments:
+        case .gradables:
             return assignments.count
+        }
+    }
+    
+    /// Title for the gradables section
+    func title(for section: Int) -> String? {
+        guard let section = Sections(rawValue: section) else { return nil }
+        switch section {
+        case .grade:
+            return nil
+        case .gradables:
+            return "Assignments"
         }
     }
     
@@ -73,6 +83,9 @@ class AssignmentsViewModel: GradableViewModelRepresentable {
         return GradableCellViewModel(assignment: assignment)
     }
     
+    /// View model for `GradesCardTableViewCell`
+    /// - Parameter indexPath: Index path of the cell
+    /// - Returns: View model for `GradesCardTableViewCell`
     func gradeCardViewModelForRow(at indexPath: IndexPath) -> GradesCardTableViewCellRepresentable? {
         guard let subject = subject else { return nil }
         let gradeCardViewModel = GradeCardViewModel(gradable: subject, type: "Grade", message: "You are doing great!")
@@ -87,6 +100,9 @@ class AssignmentsViewModel: GradableViewModelRepresentable {
         return nil
     }
     
+    /// Contextual menu for selected cell
+    /// - Parameter indexPath: Index path of the cell
+    /// - Returns: Contextual menu for selected cell
     func createContextualMenuForRow(at indexPath: IndexPath) -> UIMenu? {
         let assignment = assignments[indexPath.row]
         var rootChildren: [UIMenuElement] = []
@@ -104,22 +120,17 @@ class AssignmentsViewModel: GradableViewModelRepresentable {
         return menu
     }
     
+    
+    /// Create a new assignment
     func createAssignment() {
         AssignmentCoreDataManager.shared.createAssignment(name: "Prueba", maxGrade: 20, minGrade: 10, grade: 20, deadline: Date(), percentage: 0.5, subject: subject, assignment: nil, assignments: nil)
     }
     
+    /// Delete assignment
     func deleteItem(at indexPath: IndexPath) {
         let assignment = assignments[indexPath.row]
         CoreDataManager.shared.delete(assignment)
         assignments.remove(at: indexPath.row)
     }
     
-}
-
-extension AssignmentsViewModel: SubjectsViewModelDelegate {
-    func didFetchSubjects(_ subjects: [Subject]) {
-        guard !subjects.isEmpty else { return }
-        subject = subjects[0]
-        fetch()
-    }
 }

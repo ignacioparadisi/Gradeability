@@ -9,15 +9,14 @@
 import UIKit
 
 class AssignmentsViewController: GradablesViewController {
+    
+    // MARK: Properties
+    /// View model for the view
     private let viewModel: AssignmentsViewModel
+    /// View for showing in case there's no assignments
     private var emptyView: EmptyGradablesView?
-    /// Sections displayed in the table view
-    enum Sections: Int, CaseIterable {
-        case grade
-        case assignments
-    }
     
-    
+    // MARK: Initializers
     init(viewModel: AssignmentsViewModel) {
         self.viewModel = viewModel
         super.init(viewModel: viewModel)
@@ -27,12 +26,13 @@ class AssignmentsViewController: GradablesViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: Functions
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(GradesCardTableViewCell.self)
     }
     
-    /// Setup all View Model's closures to update the UI
+    /// Setup all View Model's closures to update the UI.
     override func setupViewModel() {
         viewModel.dataDidChange = { [weak self] in
             if self?.viewModel.numberOfRows(in: 1) == 0 {
@@ -43,6 +43,7 @@ class AssignmentsViewController: GradablesViewController {
         }
     }
     
+    /// Show view for creating an assignment in case there's no one created yet.
     private func showEmptyView() {
         emptyView = EmptyGradablesView(imageName: "doc.circle.fill",
                                        description: "It seems that you don't have any assignment in this subject.",
@@ -51,18 +52,18 @@ class AssignmentsViewController: GradablesViewController {
         view.addSubview(emptyView!)
         emptyView?.anchor.edgesToSuperview().activate()
     }
+    
+    /// Handle navigation button for creating a new assignment
+    /// - Parameter sender: Tap gesture
+    override func didTapAddButton(_ sender: UIBarButtonItem?) {
+        let viewController = UINavigationController(rootViewController: CreateAssignmentViewController())
+        present(viewController, animated: true)
+    }
+    
 }
 
 // MARK: - UITableViewDataSource
 extension AssignmentsViewController {
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return viewModel.numberOfSections
-    }
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.numberOfRows(in: section)
-    }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let section = Sections(rawValue: indexPath.section) else { return UITableViewCell() }
@@ -72,7 +73,7 @@ extension AssignmentsViewController {
             guard let viewModel = self.viewModel.gradeCardViewModelForRow(at: indexPath) else { return UITableViewCell() }
             cell.configure(with: viewModel)
             return cell
-        case .assignments:
+        case .gradables:
             let cellViewModel = viewModel.gradableViewModelForRow(at: indexPath)
             let contextMenuInteraction = UIContextMenuInteraction(delegate: self)
             let cell = tableView.dequeueReusableCell(for: indexPath) as GradableTableViewCell
@@ -88,6 +89,8 @@ extension AssignmentsViewController {
 
 // MARK: - EmptyGradablesViewDelegate
 extension AssignmentsViewController: EmptyGradablesViewDelegate {
+    
+    /// Handle create button tap when there's no assignment created
     func didTapButton() {
         viewModel.createAssignment()
         viewModel.fetch()
@@ -98,4 +101,5 @@ extension AssignmentsViewController: EmptyGradablesViewDelegate {
             self?.emptyView = nil
         })
     }
+    
 }

@@ -9,7 +9,8 @@
 import UIKit
 
 class GradientView: UIView {
-    // Main color of the gradient
+    // MARK: Properties
+    /// Main color of the gradient
     var color: UIColor = .white
     /// Light color of gradient
     private var lightColor: UIColor {
@@ -31,7 +32,6 @@ class GradientView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        print("GradientView init")
         // startMotionUpdates()
     }
     
@@ -48,11 +48,14 @@ class GradientView: UIView {
         gradientLayer.colors = [darkColor.cgColor, lightColor.cgColor]
     }
     
+    /// Set position of gradient when mouse hovers over the view
+    /// - Parameter position: Hover position
     func didHover(_ position: CGPoint) {
         startPoint = position
         setNeedsLayout()
     }
     
+    /// Reset gradient position when hovering ends
     func reset() {
         startPoint = CGPoint(x: 0.0, y: 0.5)
         endPoint = CGPoint(x: 0.7, y: 0.5)

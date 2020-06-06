@@ -10,10 +10,13 @@ import UIKit
 
 class MainSplitViewController: UISplitViewController {
     
-    var loadingView: LoadingView?
+    // MARK: Properties
+    /// View to be shown if there's no terms created.
     private var emptyView: EmptyGradablesView?
+    /// View Model for  `SubjectsViewController`.
     private var subjectsViewModel: SubjectsViewModel?
     
+    // MARK: Functions
     override func viewDidLoad() {
         super.viewDidLoad()
         delegate = self
@@ -26,34 +29,16 @@ class MainSplitViewController: UISplitViewController {
         super.viewWillAppear(animated)
         // showWelcomeView()
     }
-
-    func showLoadingView() {
-        loadingView = LoadingView()
-        view.addSubview(loadingView!)
-        loadingView?.anchor.edgesToSuperview().activate()
-    }
-    
-    func removeLoadingView() {
-        UIView.animate(withDuration: 0.3, animations: { [weak self] in
-            self?.loadingView?.alpha = 0
-        }, completion: { [weak self] _ in
-            self?.loadingView?.removeFromSuperview()
-            self?.loadingView = nil
-        })
-    }
     
     /// Setup view controllers for the `SplitViewController`
     private func setupSplitViewControllers() {
         var term: Term?
         term = TermCoreDataManager.shared.getCurrent()
 
-        let assignmentsViewModel = AssignmentsViewModel()
         subjectsViewModel = SubjectsViewModel(term: term)
-        subjectsViewModel?.delegate = assignmentsViewModel
         let subjectsViewController = SubjectsViewController(viewModel: subjectsViewModel!)
-        let assignmentsViewController = AssignmentsViewController(viewModel: assignmentsViewModel)
         let masterViewController = UINavigationController(rootViewController: subjectsViewController)
-        let detailViewController = UINavigationController(rootViewController: assignmentsViewController)
+        let detailViewController = UINavigationController(rootViewController: NoSubjectSelectedViewController())
         viewControllers = [masterViewController, detailViewController]
         
         if term == nil {
@@ -61,6 +46,7 @@ class MainSplitViewController: UISplitViewController {
         }
     }
     
+    /// Show a view for creating a terms if there's no terms created
     private func showCreateTermView() {
         emptyView = EmptyGradablesView(imageName: "calendar.circle.fill",
                                        description: "To get started create a Term.",
@@ -70,6 +56,7 @@ class MainSplitViewController: UISplitViewController {
         emptyView?.anchor.edgesToSuperview().activate()
     }
     
+    /// Go to `CreateTermViewController`
     private func goToCreateTerm() {
         TermCoreDataManager.shared.create(name: "Semestre", maxGrade: 20, minGrade: 10)
         subjectsViewModel?.setTerm(TermCoreDataManager.shared.getCurrent())
@@ -82,6 +69,7 @@ class MainSplitViewController: UISplitViewController {
         })
     }
     
+    /// Show `WelcomeViewController` if it's the first time the user enters the app.
     private func showWelcomeView() {
         let viewController = WelcomeViewController()
         viewController.isModalInPresentation = true
@@ -90,14 +78,20 @@ class MainSplitViewController: UISplitViewController {
     
 }
 
+// MARK: - UISplitViewControllerDelegate
 extension MainSplitViewController: UISplitViewControllerDelegate {
+    
     func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController: UIViewController, onto primaryViewController: UIViewController) -> Bool {
         return true
     }
+    
 }
 
+// MARK: - EmptyGradablesViewDelegate
 extension MainSplitViewController: EmptyGradablesViewDelegate {
+    
     func didTapButton() {
         goToCreateTerm()
     }
+    
 }

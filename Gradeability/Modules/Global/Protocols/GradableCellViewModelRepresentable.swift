@@ -14,5 +14,6 @@ protocol GradableCellViewModelRepresentable {
     var name: String { get }
     /// Detail to be displayed.
     var detail: String { get }
+    /// Accessory type for the cell.
     var accessoryType: UITableViewCell.AccessoryType { get }
 }

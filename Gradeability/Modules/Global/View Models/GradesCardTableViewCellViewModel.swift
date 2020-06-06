@@ -10,7 +10,9 @@ import Foundation
 
 class GradesCardTableViewCellViewModel: GradesCardTableViewCellRepresentable {
     
+    /// View model for the `GradeCardView` that shows the current grade
     var gradeCardViewModel: GradeCardViewModel
+    /// View model for the `GradeCardView` that shows the maximum grade that can be scored
     var maxGradeCardViewModel: GradeCardViewModel
     
     init(gradeCardViewModel: GradeCardViewModel, maxGradeCardViewModel: GradeCardViewModel) {

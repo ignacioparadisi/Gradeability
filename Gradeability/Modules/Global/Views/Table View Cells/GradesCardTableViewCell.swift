@@ -10,7 +10,9 @@
 import UIKit
 
 class GradesCardTableViewCell: UITableViewCell, ReusableView {
+    /// Card view for the current grade
     let gradeCardView = GradeCardView()
+    /// Card view for the maximum grade that can be scored
     let maxGradeCardView = GradeCardView()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -40,6 +42,8 @@ class GradesCardTableViewCell: UITableViewCell, ReusableView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    /// Configure the cell with the view model's information.
+    /// - Parameter representable: View model for the cell.
     func configure(with representable: GradesCardTableViewCellRepresentable) {
         gradeCardView.configure(with: representable.gradeCardViewModel)
         maxGradeCardView.configure(with: representable.maxGradeCardViewModel)

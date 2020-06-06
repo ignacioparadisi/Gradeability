@@ -14,16 +14,24 @@ protocol EmptyGradablesViewDelegate: class {
 
 class EmptyGradablesView: UIView {
     
-    private let containerView = UIView()
+    // MARK: Properties
+    /// View that contains all subviews
+    private let contentView = UIView()
+    /// Image view to show the icon
     private let imageView = UIImageView()
+    /// Name of the image
     private let imageName: String
-    private let descriptionText: String
+    /// Detail text to show
+    private let detailText: String
+    /// Title of the button
     private let buttonTitle: String
+    /// Delegate for the view
     weak var delegate: EmptyGradablesViewDelegate?
     
+    // MARK: Initializers
     init(imageName: String, description: String, buttonTitle: String) {
         self.imageName = imageName
-        self.descriptionText = description
+        self.detailText = description
         self.buttonTitle = buttonTitle
         super.init(frame: .zero)
         backgroundColor = .systemGroupedBackground
@@ -34,6 +42,7 @@ class EmptyGradablesView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: Functions
     /// Setup view to show if there's not terms saved in the database
     private func setupCreateTermView() {
         let label = UILabel()
@@ -45,7 +54,7 @@ class EmptyGradablesView: UIView {
         label.textAlignment = .center
         label.font = UIFont.preferredFont(forTextStyle: .subheadline)
         
-        label.text = descriptionText
+        label.text = detailText
         label.numberOfLines = 2
         
         button.setTitle(buttonTitle, for: .normal)
@@ -55,12 +64,12 @@ class EmptyGradablesView: UIView {
         button.clipsToBounds = true
         button.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
         
-        addSubview(containerView)
-        containerView.addSubview(imageView)
-        containerView.addSubview(label)
-        containerView.addSubview(button)
+        addSubview(contentView)
+        contentView.addSubview(imageView)
+        contentView.addSubview(label)
+        contentView.addSubview(button)
         
-        containerView.anchor
+        contentView.anchor
             .top(greaterOrEqual: safeAreaLayoutGuide.topAnchor, constant: 50)
             .trailing(to: safeAreaLayoutGuide.trailingAnchor, constant: -30)
             .bottom(lessOrEqual: safeAreaLayoutGuide.bottomAnchor, constant: -50)
@@ -76,8 +85,8 @@ class EmptyGradablesView: UIView {
         
         button.anchor
             .top(to: label.bottomAnchor, constant: 30)
-            .trailing(lessOrEqual: containerView.trailingAnchor)
-            .leading(lessOrEqual: containerView.leadingAnchor)
+            .trailing(lessOrEqual: contentView.trailingAnchor)
+            .leading(lessOrEqual: contentView.leadingAnchor)
             .bottomToSuperview()
             .centerXToSuperview()
             .height(constant: 44)
@@ -85,6 +94,7 @@ class EmptyGradablesView: UIView {
             .activate()
     }
     
+    /// Set `imageView`  constraints after the size of the view is set.
     override func layoutSubviews() {
         super.layoutSubviews()
         imageView.anchor
@@ -95,6 +105,7 @@ class EmptyGradablesView: UIView {
             .activate()
     }
     
+    /// Function executed when the user tapes the button on the view.
     @objc private func didTapButton() {
         delegate?.didTapButton()
     }

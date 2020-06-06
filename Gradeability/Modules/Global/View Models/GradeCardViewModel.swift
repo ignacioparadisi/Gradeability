@@ -21,6 +21,6 @@ class GradeCardViewModel {
         return UIColor.getColor(for: gradable)
     }
     var grade: String {
-        return "\(gradable.grade)"
+        return gradable.grade.format(decimals: 0)
     }
 }

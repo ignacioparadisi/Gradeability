@@ -9,12 +9,16 @@
 import UIKit
 
 class GradablesViewController: UIViewController {
-    // MARK: Private Properties
+    // MARK: Properties
     /// `UITableView` to display the information.
     let tableView: UITableView = UITableView(frame: .zero, style: .insetGrouped)
-    var loadingView: LoadingView?
     /// View Model that holds the data.
     private var viewModel: GradableViewModelRepresentable
+    /// Sections displayed in the table view
+    enum Sections: Int, CaseIterable {
+        case grade
+        case gradables
+    }
     
     // MARK: Initializers
     init(viewModel: GradableViewModelRepresentable) {
@@ -69,26 +73,10 @@ class GradablesViewController: UIViewController {
         }
     }
     
-    func showLoadingView() {
-        loadingView = LoadingView()
-        view.addSubview(loadingView!)
-        loadingView?.anchor.edgesToSuperview().activate()
-    }
-    
-    func removeLoadingView() {
-        UIView.animate(withDuration: 0.1, animations: { [weak self] in
-            self?.loadingView?.alpha = 0
-        }, completion: { [weak self] _ in
-            self?.loadingView?.removeFromSuperview()
-            self?.loadingView = nil
-        })
-    }
-    
     @objc func didTapOptionsButton(_ sender: UIBarButtonItem?) {
     }
     
     @objc func didTapAddButton(_ sender: UIBarButtonItem?) {
-        
     }
 
 
@@ -96,8 +84,11 @@ class GradablesViewController: UIViewController {
 
 // MARK: - UITableViewDataSource
 extension GradablesViewController: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return viewModel.numberOfSections
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return viewModel.numberOfRows(in: section)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -112,7 +103,7 @@ extension GradablesViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return viewModel.sectionTitle
+        return viewModel.title(for: section)
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -125,9 +116,11 @@ extension GradablesViewController: UITableViewDataSource {
 
 // MARK: - UITableViewDelegate
 extension GradablesViewController: UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
     }
+    
 }
 
 // MARK: = UIContextMenuInteractionDelegate

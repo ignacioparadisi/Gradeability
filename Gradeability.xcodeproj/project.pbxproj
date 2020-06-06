@@ -20,12 +20,22 @@
 		3264277524870C8F009A6112 /* GradeCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3264277424870C8F009A6112 /* GradeCardViewModel.swift */; };
 		3264277724870CFC009A6112 /* GradesCardTableViewCellRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3264277624870CFC009A6112 /* GradesCardTableViewCellRepresentable.swift */; };
 		326427792487121A009A6112 /* GradesCardTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326427782487121A009A6112 /* GradesCardTableViewCellViewModel.swift */; };
+		3264277B2487DB02009A6112 /* Float+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3264277A2487DB02009A6112 /* Float+Extension.swift */; };
+		3264277D2487E19D009A6112 /* CreateAssignmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3264277C2487E19D009A6112 /* CreateAssignmentViewController.swift */; };
+		3264277F2487E20B009A6112 /* CreateAssignmentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3264277E2487E20B009A6112 /* CreateAssignmentViewModel.swift */; };
+		326427812487F0F4009A6112 /* CreateSubjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326427802487F0F4009A6112 /* CreateSubjectViewController.swift */; };
+		326427832487F119009A6112 /* CreateTermViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326427822487F119009A6112 /* CreateTermViewController.swift */; };
+		326427852487F136009A6112 /* CreateTermViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326427842487F136009A6112 /* CreateTermViewModel.swift */; };
+		326427872487F144009A6112 /* CreateSubjectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326427862487F144009A6112 /* CreateSubjectViewModel.swift */; };
 		3293A88D247FFC9C0054D150 /* NSLayoutAnchor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3293A88C247FFC9C0054D150 /* NSLayoutAnchor+Extension.swift */; };
 		3296EA08247F570E00A04FE0 /* DummyTerms.json in Resources */ = {isa = PBXBuildFile; fileRef = 3296EA07247F570E00A04FE0 /* DummyTerms.json */; };
 		3296EA0A247F5BA400A04FE0 /* TermsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3296EA09247F5BA400A04FE0 /* TermsViewModel.swift */; };
 		329D129B247FFDBC00A0173A /* GradableViewModelRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329D129A247FFDBC00A0173A /* GradableViewModelRepresentable.swift */; };
 		329D129F247FFF2300A0173A /* SubjectsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329D129E247FFF2300A0173A /* SubjectsViewModel.swift */; };
 		329D12A1247FFF3100A0173A /* AssignmentsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329D12A0247FFF3100A0173A /* AssignmentsViewModel.swift */; };
+		32A7F166248B0A0400EFB7E4 /* NoSubjectSelectedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A7F165248B0A0400EFB7E4 /* NoSubjectSelectedViewController.swift */; };
+		32A7F168248B0AE200EFB7E4 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A7F167248B0AE200EFB7E4 /* UIFont+Extension.swift */; };
+		32A7F16B248B1FEB00EFB7E4 /* GRDTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A7F16A248B1FEB00EFB7E4 /* GRDTextField.swift */; };
 		32B54D84248404E80083B734 /* EmptyGradablesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B54D83248404E80083B734 /* EmptyGradablesViewController.swift */; };
 		32B54D8624841AA60083B734 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B54D8524841AA60083B734 /* LoadingView.swift */; };
 		32B54D8A24841E170083B734 /* TestCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B54D8924841E170083B734 /* TestCoreDataManager.swift */; };
@@ -91,12 +101,22 @@
 		3264277424870C8F009A6112 /* GradeCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradeCardViewModel.swift; sourceTree = "<group>"; };
 		3264277624870CFC009A6112 /* GradesCardTableViewCellRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradesCardTableViewCellRepresentable.swift; sourceTree = "<group>"; };
 		326427782487121A009A6112 /* GradesCardTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradesCardTableViewCellViewModel.swift; sourceTree = "<group>"; };
+		3264277A2487DB02009A6112 /* Float+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Float+Extension.swift"; sourceTree = "<group>"; };
+		3264277C2487E19D009A6112 /* CreateAssignmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAssignmentViewController.swift; sourceTree = "<group>"; };
+		3264277E2487E20B009A6112 /* CreateAssignmentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAssignmentViewModel.swift; sourceTree = "<group>"; };
+		326427802487F0F4009A6112 /* CreateSubjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSubjectViewController.swift; sourceTree = "<group>"; };
+		326427822487F119009A6112 /* CreateTermViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTermViewController.swift; sourceTree = "<group>"; };
+		326427842487F136009A6112 /* CreateTermViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTermViewModel.swift; sourceTree = "<group>"; };
+		326427862487F144009A6112 /* CreateSubjectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSubjectViewModel.swift; sourceTree = "<group>"; };
 		3293A88C247FFC9C0054D150 /* NSLayoutAnchor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSLayoutAnchor+Extension.swift"; sourceTree = "<group>"; };
 		3296EA07247F570E00A04FE0 /* DummyTerms.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = DummyTerms.json; sourceTree = "<group>"; };
 		3296EA09247F5BA400A04FE0 /* TermsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsViewModel.swift; sourceTree = "<group>"; };
 		329D129A247FFDBC00A0173A /* GradableViewModelRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradableViewModelRepresentable.swift; sourceTree = "<group>"; };
 		329D129E247FFF2300A0173A /* SubjectsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectsViewModel.swift; sourceTree = "<group>"; };
 		329D12A0247FFF3100A0173A /* AssignmentsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentsViewModel.swift; sourceTree = "<group>"; };
+		32A7F165248B0A0400EFB7E4 /* NoSubjectSelectedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoSubjectSelectedViewController.swift; sourceTree = "<group>"; };
+		32A7F167248B0AE200EFB7E4 /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
+		32A7F16A248B1FEB00EFB7E4 /* GRDTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GRDTextField.swift; sourceTree = "<group>"; };
 		32B54D83248404E80083B734 /* EmptyGradablesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyGradablesViewController.swift; sourceTree = "<group>"; };
 		32B54D8524841AA60083B734 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		32B54D8924841E170083B734 /* TestCoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCoreDataManager.swift; sourceTree = "<group>"; };
@@ -168,17 +188,10 @@
 			children = (
 				3264276B248707EB009A6112 /* GradientView.swift */,
 				32642770248708D0009A6112 /* GradeCardView.swift */,
+				32A7F16A248B1FEB00EFB7E4 /* GRDTextField.swift */,
 				3264276F24870871009A6112 /* Table View Cells */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		324E14F324812E3B0089ECFC /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-				324E14F424812E550089ECFC /* ReusableView.swift */,
-			);
-			path = Protocols;
 			sourceTree = "<group>";
 		};
 		3264276F24870871009A6112 /* Table View Cells */ = {
@@ -207,6 +220,8 @@
 				3293A88C247FFC9C0054D150 /* NSLayoutAnchor+Extension.swift */,
 				324E14F124812E2E0089ECFC /* UITableView+Extension.swift */,
 				3264276D2487082C009A6112 /* UIColor+Extension.swift */,
+				3264277A2487DB02009A6112 /* Float+Extension.swift */,
+				32A7F167248B0AE200EFB7E4 /* UIFont+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -282,6 +297,7 @@
 				32F86A152482EEB00058E56E /* WelcomeViewController.swift */,
 				32B54D83248404E80083B734 /* EmptyGradablesViewController.swift */,
 				32B54D8524841AA60083B734 /* LoadingView.swift */,
+				32A7F165248B0A0400EFB7E4 /* NoSubjectSelectedViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -289,6 +305,7 @@
 		329D12A524812B1E00A0173A /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				324E14F424812E550089ECFC /* ReusableView.swift */,
 				329D129A247FFDBC00A0173A /* GradableViewModelRepresentable.swift */,
 				324E14F6248133CD0089ECFC /* GradableCellViewModelRepresentable.swift */,
 				3264277624870CFC009A6112 /* GradesCardTableViewCellRepresentable.swift */,
@@ -300,6 +317,7 @@
 			isa = PBXGroup;
 			children = (
 				329D12A0247FFF3100A0173A /* AssignmentsViewModel.swift */,
+				3264277E2487E20B009A6112 /* CreateAssignmentViewModel.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -308,6 +326,7 @@
 			isa = PBXGroup;
 			children = (
 				329D129E247FFF2300A0173A /* SubjectsViewModel.swift */,
+				326427862487F144009A6112 /* CreateSubjectViewModel.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -316,6 +335,7 @@
 			isa = PBXGroup;
 			children = (
 				3296EA09247F5BA400A04FE0 /* TermsViewModel.swift */,
+				326427842487F136009A6112 /* CreateTermViewModel.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -351,7 +371,6 @@
 				32E34F0F247F383600BFD25A /* Info.plist */,
 				329D1299247FFD4100A0173A /* Localizables */,
 				32E34F31247F389C00BFD25A /* Core Data */,
-				324E14F324812E3B0089ECFC /* Protocols */,
 				3293A88B247FFC690054D150 /* Extensions */,
 				3293A88A247FFC5E0054D150 /* Modules */,
 			);
@@ -423,6 +442,7 @@
 			isa = PBXGroup;
 			children = (
 				32F86A132482CF5E0058E56E /* AssignmentsViewController.swift */,
+				3264277C2487E19D009A6112 /* CreateAssignmentViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -431,6 +451,7 @@
 			isa = PBXGroup;
 			children = (
 				32F86A112482CF300058E56E /* SubjectsViewController.swift */,
+				326427802487F0F4009A6112 /* CreateSubjectViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -439,6 +460,7 @@
 			isa = PBXGroup;
 			children = (
 				32F86A0F2482CEC50058E56E /* TermsViewController.swift */,
+				326427822487F119009A6112 /* CreateTermViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -578,20 +600,25 @@
 				32E59DC22483317700B4F67C /* AssignmentCoreDataManager.swift in Sources */,
 				32E59DB92483313E00B4F67C /* SubjectCoreDataManagerRepresentable.swift in Sources */,
 				32E34F03247F383500BFD25A /* GradablesViewController.swift in Sources */,
+				326427872487F144009A6112 /* CreateSubjectViewModel.swift in Sources */,
 				329D12A1247FFF3100A0173A /* AssignmentsViewModel.swift in Sources */,
 				324E14F224812E2E0089ECFC /* UITableView+Extension.swift in Sources */,
 				3264277324870910009A6112 /* GradesCardTableViewCell.swift in Sources */,
 				32E34EFF247F383500BFD25A /* AppDelegate.swift in Sources */,
+				326427852487F136009A6112 /* CreateTermViewModel.swift in Sources */,
 				32E34F41247F3A1100BFD25A /* Gradable+CoreDataClass.swift in Sources */,
+				326427832487F119009A6112 /* CreateTermViewController.swift in Sources */,
 				32E34F42247F3A1100BFD25A /* Gradable+CoreDataProperties.swift in Sources */,
 				32E34F09247F383500BFD25A /* Gradeability.xcdatamodeld in Sources */,
 				32E34F3C247F3A1100BFD25A /* Term+CoreDataProperties.swift in Sources */,
 				32E59DBB2483314600B4F67C /* AssignmentCoreDataManagerRepresentable.swift in Sources */,
+				3264277B2487DB02009A6112 /* Float+Extension.swift in Sources */,
 				3264276E2487082C009A6112 /* UIColor+Extension.swift in Sources */,
 				32E59DBE2483316300B4F67C /* TermCoreDataManager.swift in Sources */,
 				324E14F924813DC50089ECFC /* MainSplitViewController.swift in Sources */,
 				32E59DB424832C9C00B4F67C /* CoreDataManagerFactory.swift in Sources */,
 				32F86A102482CEC50058E56E /* TermsViewController.swift in Sources */,
+				32A7F168248B0AE200EFB7E4 /* UIFont+Extension.swift in Sources */,
 				32E34F3E247F3A1100BFD25A /* Subject+CoreDataProperties.swift in Sources */,
 				32B54D8624841AA60083B734 /* LoadingView.swift in Sources */,
 				326427792487121A009A6112 /* GradesCardTableViewCellViewModel.swift in Sources */,
@@ -600,19 +627,24 @@
 				329D129B247FFDBC00A0173A /* GradableViewModelRepresentable.swift in Sources */,
 				32642771248708D0009A6112 /* GradeCardView.swift in Sources */,
 				32E59DB72483313400B4F67C /* TermCoreDataManagerRepresentable.swift in Sources */,
+				3264277D2487E19D009A6112 /* CreateAssignmentViewController.swift in Sources */,
 				3264277724870CFC009A6112 /* GradesCardTableViewCellRepresentable.swift in Sources */,
 				3264276C248707EB009A6112 /* GradientView.swift in Sources */,
 				329D129F247FFF2300A0173A /* SubjectsViewModel.swift in Sources */,
+				32A7F16B248B1FEB00EFB7E4 /* GRDTextField.swift in Sources */,
 				32F86A122482CF300058E56E /* SubjectsViewController.swift in Sources */,
 				32E59DC62483330200B4F67C /* CoreDataManagerRepresentable.swift in Sources */,
+				326427812487F0F4009A6112 /* CreateSubjectViewController.swift in Sources */,
 				324E14F7248133CD0089ECFC /* GradableCellViewModelRepresentable.swift in Sources */,
 				32E34F40247F3A1100BFD25A /* Assignment+CoreDataProperties.swift in Sources */,
+				32A7F166248B0A0400EFB7E4 /* NoSubjectSelectedViewController.swift in Sources */,
 				3264277524870C8F009A6112 /* GradeCardViewModel.swift in Sources */,
 				32E34F01247F383500BFD25A /* SceneDelegate.swift in Sources */,
 				324E14F524812E550089ECFC /* ReusableView.swift in Sources */,
 				32E34F3B247F3A1100BFD25A /* Term+CoreDataClass.swift in Sources */,
 				324E14F024812E080089ECFC /* GradableTableViewCell.swift in Sources */,
 				32B54D84248404E80083B734 /* EmptyGradablesViewController.swift in Sources */,
+				3264277F2487E20B009A6112 /* CreateAssignmentViewModel.swift in Sources */,
 				32E59DC02483316D00B4F67C /* SubjectCoreDataManager.swift in Sources */,
 				324E14ED24812C060089ECFC /* GradableCellViewModel.swift in Sources */,
 				32B54D8A24841E170083B734 /* TestCoreDataManager.swift in Sources */,
