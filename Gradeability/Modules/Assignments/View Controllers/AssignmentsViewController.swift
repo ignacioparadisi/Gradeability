@@ -38,7 +38,9 @@ class AssignmentsViewController: GradablesViewController {
             if self?.viewModel.numberOfRows(in: 1) == 0 {
                 self?.showEmptyView()
             }
+            #if !targetEnvironment(macCatalyst)
             self?.title = self?.viewModel.title
+            #endif
             self?.tableView.reloadData()
         }
     }
@@ -46,8 +48,8 @@ class AssignmentsViewController: GradablesViewController {
     /// Show view for creating an assignment in case there's no one created yet.
     private func showEmptyView() {
         emptyView = EmptyGradablesView(imageName: "doc.circle.fill",
-                                       description: "It seems that you don't have any assignment in this subject.",
-                                       buttonTitle: "Create Assignment")
+                                       description: AssignmentString.emptyAssignments.localized,
+                                       buttonTitle: AssignmentString.createAssignment.localized)
         emptyView?.delegate = self
         view.addSubview(emptyView!)
         emptyView?.anchor.edgesToSuperview().activate()

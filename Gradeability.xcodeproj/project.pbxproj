@@ -36,6 +36,17 @@
 		32A7F166248B0A0400EFB7E4 /* NoSubjectSelectedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A7F165248B0A0400EFB7E4 /* NoSubjectSelectedViewController.swift */; };
 		32A7F168248B0AE200EFB7E4 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A7F167248B0AE200EFB7E4 /* UIFont+Extension.swift */; };
 		32A7F16B248B1FEB00EFB7E4 /* GRDTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A7F16A248B1FEB00EFB7E4 /* GRDTextField.swift */; };
+		32A7F16F248B2A1F00EFB7E4 /* GlobalStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A7F16E248B2A1F00EFB7E4 /* GlobalStrings.swift */; };
+		32A7F171248B2A2700EFB7E4 /* TermStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A7F170248B2A2700EFB7E4 /* TermStrings.swift */; };
+		32A7F173248B2A2F00EFB7E4 /* SubjectStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A7F172248B2A2F00EFB7E4 /* SubjectStrings.swift */; };
+		32A7F175248B2A3900EFB7E4 /* AssignmentStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A7F174248B2A3900EFB7E4 /* AssignmentStrings.swift */; };
+		32A7F177248B2A4100EFB7E4 /* AlertStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A7F176248B2A4100EFB7E4 /* AlertStrings.swift */; };
+		32A7F179248B2A5E00EFB7E4 /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A7F178248B2A5E00EFB7E4 /* Localizable.swift */; };
+		32A7F17B248B2A8B00EFB7E4 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A7F17A248B2A8B00EFB7E4 /* String+Extension.swift */; };
+		32A7F17F248B2B0300EFB7E4 /* Global.strings in Resources */ = {isa = PBXBuildFile; fileRef = 32A7F181248B2B0300EFB7E4 /* Global.strings */; };
+		32A7F185248B2BE000EFB7E4 /* Assignment.strings in Resources */ = {isa = PBXBuildFile; fileRef = 32A7F187248B2BE000EFB7E4 /* Assignment.strings */; };
+		32A7F18A248B2E6F00EFB7E4 /* ButtonStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A7F189248B2E6F00EFB7E4 /* ButtonStrings.swift */; };
+		32A7F18D248B2E9E00EFB7E4 /* Button.strings in Resources */ = {isa = PBXBuildFile; fileRef = 32A7F18F248B2E9E00EFB7E4 /* Button.strings */; };
 		32B54D84248404E80083B734 /* EmptyGradablesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B54D83248404E80083B734 /* EmptyGradablesViewController.swift */; };
 		32B54D8624841AA60083B734 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B54D8524841AA60083B734 /* LoadingView.swift */; };
 		32B54D8A24841E170083B734 /* TestCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B54D8924841E170083B734 /* TestCoreDataManager.swift */; };
@@ -117,6 +128,21 @@
 		32A7F165248B0A0400EFB7E4 /* NoSubjectSelectedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoSubjectSelectedViewController.swift; sourceTree = "<group>"; };
 		32A7F167248B0AE200EFB7E4 /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
 		32A7F16A248B1FEB00EFB7E4 /* GRDTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GRDTextField.swift; sourceTree = "<group>"; };
+		32A7F16E248B2A1F00EFB7E4 /* GlobalStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalStrings.swift; sourceTree = "<group>"; };
+		32A7F170248B2A2700EFB7E4 /* TermStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermStrings.swift; sourceTree = "<group>"; };
+		32A7F172248B2A2F00EFB7E4 /* SubjectStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectStrings.swift; sourceTree = "<group>"; };
+		32A7F174248B2A3900EFB7E4 /* AssignmentStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentStrings.swift; sourceTree = "<group>"; };
+		32A7F176248B2A4100EFB7E4 /* AlertStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertStrings.swift; sourceTree = "<group>"; };
+		32A7F178248B2A5E00EFB7E4 /* Localizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localizable.swift; sourceTree = "<group>"; };
+		32A7F17A248B2A8B00EFB7E4 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		32A7F17E248B2AF700EFB7E4 /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		32A7F180248B2B0300EFB7E4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Global.strings; sourceTree = "<group>"; };
+		32A7F182248B2B0800EFB7E4 /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/Global.strings"; sourceTree = "<group>"; };
+		32A7F186248B2BE000EFB7E4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Assignment.strings; sourceTree = "<group>"; };
+		32A7F188248B2BE100EFB7E4 /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/Assignment.strings"; sourceTree = "<group>"; };
+		32A7F189248B2E6F00EFB7E4 /* ButtonStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStrings.swift; sourceTree = "<group>"; };
+		32A7F18E248B2E9E00EFB7E4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Button.strings; sourceTree = "<group>"; };
+		32A7F190248B2E9F00EFB7E4 /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/Button.strings"; sourceTree = "<group>"; };
 		32B54D83248404E80083B734 /* EmptyGradablesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyGradablesViewController.swift; sourceTree = "<group>"; };
 		32B54D8524841AA60083B734 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		32B54D8924841E170083B734 /* TestCoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCoreDataManager.swift; sourceTree = "<group>"; };
@@ -222,6 +248,7 @@
 				3264276D2487082C009A6112 /* UIColor+Extension.swift */,
 				3264277A2487DB02009A6112 /* Float+Extension.swift */,
 				32A7F167248B0AE200EFB7E4 /* UIFont+Extension.swift */,
+				32A7F17A248B2A8B00EFB7E4 /* String+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -246,6 +273,9 @@
 		329D1299247FFD4100A0173A /* Localizables */ = {
 			isa = PBXGroup;
 			children = (
+				32A7F178248B2A5E00EFB7E4 /* Localizable.swift */,
+				32A7F16C248B29FB00EFB7E4 /* Enums */,
+				32A7F16D248B2A0400EFB7E4 /* Strings */,
 			);
 			path = Localizables;
 			sourceTree = "<group>";
@@ -338,6 +368,29 @@
 				326427842487F136009A6112 /* CreateTermViewModel.swift */,
 			);
 			path = "View Models";
+			sourceTree = "<group>";
+		};
+		32A7F16C248B29FB00EFB7E4 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				32A7F16E248B2A1F00EFB7E4 /* GlobalStrings.swift */,
+				32A7F170248B2A2700EFB7E4 /* TermStrings.swift */,
+				32A7F172248B2A2F00EFB7E4 /* SubjectStrings.swift */,
+				32A7F174248B2A3900EFB7E4 /* AssignmentStrings.swift */,
+				32A7F176248B2A4100EFB7E4 /* AlertStrings.swift */,
+				32A7F189248B2E6F00EFB7E4 /* ButtonStrings.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
+		32A7F16D248B2A0400EFB7E4 /* Strings */ = {
+			isa = PBXGroup;
+			children = (
+				32A7F181248B2B0300EFB7E4 /* Global.strings */,
+				32A7F187248B2BE000EFB7E4 /* Assignment.strings */,
+				32A7F18F248B2E9E00EFB7E4 /* Button.strings */,
+			);
+			path = Strings;
 			sourceTree = "<group>";
 		};
 		32E34EF2247F383500BFD25A = {
@@ -551,6 +604,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"es-419",
 			);
 			mainGroup = 32E34EF2247F383500BFD25A;
 			productRefGroup = 32E34EFC247F383500BFD25A /* Products */;
@@ -571,7 +625,10 @@
 			files = (
 				32E34F0E247F383600BFD25A /* LaunchScreen.storyboard in Resources */,
 				3296EA08247F570E00A04FE0 /* DummyTerms.json in Resources */,
+				32A7F18D248B2E9E00EFB7E4 /* Button.strings in Resources */,
 				32E34F0B247F383600BFD25A /* Assets.xcassets in Resources */,
+				32A7F185248B2BE000EFB7E4 /* Assignment.strings in Resources */,
+				32A7F17F248B2B0300EFB7E4 /* Global.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -597,6 +654,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				32F86A142482CF5E0058E56E /* AssignmentsViewController.swift in Sources */,
+				32A7F17B248B2A8B00EFB7E4 /* String+Extension.swift in Sources */,
 				32E59DC22483317700B4F67C /* AssignmentCoreDataManager.swift in Sources */,
 				32E59DB92483313E00B4F67C /* SubjectCoreDataManagerRepresentable.swift in Sources */,
 				32E34F03247F383500BFD25A /* GradablesViewController.swift in Sources */,
@@ -604,6 +662,7 @@
 				329D12A1247FFF3100A0173A /* AssignmentsViewModel.swift in Sources */,
 				324E14F224812E2E0089ECFC /* UITableView+Extension.swift in Sources */,
 				3264277324870910009A6112 /* GradesCardTableViewCell.swift in Sources */,
+				32A7F179248B2A5E00EFB7E4 /* Localizable.swift in Sources */,
 				32E34EFF247F383500BFD25A /* AppDelegate.swift in Sources */,
 				326427852487F136009A6112 /* CreateTermViewModel.swift in Sources */,
 				32E34F41247F3A1100BFD25A /* Gradable+CoreDataClass.swift in Sources */,
@@ -614,6 +673,7 @@
 				32E59DBB2483314600B4F67C /* AssignmentCoreDataManagerRepresentable.swift in Sources */,
 				3264277B2487DB02009A6112 /* Float+Extension.swift in Sources */,
 				3264276E2487082C009A6112 /* UIColor+Extension.swift in Sources */,
+				32A7F18A248B2E6F00EFB7E4 /* ButtonStrings.swift in Sources */,
 				32E59DBE2483316300B4F67C /* TermCoreDataManager.swift in Sources */,
 				324E14F924813DC50089ECFC /* MainSplitViewController.swift in Sources */,
 				32E59DB424832C9C00B4F67C /* CoreDataManagerFactory.swift in Sources */,
@@ -624,6 +684,7 @@
 				326427792487121A009A6112 /* GradesCardTableViewCellViewModel.swift in Sources */,
 				32F86A162482EEB00058E56E /* WelcomeViewController.swift in Sources */,
 				32E34F3D247F3A1100BFD25A /* Subject+CoreDataClass.swift in Sources */,
+				32A7F171248B2A2700EFB7E4 /* TermStrings.swift in Sources */,
 				329D129B247FFDBC00A0173A /* GradableViewModelRepresentable.swift in Sources */,
 				32642771248708D0009A6112 /* GradeCardView.swift in Sources */,
 				32E59DB72483313400B4F67C /* TermCoreDataManagerRepresentable.swift in Sources */,
@@ -634,11 +695,14 @@
 				32A7F16B248B1FEB00EFB7E4 /* GRDTextField.swift in Sources */,
 				32F86A122482CF300058E56E /* SubjectsViewController.swift in Sources */,
 				32E59DC62483330200B4F67C /* CoreDataManagerRepresentable.swift in Sources */,
+				32A7F173248B2A2F00EFB7E4 /* SubjectStrings.swift in Sources */,
 				326427812487F0F4009A6112 /* CreateSubjectViewController.swift in Sources */,
+				32A7F177248B2A4100EFB7E4 /* AlertStrings.swift in Sources */,
 				324E14F7248133CD0089ECFC /* GradableCellViewModelRepresentable.swift in Sources */,
 				32E34F40247F3A1100BFD25A /* Assignment+CoreDataProperties.swift in Sources */,
 				32A7F166248B0A0400EFB7E4 /* NoSubjectSelectedViewController.swift in Sources */,
 				3264277524870C8F009A6112 /* GradeCardViewModel.swift in Sources */,
+				32A7F175248B2A3900EFB7E4 /* AssignmentStrings.swift in Sources */,
 				32E34F01247F383500BFD25A /* SceneDelegate.swift in Sources */,
 				324E14F524812E550089ECFC /* ReusableView.swift in Sources */,
 				32E34F3B247F3A1100BFD25A /* Term+CoreDataClass.swift in Sources */,
@@ -649,6 +713,7 @@
 				324E14ED24812C060089ECFC /* GradableCellViewModel.swift in Sources */,
 				32B54D8A24841E170083B734 /* TestCoreDataManager.swift in Sources */,
 				3293A88D247FFC9C0054D150 /* NSLayoutAnchor+Extension.swift in Sources */,
+				32A7F16F248B2A1F00EFB7E4 /* GlobalStrings.swift in Sources */,
 				3296EA0A247F5BA400A04FE0 /* TermsViewModel.swift in Sources */,
 				32E59DC4248332D000B4F67C /* CoreDataManager.swift in Sources */,
 				32E34F3F247F3A1100BFD25A /* Assignment+CoreDataClass.swift in Sources */,
@@ -687,10 +752,38 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		32A7F181248B2B0300EFB7E4 /* Global.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				32A7F180248B2B0300EFB7E4 /* en */,
+				32A7F182248B2B0800EFB7E4 /* es-419 */,
+			);
+			name = Global.strings;
+			sourceTree = "<group>";
+		};
+		32A7F187248B2BE000EFB7E4 /* Assignment.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				32A7F186248B2BE000EFB7E4 /* en */,
+				32A7F188248B2BE100EFB7E4 /* es-419 */,
+			);
+			name = Assignment.strings;
+			sourceTree = "<group>";
+		};
+		32A7F18F248B2E9E00EFB7E4 /* Button.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				32A7F18E248B2E9E00EFB7E4 /* en */,
+				32A7F190248B2E9F00EFB7E4 /* es-419 */,
+			);
+			name = Button.strings;
+			sourceTree = "<group>";
+		};
 		32E34F0C247F383600BFD25A /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				32E34F0D247F383600BFD25A /* Base */,
+				32A7F17E248B2AF700EFB7E4 /* es-419 */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -702,6 +795,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -762,6 +856,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

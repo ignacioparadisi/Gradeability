@@ -56,13 +56,17 @@ class GradablesViewController: UIViewController {
     /// Sets the Title and Bar Buttons to the Navigation Bar
     private func setupNavigationBar() {
         navigationController?.navigationBar.prefersLargeTitles = true
+        var optionsImage = UIImage(systemName: "ellipsis.circle", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20))
+        let addImage = UIImage(systemName: "plus.circle.fill", withConfiguration: UIImage.SymbolConfiguration(weight: .bold))
+        var barButtons: [UIBarButtonItem] = []
+        #if !targetEnvironment(macCatalyst)
         title = viewModel.title
-        guard let addImage = UIImage(systemName: "plus.circle.fill", withConfiguration: UIImage.SymbolConfiguration(weight: .bold)) else { return }
-        guard let optionsImage = UIImage(systemName: "ellipsis.circle") else { return }
-        navigationItem.setRightBarButtonItems([
-            UIBarButtonItem(image: addImage, style: .plain, target: self, action: #selector(didTapAddButton(_:))),
-            UIBarButtonItem(image: optionsImage, style: .plain, target: self, action: #selector(didTapOptionsButton(_:)))
-        ], animated: false)
+        optionsImage = UIImage(systemName: "ellipsis.circle")
+        barButtons.append(UIBarButtonItem(image: addImage, style: .plain, target: self, action: #selector(didTapAddButton(_:))))
+        #endif
+        barButtons.append(UIBarButtonItem(image: optionsImage, style: .plain, target: self, action: #selector(didTapOptionsButton(_:))))
+        
+        navigationItem.setRightBarButtonItems(barButtons, animated: false)
     }
     
     /// Setup all View Model's closures to update the UI

@@ -1,0 +1,17 @@
+/* 
+  Assignment.strings
+  Gradeability
+
+  Created by Ignacio Paradisi on 6/5/20.
+  Copyright © 2020 Ignacio Paradisi. All rights reserved.
+*/
+
+"assignments" = "Assignments";
+
+// MARK: Assignments List
+"createAssignment" = "Create Assignment";
+"emptyAssignments" = "It seems that you don't have any assignment in this subject.";
+
+// MARK: Create Assignment
+"insertName" = "Insert the name for the assignment.";
+"assignmentsName" = "Assignment's name";

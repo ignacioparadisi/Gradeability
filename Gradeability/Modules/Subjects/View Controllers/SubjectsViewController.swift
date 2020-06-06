@@ -9,9 +9,14 @@
 import UIKit
 
 class SubjectsViewController: GradablesViewController {
+    
+    // MARK: Properties
+    /// View model for the view controller
     private let viewModel: SubjectsViewModel
+    /// View for showing in case there's no assignments
     private var emptyView: EmptyGradablesView?
     
+    // MARK: Initializers
     init(viewModel: SubjectsViewModel) {
         self.viewModel = viewModel
         super.init(viewModel: viewModel)
@@ -21,6 +26,7 @@ class SubjectsViewController: GradablesViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: Functions
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(GradesCardTableViewCell.self)
@@ -42,6 +48,7 @@ class SubjectsViewController: GradablesViewController {
         }
     }
     
+    /// Show view for creating an assignment in case there's no one created yet.
     private func showEmptyView() {
         emptyView = EmptyGradablesView(imageName: "book.circle.fill",
                                        description: "It seems that you don't have any subject in this term.",
@@ -58,6 +65,8 @@ class SubjectsViewController: GradablesViewController {
         present(UINavigationController(rootViewController: viewController), animated: true)
     }
     
+    /// Handle navigation button for creating a new subject
+    /// - Parameter sender: Tap gesture
     override func didTapAddButton(_ sender: UIBarButtonItem?) {
         let viewController = UINavigationController(rootViewController: CreateSubjectViewController())
         present(viewController, animated: true)
@@ -105,6 +114,7 @@ extension SubjectsViewController {
     
 }
 
+// MARK: - EmptyGradablesViewDelegate
 extension SubjectsViewController: EmptyGradablesViewDelegate {
     func didTapButton() {
         viewModel.createSubject()

@@ -10,8 +10,11 @@ import UIKit
 
 class CreateSubjectViewController: UIViewController {
     
+    // MARK: Properties
+    /// View Model for the view controller
     let viewModel: CreateSubjectViewModel = CreateSubjectViewModel()
     
+    // MARK: Functions
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Create Subject"

@@ -27,7 +27,7 @@ class CreateAssignmentViewController: UIViewController {
     
     /// Setup the navigation bar
     private func setupNavigationBar() {
-        title = "Create Assignment"
+        title = AssignmentString.createAssignment.localized
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(dismissView))
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(dismissView))
         navigationItem.rightBarButtonItem?.isEnabled = false
@@ -56,10 +56,10 @@ class CreateAssignmentViewController: UIViewController {
         
         titleLabel.font = UIFont.preferredFont(forTextStyle: .title1)
         // titleLabel.font = UIFont.boldSystemFont(ofSize: titleLabel.font.pointSize)
-        titleLabel.text = "Name"
+        titleLabel.text = GlobalStrings.name.localized
         descriptionLabel.numberOfLines = 0
-        descriptionLabel.text = "Insert the name for the assignment."
-        textField.placeholder = "Assignment's name"
+        descriptionLabel.text = AssignmentString.insertName.localized
+        textField.placeholder = AssignmentString.assignmentsName.localized
         
         contentView.addSubview(titleLabel)
         contentView.addSubview(descriptionLabel)

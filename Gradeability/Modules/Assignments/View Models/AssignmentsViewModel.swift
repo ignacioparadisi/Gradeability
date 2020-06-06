@@ -71,7 +71,7 @@ class AssignmentsViewModel: GradableViewModelRepresentable {
         case .grade:
             return nil
         case .gradables:
-            return "Assignments"
+            return AssignmentString.assignments.localized
         }
     }
     
@@ -88,8 +88,8 @@ class AssignmentsViewModel: GradableViewModelRepresentable {
     /// - Returns: View model for `GradesCardTableViewCell`
     func gradeCardViewModelForRow(at indexPath: IndexPath) -> GradesCardTableViewCellRepresentable? {
         guard let subject = subject else { return nil }
-        let gradeCardViewModel = GradeCardViewModel(gradable: subject, type: "Grade", message: "You are doing great!")
-        let maxGradeCardViewModel = GradeCardViewModel(gradable: subject, type: "Max Grade", message: "You are doing great!")
+        let gradeCardViewModel = GradeCardViewModel(gradable: subject, type: GlobalStrings.grade.localized, message: "You are doing great!")
+        let maxGradeCardViewModel = GradeCardViewModel(gradable: subject, type: GlobalStrings.maxGrade.localized, message: "You are doing great!")
         return GradesCardTableViewCellViewModel(gradeCardViewModel: gradeCardViewModel,
                                                 maxGradeCardViewModel: maxGradeCardViewModel)
     }
@@ -106,10 +106,10 @@ class AssignmentsViewModel: GradableViewModelRepresentable {
     func createContextualMenuForRow(at indexPath: IndexPath) -> UIMenu? {
         let assignment = assignments[indexPath.row]
         var rootChildren: [UIMenuElement] = []
-        let editAction = UIAction(title: "Edit", image: UIImage(systemName: "square.and.pencil")) { _ in
+        let editAction = UIAction(title: ButtonStrings.edit.localized, image: UIImage(systemName: "square.and.pencil")) { _ in
             
         }
-        let deleteAction = UIAction(title: "Delete", image: UIImage(systemName: "trash"), attributes: .destructive) { _ in
+        let deleteAction = UIAction(title: ButtonStrings.delete.localized, image: UIImage(systemName: "trash"), attributes: .destructive) { _ in
             CoreDataManager.shared.delete(assignment)
             self.fetch()
         }
