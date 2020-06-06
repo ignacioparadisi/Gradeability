@@ -27,6 +27,7 @@
 		326427832487F119009A6112 /* CreateTermViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326427822487F119009A6112 /* CreateTermViewController.swift */; };
 		326427852487F136009A6112 /* CreateTermViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326427842487F136009A6112 /* CreateTermViewModel.swift */; };
 		326427872487F144009A6112 /* CreateSubjectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326427862487F144009A6112 /* CreateSubjectViewModel.swift */; };
+		32801D3C248BC7F900326C93 /* NSToolbarItemIdentifier+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32801D3B248BC7F900326C93 /* NSToolbarItemIdentifier+Extension.swift */; };
 		3293A88D247FFC9C0054D150 /* NSLayoutAnchor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3293A88C247FFC9C0054D150 /* NSLayoutAnchor+Extension.swift */; };
 		3296EA08247F570E00A04FE0 /* DummyTerms.json in Resources */ = {isa = PBXBuildFile; fileRef = 3296EA07247F570E00A04FE0 /* DummyTerms.json */; };
 		3296EA0A247F5BA400A04FE0 /* TermsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3296EA09247F5BA400A04FE0 /* TermsViewModel.swift */; };
@@ -119,6 +120,7 @@
 		326427822487F119009A6112 /* CreateTermViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTermViewController.swift; sourceTree = "<group>"; };
 		326427842487F136009A6112 /* CreateTermViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTermViewModel.swift; sourceTree = "<group>"; };
 		326427862487F144009A6112 /* CreateSubjectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSubjectViewModel.swift; sourceTree = "<group>"; };
+		32801D3B248BC7F900326C93 /* NSToolbarItemIdentifier+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSToolbarItemIdentifier+Extension.swift"; sourceTree = "<group>"; };
 		3293A88C247FFC9C0054D150 /* NSLayoutAnchor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSLayoutAnchor+Extension.swift"; sourceTree = "<group>"; };
 		3296EA07247F570E00A04FE0 /* DummyTerms.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = DummyTerms.json; sourceTree = "<group>"; };
 		3296EA09247F5BA400A04FE0 /* TermsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsViewModel.swift; sourceTree = "<group>"; };
@@ -249,6 +251,7 @@
 				3264277A2487DB02009A6112 /* Float+Extension.swift */,
 				32A7F167248B0AE200EFB7E4 /* UIFont+Extension.swift */,
 				32A7F17A248B2A8B00EFB7E4 /* String+Extension.swift */,
+				32801D3B248BC7F900326C93 /* NSToolbarItemIdentifier+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -697,6 +700,7 @@
 				32E59DC62483330200B4F67C /* CoreDataManagerRepresentable.swift in Sources */,
 				32A7F173248B2A2F00EFB7E4 /* SubjectStrings.swift in Sources */,
 				326427812487F0F4009A6112 /* CreateSubjectViewController.swift in Sources */,
+				32801D3C248BC7F900326C93 /* NSToolbarItemIdentifier+Extension.swift in Sources */,
 				32A7F177248B2A4100EFB7E4 /* AlertStrings.swift in Sources */,
 				324E14F7248133CD0089ECFC /* GradableCellViewModelRepresentable.swift in Sources */,
 				32E34F40247F3A1100BFD25A /* Assignment+CoreDataProperties.swift in Sources */,

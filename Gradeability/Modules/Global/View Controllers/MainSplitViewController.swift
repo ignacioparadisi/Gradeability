@@ -27,7 +27,7 @@ class MainSplitViewController: UISplitViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        // showWelcomeView()
+        showWelcomeView()
     }
     
     /// Setup view controllers for the `SplitViewController`
@@ -73,6 +73,9 @@ class MainSplitViewController: UISplitViewController {
     private func showWelcomeView() {
         let viewController = WelcomeViewController()
         viewController.isModalInPresentation = true
+        #if targetEnvironment(macCatalyst)
+        viewController.modalPresentationStyle = .overFullScreen
+        #endif
         present(viewController, animated: true)
     }
     

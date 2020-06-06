@@ -54,8 +54,7 @@ class CreateAssignmentViewController: UIViewController {
         let descriptionLabel = UILabel()
         let textField = GRDTextField()
         
-        titleLabel.font = UIFont.preferredFont(forTextStyle: .title1)
-        // titleLabel.font = UIFont.boldSystemFont(ofSize: titleLabel.font.pointSize)
+        titleLabel.font = UIFont.preferredFont(forTextStyle: .title1).bold
         titleLabel.text = GlobalStrings.name.localized
         descriptionLabel.numberOfLines = 0
         descriptionLabel.text = AssignmentString.insertName.localized

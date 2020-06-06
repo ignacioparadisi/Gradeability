@@ -30,11 +30,13 @@ class SubjectsViewController: GradablesViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(GradesCardTableViewCell.self)
+        #if !targetEnvironment(macCatalyst)
         if viewModel.isMasterController {
             navigationItem.setLeftBarButton(
                 UIBarButtonItem(title: "All Terms", style: .plain, target: self, action: #selector(showAllTerms)),
             animated: false)
         }
+        #endif
     }
 
     /// Setup all View Model's closures to update the UI

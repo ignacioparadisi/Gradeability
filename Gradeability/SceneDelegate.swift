@@ -17,8 +17,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        guard let windowsScene = (scene as? UIWindowScene) else { return }
-        window = UIWindow(windowScene: windowsScene)
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+        setupToolbarIfNeeded(scene: windowScene)
+        window = UIWindow(windowScene: windowScene)
         window?.rootViewController = MainSplitViewController()
         window?.makeKeyAndVisible()
     }
@@ -53,7 +54,59 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Save changes in the application's managed object context when the application transitions to the background.
         CoreDataManager.shared.saveContext()
     }
+    
+    /// Adds the toolbar to the mac app
+    /// - Parameter scene: Window Scene of the app
+    private func setupToolbarIfNeeded(scene: UIWindowScene) {
+        #if targetEnvironment(macCatalyst)
+        let toolbarIdentifier = "ToolbarIdentifier"
+        if let titlebar = scene.titlebar {
+            let toolbar = NSToolbar(identifier: toolbarIdentifier)
+            toolbar.delegate = self
+            toolbar.allowsUserCustomization = false
+            titlebar.toolbar = toolbar
+            titlebar.titleVisibility = .hidden
+        }
+        #endif
+    }
 
+}
 
+extension SceneDelegate: NSToolbarDelegate {
+    func toolbarAllowedItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
+        return [.showAllTerms, .addNote]
+    }
+    
+    func toolbarDefaultItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
+        return [.showAllTerms, .flexibleSpace, .addNote]
+    }
+    
+    func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
+        if itemIdentifier == .showAllTerms {
+            let barButton = UIBarButtonItem(title: "All Terms", style: .plain, target: self, action: #selector(showAllTerms))
+            let item = NSToolbarItem(itemIdentifier: itemIdentifier, barButtonItem: barButton)
+            item.isBordered = true
+            item.toolTip = "Show All Terms"
+            item.label = ""
+            return item
+        } else if itemIdentifier == .addNote {
+            let barButton = UIBarButtonItem(image: UIImage(systemName: "square.and.pencil"), style: .plain, target: self, action: nil)
+            let item = NSToolbarItem(itemIdentifier: itemIdentifier, barButtonItem: barButton)
+            item.isBordered = true
+            item.toolTip = "Add Note"
+            item.label = "Add Note"
+            return item
+        }
+        return nil
+    }
+    
+    /// Present `GradablesViewController` for showing all Terms
+    @objc private func showAllTerms() {
+        if let topViewController = window?.rootViewController {
+            let termsViewModel = TermsViewModel()
+            let viewController = TermsViewController(viewModel: termsViewModel)
+            topViewController.present(UINavigationController(rootViewController: viewController), animated: true)
+        }
+    }
 }
 
