@@ -19,8 +19,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let windowScene = (scene as? UIWindowScene) else { return }
         setupToolbarIfNeeded(scene: windowScene)
+        setupWindowSize(scene: windowScene)
         window = UIWindow(windowScene: windowScene)
+        #if targetEnvironment(macCatalyst)
+        window?.rootViewController = MainViewController()
+        #else
         window?.rootViewController = MainSplitViewController()
+        #endif
         window?.makeKeyAndVisible()
     }
 
@@ -54,7 +59,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Save changes in the application's managed object context when the application transitions to the background.
         CoreDataManager.shared.saveContext()
     }
-    
+
+}
+
+extension SceneDelegate {
     /// Adds the toolbar to the mac app
     /// - Parameter scene: Window Scene of the app
     private func setupToolbarIfNeeded(scene: UIWindowScene) {
@@ -69,7 +77,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         #endif
     }
-
+    
+    private func setupWindowSize(scene: UIWindowScene) {
+        scene.sizeRestrictions?.minimumSize = CGSize(width: 1100.0, height: 768.0)
+        scene.sizeRestrictions?.maximumSize = CGSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude)
+    }
 }
 
 #if targetEnvironment(macCatalyst)

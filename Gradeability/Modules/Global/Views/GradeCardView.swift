@@ -88,16 +88,20 @@ class GradeCardView: UIView {
     /// Configure the view with the information stored in the view model
     /// - Parameter viewModel: View Model that holds the view's information
     func configure(with viewModel: GradeCardViewModel) {
-        let sizeMultiplier = frame.width / 375
-        let multiplier = (sizeMultiplier > 1) ? 1 : sizeMultiplier
-        gradeLabel.font = UIFont.boldSystemFont(ofSize: 80.0 * multiplier)
-        
         backgroundColor = viewModel.color
         cardGradientView.color = viewModel.color
         cardTopView.backgroundColor = viewModel.color
         gradeLabel.text = viewModel.grade
         gradeTypeLabel.text = viewModel.type
         messageLabel.text = viewModel.message
+        
+        let sizeMultiplier = frame.width / 300
+        let multiplier = (sizeMultiplier > 1) ? 1 : sizeMultiplier
+        gradeLabel.font = UIFont.boldSystemFont(ofSize: 80.0 * multiplier)
+        
+//        let sizeMultiplier = abs(frame.height - frame.width)
+//        let multiplier = (sizeMultiplier > 80) ? 80 : sizeMultiplier
+//        gradeLabel.font = UIFont.boldSystemFont(ofSize: sizeMultiplier)
     }
     
     /// Handle gradient position on mouse hover
