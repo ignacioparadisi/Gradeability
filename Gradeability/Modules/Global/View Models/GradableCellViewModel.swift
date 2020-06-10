@@ -16,6 +16,7 @@ class GradableCellViewModel: GradableCellViewModelRepresentable {
     private var gradableDetail: String = ""
     /// Accessory Type to be displayed on the cell
     private var gradableAccessoryType: UITableViewCell.AccessoryType = .disclosureIndicator
+    private var gradable: Gradable
     
     // MARK: Internal Properties
     /// Name to be displayed.
@@ -30,11 +31,15 @@ class GradableCellViewModel: GradableCellViewModelRepresentable {
     var accessoryType: UITableViewCell.AccessoryType {
         return gradableAccessoryType
     }
+    var gradeRingViewModel: GradeRingViewModel {
+        return GradeRingViewModel(gradable: gradable)
+    }
     
     // MARK: Initializers
     /// Initialized `GradableCellViewModel` with a `Term`. This means `name` is the Term's name and `detail` is the start and end year of the `Term`.
     /// - Parameter term: Term to be displayed.
     init(term: Term) {
+        gradable = term
         gradableName = term.name ?? ""
         gradableDetail = "2020 - 2021"
         gradableAccessoryType = term.isCurrent ? .checkmark : .disclosureIndicator
@@ -43,6 +48,7 @@ class GradableCellViewModel: GradableCellViewModelRepresentable {
     /// Initialized `GradableCellViewModel` with a `Subject`. This means `name` is the Subject's name and `detail` is the Teacher's name.
     /// - Parameter subject: Subject to be displayed.
     init(subject: Subject) {
+        gradable = subject
         gradableName = subject.name ?? ""
         gradableDetail = subject.teacherName ?? ""
     }
@@ -50,6 +56,7 @@ class GradableCellViewModel: GradableCellViewModelRepresentable {
     /// Initialized `GradableCellViewModel` with an `Assignment`. This means `name` is the Assignment's name and `detail` is the Assignment's deadline.
     /// - Parameter assignment: Assignment to be displayed.
     init(assignment: Assignment) {
+        gradable = assignment
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .long
         dateFormatter.timeStyle = .short

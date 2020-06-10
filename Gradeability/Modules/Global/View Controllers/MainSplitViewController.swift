@@ -27,7 +27,7 @@ class MainSplitViewController: UISplitViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        showWelcomeView()
+        // showWelcomeView()
     }
     
     /// Setup view controllers for the `SplitViewController`

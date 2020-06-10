@@ -16,4 +16,5 @@ protocol GradableCellViewModelRepresentable {
     var detail: String { get }
     /// Accessory type for the cell.
     var accessoryType: UITableViewCell.AccessoryType { get }
+    var gradeRingViewModel: GradeRingViewModel { get }
 }

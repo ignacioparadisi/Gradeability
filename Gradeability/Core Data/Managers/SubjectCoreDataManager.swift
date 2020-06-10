@@ -40,7 +40,7 @@ class SubjectCoreDataManager: SubjectCoreDataManagerRepresentable {
     }
     
     func create(term: Term, name: String, maxGrade: Float, minGrade: Float, teacherName: String?) {
-        let subject = Subject(context: CoreDataManager.shared.context)
+        let subject = Subject(context: CoreDataManagerFactory.createManager.context)
         subject.term = term
         subject.id = UUID()
         subject.name = name

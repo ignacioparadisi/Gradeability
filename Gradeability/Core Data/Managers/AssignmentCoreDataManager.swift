@@ -53,7 +53,7 @@ class AssignmentCoreDataManager: AssignmentCoreDataManagerRepresentable {
     ///   - assignments: Children assignments.
     ///   - dateCreated: Date when the assignment was created (in case the assignment already exists).
     func createAssignment(name: String?, maxGrade: Float, minGrade: Float, grade: Float = 0, deadline: Date?, percentage: Float, subject: Subject?, assignment: Assignment? = nil, assignments: NSSet? = nil) {
-        let assignment = Assignment(context:CoreDataManagerFactory.createManager.context)
+        let assignment = Assignment(context: CoreDataManagerFactory.createManager.context)
         assignment.id = UUID()
         assignment.subject = subject
         assignment.name = name
@@ -93,7 +93,7 @@ class AssignmentCoreDataManager: AssignmentCoreDataManagerRepresentable {
                 grade += result["grade"] as! Float
             }
             subject?.grade = grade
-            CoreDataManager.shared.saveContext()
+            CoreDataManagerFactory.createManager.saveContext()
         } catch let error as NSError {
             print("count not fetched \(error), \(error.userInfo)")
         }

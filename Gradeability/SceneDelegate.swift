@@ -72,6 +72,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 }
 
+#if targetEnvironment(macCatalyst)
 extension SceneDelegate: NSToolbarDelegate {
     func toolbarAllowedItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
         return [.showAllTerms, .addNote]
@@ -109,4 +110,5 @@ extension SceneDelegate: NSToolbarDelegate {
         }
     }
 }
+#endif
 

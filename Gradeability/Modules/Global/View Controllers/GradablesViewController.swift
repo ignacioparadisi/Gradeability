@@ -99,9 +99,7 @@ extension GradablesViewController: UITableViewDataSource {
         let cellViewModel = viewModel.gradableViewModelForRow(at: indexPath)
         let contextMenuInteraction = UIContextMenuInteraction(delegate: self)
         let cell = tableView.dequeueReusableCell(for: indexPath) as GradableTableViewCell
-        cell.accessoryType = cellViewModel.accessoryType
-        cell.textLabel?.text = cellViewModel.name
-        cell.detailTextLabel?.text = cellViewModel.detail
+        cell.configure(with: cellViewModel)
         cell.addInteraction(contextMenuInteraction)
         return cell
     }
