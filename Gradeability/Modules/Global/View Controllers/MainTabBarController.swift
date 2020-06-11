@@ -10,7 +10,7 @@ import UIKit
 
 class MainTabBarController: UITabBarController {
     private let mainSplitViewController = MainSplitViewController()
-    private let calendarViewController = CalendarViewController()
+    private let calendarViewController = UINavigationController(rootViewController: CalendarViewController())
     
     override func viewDidLoad() {
         super.viewDidLoad()

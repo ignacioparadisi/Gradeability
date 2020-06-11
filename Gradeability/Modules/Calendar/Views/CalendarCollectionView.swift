@@ -19,6 +19,11 @@ class CalendarView: JTACMonthView {
         isPagingEnabled = true
         showsVerticalScrollIndicator = false
         showsHorizontalScrollIndicator = false
+        backgroundColor = .secondarySystemGroupedBackground
+        layer.cornerRadius = 10
+        clipsToBounds = true
+        selectDates([Date()])
+        scrollToDate(Date(), animateScroll: false)
     }
     
     required init?(coder aDecoder: NSCoder) {
