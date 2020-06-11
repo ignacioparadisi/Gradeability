@@ -39,7 +39,7 @@ class DateCollectionViewCell: JTACDayCell, ReusableView {
             .topToSuperview()
             .trailingToSuperview()
             .leadingToSuperview()
-            .height(constant: 2)
+            .height(constant: 1)
             .activate()
         
         setupNotificationBadge()
@@ -64,13 +64,13 @@ class DateCollectionViewCell: JTACDayCell, ReusableView {
     /// Add the `selectedView` to the view and configures it
     private func setupSelectedView() {
         selectedView.backgroundColor = .systemBlue
-        selectedView.layer.cornerRadius = 18
+        selectedView.layer.cornerRadius = 16
         selectedView.clipsToBounds = true
         selectedView.isHidden = true
         selectedView.anchor
             .centerX(to: dateLabel.centerXAnchor)
             .centerY(to: dateLabel.centerYAnchor)
-            .width(constant: 36)
+            .width(constant: 34)
             .height(to: selectedView.widthAnchor)
             .activate()
     }

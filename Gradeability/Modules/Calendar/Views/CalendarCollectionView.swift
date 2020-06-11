@@ -20,8 +20,6 @@ class CalendarView: JTACMonthView {
         showsVerticalScrollIndicator = false
         showsHorizontalScrollIndicator = false
         backgroundColor = .secondarySystemGroupedBackground
-        layer.cornerRadius = 10
-        clipsToBounds = true
         selectDates([Date()])
         
         let weekday = Calendar.current.component(.weekday, from: Date()) - 1

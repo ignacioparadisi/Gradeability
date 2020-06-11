@@ -10,6 +10,8 @@ import UIKit
 import JTAppleCalendar
 
 class CalendarViewController: UIViewController {
+    private let contentView: UIView = UIView()
+    private let daysOfWeekStackView: UIStackView = UIStackView()
     private let calendarView = CalendarView()
     private var calendarPortraitAnchors: Anchor!
     private var calendarLandscapeAnchors: Anchor!
@@ -18,10 +20,12 @@ class CalendarViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemGroupedBackground
+        view.backgroundColor = .clear
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.right"), style: .plain, target: self, action: nil)
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .plain, target: self, action: nil)
         setupLeftLine()
+        setupCalendarContentView()
+        setupCalendarHeader()
         setupCalendarView()
         setupEventsTableView()
     }
@@ -37,21 +41,53 @@ class CalendarViewController: UIViewController {
             .activate()
     }
     
+    func setupCalendarContentView() {
+        view.addSubview(contentView)
+        contentView.backgroundColor = .secondarySystemGroupedBackground
+        contentView.anchor
+            .topToSuperview()
+            .trailingToSuperview()
+            .leadingToSuperview()
+            .activate()
+    }
+    
+    func setupCalendarHeader() {
+        let daysOfWeek = Calendar.current.shortWeekdaySymbols
+        daysOfWeekStackView.axis = .horizontal
+        daysOfWeekStackView.alignment = .center
+        daysOfWeekStackView.distribution = .fillEqually
+        for day in daysOfWeek {
+            let label = UILabel()
+            label.textAlignment = .center
+            label.textColor = .secondaryLabel
+            label.font = UIFont.preferredFont(forTextStyle: .caption1)
+            label.text = day.capitalized
+            daysOfWeekStackView.addArrangedSubview(label)
+        }
+        contentView.addSubview(daysOfWeekStackView)
+        daysOfWeekStackView.anchor
+            .topToSuperview(constant: 16, toSafeArea: true)
+            .trailingToSuperview(toSafeArea: true)
+            .leadingToSuperview(toSafeArea: true)
+            .activate()
+    }
+    
     /// Add calendar view to the view controller
     private func setupCalendarView() {
-        view.addSubview(calendarView)
+        contentView.addSubview(calendarView)
         calendarView.ibCalendarDataSource = self
         calendarView.ibCalendarDelegate = self
         calendarView.register(DateCollectionViewCell.self)
         
         calendarPortraitAnchors = calendarView.anchor
-            .topToSuperview(constant: 20, toSafeArea: true)
-            .trailingToSuperview(constant: -16, toSafeArea: true)
-            .leadingToSuperview(constant: 16, toSafeArea: true)
-            .height(to: calendarView.widthAnchor)
+            .top(to: daysOfWeekStackView.bottomAnchor, constant: 7)
+            .trailingToSuperview(toSafeArea: true)
+            .leadingToSuperview(toSafeArea: true)
+            .bottomToSuperview()
+            .height(to: calendarView.widthAnchor, multiplier: 0.8)
         
         calendarLandscapeAnchors = calendarView.anchor
-            .topToSuperview(toSafeArea: true)
+            .top(to: daysOfWeekStackView.bottomAnchor, constant: 7)
             .trailingToSuperview(toSafeArea: true)
             .leadingToSuperview(toSafeArea: true)
             .bottomToSuperview(toSafeArea: true)
@@ -67,13 +103,13 @@ class CalendarViewController: UIViewController {
             calendarLandscapeAnchors.activate()
         }
         #endif
-
     }
     
     func setupEventsTableView() {
         view.addSubview(eventsTableView)
+        eventsTableView.backgroundColor = .systemGroupedBackground
         eventsTableView.anchor
-            .top(to: calendarView.bottomAnchor, constant: 20)
+            .top(to: contentView.bottomAnchor)
             .trailingToSuperview()
             .bottomToSuperview()
             .leading(to: leftLine.trailingAnchor)
