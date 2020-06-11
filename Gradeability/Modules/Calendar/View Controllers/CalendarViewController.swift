@@ -17,7 +17,22 @@ class CalendarViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemGroupedBackground
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.right"), style: .plain, target: self, action: nil)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .plain, target: self, action: nil)
+        setupLeftLine()
         setupCalendarView()
+    }
+    
+    func setupLeftLine() {
+        let line = UIView()
+        line.backgroundColor = .systemGray4
+        view.addSubview(line)
+        line.anchor
+            .topToSuperview()
+            .bottomToSuperview()
+            .leadingToSuperview()
+            .width(constant: 1)
+            .activate()
     }
     
     /// Add calendar view to the view controller
@@ -39,6 +54,9 @@ class CalendarViewController: UIViewController {
             .leadingToSuperview(toSafeArea: true)
             .bottomToSuperview(toSafeArea: true)
         
+        #if targetEnvironment(macCatalyst)
+        calendarPortraitAnchors.activate()
+        #else
         if view.frame.size.width < view.frame.size.height {
             calendarLandscapeAnchors.deactivate()
             calendarPortraitAnchors.activate()
@@ -46,6 +64,7 @@ class CalendarViewController: UIViewController {
             calendarPortraitAnchors.deactivate()
             calendarLandscapeAnchors.activate()
         }
+        #endif
 
     }
     
@@ -59,20 +78,24 @@ class CalendarViewController: UIViewController {
         }
     }
     
+    #if !targetEnvironment(macCatalyst)
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         handleDeviceOrientation()
         let visibleDates = calendarView.visibleDates()
         calendarView.viewWillTransition(to: .zero, with: coordinator, anchorDate: visibleDates.monthDates.first?.date)
     }
+    #endif
 }
 
 // MARK: - JTACMonthViewDataSource
 extension CalendarViewController: JTACMonthViewDataSource {
     func configureCalendar(_ calendar: JTACMonthView) -> ConfigurationParameters {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy MM dd"
-        let startDate = formatter.date(from: "2018 01 01")!
-        let endDate = Date()
+        let currentDate = Date()
+        var dateComponents = DateComponents()
+        dateComponents.year = -5
+        let startDate = Calendar.current.date(byAdding: dateComponents, to: currentDate)!
+        dateComponents.year = 5
+        let endDate = Calendar.current.date(byAdding: dateComponents, to: currentDate)!
         return ConfigurationParameters(startDate: startDate, endDate: endDate)
     }
 }
@@ -93,6 +116,18 @@ extension CalendarViewController: JTACMonthViewDelegate {
         dateFormatter.dateFormat = "MMMM"
         let date: Date = visibleDates.monthDates.first!.date
         let month = dateFormatter.string(from: date)
-        navigationItem.title = month.capitalized
+        dateFormatter.dateFormat = "yyyy"
+        
+        let year = dateFormatter.string(from: date)
+        let navLabel = UILabel()
+        let navTitle = NSMutableAttributedString(string: "\(month.capitalized) ", attributes:[
+        NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 17.0)])
+
+         navTitle.append(NSMutableAttributedString(string: year, attributes:[
+         NSAttributedString.Key.font: UIFont.systemFont(ofSize: 17.0, weight: UIFont.Weight.light)]))
+
+        navLabel.attributedText = navTitle
+         navLabel.backgroundColor = .clear
+        self.navigationItem.titleView = navLabel
     }
 }

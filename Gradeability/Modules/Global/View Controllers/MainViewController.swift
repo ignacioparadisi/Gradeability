@@ -10,8 +10,8 @@ import UIKit
 
 class MainViewController: UIViewController {
     private let mainSplitViewController = MainSplitViewController()
-    private var calendarViewController: CalendarViewController?
-    private let calendarViewControllerReference = CalendarViewController()
+    private var calendarViewController: UIViewController?
+    private let calendarViewControllerReference = UINavigationController(rootViewController: CalendarViewController())
     private var splitViewTrailingAnchor: Anchor!
     
     override func viewDidLoad() {

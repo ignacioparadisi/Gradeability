@@ -11,12 +11,16 @@ import JTAppleCalendar
 
 class DateCollectionViewCell: JTACDayCell, ReusableView {
     
-    let dateLabel: UILabel = UILabel()
-    let notificationBadgeView: UIView = UIView()
-    let selectedView = UIView()
+    private let dateLabel: UILabel = UILabel()
+    private let notificationBadgeView: UIView = UIView()
+    private let selectedView = UIView()
+    private var state: CellState!
     override var isSelected: Bool {
         didSet {
             selectedView.isHidden = !isSelected
+            if state != nil {
+                handleTextColor()
+            }
         }
     }
     
@@ -24,7 +28,7 @@ class DateCollectionViewCell: JTACDayCell, ReusableView {
         super.init(frame: frame)
         
         let topLine = UIView()
-        topLine.backgroundColor = .systemGray5
+        topLine.backgroundColor = .systemGray3
         
         contentView.addSubview(topLine)
         contentView.addSubview(notificationBadgeView)
@@ -90,17 +94,26 @@ class DateCollectionViewCell: JTACDayCell, ReusableView {
     ///   - state: Cell state
     ///   - date: Date to be displayed
     func configure(with state: CellState, forDate date: Date) {
+        self.state = state
         dateLabel.text = state.text
-        handleTextColor(state: state)
+        handleTextColor()
     }
     
     /// Setup the text color depending if the date corresponds to the current month or not
     /// - Parameter state: Cell state
-    func handleTextColor(state: CellState) {
+    func handleTextColor() {
         if state.dateBelongsTo == .thisMonth {
-            dateLabel.textColor = .label
+            let order = Calendar.current.compare(state.date, to: Date(), toGranularity: .day)
+            if order == .orderedSame {
+                dateLabel.font = UIFont.preferredFont(forTextStyle: .title3).bold
+                dateLabel.textColor = isSelected ? .white : .systemBlue
+            } else {
+                dateLabel.textColor = isSelected ? .white : .label
+                dateLabel.font = UIFont.preferredFont(forTextStyle: .body)
+            }
         } else {
             dateLabel.textColor = .tertiaryLabel
+            dateLabel.font = UIFont.preferredFont(forTextStyle: .body)
         }
     }
 }
