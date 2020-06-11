@@ -15,7 +15,7 @@ class MainTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         mainSplitViewController.tabBarItem = UITabBarItem(title: "Grades", image: UIImage(systemName: "star.fill"), selectedImage: nil)
-        calendarViewController.tabBarItem = UITabBarItem(title: "Grades", image: UIImage(systemName: "calendar"), selectedImage: nil)
+        calendarViewController.tabBarItem = UITabBarItem(title: "Calendar", image: UIImage(systemName: "calendar"), selectedImage: nil)
         viewControllers = [mainSplitViewController, calendarViewController]
     }
     
