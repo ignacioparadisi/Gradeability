@@ -8,25 +8,15 @@
 
 import UIKit
 
-class CreateAssignmentViewController: UIViewController {
+class CreateAssignmentViewController: BaseScrollViewController {
     
     // MARK: Properties
     /// View Model for the view controller
     private let viewModel: CreateAssignmentViewModel = CreateAssignmentViewModel()
-    /// ScrollView where the views are placed
-    private let scrollView = UIScrollView()
-    /// View that contains all the subviews. All subviews should be held for the `contentView` instead of the `scrollView`
-    private let contentView = UIView()
-    
-    // MARK: Functions
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setupNavigationBar()
-        setupView()
-    }
     
     /// Setup the navigation bar
-    private func setupNavigationBar() {
+    override func setupNavigationBar() {
+        super.setupNavigationBar()
         title = AssignmentString.createAssignment.localized
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(dismissView))
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(dismissView))
@@ -34,17 +24,8 @@ class CreateAssignmentViewController: UIViewController {
     }
     
     /// Setup the view
-    private func setupView() {
-        view.backgroundColor = .systemBackground
-        view.addSubview(scrollView)
-        scrollView.addSubview(contentView)
-        scrollView.anchor.edgesToSuperview().activate()
-        contentView.anchor
-            .edgesToSuperview()
-            .width(to: scrollView.widthAnchor)
-            .height(to: scrollView.heightAnchor, priority: .defaultLow)
-            .activate()
-        
+    override func setupView() {
+        super.setupView()
         setupNameSection()
     }
     

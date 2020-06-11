@@ -64,13 +64,13 @@ class DateCollectionViewCell: JTACDayCell, ReusableView {
     /// Add the `selectedView` to the view and configures it
     private func setupSelectedView() {
         selectedView.backgroundColor = .systemBlue
-        selectedView.layer.cornerRadius = 16
+        selectedView.layer.cornerRadius = 15
         selectedView.clipsToBounds = true
         selectedView.isHidden = true
         selectedView.anchor
             .centerX(to: dateLabel.centerXAnchor)
             .centerY(to: dateLabel.centerYAnchor)
-            .width(constant: 34)
+            .width(constant: 30)
             .height(to: selectedView.widthAnchor)
             .activate()
     }

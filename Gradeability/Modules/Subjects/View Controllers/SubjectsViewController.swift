@@ -74,6 +74,16 @@ class SubjectsViewController: GradablesViewController {
         present(viewController, animated: true)
     }
     
+    #if targetEnvironment(macCatalyst)
+    override func makeTouchBar() -> NSTouchBar? {
+        let touchBar = NSTouchBar()
+        touchBar.defaultItemIdentifiers = [.newSubject]
+        let button = NSButtonTouchBarItem(identifier: .newSubject, title: "New Subject", image: UIImage(systemName: "plus")!, target: self, action: nil)
+        touchBar.templateItems = [button]
+        return touchBar
+    }
+    #endif
+    
 }
 
 // MARK: - UITableViewDataSource

@@ -28,6 +28,7 @@
 		326427852487F136009A6112 /* CreateTermViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326427842487F136009A6112 /* CreateTermViewModel.swift */; };
 		326427872487F144009A6112 /* CreateSubjectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326427862487F144009A6112 /* CreateSubjectViewModel.swift */; };
 		326AED402492640B0074CDB2 /* UICollectionView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326AED3F2492640B0074CDB2 /* UICollectionView+Extension.swift */; };
+		326AED422492BFF10074CDB2 /* BaseScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326AED412492BFF10074CDB2 /* BaseScrollViewController.swift */; };
 		32801D3C248BC7F900326C93 /* NSToolbarItemIdentifier+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32801D3B248BC7F900326C93 /* NSToolbarItemIdentifier+Extension.swift */; };
 		3293A88D247FFC9C0054D150 /* NSLayoutAnchor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3293A88C247FFC9C0054D150 /* NSLayoutAnchor+Extension.swift */; };
 		3296EA08247F570E00A04FE0 /* DummyTerms.json in Resources */ = {isa = PBXBuildFile; fileRef = 3296EA07247F570E00A04FE0 /* DummyTerms.json */; };
@@ -59,6 +60,8 @@
 		32B54D84248404E80083B734 /* EmptyGradablesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B54D83248404E80083B734 /* EmptyGradablesViewController.swift */; };
 		32B54D8624841AA60083B734 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B54D8524841AA60083B734 /* LoadingView.swift */; };
 		32B54D8A24841E170083B734 /* TestCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B54D8924841E170083B734 /* TestCoreDataManager.swift */; };
+		32DD89C72492C69F00CBDE36 /* NSTouchBarItemIdentifier+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32DD89C62492C69F00CBDE36 /* NSTouchBarItemIdentifier+Extension.swift */; };
+		32DD89C92492CDAC00CBDE36 /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32DD89C82492CDAC00CBDE36 /* UIButton+Extension.swift */; };
 		32E34EFF247F383500BFD25A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E34EFE247F383500BFD25A /* AppDelegate.swift */; };
 		32E34F01247F383500BFD25A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E34F00247F383500BFD25A /* SceneDelegate.swift */; };
 		32E34F03247F383500BFD25A /* GradablesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E34F02247F383500BFD25A /* GradablesViewController.swift */; };
@@ -132,6 +135,7 @@
 		326427842487F136009A6112 /* CreateTermViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTermViewModel.swift; sourceTree = "<group>"; };
 		326427862487F144009A6112 /* CreateSubjectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSubjectViewModel.swift; sourceTree = "<group>"; };
 		326AED3F2492640B0074CDB2 /* UICollectionView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extension.swift"; sourceTree = "<group>"; };
+		326AED412492BFF10074CDB2 /* BaseScrollViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseScrollViewController.swift; sourceTree = "<group>"; };
 		32801D3B248BC7F900326C93 /* NSToolbarItemIdentifier+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSToolbarItemIdentifier+Extension.swift"; sourceTree = "<group>"; };
 		3293A88C247FFC9C0054D150 /* NSLayoutAnchor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSLayoutAnchor+Extension.swift"; sourceTree = "<group>"; };
 		3296EA07247F570E00A04FE0 /* DummyTerms.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = DummyTerms.json; sourceTree = "<group>"; };
@@ -166,6 +170,8 @@
 		32B54D83248404E80083B734 /* EmptyGradablesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyGradablesViewController.swift; sourceTree = "<group>"; };
 		32B54D8524841AA60083B734 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		32B54D8924841E170083B734 /* TestCoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCoreDataManager.swift; sourceTree = "<group>"; };
+		32DD89C62492C69F00CBDE36 /* NSTouchBarItemIdentifier+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSTouchBarItemIdentifier+Extension.swift"; sourceTree = "<group>"; };
+		32DD89C82492CDAC00CBDE36 /* UIButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
 		32E34EFB247F383500BFD25A /* Gradeability.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gradeability.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		32E34EFE247F383500BFD25A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		32E34F00247F383500BFD25A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -278,6 +284,8 @@
 				32801D3B248BC7F900326C93 /* NSToolbarItemIdentifier+Extension.swift */,
 				3297DF292491A73500CB22DD /* NotificationName+Extension.swift */,
 				326AED3F2492640B0074CDB2 /* UICollectionView+Extension.swift */,
+				32DD89C62492C69F00CBDE36 /* NSTouchBarItemIdentifier+Extension.swift */,
+				32DD89C82492CDAC00CBDE36 /* UIButton+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -403,6 +411,7 @@
 				32A7F165248B0A0400EFB7E4 /* NoSubjectSelectedViewController.swift */,
 				32E4CB7F249119C7006F3A7C /* MainViewController.swift */,
 				3297DF3B2491BCA600CB22DD /* MainTabBarController.swift */,
+				326AED412492BFF10074CDB2 /* BaseScrollViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -760,6 +769,7 @@
 				32E59DBE2483316300B4F67C /* TermCoreDataManager.swift in Sources */,
 				324E14F924813DC50089ECFC /* MainSplitViewController.swift in Sources */,
 				32E59DB424832C9C00B4F67C /* CoreDataManagerFactory.swift in Sources */,
+				32DD89C72492C69F00CBDE36 /* NSTouchBarItemIdentifier+Extension.swift in Sources */,
 				32F86A102482CEC50058E56E /* TermsViewController.swift in Sources */,
 				32A7F168248B0AE200EFB7E4 /* UIFont+Extension.swift in Sources */,
 				32E34F3E247F3A1100BFD25A /* Subject+CoreDataProperties.swift in Sources */,
@@ -770,9 +780,11 @@
 				32A7F171248B2A2700EFB7E4 /* TermStrings.swift in Sources */,
 				329D129B247FFDBC00A0173A /* GradableViewModelRepresentable.swift in Sources */,
 				32642771248708D0009A6112 /* GradeCardView.swift in Sources */,
+				326AED422492BFF10074CDB2 /* BaseScrollViewController.swift in Sources */,
 				32E59DB72483313400B4F67C /* TermCoreDataManagerRepresentable.swift in Sources */,
 				3264277D2487E19D009A6112 /* CreateAssignmentViewController.swift in Sources */,
 				3264277724870CFC009A6112 /* GradesCardTableViewCellRepresentable.swift in Sources */,
+				32DD89C92492CDAC00CBDE36 /* UIButton+Extension.swift in Sources */,
 				3297DF3A2491B60900CB22DD /* CalendarTableViewCell.swift in Sources */,
 				3264276C248707EB009A6112 /* GradientView.swift in Sources */,
 				3297DF312491B0D100CB22DD /* CalendarViewController.swift in Sources */,

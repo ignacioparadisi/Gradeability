@@ -62,6 +62,16 @@ class AssignmentsViewController: GradablesViewController {
         present(viewController, animated: true)
     }
     
+    #if targetEnvironment(macCatalyst)
+    override func makeTouchBar() -> NSTouchBar? {
+        let touchBar = NSTouchBar()
+        touchBar.defaultItemIdentifiers = [.newAssignment]
+        let button = NSButtonTouchBarItem(identifier: .newAssignment, title: "New Assignment", image: UIImage(systemName: "plus")!, target: self, action: nil)
+        touchBar.templateItems = [button]
+        return touchBar
+    }
+    #endif
+    
 }
 
 // MARK: - UITableViewDataSource

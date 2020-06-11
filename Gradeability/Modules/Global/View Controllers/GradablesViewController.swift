@@ -78,6 +78,30 @@ class GradablesViewController: UIViewController {
     }
     
     @objc func didTapOptionsButton(_ sender: UIBarButtonItem?) {
+        let alertSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let createAction = UIAlertAction(title: "New", style: .default, handler: nil)
+        let seeDetailAction = UIAlertAction(title: "See Details", style: .default, handler: nil)
+        let deleteAction = UIAlertAction(title: ButtonStrings.delete.localized, style: .destructive, handler: nil)
+        let cancelAction = UIAlertAction(title: ButtonStrings.cancel.localized, style: .cancel, handler: nil)
+        
+        let createImage = UIImage(systemName: "plus", withConfiguration:  UIImage.SymbolConfiguration(scale: .large))
+        let seeDetailImage = UIImage(systemName: "info.circle", withConfiguration: UIImage.SymbolConfiguration(scale: .large))
+        let deleteImage = UIImage(systemName: "trash", withConfiguration: UIImage.SymbolConfiguration(scale: .large))
+        
+        createAction.setValue(createImage, forKey: "image")
+        seeDetailAction.setValue(seeDetailImage, forKey: "image")
+        deleteAction.setValue(deleteImage, forKey: "image")
+        
+        alertSheet.addAction(createAction)
+        alertSheet.addAction(seeDetailAction)
+        alertSheet.addAction(deleteAction)
+        alertSheet.addAction(cancelAction)
+        
+        if let popoverController = alertSheet.popoverPresentationController {
+            popoverController.barButtonItem = sender
+        }
+        
+        present(alertSheet, animated: true)
     }
     
     @objc func didTapAddButton(_ sender: UIBarButtonItem?) {

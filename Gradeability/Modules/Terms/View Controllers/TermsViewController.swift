@@ -23,7 +23,16 @@ class TermsViewController: GradablesViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        #if targetEnvironment(macCatalyst)
+        let ellipsisImage = UIImage(systemName: "ellipsis.circle", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20))
+        navigationItem.setRightBarButtonItems([
+            UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(dismissView)),
+            UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
+            UIBarButtonItem(image: ellipsisImage, style: .plain, target: self, action: #selector(super.didTapOptionsButton(_:)))
+        ], animated: false)
+        #else
         navigationItem.setLeftBarButton(UIBarButtonItem(title: "Close", style: .plain, target: self, action: #selector(dismissView)), animated: false)
+        #endif
     }
     
     @objc func dismissView() {
@@ -34,6 +43,16 @@ class TermsViewController: GradablesViewController {
         let viewController = UINavigationController(rootViewController: CreateTermViewController())
         present(viewController, animated: true)
     }
+    
+    #if targetEnvironment(macCatalyst)
+    override func makeTouchBar() -> NSTouchBar? {
+        let touchBar = NSTouchBar()
+        touchBar.defaultItemIdentifiers = [.newTerm]
+        let button = NSButtonTouchBarItem(identifier: .newTerm, title: "New Term", image: UIImage(systemName: "plus")!, target: self, action: nil)
+        touchBar.templateItems = [button]
+        return touchBar
+    }
+    #endif
 }
 
 // MARK: - UITableViewDelegate

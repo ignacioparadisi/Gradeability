@@ -15,4 +15,5 @@ enum ButtonStrings: String, Localizable {
     
     case edit
     case delete
+    case cancel
 }
