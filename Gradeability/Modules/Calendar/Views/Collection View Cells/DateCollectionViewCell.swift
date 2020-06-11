@@ -108,8 +108,13 @@ class DateCollectionViewCell: JTACDayCell, ReusableView {
                 dateLabel.font = UIFont.preferredFont(forTextStyle: .title3).bold
                 dateLabel.textColor = isSelected ? .white : .systemBlue
             } else {
-                dateLabel.textColor = isSelected ? .white : .label
                 dateLabel.font = UIFont.preferredFont(forTextStyle: .body)
+                let weekday = Calendar.current.component(.weekday, from: state.date)
+                if [1, 7].contains(weekday) {
+                    dateLabel.textColor = isSelected ? .white : .secondaryLabel
+                } else {
+                    dateLabel.textColor = isSelected ? .white : .label
+                }
             }
         } else {
             dateLabel.textColor = .tertiaryLabel

@@ -23,7 +23,12 @@ class CalendarView: JTACMonthView {
         layer.cornerRadius = 10
         clipsToBounds = true
         selectDates([Date()])
-        scrollToDate(Date(), animateScroll: false)
+        
+        let weekday = Calendar.current.component(.weekday, from: Date()) - 1
+        var components = DateComponents()
+        components.day = -weekday
+        let date = Calendar.current.date(byAdding: components, to: Date())!
+        scrollToDate(date, animateScroll: false)
     }
     
     required init?(coder aDecoder: NSCoder) {

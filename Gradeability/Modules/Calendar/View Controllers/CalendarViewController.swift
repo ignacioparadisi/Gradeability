@@ -13,6 +13,8 @@ class CalendarViewController: UIViewController {
     private let calendarView = CalendarView()
     private var calendarPortraitAnchors: Anchor!
     private var calendarLandscapeAnchors: Anchor!
+    private var eventsTableView: UITableView = UITableView()
+    private var leftLine: UIView = UIView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,13 +23,13 @@ class CalendarViewController: UIViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .plain, target: self, action: nil)
         setupLeftLine()
         setupCalendarView()
+        setupEventsTableView()
     }
     
     func setupLeftLine() {
-        let line = UIView()
-        line.backgroundColor = .systemGray4
-        view.addSubview(line)
-        line.anchor
+        leftLine.backgroundColor = .systemGray4
+        view.addSubview(leftLine)
+        leftLine.anchor
             .topToSuperview()
             .bottomToSuperview()
             .leadingToSuperview()
@@ -66,6 +68,16 @@ class CalendarViewController: UIViewController {
         }
         #endif
 
+    }
+    
+    func setupEventsTableView() {
+        view.addSubview(eventsTableView)
+        eventsTableView.anchor
+            .top(to: calendarView.bottomAnchor, constant: 20)
+            .trailingToSuperview()
+            .bottomToSuperview()
+            .leading(to: leftLine.trailingAnchor)
+            .activate()
     }
     
     private func handleDeviceOrientation() {
