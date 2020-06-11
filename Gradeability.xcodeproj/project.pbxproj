@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -31,6 +31,13 @@
 		3293A88D247FFC9C0054D150 /* NSLayoutAnchor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3293A88C247FFC9C0054D150 /* NSLayoutAnchor+Extension.swift */; };
 		3296EA08247F570E00A04FE0 /* DummyTerms.json in Resources */ = {isa = PBXBuildFile; fileRef = 3296EA07247F570E00A04FE0 /* DummyTerms.json */; };
 		3296EA0A247F5BA400A04FE0 /* TermsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3296EA09247F5BA400A04FE0 /* TermsViewModel.swift */; };
+		3297DF2A2491A73500CB22DD /* NotificationName+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3297DF292491A73500CB22DD /* NotificationName+Extension.swift */; };
+		3297DF2D2491B06800CB22DD /* JTAppleCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 3297DF2C2491B06800CB22DD /* JTAppleCalendar */; };
+		3297DF312491B0D100CB22DD /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3297DF302491B0D100CB22DD /* CalendarViewController.swift */; };
+		3297DF352491B3FB00CB22DD /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3297DF342491B3FB00CB22DD /* CalendarView.swift */; };
+		3297DF372491B4C500CB22DD /* DateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3297DF362491B4C500CB22DD /* DateCollectionViewCell.swift */; };
+		3297DF3A2491B60900CB22DD /* CalendarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3297DF392491B60900CB22DD /* CalendarTableViewCell.swift */; };
+		3297DF3C2491BCA600CB22DD /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3297DF3B2491BCA600CB22DD /* MainTabBarController.swift */; };
 		329D129B247FFDBC00A0173A /* GradableViewModelRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329D129A247FFDBC00A0173A /* GradableViewModelRepresentable.swift */; };
 		329D129F247FFF2300A0173A /* SubjectsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329D129E247FFF2300A0173A /* SubjectsViewModel.swift */; };
 		329D12A1247FFF3100A0173A /* AssignmentsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329D12A0247FFF3100A0173A /* AssignmentsViewModel.swift */; };
@@ -127,6 +134,12 @@
 		3293A88C247FFC9C0054D150 /* NSLayoutAnchor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSLayoutAnchor+Extension.swift"; sourceTree = "<group>"; };
 		3296EA07247F570E00A04FE0 /* DummyTerms.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = DummyTerms.json; sourceTree = "<group>"; };
 		3296EA09247F5BA400A04FE0 /* TermsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsViewModel.swift; sourceTree = "<group>"; };
+		3297DF292491A73500CB22DD /* NotificationName+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationName+Extension.swift"; sourceTree = "<group>"; };
+		3297DF302491B0D100CB22DD /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
+		3297DF342491B3FB00CB22DD /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		3297DF362491B4C500CB22DD /* DateCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCollectionViewCell.swift; sourceTree = "<group>"; };
+		3297DF392491B60900CB22DD /* CalendarTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTableViewCell.swift; sourceTree = "<group>"; };
+		3297DF3B2491BCA600CB22DD /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		329D129A247FFDBC00A0173A /* GradableViewModelRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradableViewModelRepresentable.swift; sourceTree = "<group>"; };
 		329D129E247FFF2300A0173A /* SubjectsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectsViewModel.swift; sourceTree = "<group>"; };
 		329D12A0247FFF3100A0173A /* AssignmentsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentsViewModel.swift; sourceTree = "<group>"; };
@@ -197,6 +210,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3297DF2D2491B06800CB22DD /* JTAppleCalendar in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -241,6 +255,7 @@
 		3293A88A247FFC5E0054D150 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				3297DF2E2491B0B400CB22DD /* Calendar */,
 				329D12A224812ADC00A0173A /* Global */,
 				329D129D247FFF0F00A0173A /* Assignments */,
 				329D129C247FFF0A00A0173A /* Subjects */,
@@ -259,6 +274,7 @@
 				32A7F167248B0AE200EFB7E4 /* UIFont+Extension.swift */,
 				32A7F17A248B2A8B00EFB7E4 /* String+Extension.swift */,
 				32801D3B248BC7F900326C93 /* NSToolbarItemIdentifier+Extension.swift */,
+				3297DF292491A73500CB22DD /* NotificationName+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -278,6 +294,49 @@
 				3296EA07247F570E00A04FE0 /* DummyTerms.json */,
 			);
 			path = "Dummy Data";
+			sourceTree = "<group>";
+		};
+		3297DF2E2491B0B400CB22DD /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				3297DF322491B34900CB22DD /* Views */,
+				3297DF2F2491B0BB00CB22DD /* View Controllers */,
+			);
+			path = Calendar;
+			sourceTree = "<group>";
+		};
+		3297DF2F2491B0BB00CB22DD /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				3297DF302491B0D100CB22DD /* CalendarViewController.swift */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		3297DF322491B34900CB22DD /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3297DF382491B5ED00CB22DD /* Table View Cells */,
+				3297DF332491B35600CB22DD /* Collection View Cells */,
+				3297DF342491B3FB00CB22DD /* CalendarView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		3297DF332491B35600CB22DD /* Collection View Cells */ = {
+			isa = PBXGroup;
+			children = (
+				3297DF362491B4C500CB22DD /* DateCollectionViewCell.swift */,
+			);
+			path = "Collection View Cells";
+			sourceTree = "<group>";
+		};
+		3297DF382491B5ED00CB22DD /* Table View Cells */ = {
+			isa = PBXGroup;
+			children = (
+				3297DF392491B60900CB22DD /* CalendarTableViewCell.swift */,
+			);
+			path = "Table View Cells";
 			sourceTree = "<group>";
 		};
 		329D1299247FFD4100A0173A /* Localizables */ = {
@@ -340,6 +399,7 @@
 				32B54D8524841AA60083B734 /* LoadingView.swift */,
 				32A7F165248B0A0400EFB7E4 /* NoSubjectSelectedViewController.swift */,
 				32E4CB7F249119C7006F3A7C /* MainViewController.swift */,
+				3297DF3B2491BCA600CB22DD /* MainTabBarController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -546,6 +606,9 @@
 			dependencies = (
 			);
 			name = Gradeability;
+			packageProductDependencies = (
+				3297DF2C2491B06800CB22DD /* JTAppleCalendar */,
+			);
 			productName = Gradeability;
 			productReference = 32E34EFB247F383500BFD25A /* Gradeability.app */;
 			productType = "com.apple.product-type.application";
@@ -619,6 +682,9 @@
 				"es-419",
 			);
 			mainGroup = 32E34EF2247F383500BFD25A;
+			packageReferences = (
+				3297DF2B2491B06800CB22DD /* XCRemoteSwiftPackageReference "JTAppleCalendar" */,
+			);
 			productRefGroup = 32E34EFC247F383500BFD25A /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -704,18 +770,24 @@
 				32E59DB72483313400B4F67C /* TermCoreDataManagerRepresentable.swift in Sources */,
 				3264277D2487E19D009A6112 /* CreateAssignmentViewController.swift in Sources */,
 				3264277724870CFC009A6112 /* GradesCardTableViewCellRepresentable.swift in Sources */,
+				3297DF3A2491B60900CB22DD /* CalendarTableViewCell.swift in Sources */,
 				3264276C248707EB009A6112 /* GradientView.swift in Sources */,
+				3297DF312491B0D100CB22DD /* CalendarViewController.swift in Sources */,
 				329D129F247FFF2300A0173A /* SubjectsViewModel.swift in Sources */,
 				32A7F16B248B1FEB00EFB7E4 /* GRDTextField.swift in Sources */,
 				32F86A122482CF300058E56E /* SubjectsViewController.swift in Sources */,
 				32E59DC62483330200B4F67C /* CoreDataManagerRepresentable.swift in Sources */,
 				32A7F173248B2A2F00EFB7E4 /* SubjectStrings.swift in Sources */,
 				326427812487F0F4009A6112 /* CreateSubjectViewController.swift in Sources */,
+				3297DF3C2491BCA600CB22DD /* MainTabBarController.swift in Sources */,
 				32801D3C248BC7F900326C93 /* NSToolbarItemIdentifier+Extension.swift in Sources */,
 				32A7F177248B2A4100EFB7E4 /* AlertStrings.swift in Sources */,
 				324E14F7248133CD0089ECFC /* GradableCellViewModelRepresentable.swift in Sources */,
 				32E34F40247F3A1100BFD25A /* Assignment+CoreDataProperties.swift in Sources */,
+				3297DF2A2491A73500CB22DD /* NotificationName+Extension.swift in Sources */,
+				3297DF372491B4C500CB22DD /* DateCollectionViewCell.swift in Sources */,
 				32A7F166248B0A0400EFB7E4 /* NoSubjectSelectedViewController.swift in Sources */,
+				3297DF352491B3FB00CB22DD /* CalendarView.swift in Sources */,
 				3264277524870C8F009A6112 /* GradeCardViewModel.swift in Sources */,
 				32A7F175248B2A3900EFB7E4 /* AssignmentStrings.swift in Sources */,
 				32E34F01247F383500BFD25A /* SceneDelegate.swift in Sources */,
@@ -1089,6 +1161,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		3297DF2B2491B06800CB22DD /* XCRemoteSwiftPackageReference "JTAppleCalendar" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/patchthecode/JTAppleCalendar.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.0.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		3297DF2C2491B06800CB22DD /* JTAppleCalendar */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3297DF2B2491B06800CB22DD /* XCRemoteSwiftPackageReference "JTAppleCalendar" */;
+			productName = JTAppleCalendar;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		32E34F07247F383500BFD25A /* Gradeability.xcdatamodeld */ = {

@@ -22,6 +22,8 @@ class MainSplitViewController: UISplitViewController {
         delegate = self
         primaryBackgroundStyle = .sidebar
         preferredDisplayMode = .allVisible
+        maximumPrimaryColumnWidth = 320
+        minimumPrimaryColumnWidth = 320
         setupSplitViewControllers()
     }
     

@@ -24,7 +24,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         #if targetEnvironment(macCatalyst)
         window?.rootViewController = MainViewController()
         #else
-        window?.rootViewController = MainSplitViewController()
+        window?.rootViewController = MainTabBarController()
         #endif
         window?.makeKeyAndVisible()
     }
@@ -59,9 +59,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Save changes in the application's managed object context when the application transitions to the background.
         CoreDataManager.shared.saveContext()
     }
+    
+    /// Send notification when window size changes
+    func windowScene(_ windowScene: UIWindowScene, didUpdate previousCoordinateSpace: UICoordinateSpace, interfaceOrientation previousInterfaceOrientation: UIInterfaceOrientation, traitCollection previousTraitCollection: UITraitCollection) {
+        NotificationCenter.default.post(name: .windowSizeDidChange, object: nil)
+    }
 
 }
 
+// MARK: - Custom Functions
 extension SceneDelegate {
     /// Adds the toolbar to the mac app
     /// - Parameter scene: Window Scene of the app
@@ -79,11 +85,12 @@ extension SceneDelegate {
     }
     
     private func setupWindowSize(scene: UIWindowScene) {
-        scene.sizeRestrictions?.minimumSize = CGSize(width: 1100.0, height: 768.0)
+        scene.sizeRestrictions?.minimumSize = CGSize(width: 768.0, height: 768.0)
         scene.sizeRestrictions?.maximumSize = CGSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude)
     }
 }
 
+// MARK: - NSToolbarDelegate
 #if targetEnvironment(macCatalyst)
 extension SceneDelegate: NSToolbarDelegate {
     func toolbarAllowedItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
