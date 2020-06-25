@@ -41,6 +41,7 @@
 		3297DF372491B4C500CB22DD /* DateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3297DF362491B4C500CB22DD /* DateCollectionViewCell.swift */; };
 		3297DF3A2491B60900CB22DD /* CalendarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3297DF392491B60900CB22DD /* CalendarTableViewCell.swift */; };
 		3297DF3C2491BCA600CB22DD /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3297DF3B2491BCA600CB22DD /* MainTabBarController.swift */; };
+		329C16F224A51651005B65A8 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 329C16F124A51651005B65A8 /* CloudKit.framework */; };
 		329D129B247FFDBC00A0173A /* GradableViewModelRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329D129A247FFDBC00A0173A /* GradableViewModelRepresentable.swift */; };
 		329D129F247FFF2300A0173A /* SubjectsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329D129E247FFF2300A0173A /* SubjectsViewModel.swift */; };
 		329D12A1247FFF3100A0173A /* AssignmentsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329D12A0247FFF3100A0173A /* AssignmentsViewModel.swift */; };
@@ -147,6 +148,7 @@
 		3297DF362491B4C500CB22DD /* DateCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCollectionViewCell.swift; sourceTree = "<group>"; };
 		3297DF392491B60900CB22DD /* CalendarTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTableViewCell.swift; sourceTree = "<group>"; };
 		3297DF3B2491BCA600CB22DD /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		329C16F124A51651005B65A8 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		329D129A247FFDBC00A0173A /* GradableViewModelRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradableViewModelRepresentable.swift; sourceTree = "<group>"; };
 		329D129E247FFF2300A0173A /* SubjectsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectsViewModel.swift; sourceTree = "<group>"; };
 		329D12A0247FFF3100A0173A /* AssignmentsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentsViewModel.swift; sourceTree = "<group>"; };
@@ -219,6 +221,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3297DF2D2491B06800CB22DD /* JTAppleCalendar in Frameworks */,
+				329C16F224A51651005B65A8 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -348,6 +351,14 @@
 				3297DF392491B60900CB22DD /* CalendarTableViewCell.swift */,
 			);
 			path = "Table View Cells";
+			sourceTree = "<group>";
+		};
+		329C16F024A51651005B65A8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				329C16F124A51651005B65A8 /* CloudKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		329D1299247FFD4100A0173A /* Localizables */ = {
@@ -484,6 +495,7 @@
 				32E34F17247F383600BFD25A /* GradeabilityTests */,
 				32E34F22247F383600BFD25A /* GradeabilityUITests */,
 				32E34EFC247F383500BFD25A /* Products */,
+				329C16F024A51651005B65A8 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1016,6 +1028,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Gradeability/Gradeability.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8T85WESY64;
 				INFOPLIST_FILE = Gradeability/Info.plist;
@@ -1026,6 +1040,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ignacioparadisi.Gradeability;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1037,6 +1053,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Gradeability/Gradeability.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8T85WESY64;
 				INFOPLIST_FILE = Gradeability/Info.plist;
@@ -1047,6 +1065,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ignacioparadisi.Gradeability;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

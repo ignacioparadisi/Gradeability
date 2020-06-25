@@ -25,6 +25,11 @@ class SubjectsViewModel: GradableViewModelRepresentable {
     var didDeleteTerm: (() -> Void)?
     /// Closure called when data loading changes so the UI can be updated.
     var loadingDidChange: ((Bool) -> Void)?
+    private var isLoading: Bool = false {
+        didSet {
+            loadingDidChange?(isLoading)
+        }
+    }
     var numberOfSections: Int {
         return Sections.allCases.count
     }
@@ -59,7 +64,10 @@ class SubjectsViewModel: GradableViewModelRepresentable {
     /// Fetches the Subjects.
     func fetch() {
         guard let term = term else { return }
+        if isLoading { return }
+        isLoading = true
         SubjectCoreDataManager.shared.fetch(for: term) { [weak self] result in
+            self?.isLoading = false
             switch result {
             case .success(let subjects):
                 self?.subjects = subjects

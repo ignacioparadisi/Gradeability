@@ -53,6 +53,10 @@ class GradablesViewController: UIViewController {
         tableView.register(GradableTableViewCell.self)
     }
     
+    @objc func refresh() {
+        viewModel.fetch()
+    }
+    
     /// Sets the Title and Bar Buttons to the Navigation Bar
     private func setupNavigationBar() {
         navigationController?.navigationBar.prefersLargeTitles = true
@@ -77,6 +81,8 @@ class GradablesViewController: UIViewController {
         viewModel.dataDidChange = { [weak self] in
             self?.title = self?.viewModel.title
             self?.tableView.reloadData()
+        }
+        viewModel.loadingDidChange = { [weak self] isLoading in
         }
     }
     

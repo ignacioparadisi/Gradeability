@@ -43,6 +43,8 @@ class AssignmentsViewController: GradablesViewController {
             #endif
             self?.tableView.reloadData()
         }
+        viewModel.loadingDidChange = { [weak self] isLoading in
+        }
     }
     
     /// Show view for creating an assignment in case there's no one created yet.

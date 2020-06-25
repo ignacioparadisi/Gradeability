@@ -23,6 +23,11 @@ class AssignmentsViewModel: GradableViewModelRepresentable {
     var dataDidChange: (() -> Void)?
     /// Closure called when data loading changes so the UI can be updated.
     var loadingDidChange: ((Bool) -> Void)?
+    private var isLoading: Bool = false {
+        didSet {
+            loadingDidChange?(isLoading)
+        }
+    }
     var numberOfSections: Int {
         return Sections.allCases.count
     }
@@ -40,7 +45,10 @@ class AssignmentsViewModel: GradableViewModelRepresentable {
     /// Fetches the Assignments.
     func fetch() {
         guard let subject = subject else { return }
+        if isLoading { return }
+        isLoading = true
         AssignmentCoreDataManager.shared.fetch(for: subject) { [weak self] result in
+            self?.isLoading = false
             switch result {
             case .success(let assignments):
                 self?.assignments = assignments

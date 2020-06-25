@@ -49,17 +49,13 @@ class GradableTableViewCell: UITableViewCell, ReusableView {
     private func setupGradeRingView() {
         gradeRingView.anchor
             .top(greaterOrEqual: contentView.topAnchor)
+            .trailingToSuperview(constant: -10, toSafeArea: true)
             .bottom(lessOrEqual: contentView.bottomAnchor)
             .leading(to: containerView.trailingAnchor, constant: 10)
             .centerYToSuperview()
             .width(constant: 44)
             .height(constant: 44)
             .activate()
-        if let trailingAnchor = accessoryView?.leadingAnchor {
-            gradeRingView.anchor.trailing(to: trailingAnchor, constant: -10).activate(priority: .defaultHigh)
-        } else {
-            gradeRingView.anchor.trailingToSuperview(constant: -10, toSafeArea: true).activate(priority: .defaultHigh)
-        }
     }
     
     private func setupNameLabel() {

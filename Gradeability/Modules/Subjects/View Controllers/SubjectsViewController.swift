@@ -51,6 +51,8 @@ class SubjectsViewController: GradablesViewController {
         viewModel.didDeleteTerm = { [weak self] in
             self?.navigationController?.popViewController(animated: true)
         }
+        viewModel.loadingDidChange = { [weak self] isLoading in
+        }
     }
     
     /// Show view for creating an assignment in case there's no one created yet.
