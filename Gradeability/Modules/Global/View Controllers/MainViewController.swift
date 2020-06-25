@@ -24,12 +24,13 @@ class MainViewController: UIViewController {
         
         mainSplitViewController.view.anchor
             .topToSuperview()
+            .trailingToSuperview()
             .bottomToSuperview()
             .leadingToSuperview()
             .activate()
-        splitViewTrailingAnchor = mainSplitViewController.view.anchor.trailingToSuperview()
+        // splitViewTrailingAnchor = mainSplitViewController.view.anchor.trailingToSuperview()
         
-        setupRightPanel()
+        // setupRightPanel()
         
     }
     
@@ -55,6 +56,6 @@ class MainViewController: UIViewController {
     }
     
     @objc private func windowSizeDidChange() {
-        setupRightPanel()
+        // setupRightPanel()
     }
 }

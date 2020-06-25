@@ -21,11 +21,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         setupToolbarIfNeeded(scene: windowScene)
         setupWindowSize(scene: windowScene)
         window = UIWindow(windowScene: windowScene)
-        #if targetEnvironment(macCatalyst)
+//        #if targetEnvironment(macCatalyst)
         window?.rootViewController = MainViewController()
-        #else
-        window?.rootViewController = MainTabBarController()
-        #endif
+//        #else
+//        window?.rootViewController = MainTabBarController()
+//        #endif
         window?.makeKeyAndVisible()
     }
 
