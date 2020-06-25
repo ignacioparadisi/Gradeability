@@ -13,6 +13,7 @@
 		324E14F524812E550089ECFC /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 324E14F424812E550089ECFC /* ReusableView.swift */; };
 		324E14F7248133CD0089ECFC /* GradableCellViewModelRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 324E14F6248133CD0089ECFC /* GradableCellViewModelRepresentable.swift */; };
 		324E14F924813DC50089ECFC /* MainSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 324E14F824813DC50089ECFC /* MainSplitViewController.swift */; };
+		325875BB2492F84B00A8759A /* UIAlertAction+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325875BA2492F84B00A8759A /* UIAlertAction+Extension.swift */; };
 		3264276C248707EB009A6112 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3264276B248707EB009A6112 /* GradientView.swift */; };
 		3264276E2487082C009A6112 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3264276D2487082C009A6112 /* UIColor+Extension.swift */; };
 		32642771248708D0009A6112 /* GradeCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32642770248708D0009A6112 /* GradeCardView.swift */; };
@@ -61,7 +62,6 @@
 		32B54D8624841AA60083B734 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B54D8524841AA60083B734 /* LoadingView.swift */; };
 		32B54D8A24841E170083B734 /* TestCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B54D8924841E170083B734 /* TestCoreDataManager.swift */; };
 		32DD89C72492C69F00CBDE36 /* NSTouchBarItemIdentifier+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32DD89C62492C69F00CBDE36 /* NSTouchBarItemIdentifier+Extension.swift */; };
-		32DD89C92492CDAC00CBDE36 /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32DD89C82492CDAC00CBDE36 /* UIButton+Extension.swift */; };
 		32E34EFF247F383500BFD25A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E34EFE247F383500BFD25A /* AppDelegate.swift */; };
 		32E34F01247F383500BFD25A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E34F00247F383500BFD25A /* SceneDelegate.swift */; };
 		32E34F03247F383500BFD25A /* GradablesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E34F02247F383500BFD25A /* GradablesViewController.swift */; };
@@ -120,6 +120,7 @@
 		324E14F424812E550089ECFC /* ReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReusableView.swift; sourceTree = "<group>"; };
 		324E14F6248133CD0089ECFC /* GradableCellViewModelRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradableCellViewModelRepresentable.swift; sourceTree = "<group>"; };
 		324E14F824813DC50089ECFC /* MainSplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSplitViewController.swift; sourceTree = "<group>"; };
+		325875BA2492F84B00A8759A /* UIAlertAction+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertAction+Extension.swift"; sourceTree = "<group>"; };
 		3264276B248707EB009A6112 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		3264276D2487082C009A6112 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		32642770248708D0009A6112 /* GradeCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradeCardView.swift; sourceTree = "<group>"; };
@@ -171,7 +172,6 @@
 		32B54D8524841AA60083B734 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		32B54D8924841E170083B734 /* TestCoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCoreDataManager.swift; sourceTree = "<group>"; };
 		32DD89C62492C69F00CBDE36 /* NSTouchBarItemIdentifier+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSTouchBarItemIdentifier+Extension.swift"; sourceTree = "<group>"; };
-		32DD89C82492CDAC00CBDE36 /* UIButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
 		32E34EFB247F383500BFD25A /* Gradeability.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gradeability.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		32E34EFE247F383500BFD25A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		32E34F00247F383500BFD25A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -280,12 +280,12 @@
 				3264276D2487082C009A6112 /* UIColor+Extension.swift */,
 				3264277A2487DB02009A6112 /* Float+Extension.swift */,
 				32A7F167248B0AE200EFB7E4 /* UIFont+Extension.swift */,
-				32A7F17A248B2A8B00EFB7E4 /* String+Extension.swift */,
 				32801D3B248BC7F900326C93 /* NSToolbarItemIdentifier+Extension.swift */,
 				3297DF292491A73500CB22DD /* NotificationName+Extension.swift */,
 				326AED3F2492640B0074CDB2 /* UICollectionView+Extension.swift */,
 				32DD89C62492C69F00CBDE36 /* NSTouchBarItemIdentifier+Extension.swift */,
-				32DD89C82492CDAC00CBDE36 /* UIButton+Extension.swift */,
+				32A7F17A248B2A8B00EFB7E4 /* String+Extension.swift */,
+				325875BA2492F84B00A8759A /* UIAlertAction+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -784,10 +784,10 @@
 				32E59DB72483313400B4F67C /* TermCoreDataManagerRepresentable.swift in Sources */,
 				3264277D2487E19D009A6112 /* CreateAssignmentViewController.swift in Sources */,
 				3264277724870CFC009A6112 /* GradesCardTableViewCellRepresentable.swift in Sources */,
-				32DD89C92492CDAC00CBDE36 /* UIButton+Extension.swift in Sources */,
 				3297DF3A2491B60900CB22DD /* CalendarTableViewCell.swift in Sources */,
 				3264276C248707EB009A6112 /* GradientView.swift in Sources */,
 				3297DF312491B0D100CB22DD /* CalendarViewController.swift in Sources */,
+				325875BB2492F84B00A8759A /* UIAlertAction+Extension.swift in Sources */,
 				329D129F247FFF2300A0173A /* SubjectsViewModel.swift in Sources */,
 				32A7F16B248B1FEB00EFB7E4 /* GRDTextField.swift in Sources */,
 				32F86A122482CF300058E56E /* SubjectsViewController.swift in Sources */,

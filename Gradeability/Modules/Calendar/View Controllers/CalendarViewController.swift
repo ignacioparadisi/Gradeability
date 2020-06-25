@@ -21,6 +21,10 @@ class CalendarViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .clear
+        #if targetEnvironment(macCatalyst)
+        navigationController?.navigationBar.tintColor = .systemGray
+        navigationController?.navigationBar.barTintColor = .clear
+        #endif
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.right"), style: .plain, target: self, action: nil)
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .plain, target: self, action: nil)
         setupLeftLine()

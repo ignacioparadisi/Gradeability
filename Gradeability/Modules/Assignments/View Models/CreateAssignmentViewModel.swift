@@ -9,5 +9,11 @@
 import Foundation
 
 class CreateAssignmentViewModel {
-    
+    var name: String?
+    var grade: Float = 0.0
+    var maxGrade: Float?
+    var minGrade: Float?
+    var percentage: Float?
+    var deadline: Date?
+    var shouldSaveEventInCalendar: Bool = true
 }

@@ -22,6 +22,7 @@ class SubjectsViewModel: GradableViewModelRepresentable {
     var isMasterController: Bool = true
     /// Closure called when `subjects` changes so the UI can be updated.
     var dataDidChange: (() -> Void)?
+    var didDeleteTerm: (() -> Void)?
     /// Closure called when data loading changes so the UI can be updated.
     var loadingDidChange: ((Bool) -> Void)?
     var numberOfSections: Int {
@@ -39,6 +40,9 @@ class SubjectsViewModel: GradableViewModelRepresentable {
         let viewModel = TermsViewModel()
         viewModel.delegate = self
         return viewModel
+    }
+    var canDeleteTerm: Bool {
+        return !(term?.isCurrent ?? true)
     }
     
     // MARK: Initializers
@@ -137,6 +141,12 @@ class SubjectsViewModel: GradableViewModelRepresentable {
         let subject = subjects[indexPath.row]
         CoreDataManager.shared.delete(subject)
         subjects.remove(at: indexPath.row)
+    }
+    
+    func deleteTerm() {
+        guard let term = term, !term.isCurrent else { return }
+        CoreDataManager.shared.delete(term)
+        didDeleteTerm?()
     }
     
 }

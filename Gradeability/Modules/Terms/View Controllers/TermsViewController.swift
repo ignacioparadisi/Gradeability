@@ -44,6 +44,23 @@ class TermsViewController: GradablesViewController {
         present(viewController, animated: true)
     }
     
+    override func didTapOptionsButton(_ sender: UIBarButtonItem?) {
+        let alertSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let createAction = UIAlertAction(title: "New", imageName: "plus", style: .default, handler: nil)
+        let seeDetailAction = UIAlertAction(title: "See Details", imageName: "info.circle", style: .default, handler: nil)
+        let cancelAction = UIAlertAction(title: ButtonStrings.cancel.localized, style: .cancel, handler: nil)
+        
+        alertSheet.addAction(createAction)
+        alertSheet.addAction(seeDetailAction)
+        alertSheet.addAction(cancelAction)
+        
+        if let popoverController = alertSheet.popoverPresentationController {
+            popoverController.barButtonItem = sender
+        }
+        
+        present(alertSheet, animated: true)
+    }
+    
     #if targetEnvironment(macCatalyst)
     override func makeTouchBar() -> NSTouchBar? {
         let touchBar = NSTouchBar()

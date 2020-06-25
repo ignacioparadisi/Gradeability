@@ -48,6 +48,9 @@ class SubjectsViewController: GradablesViewController {
             self?.title = self?.viewModel.title
             self?.tableView.reloadData()
         }
+        viewModel.didDeleteTerm = { [weak self] in
+            self?.navigationController?.popViewController(animated: true)
+        }
     }
     
     /// Show view for creating an assignment in case there's no one created yet.
@@ -72,6 +75,31 @@ class SubjectsViewController: GradablesViewController {
     override func didTapAddButton(_ sender: UIBarButtonItem?) {
         let viewController = UINavigationController(rootViewController: CreateSubjectViewController())
         present(viewController, animated: true)
+    }
+    
+    override func didTapOptionsButton(_ sender: UIBarButtonItem?) {
+        let alertSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let createAction = UIAlertAction(title: "New Subject", imageName: "plus", style: .default, handler: nil)
+        let seeDetailAction = UIAlertAction(title: "See Details", imageName: "info.circle", style: .default, handler: nil)
+        let cancelAction = UIAlertAction(title: ButtonStrings.cancel.localized, style: .cancel, handler: nil)
+        
+        alertSheet.addAction(createAction)
+        alertSheet.addAction(seeDetailAction)
+        
+        if viewModel.canDeleteTerm {
+            let deleteAction = UIAlertAction(title: ButtonStrings.delete.localized, imageName: "trash", style: .destructive) { [weak self] _ in
+                self?.viewModel.deleteTerm()
+            }
+            alertSheet.addAction(deleteAction)
+        }
+        
+        alertSheet.addAction(cancelAction)
+        
+        if let popoverController = alertSheet.popoverPresentationController {
+            popoverController.barButtonItem = sender
+        }
+        
+        present(alertSheet, animated: true)
     }
     
     #if targetEnvironment(macCatalyst)
