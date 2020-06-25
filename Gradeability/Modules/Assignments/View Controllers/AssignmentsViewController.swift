@@ -58,7 +58,9 @@ class AssignmentsViewController: GradablesViewController {
     /// Handle navigation button for creating a new assignment
     /// - Parameter sender: Tap gesture
     override func didTapAddButton(_ sender: UIBarButtonItem?) {
-        let viewController = UINavigationController(rootViewController: CreateAssignmentViewController())
+        let createAssignmentViewController = CreateAssignmentViewController()
+        createAssignmentViewController.isModalInPresentation = true
+        let viewController = UINavigationController(rootViewController: createAssignmentViewController)
         present(viewController, animated: true)
     }
     
