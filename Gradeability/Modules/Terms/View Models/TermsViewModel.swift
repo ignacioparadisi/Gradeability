@@ -19,6 +19,7 @@ class TermsViewModel: GradableViewModelRepresentable {
     // MARK: Private Properties
     /// Terms to be displayed.
     private var terms: [Term] = []
+    var gradables: [GradableCellViewModel] = []
     private var isLoading: Bool = false {
         didSet {
             loadingDidChange?(isLoading)
@@ -48,6 +49,7 @@ class TermsViewModel: GradableViewModelRepresentable {
             switch result {
             case .success(let terms):
                 self?.terms = terms
+                self?.gradables = terms.map { GradableCellViewModel(term: $0) }
                 self?.dataDidChange?()
             case .failure:
                 break

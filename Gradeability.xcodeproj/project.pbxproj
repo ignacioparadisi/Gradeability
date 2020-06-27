@@ -14,6 +14,8 @@
 		324E14F7248133CD0089ECFC /* GradableCellViewModelRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 324E14F6248133CD0089ECFC /* GradableCellViewModelRepresentable.swift */; };
 		324E14F924813DC50089ECFC /* MainSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 324E14F824813DC50089ECFC /* MainSplitViewController.swift */; };
 		325875BB2492F84B00A8759A /* UIAlertAction+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325875BA2492F84B00A8759A /* UIAlertAction+Extension.swift */; };
+		325AA8CE24A78A7B00958D6A /* TermTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325AA8CD24A78A7B00958D6A /* TermTableViewCell.swift */; };
+		325AA8D224A7C0F800958D6A /* TermCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325AA8D124A7C0F800958D6A /* TermCollectionViewCell.swift */; };
 		3264276C248707EB009A6112 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3264276B248707EB009A6112 /* GradientView.swift */; };
 		3264276E2487082C009A6112 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3264276D2487082C009A6112 /* UIColor+Extension.swift */; };
 		32642771248708D0009A6112 /* GradeCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32642770248708D0009A6112 /* GradeCardView.swift */; };
@@ -30,6 +32,7 @@
 		326427872487F144009A6112 /* CreateSubjectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326427862487F144009A6112 /* CreateSubjectViewModel.swift */; };
 		326AED402492640B0074CDB2 /* UICollectionView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326AED3F2492640B0074CDB2 /* UICollectionView+Extension.swift */; };
 		326AED422492BFF10074CDB2 /* BaseScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326AED412492BFF10074CDB2 /* BaseScrollViewController.swift */; };
+		327A170924A66A62006F39D0 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 327A170824A66A62006F39D0 /* IQKeyboardManagerSwift */; };
 		32801D3C248BC7F900326C93 /* NSToolbarItemIdentifier+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32801D3B248BC7F900326C93 /* NSToolbarItemIdentifier+Extension.swift */; };
 		3293A88D247FFC9C0054D150 /* NSLayoutAnchor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3293A88C247FFC9C0054D150 /* NSLayoutAnchor+Extension.swift */; };
 		3296EA08247F570E00A04FE0 /* DummyTerms.json in Resources */ = {isa = PBXBuildFile; fileRef = 3296EA07247F570E00A04FE0 /* DummyTerms.json */; };
@@ -122,6 +125,8 @@
 		324E14F6248133CD0089ECFC /* GradableCellViewModelRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradableCellViewModelRepresentable.swift; sourceTree = "<group>"; };
 		324E14F824813DC50089ECFC /* MainSplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSplitViewController.swift; sourceTree = "<group>"; };
 		325875BA2492F84B00A8759A /* UIAlertAction+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertAction+Extension.swift"; sourceTree = "<group>"; };
+		325AA8CD24A78A7B00958D6A /* TermTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermTableViewCell.swift; sourceTree = "<group>"; };
+		325AA8D124A7C0F800958D6A /* TermCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermCollectionViewCell.swift; sourceTree = "<group>"; };
 		3264276B248707EB009A6112 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		3264276D2487082C009A6112 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		32642770248708D0009A6112 /* GradeCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradeCardView.swift; sourceTree = "<group>"; };
@@ -222,6 +227,7 @@
 			files = (
 				3297DF2D2491B06800CB22DD /* JTAppleCalendar in Frameworks */,
 				329C16F224A51651005B65A8 /* CloudKit.framework in Frameworks */,
+				327A170924A66A62006F39D0 /* IQKeyboardManagerSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -254,11 +260,27 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		325AA8CF24A7C0DE00958D6A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		325AA8D024A7C0E400958D6A /* Collection View Cells */ = {
+			isa = PBXGroup;
+			children = (
+				325AA8D124A7C0F800958D6A /* TermCollectionViewCell.swift */,
+			);
+			path = "Collection View Cells";
+			sourceTree = "<group>";
+		};
 		3264276F24870871009A6112 /* Table View Cells */ = {
 			isa = PBXGroup;
 			children = (
 				324E14EF24812E080089ECFC /* GradableTableViewCell.swift */,
 				3264277224870910009A6112 /* GradesCardTableViewCell.swift */,
+				325AA8CD24A78A7B00958D6A /* TermTableViewCell.swift */,
 			);
 			path = "Table View Cells";
 			sourceTree = "<group>";
@@ -296,6 +318,8 @@
 		3293A88E247FFCD80054D150 /* Terms */ = {
 			isa = PBXGroup;
 			children = (
+				325AA8D024A7C0E400958D6A /* Collection View Cells */,
+				325AA8CF24A7C0DE00958D6A /* Views */,
 				32F86A0E2482CEAE0058E56E /* View Controllers */,
 				329D12A824812B3700A0173A /* View Models */,
 			);
@@ -632,6 +656,7 @@
 			name = Gradeability;
 			packageProductDependencies = (
 				3297DF2C2491B06800CB22DD /* JTAppleCalendar */,
+				327A170824A66A62006F39D0 /* IQKeyboardManagerSwift */,
 			);
 			productName = Gradeability;
 			productReference = 32E34EFB247F383500BFD25A /* Gradeability.app */;
@@ -708,6 +733,7 @@
 			mainGroup = 32E34EF2247F383500BFD25A;
 			packageReferences = (
 				3297DF2B2491B06800CB22DD /* XCRemoteSwiftPackageReference "JTAppleCalendar" */,
+				327A170724A66A61006F39D0 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 			);
 			productRefGroup = 32E34EFC247F383500BFD25A /* Products */;
 			projectDirPath = "";
@@ -809,6 +835,7 @@
 				3297DF3C2491BCA600CB22DD /* MainTabBarController.swift in Sources */,
 				32801D3C248BC7F900326C93 /* NSToolbarItemIdentifier+Extension.swift in Sources */,
 				32A7F177248B2A4100EFB7E4 /* AlertStrings.swift in Sources */,
+				325AA8D224A7C0F800958D6A /* TermCollectionViewCell.swift in Sources */,
 				324E14F7248133CD0089ECFC /* GradableCellViewModelRepresentable.swift in Sources */,
 				32E34F40247F3A1100BFD25A /* Assignment+CoreDataProperties.swift in Sources */,
 				3297DF2A2491A73500CB22DD /* NotificationName+Extension.swift in Sources */,
@@ -821,6 +848,7 @@
 				324E14F524812E550089ECFC /* ReusableView.swift in Sources */,
 				32E34F3B247F3A1100BFD25A /* Term+CoreDataClass.swift in Sources */,
 				324E14F024812E080089ECFC /* GradableTableViewCell.swift in Sources */,
+				325AA8CE24A78A7B00958D6A /* TermTableViewCell.swift in Sources */,
 				32B54D84248404E80083B734 /* EmptyGradablesViewController.swift in Sources */,
 				3264277F2487E20B009A6112 /* CreateAssignmentViewModel.swift in Sources */,
 				32E59DC02483316D00B4F67C /* SubjectCoreDataManager.swift in Sources */,
@@ -1199,6 +1227,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		327A170724A66A61006F39D0 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.5.5;
+			};
+		};
 		3297DF2B2491B06800CB22DD /* XCRemoteSwiftPackageReference "JTAppleCalendar" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/patchthecode/JTAppleCalendar.git";
@@ -1210,6 +1246,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		327A170824A66A62006F39D0 /* IQKeyboardManagerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 327A170724A66A61006F39D0 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
+			productName = IQKeyboardManagerSwift;
+		};
 		3297DF2C2491B06800CB22DD /* JTAppleCalendar */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 3297DF2B2491B06800CB22DD /* XCRemoteSwiftPackageReference "JTAppleCalendar" */;

@@ -9,29 +9,29 @@
 import Foundation
 
 class CreateTermViewModel {
-    var name: String = "" {
+    var name: String? = "" {
         didSet {
             checkFieldsValues()
         }
     }
-    var maxGrade: Float = 0.0 {
+    var maxGrade: Float? = 0.0 {
         didSet {
             checkFieldsValues()
         }
     }
-    var minGrade: Float = 0.0 {
+    var minGrade: Float? = 0.0 {
         didSet {
             checkFieldsValues()
         }
     }
-    var canSaveDidChange: ((Bool) -> Void)?
-    private var canSave: Bool = false {
-        didSet {
-            canSaveDidChange?(canSave)
-        }
-    }
+
+    @Published private(set) var canSave: Bool = false
     
     private func checkFieldsValues() {
+        guard let minGrade = minGrade, let maxGrade = maxGrade, let name = name else {
+            canSave = false
+            return
+        }
         if minGrade > maxGrade {
             canSave = false
             return

@@ -1387,4 +1387,930 @@
             "percentage": 0.34
         }]
     }]
+},
+
+{
+    "name": "Semestre 1",
+    "maxGrade": 20.0,
+    "minGrade": 10.0,
+    "grade": 18.0,
+    "isCurrent": true,
+    "subjects": [{
+        "name": "Matemática Básica",
+        "teacherName": "Milagros Vilacha",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 19.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }, {
+        "name": "Geometría Plana y Trigonometría",
+        "teacherName": "José Fajardo",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 16.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }, {
+        "name": "Introducción a la Informática",
+        "teacherName": "Omar Hernández",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 20.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }, {
+        "name": "Comprensión y Producción de Textos",
+        "teacherName": "Hilda López",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 12.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }, {
+        "name": "Identidad, Liderazgo y Compromiso I",
+        "teacherName": "Grecia Martinez",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 10.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }]
+}, {
+    "name": "Semestre 1",
+    "maxGrade": 20.0,
+    "minGrade": 10.0,
+    "grade": 18.0,
+    "isCurrent": true,
+    "subjects": [{
+        "name": "Matemática Básica",
+        "teacherName": "Milagros Vilacha",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 19.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }, {
+        "name": "Geometría Plana y Trigonometría",
+        "teacherName": "José Fajardo",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 16.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }, {
+        "name": "Introducción a la Informática",
+        "teacherName": "Omar Hernández",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 20.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }, {
+        "name": "Comprensión y Producción de Textos",
+        "teacherName": "Hilda López",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 12.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }, {
+        "name": "Identidad, Liderazgo y Compromiso I",
+        "teacherName": "Grecia Martinez",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 10.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }]
+}, {
+    "name": "Semestre 1",
+    "maxGrade": 20.0,
+    "minGrade": 10.0,
+    "grade": 18.0,
+    "isCurrent": true,
+    "subjects": [{
+        "name": "Matemática Básica",
+        "teacherName": "Milagros Vilacha",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 19.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }, {
+        "name": "Geometría Plana y Trigonometría",
+        "teacherName": "José Fajardo",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 16.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }, {
+        "name": "Introducción a la Informática",
+        "teacherName": "Omar Hernández",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 20.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }, {
+        "name": "Comprensión y Producción de Textos",
+        "teacherName": "Hilda López",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 12.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }, {
+        "name": "Identidad, Liderazgo y Compromiso I",
+        "teacherName": "Grecia Martinez",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 10.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }]
+}, {
+    "name": "Semestre 1",
+    "maxGrade": 20.0,
+    "minGrade": 10.0,
+    "grade": 18.0,
+    "isCurrent": true,
+    "subjects": [{
+        "name": "Matemática Básica",
+        "teacherName": "Milagros Vilacha",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 19.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }, {
+        "name": "Geometría Plana y Trigonometría",
+        "teacherName": "José Fajardo",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 16.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }, {
+        "name": "Introducción a la Informática",
+        "teacherName": "Omar Hernández",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 20.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }, {
+        "name": "Comprensión y Producción de Textos",
+        "teacherName": "Hilda López",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 12.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }, {
+        "name": "Identidad, Liderazgo y Compromiso I",
+        "teacherName": "Grecia Martinez",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 10.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }]
+}, {
+    "name": "Semestre 1",
+    "maxGrade": 20.0,
+    "minGrade": 10.0,
+    "grade": 18.0,
+    "isCurrent": true,
+    "subjects": [{
+        "name": "Matemática Básica",
+        "teacherName": "Milagros Vilacha",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 19.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }, {
+        "name": "Geometría Plana y Trigonometría",
+        "teacherName": "José Fajardo",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 16.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }, {
+        "name": "Introducción a la Informática",
+        "teacherName": "Omar Hernández",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 20.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }, {
+        "name": "Comprensión y Producción de Textos",
+        "teacherName": "Hilda López",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 12.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }, {
+        "name": "Identidad, Liderazgo y Compromiso I",
+        "teacherName": "Grecia Martinez",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 10.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }]
+}, {
+    "name": "Semestre 1",
+    "maxGrade": 20.0,
+    "minGrade": 10.0,
+    "grade": 18.0,
+    "isCurrent": true,
+    "subjects": [{
+        "name": "Matemática Básica",
+        "teacherName": "Milagros Vilacha",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 19.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }, {
+        "name": "Geometría Plana y Trigonometría",
+        "teacherName": "José Fajardo",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 16.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }, {
+        "name": "Introducción a la Informática",
+        "teacherName": "Omar Hernández",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 20.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }, {
+        "name": "Comprensión y Producción de Textos",
+        "teacherName": "Hilda López",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 12.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }, {
+        "name": "Identidad, Liderazgo y Compromiso I",
+        "teacherName": "Grecia Martinez",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 10.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }]
+}, {
+    "name": "Semestre 1",
+    "maxGrade": 20.0,
+    "minGrade": 10.0,
+    "grade": 18.0,
+    "isCurrent": true,
+    "subjects": [{
+        "name": "Matemática Básica",
+        "teacherName": "Milagros Vilacha",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 19.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }, {
+        "name": "Geometría Plana y Trigonometría",
+        "teacherName": "José Fajardo",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 16.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }, {
+        "name": "Introducción a la Informática",
+        "teacherName": "Omar Hernández",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 20.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }, {
+        "name": "Comprensión y Producción de Textos",
+        "teacherName": "Hilda López",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 12.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }, {
+        "name": "Identidad, Liderazgo y Compromiso I",
+        "teacherName": "Grecia Martinez",
+        "maxGrade": 20.0,
+        "minGrade": 10.0,
+        "grade": 10.0,
+        "assignments": [{
+            "name": "Parcial 1",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 2",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.33
+        }, {
+            "name": "Parcial 3",
+            "maxGrade": 20.0,
+            "minGrade": 10.0,
+            "grade": 19.0,
+            "percentage": 0.34
+        }]
+    }]
 }]

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class GradableCellViewModel: GradableCellViewModelRepresentable {
+struct GradableCellViewModel: GradableCellViewModelRepresentable, Hashable {
     // MARK: Private Properties
     /// Name of the `Term`, `Subject` or `Assignment`.
     private var gradableName: String = ""
@@ -65,4 +65,5 @@ class GradableCellViewModel: GradableCellViewModelRepresentable {
             gradableDetail = dateFormatter.string(from: deadline)
         }
     }
+
 }

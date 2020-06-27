@@ -11,7 +11,7 @@ import UIKit
 class GradablesViewController: UIViewController {
     // MARK: Properties
     /// `UITableView` to display the information.
-    let tableView: UITableView = UITableView(frame: .zero, style: .insetGrouped)
+    let tableView: UITableView = UITableView(frame: .zero, style: .grouped)
     /// View Model that holds the data.
     private var viewModel: GradableViewModelRepresentable
     /// Sections displayed in the table view
@@ -35,11 +35,13 @@ class GradablesViewController: UIViewController {
         super.viewDidLoad()
         setupNavigationBar()
         setupViewModel()
-        setupTableView()
-        viewModel.fetch()
+        // setupTableView()
+        // viewModel.fetch()
     }
     
     private func setupTableView() {
+        tableView.backgroundColor = .systemGroupedBackground
+        tableView.separatorStyle = .none
         tableView.dataSource = self
         tableView.delegate = self
         tableView.cellLayoutMarginsFollowReadableWidth = true
@@ -58,7 +60,7 @@ class GradablesViewController: UIViewController {
     }
     
     /// Sets the Title and Bar Buttons to the Navigation Bar
-    private func setupNavigationBar() {
+    func setupNavigationBar() {
         navigationController?.navigationBar.prefersLargeTitles = true
         var optionsImage = UIImage(systemName: "ellipsis.circle", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20))
         #if targetEnvironment(macCatalyst)
@@ -82,8 +84,6 @@ class GradablesViewController: UIViewController {
             self?.title = self?.viewModel.title
             self?.tableView.reloadData()
         }
-        viewModel.loadingDidChange = { [weak self] isLoading in
-        }
     }
     
     @objc func didTapOptionsButton(_ sender: UIBarButtonItem?) {
@@ -104,19 +104,15 @@ extension GradablesViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cellViewModel = viewModel.gradableViewModelForRow(at: indexPath)
-        let contextMenuInteraction = UIContextMenuInteraction(delegate: self)
-        let cell = tableView.dequeueReusableCell(for: indexPath) as GradableTableViewCell
-        cell.configure(with: cellViewModel)
-        cell.addInteraction(contextMenuInteraction)
-        return cell
+        return UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return viewModel.title(for: section)
+        return nil
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if let section = Sections(rawValue: indexPath.section), section == .grade { return }
         if editingStyle == .delete {
             viewModel.deleteItem(at: indexPath)
             tableView.deleteRows(at: [indexPath], with: .left)
