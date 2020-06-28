@@ -119,22 +119,22 @@ class TermsViewController: GradablesViewController {
 }
 
 // MARK: - UITableViewDataSource
-extension TermsViewController {
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cellViewModel = viewModel.gradableViewModelForRow(at: indexPath)
-        let contextMenuInteraction = UIContextMenuInteraction(delegate: self)
-        let cell = tableView.dequeueReusableCell(for: indexPath) as TermTableViewCell
-        cell.configure(with: cellViewModel)
-        cell.addInteraction(contextMenuInteraction)
-        return cell
-    }
-    
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return viewModel.title(for: section)
-    }
-    
-}
+//extension TermsViewController {
+//    
+//    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        let cellViewModel = viewModel.gradableViewModelForRow(at: indexPath)
+//        let contextMenuInteraction = UIContextMenuInteraction(delegate: self)
+//        let cell = tableView.dequeueReusableCell(for: indexPath) as TermTableViewCell
+//        cell.configure(with: cellViewModel)
+//        cell.addInteraction(contextMenuInteraction)
+//        return cell
+//    }
+//    
+//    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        return viewModel.title(for: section)
+//    }
+//    
+//}
 
 // MARK: - UICollectionViewDelegate
 extension TermsViewController {

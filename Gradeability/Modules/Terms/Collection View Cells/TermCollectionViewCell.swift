@@ -245,7 +245,6 @@ class TermCollectionViewCell: UICollectionViewCell, ReusableView {
     }
     
     func setupView() {
-        addShadow()
         backgroundColor = UIColor(named: "cellSecondaryBackgroundColor")
         layer.cornerRadius = 15
         contentView.addSubview(primaryCellView)
@@ -269,13 +268,15 @@ class TermCollectionViewCell: UICollectionViewCell, ReusableView {
     }
     
     func configure(with viewModel: GradableCellViewModelRepresentable) {
-        let primaryViewModel = GradableCellPrimaryViewModel(name: viewModel.name, detail: viewModel.detail, accentText: viewModel.accessoryType == .checkmark ? "Período actual".uppercased() : nil, gradeRingViewModel: viewModel.gradeRingViewModel)
+        let primaryViewModel = GradableCellPrimaryViewModel(name: viewModel.name, detail: viewModel.detail, accentText: viewModel.accentText, gradeRingViewModel: viewModel.gradeRingViewModel)
         primaryCellView.configure(with: primaryViewModel)
-        if viewModel.accessoryType == .checkmark {
+        if viewModel.shouldShowSecondaryView {
+            addShadow(height: 6)
             primaryViewBottomAnchor?.deactivate()
             setupSecondaryView()
             secondaryCellView.configure(with: "Días restantes", progress: 0.3, progressText: "300 días")
         } else {
+            removeShadow()
             primaryViewBottomAnchor?.activate()
             secondaryCellView.removeFromSuperview()
         }

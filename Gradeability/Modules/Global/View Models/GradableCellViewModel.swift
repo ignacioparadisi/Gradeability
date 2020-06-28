@@ -9,6 +9,7 @@
 import UIKit
 
 struct GradableCellViewModel: GradableCellViewModelRepresentable, Hashable {
+    
     // MARK: Private Properties
     /// Name of the `Term`, `Subject` or `Assignment`.
     private var gradableName: String = ""
@@ -27,9 +28,12 @@ struct GradableCellViewModel: GradableCellViewModelRepresentable, Hashable {
     var detail: String {
         return gradableDetail
     }
-    /// Accessory Type top be displaced on the cell
-    var accessoryType: UITableViewCell.AccessoryType {
-        return gradableAccessoryType
+    var accentText: String? {
+        return gradableAccessoryType == .checkmark ? "Período actual".uppercased() : nil
+    }
+    
+    var shouldShowSecondaryView: Bool {
+        return gradable is Subject || gradableAccessoryType == .checkmark
     }
     var gradeRingViewModel: GradeRingViewModel {
         return GradeRingViewModel(gradable: gradable)
