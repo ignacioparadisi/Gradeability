@@ -15,8 +15,6 @@ struct GradableCellViewModel: GradableCellViewModelRepresentable, Hashable {
     private var gradableName: String = ""
     /// For `Terms` it is the start and end year, for `Subjects` it is the Teacher's name and for `Assignments` it is the deadline.
     private var gradableDetail: String = ""
-    /// Accessory Type to be displayed on the cell
-    private var gradableAccessoryType: UITableViewCell.AccessoryType = .disclosureIndicator
     private var gradable: Gradable
     
     // MARK: Internal Properties
@@ -29,11 +27,17 @@ struct GradableCellViewModel: GradableCellViewModelRepresentable, Hashable {
         return gradableDetail
     }
     var accentText: String? {
-        return gradableAccessoryType == .checkmark ? "Período actual".uppercased() : nil
+        if let term = gradable as? Term, term.isCurrent {
+            return "Período actual".uppercased()
+        }
+        return nil
     }
     
     var shouldShowSecondaryView: Bool {
-        return gradable is Subject || gradableAccessoryType == .checkmark
+        if let term = gradable as? Term, term.isCurrent {
+            return true
+        }
+        return gradable is Subject
     }
     var gradeRingViewModel: GradeRingViewModel {
         return GradeRingViewModel(gradable: gradable)
@@ -46,7 +50,6 @@ struct GradableCellViewModel: GradableCellViewModelRepresentable, Hashable {
         gradable = term
         gradableName = term.name ?? ""
         gradableDetail = "2020 - 2021"
-        gradableAccessoryType = term.isCurrent ? .checkmark : .disclosureIndicator
     }
     
     /// Initialized `GradableCellViewModel` with a `Subject`. This means `name` is the Subject's name and `detail` is the Teacher's name.
