@@ -48,7 +48,6 @@ class GradablesViewController: UIViewController {
         collectionView.dataSource = dataSource
         collectionView.delegate = self
         collectionView.backgroundColor = .systemGroupedBackground
-        collectionView.register(TermCollectionViewCell.self)
         view.addSubview(collectionView)
         collectionView.anchor.edgesToSuperview().activate()
     }
@@ -101,7 +100,6 @@ class GradablesViewController: UIViewController {
         viewModel.dataDidChange = { [weak self] in
             self?.title = self?.viewModel.title
             self?.reloadData()
-            self?.collectionView.reloadData()
         }
     }
     
@@ -115,32 +113,11 @@ class GradablesViewController: UIViewController {
     
     @objc func didTapAddButton(_ sender: UIBarButtonItem?) {
     }
-
-}
-
-// MARK: - UITableViewDataSource
-extension GradablesViewController: UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return viewModel.numberOfSections
-    }
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.numberOfRows(in: section)
-    }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
-    }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return nil
-    }
-    
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if let section = Sections(rawValue: indexPath.section), section == .grade { return }
-        if editingStyle == .delete {
-            viewModel.deleteItem(at: indexPath)
-            tableView.deleteRows(at: [indexPath], with: .left)
-        }
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        collectionView.collectionViewLayout.invalidateLayout()
     }
 }
 
@@ -149,6 +126,10 @@ extension GradablesViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, shouldSpringLoadItemAt indexPath: IndexPath, with context: UISpringLoadedInteractionContext) -> Bool {
+        return true
     }
     
 }

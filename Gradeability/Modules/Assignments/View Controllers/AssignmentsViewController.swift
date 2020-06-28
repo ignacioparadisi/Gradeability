@@ -46,7 +46,7 @@ class AssignmentsViewController: GradablesViewController {
                 return cell
             case .grade:
                 let cell = collectionView.dequeueReusableCell(for: indexPath) as GradesCardCollectionViewCell
-                guard let viewModel = self.viewModel.gradeCardViewModelForRow(at: indexPath) else { return nil }
+                guard let viewModel = self.viewModel.gradeCardViewModel else { return nil }
                 cell.configure(with: viewModel)
                 return cell
             }
@@ -56,6 +56,7 @@ class AssignmentsViewController: GradablesViewController {
     override func createSnapshot() -> NSDiffableDataSourceSnapshot<Sections, AnyHashable> {
         var snapshot = NSDiffableDataSourceSnapshot<Sections, AnyHashable>()
         snapshot.appendSections(Sections.allCases)
+        snapshot.appendItems([viewModel.gradeCardViewModel], toSection: .grade)
         snapshot.appendItems(viewModel.gradables, toSection: .gradables)
         return snapshot
     }
@@ -87,10 +88,33 @@ class AssignmentsViewController: GradablesViewController {
     /// Handle navigation button for creating a new assignment
     /// - Parameter sender: Tap gesture
     override func didTapAddButton(_ sender: UIBarButtonItem?) {
+        goToCreateAssignmentViewController()
+    }
+    
+    @objc func goToCreateAssignmentViewController() {
         let createAssignmentViewController = CreateAssignmentViewController()
         createAssignmentViewController.isModalInPresentation = true
         let viewController = UINavigationController(rootViewController: createAssignmentViewController)
         present(viewController, animated: true)
+    }
+    
+    override func didTapOptionsButton(_ sender: UIBarButtonItem?) {
+        let alertSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let createAction = UIAlertAction(title: "New", imageName: "plus", style: .default, handler: { [weak self] _ in
+            self?.goToCreateAssignmentViewController()
+        })
+        let seeDetailAction = UIAlertAction(title: "See Details", imageName: "info.circle", style: .default, handler: nil)
+        let cancelAction = UIAlertAction(title: ButtonStrings.cancel.localized, style: .cancel, handler: nil)
+        
+        alertSheet.addAction(createAction)
+        alertSheet.addAction(seeDetailAction)
+        alertSheet.addAction(cancelAction)
+        
+        if let popoverController = alertSheet.popoverPresentationController {
+            popoverController.barButtonItem = sender
+        }
+        
+        present(alertSheet, animated: true)
     }
     
     #if targetEnvironment(macCatalyst)
@@ -131,6 +155,9 @@ class AssignmentsViewController: GradablesViewController {
 //    }
 //
 //}
+
+extension AssignmentsViewController {
+}
 
 // MARK: - EmptyGradablesViewDelegate
 extension AssignmentsViewController: EmptyGradablesViewDelegate {

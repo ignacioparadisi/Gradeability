@@ -23,6 +23,7 @@ class TermsViewController: GradablesViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        collectionView.register(GradableCollectionViewCell.self)
         viewModel.fetch()
     }
     
@@ -32,7 +33,7 @@ class TermsViewController: GradablesViewController {
 //            switch section {
 //            case .gradables:
                 guard let gradable = gradable as? GradableCellViewModel else { return nil }
-                let cell = collectionView.dequeueReusableCell(for: indexPath) as TermCollectionViewCell
+                let cell = collectionView.dequeueReusableCell(for: indexPath) as GradableCollectionViewCell
                 let contextMenuInteraction = UIContextMenuInteraction(delegate: self)
                 cell.configure(with: gradable)
                 cell.addInteraction(contextMenuInteraction)
@@ -86,13 +87,19 @@ class TermsViewController: GradablesViewController {
     }
     
     override func didTapAddButton(_ sender: UIBarButtonItem?) {
+        goToCreateTermViewController()
+    }
+    
+    @objc func goToCreateTermViewController() {
         let viewController = UINavigationController(rootViewController: CreateTermViewController())
         present(viewController, animated: true)
     }
     
     override func didTapOptionsButton(_ sender: UIBarButtonItem?) {
         let alertSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        let createAction = UIAlertAction(title: "New", imageName: "plus", style: .default, handler: nil)
+        let createAction = UIAlertAction(title: "New", imageName: "plus", style: .default, handler: { [weak self] _ in
+            self?.goToCreateTermViewController()
+        })
         let seeDetailAction = UIAlertAction(title: "See Details", imageName: "info.circle", style: .default, handler: nil)
         let cancelAction = UIAlertAction(title: ButtonStrings.cancel.localized, style: .cancel, handler: nil)
         

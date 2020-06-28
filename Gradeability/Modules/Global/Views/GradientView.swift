@@ -14,11 +14,11 @@ class GradientView: UIView {
     var color: UIColor = .white
     /// Light color of gradient
     private var lightColor: UIColor {
-        return color.lighter() ?? color
+        return color
     }
     /// Dark color of gradient
     private var darkColor: UIColor {
-        return color.darker() ?? color
+        return color.darker(by: 40) ?? color
     }
     // private var motionManager = CMMotionManager()
     /// Start point of gradient
@@ -57,8 +57,8 @@ class GradientView: UIView {
     
     /// Reset gradient position when hovering ends
     func reset() {
-        startPoint = CGPoint(x: 0.0, y: 0.5)
-        endPoint = CGPoint(x: 0.7, y: 0.5)
+        startPoint = CGPoint(x: 0.5, y: 1)
+        endPoint = CGPoint(x: 0.5, y: 0.0)
         UIView.animate(withDuration: 1) {
             self.setNeedsLayout()
         }

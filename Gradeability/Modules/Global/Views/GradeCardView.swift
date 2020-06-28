@@ -14,6 +14,7 @@ class GradeCardView: UIView {
     /// View that holds the labels
     private let cardTopView = UIView()
     /// Gradient view
+    private let backgroundGradientView = GradientView()
     private let cardGradientView = GradientView()
     /// Label for the grade
     private var gradeLabel: UILabel = {
@@ -36,7 +37,15 @@ class GradeCardView: UIView {
         super.init(frame: frame)
         layer.cornerRadius = 15
         
-        addSubview(cardGradientView)
+        addSubview(backgroundGradientView)
+        backgroundGradientView.anchor.edgesToSuperview().activate()
+        backgroundGradientView.layer.cornerRadius = layer.cornerRadius
+        
+        let blurView = createBlurView(cornerRadius: layer.cornerRadius)
+        backgroundGradientView.addSubview(blurView)
+        blurView.anchor.edgesToSuperview().activate()
+        
+        backgroundGradientView.addSubview(cardGradientView)
         cardGradientView.layer.cornerRadius = 10
         cardGradientView.anchor
             .edgesToSuperview(insets: UIEdgeInsets(top: 8, left: 8, bottom: -8, right: -8))
@@ -54,6 +63,13 @@ class GradeCardView: UIView {
         addGestureRecognizer(gesture)
     }
     
+    func createBlurView(cornerRadius: CGFloat) -> UIVisualEffectView {
+        let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .systemThickMaterial))
+        blurView.layer.cornerRadius = cornerRadius
+        blurView.clipsToBounds = true
+        return blurView
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -66,8 +82,7 @@ class GradeCardView: UIView {
         containerView.addSubview(gradeTypeLabel)
         containerView.addSubview(messageLabel)
         
-        cardTopView.backgroundColor = .systemBackground
-        backgroundColor = .systemBackground
+        cardTopView.backgroundColor = .clear // UIColor.systemBackground.withAlphaComponent(0.7)
         
         gradeLabel.anchor
             .topToSuperview()
@@ -86,7 +101,10 @@ class GradeCardView: UIView {
             .bottomToSuperview()
             .activate()
         
+        let blurView = createBlurView(cornerRadius: cardTopView.layer.cornerRadius)
+        cardTopView.addSubview(blurView)
         cardTopView.addSubview(containerView)
+        blurView.anchor.edgesToSuperview().activate()
         containerView.anchor
             .edgesToSuperview(insets: UIEdgeInsets(top: 10, left: 16, bottom: -20, right: -16))
             .activate()
@@ -97,16 +115,12 @@ class GradeCardView: UIView {
     /// Configure the view with the information stored in the view model
     /// - Parameter viewModel: View Model that holds the view's information
     func configure(with viewModel: GradeCardViewModel) {
-        // backgroundColor = viewModel.color
+        backgroundGradientView.color = viewModel.color
         cardGradientView.color = viewModel.color
-        // cardTopView.backgroundColor = viewModel.color
         gradeLabel.text = viewModel.grade
-        print(viewModel.grade)
         gradeTypeLabel.text = viewModel.type
         messageLabel.text = viewModel.message
-//        gradeLabel.textColor = viewModel.color.lighter(by: 60)
-//        gradeTypeLabel.textColor = viewModel.color.lighter(by: 60)
-//        messageLabel.textColor = viewModel.color.lighter(by: 60)
+        // backgroundColor = viewModel.color.withAlphaComponent(0.2)
         
 //        let sizeMultiplier = frame.width / 300
 //        let multiplier = (sizeMultiplier > 1) ? 1 : sizeMultiplier

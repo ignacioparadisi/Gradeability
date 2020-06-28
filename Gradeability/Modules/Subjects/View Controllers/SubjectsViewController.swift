@@ -29,6 +29,7 @@ class SubjectsViewController: GradablesViewController {
     // MARK: Functions
     override func viewDidLoad() {
         super.viewDidLoad()
+        collectionView.register(GradableCollectionViewCell.self)
         collectionView.register(GradesCardCollectionViewCell.self)
         #if !targetEnvironment(macCatalyst)
         if viewModel.isMasterController {
@@ -44,7 +45,7 @@ class SubjectsViewController: GradablesViewController {
             guard let section = Sections(rawValue: indexPath.section) else { return nil }
             switch section {
             case .gradables:
-                let cell = collectionView.dequeueReusableCell(for: indexPath) as TermCollectionViewCell
+                let cell = collectionView.dequeueReusableCell(for: indexPath) as GradableCollectionViewCell
                 guard let gradable = gradable as? GradableCellViewModel else { return nil }
                 let contextMenuInteraction = UIContextMenuInteraction(delegate: self)
                 cell.configure(with: gradable)
@@ -77,7 +78,6 @@ class SubjectsViewController: GradablesViewController {
             }
             self?.title = self?.viewModel.title
             self?.reloadData()
-            self?.collectionView.reloadData()
         }
         viewModel.didDeleteTerm = { [weak self] in
             self?.navigationController?.popViewController(animated: true)
@@ -172,6 +172,7 @@ class SubjectsViewController: GradablesViewController {
 extension SubjectsViewController {
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard Sections(rawValue: indexPath.section) != .grade else { return }
         guard let nextViewModel = viewModel.nextViewModelForRow(at: indexPath) else { return }
         let viewController = AssignmentsViewController(viewModel: nextViewModel as! AssignmentsViewModel)
         if viewModel.isMasterController {

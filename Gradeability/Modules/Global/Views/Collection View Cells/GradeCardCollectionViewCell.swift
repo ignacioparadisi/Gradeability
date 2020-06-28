@@ -16,8 +16,7 @@ class GradesCardCollectionViewCell: UICollectionViewCell, ReusableView {
         super.init(frame: frame)
         backgroundColor = .clear
         contentView.addSubview(gradeCardView)
-        gradeCardView
-            .anchor
+        gradeCardView.anchor
             .topToSuperview()
             .leadingToSuperview()
             .bottomToSuperview()

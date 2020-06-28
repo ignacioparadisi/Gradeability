@@ -12,7 +12,8 @@ struct GradableCellViewModel: GradableCellViewModelRepresentable, Hashable {
     var primaryViewModel: GradableCellPrimaryViewRepresentable {
         if let assignment = gradable as? Assignment {
             if let deadline = assignment.deadline {
-                return AssignmentCellPrimaryViewModel(name: name, detail: detail, accentText: accentText, systemImage: "calendar", gradeRingViewModel: gradeRingViewModel, isFinished: deadline < Date())
+                let color: UIColor = deadline < Date() ? .secondaryLabel : .systemBlue
+                return AssignmentCellPrimaryViewModel(name: name, detail: detail, accentText: accentText, systemImage: "calendar", gradeRingViewModel: gradeRingViewModel, isFinished: deadline < Date(), iconColor: color)
             }
             return AssignmentCellPrimaryViewModel(name: name, detail: detail, accentText: accentText, systemImage: "calendar", gradeRingViewModel: gradeRingViewModel, isFinished: false)
         }

@@ -30,6 +30,13 @@ class AssignmentsViewModel: GradableViewModelRepresentable {
         return subject?.name ?? ""
     }
     
+    /// View model for `GradesCardTableViewCell`
+    var gradeCardViewModel: GradesCardCollectionViewCellViewModel? {
+        guard let subject = subject else { return nil }
+        let gradeCardViewModel = GradeCardViewModel(gradable: subject, type: GlobalStrings.grade.localized, message: "You are doing great!")
+        return GradesCardCollectionViewCellViewModel(gradeCardViewModel: gradeCardViewModel)
+    }
+    
     // MARK: Initializers
     init(subject: Subject? = nil) {
         self.subject = subject
@@ -83,15 +90,6 @@ class AssignmentsViewModel: GradableViewModelRepresentable {
         return GradableCellViewModel(assignment: assignment)
     }
     
-    /// View model for `GradesCardTableViewCell`
-    /// - Parameter indexPath: Index path of the cell
-    /// - Returns: View model for `GradesCardTableViewCell`
-    func gradeCardViewModelForRow(at indexPath: IndexPath) -> GradesCardCollectionViewCellRepresentable? {
-        guard let subject = subject else { return nil }
-        let gradeCardViewModel = GradeCardViewModel(gradable: subject, type: GlobalStrings.grade.localized, message: "You are doing great!")
-        return GradesCardCollectionViewCellViewModel(gradeCardViewModel: gradeCardViewModel)
-    }
-    
     /// Gets the View Model for the `UIViewController` to be displayed next when the user selects a `UITableViewCell`.
     /// - Parameter indexPath: IndexPath for the cell selected.
     func nextViewModelForRow(at indexPath: IndexPath) -> GradableViewModelRepresentable? {
@@ -119,10 +117,14 @@ class AssignmentsViewModel: GradableViewModelRepresentable {
     }
     
     func positionForCell(at indexPath: IndexPath) -> AssignmentCellPrimaryViewModel.CellPosition {
+        let count = assignments.count
+        if count == 1 {
+            return .only
+        }
         if indexPath.item == 0 {
             return .first
         }
-        if indexPath.item == assignments.count - 1 {
+        if indexPath.item == count - 1 {
             return .last
         }
         return .middle
