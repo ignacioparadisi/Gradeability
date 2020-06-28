@@ -22,9 +22,9 @@ class GradientView: UIView {
     }
     // private var motionManager = CMMotionManager()
     /// Start point of gradient
-    private var startPoint = CGPoint(x: 0.0, y: 0.5)
+    private var startPoint = CGPoint(x: 0.5, y: 1)
     /// End point of gradient
-    private var endPoint = CGPoint(x: 0.7, y: 0.5)
+    private var endPoint = CGPoint(x: 0.5, y: 0.0)
     
     override class var layerClass: AnyClass {
         return CAGradientLayer.self

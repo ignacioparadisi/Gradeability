@@ -10,10 +10,10 @@ import UIKit
 
 class GradablesViewController: UIViewController {
     // MARK: Properties
-    /// `UITableView` to display the information.
-    let tableView: UITableView = UITableView(frame: .zero, style: .grouped)
     /// View Model that holds the data.
     private var viewModel: GradableViewModelRepresentable
+    var collectionView: UICollectionView!
+    var dataSource: UICollectionViewDiffableDataSource<Sections, AnyHashable>!
     /// Sections displayed in the table view
     enum Sections: Int, CaseIterable {
         case grade
@@ -33,27 +33,45 @@ class GradablesViewController: UIViewController {
     /// Add the `tableView` to the `view` and set's it up.
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .systemGroupedBackground
         setupNavigationBar()
         setupViewModel()
-        // setupTableView()
-        // viewModel.fetch()
+        setupCollectionView()
+        viewModel.fetch()
     }
     
-    private func setupTableView() {
-        tableView.backgroundColor = .systemGroupedBackground
-        tableView.separatorStyle = .none
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.cellLayoutMarginsFollowReadableWidth = true
-        view.addSubview(tableView)
-        tableView.anchor
-            .topToSuperview()
-            .trailingToSuperview()
-            .bottomToSuperview()
-            .leadingToSuperview()
-            .activate()
-        tableView.register(GradableTableViewCell.self)
+    private func setupCollectionView() {
+        let layout = createLayout()
+        collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        dataSource = createDataSource()
+        collectionView.alwaysBounceVertical = true
+        collectionView.dataSource = dataSource
+        collectionView.delegate = self
+        collectionView.backgroundColor = .systemGroupedBackground
+        collectionView.register(TermCollectionViewCell.self)
+        view.addSubview(collectionView)
+        collectionView.anchor.edgesToSuperview().activate()
     }
+    
+    private func createLayout() -> UICollectionViewLayout {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(70))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(70))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
+        let section = NSCollectionLayoutSection(group: group)
+        section.interGroupSpacing = 16
+        section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 20, bottom: 30, trailing: 20)
+        return UICollectionViewCompositionalLayout(section: section)
+    }
+    
+    func createDataSource() -> UICollectionViewDiffableDataSource<Sections, AnyHashable> {
+        fatalError("This method has to be overridden" )
+    }
+    
+    func createSnapshot() -> NSDiffableDataSourceSnapshot<Sections, AnyHashable> {
+        fatalError("This method has to be overridden")
+    }
+    
     
     @objc func refresh() {
         viewModel.fetch()
@@ -82,8 +100,14 @@ class GradablesViewController: UIViewController {
     func setupViewModel() {
         viewModel.dataDidChange = { [weak self] in
             self?.title = self?.viewModel.title
-            self?.tableView.reloadData()
+            self?.reloadData()
+            self?.collectionView.reloadData()
         }
+    }
+    
+    func reloadData() {
+        let snapshot = createSnapshot()
+        dataSource.apply(snapshot)
     }
     
     @objc func didTapOptionsButton(_ sender: UIBarButtonItem?) {
@@ -121,24 +145,11 @@ extension GradablesViewController: UITableViewDataSource {
 }
 
 // MARK: - UITableViewDelegate
-extension GradablesViewController: UITableViewDelegate {
+extension GradablesViewController: UICollectionViewDelegate {
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
     }
     
-}
-
-// MARK: = UIContextMenuInteractionDelegate
-extension GradablesViewController: UIContextMenuInteractionDelegate {
-    
-    func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
-        let locationInTableView = interaction.location(in: tableView)
-        guard let indexPath = tableView.indexPathForRow(at: locationInTableView) else { return nil }
-        return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { [weak self] _ in
-            return self?.viewModel.createContextualMenuForRow(at: indexPath)
-        }
-    }
-
 }
 

@@ -17,19 +17,13 @@ class SubjectsViewModel: GradableViewModelRepresentable {
     private var term: Term?
     /// Subjects to be displayed.
     private var subjects: [Subject] = []
+    var gradables: [GradableCellViewModel] = []
     
     // MARK: Internal Properties
     var isMasterController: Bool = true
     /// Closure called when `subjects` changes so the UI can be updated.
     var dataDidChange: (() -> Void)?
     var didDeleteTerm: (() -> Void)?
-    /// Closure called when data loading changes so the UI can be updated.
-    var loadingDidChange: ((Bool) -> Void)?
-    private var isLoading: Bool = false {
-        didSet {
-            loadingDidChange?(isLoading)
-        }
-    }
     var numberOfSections: Int {
         return Sections.allCases.count
     }
@@ -49,6 +43,11 @@ class SubjectsViewModel: GradableViewModelRepresentable {
     var canDeleteTerm: Bool {
         return !(term?.isCurrent ?? true)
     }
+    var gradeCardViewModel: GradesCardCollectionViewCellViewModel? {
+        guard let term = term else { return nil }
+        let gradeCardViewModel = GradeCardViewModel(gradable: term, type: "Grade", message: "You are doing great!")
+        return GradesCardCollectionViewCellViewModel(gradeCardViewModel: gradeCardViewModel)
+    }
     
     // MARK: Initializers
     init(term: Term? = nil) {
@@ -64,13 +63,11 @@ class SubjectsViewModel: GradableViewModelRepresentable {
     /// Fetches the Subjects.
     func fetch() {
         guard let term = term else { return }
-        if isLoading { return }
-        isLoading = true
         SubjectCoreDataManager.shared.fetch(for: term) { [weak self] result in
-            self?.isLoading = false
             switch result {
             case .success(let subjects):
                 self?.subjects = subjects
+                self?.gradables = subjects.map { GradableCellViewModel(subject: $0) }
                 self?.dataDidChange?()
             case .failure:
                 break
@@ -105,14 +102,6 @@ class SubjectsViewModel: GradableViewModelRepresentable {
     func gradableViewModelForRow(at indexPath: IndexPath) -> GradableCellViewModelRepresentable {
         let subject = subjects[indexPath.row]
         return GradableCellViewModel(subject: subject)
-    }
-    
-    func gradeCardViewModelForRow(at indexPath: IndexPath) -> GradesCardTableViewCellRepresentable? {
-        guard let term = term else { return nil }
-        let gradeCardViewModel = GradeCardViewModel(gradable: term, type: "Grade", message: "You are doing great!")
-        let maxGradeCardViewModel = GradeCardViewModel(gradable: term, type: "Max Grade", message: "You are doing great!")
-        return GradesCardTableViewCellViewModel(gradeCardViewModel: gradeCardViewModel,
-                                                maxGradeCardViewModel: maxGradeCardViewModel)
     }
     
     /// Gets the View Model for the `UIViewController` to be displayed next when the user selects a `UITableViewCell`.

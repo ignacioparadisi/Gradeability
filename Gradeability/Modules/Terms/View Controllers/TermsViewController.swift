@@ -11,8 +11,6 @@ import UIKit
 class TermsViewController: GradablesViewController {
     /// View Model for the View Controller
     private let viewModel: TermsViewModel
-    var collectionView: UICollectionView!
-    var dataSource: UICollectionViewDiffableDataSource<Sections, GradableCellViewModel>!
 
     init(viewModel: TermsViewModel) {
         self.viewModel = viewModel
@@ -25,17 +23,15 @@ class TermsViewController: GradablesViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .secondarySystemGroupedBackground
-        setupCollectionView()
-        // tableView.register(TermTableViewCell.self)
         viewModel.fetch()
     }
     
-    func createDataSource() -> UICollectionViewDiffableDataSource<Sections, GradableCellViewModel> {
-        return UICollectionViewDiffableDataSource<Sections, GradableCellViewModel>(collectionView: collectionView) { collectionView, indexPath, gradable in
+    override func createDataSource() -> UICollectionViewDiffableDataSource<Sections, AnyHashable> {
+        return UICollectionViewDiffableDataSource<Sections, AnyHashable>(collectionView: collectionView) { collectionView, indexPath, gradable in
             guard let section = Sections(rawValue: indexPath.section) else { return nil }
             switch section {
             case .gradables:
+                guard let gradable = gradable as? GradableCellViewModel else { return nil }
                 let cell = collectionView.dequeueReusableCell(for: indexPath) as TermCollectionViewCell
                 let contextMenuInteraction = UIContextMenuInteraction(delegate: self)
                 cell.configure(with: gradable)
@@ -47,23 +43,11 @@ class TermsViewController: GradablesViewController {
         }
     }
     
-    func createSnapshot() -> NSDiffableDataSourceSnapshot<Sections, GradableCellViewModel> {
-        var snapshot = NSDiffableDataSourceSnapshot<Sections, GradableCellViewModel>()
-        snapshot.appendSections(Sections.allCases)
+    override func createSnapshot() -> NSDiffableDataSourceSnapshot<Sections, AnyHashable> {
+        var snapshot = NSDiffableDataSourceSnapshot<Sections, AnyHashable>()
+        snapshot.appendSections([.gradables])
         snapshot.appendItems(viewModel.gradables, toSection: .gradables)
         return snapshot
-    }
-    
-    func setupCollectionView() {
-        let layout = createLayout()
-        collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        dataSource = createDataSource()
-        collectionView.dataSource = dataSource
-        collectionView.delegate = self
-        collectionView.backgroundColor = .secondarySystemGroupedBackground
-        collectionView.register(TermCollectionViewCell.self)
-        view.addSubview(collectionView)
-        collectionView.anchor.edgesToSuperview().activate()
     }
     
     func createLayout() -> UICollectionViewLayout {
@@ -81,11 +65,6 @@ class TermsViewController: GradablesViewController {
         viewModel.dataDidChange = { [weak self] in
             self?.reloadData()
         }
-    }
-    
-    func reloadData() {
-        let snapshot = createSnapshot()
-        dataSource.apply(snapshot)
     }
     
     override func setupNavigationBar() {
@@ -157,19 +136,9 @@ extension TermsViewController {
     
 }
 
-// MARK: - UITableViewDelegate
+// MARK: - UICollectionViewDelegate
 extension TermsViewController {
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let nextViewModel = viewModel.nextViewModelForRow(at: indexPath) else { return }
-        let viewController = SubjectsViewController(viewModel: nextViewModel as! SubjectsViewModel)
-        navigationController?.pushViewController(viewController, animated: true)
-    }
-    
-}
-
-extension TermsViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let nextViewModel = viewModel.nextViewModelForRow(at: indexPath) else { return }
         let viewController = SubjectsViewController(viewModel: nextViewModel as! SubjectsViewModel)
         navigationController?.pushViewController(viewController, animated: true)
@@ -177,10 +146,10 @@ extension TermsViewController: UICollectionViewDelegate {
 }
 
 
-// MARK: = UIContextMenuInteractionDelegate
-extension TermsViewController {
+// MARK: - UIContextMenuInteractionDelegate
+extension TermsViewController: UIContextMenuInteractionDelegate {
     
-    override func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
+    func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
         let locationInCollection = interaction.location(in: collectionView)
         guard let indexPath = collectionView.indexPathForItem(at: locationInCollection) else { return nil }
         return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { [weak self] _ in

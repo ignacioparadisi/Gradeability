@@ -131,7 +131,7 @@ class GradableCellPrimaryView: UIView {
             .top(greaterOrEqual: topAnchor)
             .trailingToSuperview(constant: -horizontalMargin, toSafeArea: true)
             .bottom(lessOrEqual: bottomAnchor)
-            .leading(to: contentView.trailingAnchor, constant: 10)
+            .leading(to: contentView.trailingAnchor, constant: verticalMargin)
             .centerYToSuperview()
             .width(constant: ringRadius * 2)
             .height(constant: ringRadius * 2)
@@ -151,6 +151,7 @@ class GradableCellPrimaryView: UIView {
         } else {
             nameLabelTopAnchor?.constant = 0
         }
+        layoutSubviews()
     }
 }
 
@@ -162,6 +163,7 @@ class GradableCellSecondaryView: UIView {
     private let contentView: UIView = UIView()
     private let titleLabel: UILabel = {
         let label = UILabel()
+        label.font = UIFont.preferredFont(forTextStyle: .caption1).bold
         return label
     }()
     private let progressView: UIProgressView = {
@@ -171,6 +173,7 @@ class GradableCellSecondaryView: UIView {
     }()
     private let progressLabel: UILabel = {
         let label = UILabel()
+        label.font = UIFont.preferredFont(forTextStyle: .caption1)
         return label
     }()
     
@@ -197,7 +200,7 @@ class GradableCellSecondaryView: UIView {
         contentView.anchor
             .topToSuperview(constant: 8)
             .trailingToSuperview(constant: -horizontalMargin)
-            .bottomToSuperview(constant: -verticalMargin)
+            .bottomToSuperview(constant: -8)
             .leadingToSuperview(constant: horizontalMargin)
             .activate()
         
@@ -208,7 +211,7 @@ class GradableCellSecondaryView: UIView {
             .activate()
 
         progressView.anchor
-            .top(to: titleLabel.bottomAnchor, constant: 5)
+            .top(to: titleLabel.bottomAnchor, constant: 8)
             .trailingToSuperview()
             .leadingToSuperview()
             .activate()
@@ -221,10 +224,10 @@ class GradableCellSecondaryView: UIView {
             .activate()
     }
     
-    func configure(with title: String, progress: Float) {
-        titleLabel.text = title
+    func configure(with title: String, progress: Float, progressText: String? = nil) {
+        titleLabel.text = title.uppercased()
         progressView.progress = progress
-        progressLabel.text = String(describing: progress)
+        progressLabel.text = progressText
     }
 }
 
@@ -246,7 +249,7 @@ class TermCollectionViewCell: UICollectionViewCell, ReusableView {
     }
     
     func setupView() {
-        backgroundColor = .systemGray5
+        backgroundColor = UIColor(named: "cellSecondaryBackgroundColor")
         layer.cornerRadius = 15
         contentView.addSubview(primaryCellView)
         primaryCellView.anchor
@@ -274,7 +277,7 @@ class TermCollectionViewCell: UICollectionViewCell, ReusableView {
         if viewModel.accessoryType == .checkmark {
             primaryViewBottomAnchor?.deactivate()
             setupSecondaryView()
-            secondaryCellView.configure(with: "Días restantes", progress: 0.3)
+            secondaryCellView.configure(with: "Días restantes", progress: 0.3, progressText: "300 días")
         } else {
             primaryViewBottomAnchor?.activate()
             secondaryCellView.removeFromSuperview()

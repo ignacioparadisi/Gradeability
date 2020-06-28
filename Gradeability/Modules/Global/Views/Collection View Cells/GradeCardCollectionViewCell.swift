@@ -1,40 +1,27 @@
 //
-//  GradesCardTableViewCell.swift
+//  GradeCardCollectionViewCell.swift
 //  Gradeability
 //
-//  Created by Ignacio Paradisi on 6/2/20.
+//  Created by Ignacio Paradisi on 6/27/20.
 //  Copyright © 2020 Ignacio Paradisi. All rights reserved.
 //
 
-
 import UIKit
 
-class GradesCardTableViewCell: UITableViewCell, ReusableView {
+class GradesCardCollectionViewCell: UICollectionViewCell, ReusableView {
     /// Card view for the current grade
     let gradeCardView = GradeCardView()
-    /// Card view for the maximum grade that can be scored
-    let maxGradeCardView = GradeCardView()
 
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         backgroundColor = .clear
-        selectionStyle = .none
         contentView.addSubview(gradeCardView)
-        contentView.addSubview(maxGradeCardView)
         gradeCardView
             .anchor
             .topToSuperview()
             .leadingToSuperview()
             .bottomToSuperview()
-            .trailing(to: contentView.centerXAnchor, constant: -8)
-            .activate()
-        
-        maxGradeCardView
-            .anchor
-            .topToSuperview()
             .trailingToSuperview()
-            .bottomToSuperview()
-            .leading(to: contentView.centerXAnchor, constant: 8)
             .activate()
     }
     

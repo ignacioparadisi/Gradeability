@@ -8,16 +8,17 @@
 
 import Foundation
 
-class GradesCardTableViewCellViewModel: GradesCardTableViewCellRepresentable {
+struct GradesCardCollectionViewCellViewModel: GradesCardCollectionViewCellRepresentable, Hashable {
     
     /// View model for the `GradeCardView` that shows the current grade
     var gradeCardViewModel: GradeCardViewModel
-    /// View model for the `GradeCardView` that shows the maximum grade that can be scored
-    var maxGradeCardViewModel: GradeCardViewModel
     
-    init(gradeCardViewModel: GradeCardViewModel, maxGradeCardViewModel: GradeCardViewModel) {
+    init(gradeCardViewModel: GradeCardViewModel) {
         self.gradeCardViewModel = gradeCardViewModel
-        self.maxGradeCardViewModel = maxGradeCardViewModel
+    }
+    
+    static func == (lhs: GradesCardCollectionViewCellViewModel, rhs: GradesCardCollectionViewCellViewModel) -> Bool {
+        return lhs.gradeCardViewModel == rhs.gradeCardViewModel
     }
     
 }

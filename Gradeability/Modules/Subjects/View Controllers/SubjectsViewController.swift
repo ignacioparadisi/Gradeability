@@ -29,7 +29,7 @@ class SubjectsViewController: GradablesViewController {
     // MARK: Functions
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.register(GradesCardTableViewCell.self)
+        collectionView.register(GradesCardCollectionViewCell.self)
         #if !targetEnvironment(macCatalyst)
         if viewModel.isMasterController {
             navigationItem.setLeftBarButton(
@@ -37,6 +37,36 @@ class SubjectsViewController: GradablesViewController {
             animated: false)
         }
         #endif
+    }
+    
+    override func createDataSource() -> UICollectionViewDiffableDataSource<Sections, AnyHashable> {
+        return UICollectionViewDiffableDataSource<Sections, AnyHashable>(collectionView: collectionView) { collectionView, indexPath, gradable in
+            guard let section = Sections(rawValue: indexPath.section) else { return nil }
+            switch section {
+            case .gradables:
+                let cell = collectionView.dequeueReusableCell(for: indexPath) as TermCollectionViewCell
+                guard let gradable = gradable as? GradableCellViewModel else { return nil }
+                let contextMenuInteraction = UIContextMenuInteraction(delegate: self)
+                cell.configure(with: gradable)
+                cell.addInteraction(contextMenuInteraction)
+                return cell
+            case .grade:
+                let cell = collectionView.dequeueReusableCell(for: indexPath) as GradesCardCollectionViewCell
+                guard let viewModel = self.viewModel.gradeCardViewModel else { return nil }
+                cell.configure(with: viewModel)
+                return cell
+            }
+        }
+    }
+    
+    override func createSnapshot() -> NSDiffableDataSourceSnapshot<Sections, AnyHashable> {
+        var snapshot = NSDiffableDataSourceSnapshot<Sections, AnyHashable>()
+        snapshot.appendSections(Sections.allCases)
+        if let cardViewModel = viewModel.gradeCardViewModel {
+            snapshot.appendItems([cardViewModel], toSection: .grade)
+        }
+        snapshot.appendItems(viewModel.gradables, toSection: .gradables)
+        return snapshot
     }
 
     /// Setup all View Model's closures to update the UI
@@ -46,12 +76,11 @@ class SubjectsViewController: GradablesViewController {
                 self?.showEmptyView()
             }
             self?.title = self?.viewModel.title
-            self?.tableView.reloadData()
+            self?.reloadData()
+            self?.collectionView.reloadData()
         }
         viewModel.didDeleteTerm = { [weak self] in
             self?.navigationController?.popViewController(animated: true)
-        }
-        viewModel.loadingDidChange = { [weak self] isLoading in
         }
     }
     
@@ -116,33 +145,33 @@ class SubjectsViewController: GradablesViewController {
     
 }
 
-// MARK: - UITableViewDataSource
-extension SubjectsViewController {
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let section = Sections(rawValue: indexPath.section) else { return UITableViewCell() }
-        switch section {
-        case .grade:
-            let cell = tableView.dequeueReusableCell(for: indexPath) as GradesCardTableViewCell
-            guard let viewModel = self.viewModel.gradeCardViewModelForRow(at: indexPath) else { return UITableViewCell() }
-            cell.configure(with: viewModel)
-            return cell
-        case .gradables:
-            let cellViewModel = viewModel.gradableViewModelForRow(at: indexPath)
-            let contextMenuInteraction = UIContextMenuInteraction(delegate: self)
-            let cell = tableView.dequeueReusableCell(for: indexPath) as GradableTableViewCell
-            cell.configure(with: cellViewModel)
-            cell.addInteraction(contextMenuInteraction)
-            return cell
-        }
-    }
-    
-}
+//// MARK: - UITableViewDataSource
+//extension SubjectsViewController {
+//
+//    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        guard let section = Sections(rawValue: indexPath.section) else { return UITableViewCell() }
+//        switch section {
+//        case .grade:
+//            let cell = tableView.dequeueReusableCell(for: indexPath) as GradesCardTableViewCell
+//            guard let viewModel = self.viewModel.gradeCardViewModelForRow(at: indexPath) else { return UITableViewCell() }
+//            cell.configure(with: viewModel)
+//            return cell
+//        case .gradables:
+//            let cellViewModel = viewModel.gradableViewModelForRow(at: indexPath)
+//            let contextMenuInteraction = UIContextMenuInteraction(delegate: self)
+//            let cell = tableView.dequeueReusableCell(for: indexPath) as GradableTableViewCell
+//            cell.configure(with: cellViewModel)
+//            cell.addInteraction(contextMenuInteraction)
+//            return cell
+//        }
+//    }
+//
+//}
 
 // MARK: - UITableViewDelegate
 extension SubjectsViewController {
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let nextViewModel = viewModel.nextViewModelForRow(at: indexPath) else { return }
         let viewController = AssignmentsViewController(viewModel: nextViewModel as! AssignmentsViewModel)
         if viewModel.isMasterController {
@@ -151,7 +180,7 @@ extension SubjectsViewController {
             navigationController?.pushViewController(viewController, animated: true)
         }
     }
-    
+
 }
 
 // MARK: - EmptyGradablesViewDelegate
@@ -166,4 +195,17 @@ extension SubjectsViewController: EmptyGradablesViewDelegate {
             self?.emptyView = nil
         })
     }
+}
+
+// MARK: - UIContextMenuInteractionDelegate
+extension SubjectsViewController: UIContextMenuInteractionDelegate {
+    
+    func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
+        let locationInCollection = interaction.location(in: collectionView)
+        guard let indexPath = collectionView.indexPathForItem(at: locationInCollection) else { return nil }
+        return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { [weak self] _ in
+            return self?.viewModel.createContextualMenuForRow(at: indexPath)
+        }
+    }
+
 }

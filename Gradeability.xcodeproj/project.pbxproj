@@ -16,6 +16,7 @@
 		325875BB2492F84B00A8759A /* UIAlertAction+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325875BA2492F84B00A8759A /* UIAlertAction+Extension.swift */; };
 		325AA8CE24A78A7B00958D6A /* TermTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325AA8CD24A78A7B00958D6A /* TermTableViewCell.swift */; };
 		325AA8D224A7C0F800958D6A /* TermCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325AA8D124A7C0F800958D6A /* TermCollectionViewCell.swift */; };
+		325AA8D524A80F9B00958D6A /* GradeCardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325AA8D424A80F9B00958D6A /* GradeCardCollectionViewCell.swift */; };
 		3264276C248707EB009A6112 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3264276B248707EB009A6112 /* GradientView.swift */; };
 		3264276E2487082C009A6112 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3264276D2487082C009A6112 /* UIColor+Extension.swift */; };
 		32642771248708D0009A6112 /* GradeCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32642770248708D0009A6112 /* GradeCardView.swift */; };
@@ -127,6 +128,7 @@
 		325875BA2492F84B00A8759A /* UIAlertAction+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertAction+Extension.swift"; sourceTree = "<group>"; };
 		325AA8CD24A78A7B00958D6A /* TermTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermTableViewCell.swift; sourceTree = "<group>"; };
 		325AA8D124A7C0F800958D6A /* TermCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermCollectionViewCell.swift; sourceTree = "<group>"; };
+		325AA8D424A80F9B00958D6A /* GradeCardCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradeCardCollectionViewCell.swift; sourceTree = "<group>"; };
 		3264276B248707EB009A6112 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		3264276D2487082C009A6112 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		32642770248708D0009A6112 /* GradeCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradeCardView.swift; sourceTree = "<group>"; };
@@ -251,6 +253,7 @@
 		324E14EE24812DE00089ECFC /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				325AA8D324A80F4B00958D6A /* Collection View Cells */,
 				3264276B248707EB009A6112 /* GradientView.swift */,
 				32642770248708D0009A6112 /* GradeCardView.swift */,
 				32A7F16A248B1FEB00EFB7E4 /* GRDTextField.swift */,
@@ -271,6 +274,14 @@
 			isa = PBXGroup;
 			children = (
 				325AA8D124A7C0F800958D6A /* TermCollectionViewCell.swift */,
+			);
+			path = "Collection View Cells";
+			sourceTree = "<group>";
+		};
+		325AA8D324A80F4B00958D6A /* Collection View Cells */ = {
+			isa = PBXGroup;
+			children = (
+				325AA8D424A80F9B00958D6A /* GradeCardCollectionViewCell.swift */,
 			);
 			path = "Collection View Cells";
 			sourceTree = "<group>";
@@ -790,6 +801,7 @@
 				329D12A1247FFF3100A0173A /* AssignmentsViewModel.swift in Sources */,
 				32E4CB80249119C7006F3A7C /* MainViewController.swift in Sources */,
 				324E14F224812E2E0089ECFC /* UITableView+Extension.swift in Sources */,
+				325AA8D524A80F9B00958D6A /* GradeCardCollectionViewCell.swift in Sources */,
 				3264277324870910009A6112 /* GradesCardTableViewCell.swift in Sources */,
 				32A7F179248B2A5E00EFB7E4 /* Localizable.swift in Sources */,
 				32E34EFF247F383500BFD25A /* AppDelegate.swift in Sources */,

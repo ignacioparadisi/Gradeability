@@ -8,7 +8,8 @@
 
 import UIKit
 
-class GradeCardViewModel {
+struct GradeCardViewModel: Hashable {
+    
     // MARK: Properties
     /// Gradable
     private let gradable: Gradable
@@ -31,4 +32,9 @@ class GradeCardViewModel {
         self.type = type
         self.message = message
     }
+    
+    static func == (lhs: GradeCardViewModel, rhs: GradeCardViewModel) -> Bool {
+        lhs.gradable == rhs.gradable
+    }
+    
 }

@@ -17,17 +17,11 @@ class AssignmentsViewModel: GradableViewModelRepresentable {
     private var subject: Subject?
     /// Assignments to be displayed.
     private var assignments: [Assignment] = []
+    var gradables: [GradableCellViewModel] = []
     
     // MARK: Internal Properties
     /// Closure called when `assignments` changes so the UI can be updated.
     var dataDidChange: (() -> Void)?
-    /// Closure called when data loading changes so the UI can be updated.
-    var loadingDidChange: ((Bool) -> Void)?
-    private var isLoading: Bool = false {
-        didSet {
-            loadingDidChange?(isLoading)
-        }
-    }
     var numberOfSections: Int {
         return Sections.allCases.count
     }
@@ -45,13 +39,11 @@ class AssignmentsViewModel: GradableViewModelRepresentable {
     /// Fetches the Assignments.
     func fetch() {
         guard let subject = subject else { return }
-        if isLoading { return }
-        isLoading = true
         AssignmentCoreDataManager.shared.fetch(for: subject) { [weak self] result in
-            self?.isLoading = false
             switch result {
             case .success(let assignments):
                 self?.assignments = assignments
+                self?.gradables = assignments.map { GradableCellViewModel(assignment: $0) }
                 self?.dataDidChange?()
             case .failure:
                 break
@@ -94,12 +86,10 @@ class AssignmentsViewModel: GradableViewModelRepresentable {
     /// View model for `GradesCardTableViewCell`
     /// - Parameter indexPath: Index path of the cell
     /// - Returns: View model for `GradesCardTableViewCell`
-    func gradeCardViewModelForRow(at indexPath: IndexPath) -> GradesCardTableViewCellRepresentable? {
+    func gradeCardViewModelForRow(at indexPath: IndexPath) -> GradesCardCollectionViewCellRepresentable? {
         guard let subject = subject else { return nil }
         let gradeCardViewModel = GradeCardViewModel(gradable: subject, type: GlobalStrings.grade.localized, message: "You are doing great!")
-        let maxGradeCardViewModel = GradeCardViewModel(gradable: subject, type: GlobalStrings.maxGrade.localized, message: "You are doing great!")
-        return GradesCardTableViewCellViewModel(gradeCardViewModel: gradeCardViewModel,
-                                                maxGradeCardViewModel: maxGradeCardViewModel)
+        return GradesCardCollectionViewCellViewModel(gradeCardViewModel: gradeCardViewModel)
     }
     
     /// Gets the View Model for the `UIViewController` to be displayed next when the user selects a `UITableViewCell`.

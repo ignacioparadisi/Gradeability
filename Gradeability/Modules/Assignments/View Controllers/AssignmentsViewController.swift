@@ -29,7 +29,34 @@ class AssignmentsViewController: GradablesViewController {
     // MARK: Functions
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.register(GradesCardTableViewCell.self)
+        collectionView.register(GradesCardCollectionViewCell.self)
+    }
+    
+    override func createDataSource() -> UICollectionViewDiffableDataSource<Sections, AnyHashable> {
+        return UICollectionViewDiffableDataSource<Sections, AnyHashable>(collectionView: collectionView) { collectionView, indexPath, gradable in
+            guard let section = Sections(rawValue: indexPath.section) else { return nil }
+            switch section {
+            case .gradables:
+                guard let gradable = gradable as? GradableCellViewModel else { return nil }
+                let cell = collectionView.dequeueReusableCell(for: indexPath) as TermCollectionViewCell
+                let contextMenuInteraction = UIContextMenuInteraction(delegate: self)
+                cell.configure(with: gradable)
+                cell.addInteraction(contextMenuInteraction)
+                return cell
+            case .grade:
+                let cell = collectionView.dequeueReusableCell(for: indexPath) as GradesCardCollectionViewCell
+                guard let viewModel = self.viewModel.gradeCardViewModelForRow(at: indexPath) else { return nil }
+                cell.configure(with: viewModel)
+                return cell
+            }
+        }
+    }
+    
+    override func createSnapshot() -> NSDiffableDataSourceSnapshot<Sections, AnyHashable> {
+        var snapshot = NSDiffableDataSourceSnapshot<Sections, AnyHashable>()
+        snapshot.appendSections(Sections.allCases)
+        snapshot.appendItems(viewModel.gradables, toSection: .gradables)
+        return snapshot
     }
     
     /// Setup all View Model's closures to update the UI.
@@ -41,9 +68,8 @@ class AssignmentsViewController: GradablesViewController {
             #if !targetEnvironment(macCatalyst)
             self?.title = self?.viewModel.title
             #endif
-            self?.tableView.reloadData()
-        }
-        viewModel.loadingDidChange = { [weak self] isLoading in
+            self?.reloadData()
+            self?.collectionView.reloadData()
         }
     }
     
@@ -78,28 +104,32 @@ class AssignmentsViewController: GradablesViewController {
     
 }
 
-// MARK: - UITableViewDataSource
-extension AssignmentsViewController {
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let section = Sections(rawValue: indexPath.section) else { return UITableViewCell() }
-        switch section {
-        case .grade:
-            let cell = tableView.dequeueReusableCell(for: indexPath) as GradesCardTableViewCell
-            guard let viewModel = self.viewModel.gradeCardViewModelForRow(at: indexPath) else { return UITableViewCell() }
-            cell.configure(with: viewModel)
-            return cell
-        case .gradables:
-            let cellViewModel = viewModel.gradableViewModelForRow(at: indexPath)
-            let contextMenuInteraction = UIContextMenuInteraction(delegate: self)
-            let cell = tableView.dequeueReusableCell(for: indexPath) as GradableTableViewCell
-            cell.configure(with: cellViewModel)
-            cell.addInteraction(contextMenuInteraction)
-            return cell
-        }
-    }
-    
-}
+//// MARK: - UITableViewDataSource
+//extension AssignmentsViewController {
+//
+//    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+//        <#code#>
+//    }
+//
+//    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        guard let section = Sections(rawValue: indexPath.section) else { return UITableViewCell() }
+//        switch section {
+//        case .grade:
+//            let cell = tableView.dequeueReusableCell(for: indexPath) as GradesCardTableViewCell
+//            guard let viewModel = self.viewModel.gradeCardViewModelForRow(at: indexPath) else { return UITableViewCell() }
+//            cell.configure(with: viewModel)
+//            return cell
+//        case .gradables:
+//            let cellViewModel = viewModel.gradableViewModelForRow(at: indexPath)
+//            let contextMenuInteraction = UIContextMenuInteraction(delegate: self)
+//            let cell = tableView.dequeueReusableCell(for: indexPath) as GradableTableViewCell
+//            cell.configure(with: cellViewModel)
+//            cell.addInteraction(contextMenuInteraction)
+//            return cell
+//        }
+//    }
+//
+//}
 
 // MARK: - EmptyGradablesViewDelegate
 extension AssignmentsViewController: EmptyGradablesViewDelegate {
@@ -116,4 +146,17 @@ extension AssignmentsViewController: EmptyGradablesViewDelegate {
         })
     }
     
+}
+
+// MARK: - UIContextMenuInteractionDelegate
+extension AssignmentsViewController: UIContextMenuInteractionDelegate {
+    
+    func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
+        let locationInCollection = interaction.location(in: collectionView)
+        guard let indexPath = collectionView.indexPathForItem(at: locationInCollection) else { return nil }
+        return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { [weak self] _ in
+            return self?.viewModel.createContextualMenuForRow(at: indexPath)
+        }
+    }
+
 }
