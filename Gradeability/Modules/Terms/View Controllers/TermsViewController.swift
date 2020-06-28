@@ -28,18 +28,18 @@ class TermsViewController: GradablesViewController {
     
     override func createDataSource() -> UICollectionViewDiffableDataSource<Sections, AnyHashable> {
         return UICollectionViewDiffableDataSource<Sections, AnyHashable>(collectionView: collectionView) { collectionView, indexPath, gradable in
-            guard let section = Sections(rawValue: indexPath.section) else { return nil }
-            switch section {
-            case .gradables:
+//            guard let section = Sections(rawValue: indexPath.section) else { return nil }
+//            switch section {
+//            case .gradables:
                 guard let gradable = gradable as? GradableCellViewModel else { return nil }
                 let cell = collectionView.dequeueReusableCell(for: indexPath) as TermCollectionViewCell
                 let contextMenuInteraction = UIContextMenuInteraction(delegate: self)
                 cell.configure(with: gradable)
                 cell.addInteraction(contextMenuInteraction)
                 return cell
-            default:
-                return nil
-            }
+//            default:
+//                return nil
+//            }
         }
     }
     

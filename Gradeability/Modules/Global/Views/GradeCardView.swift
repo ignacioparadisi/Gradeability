@@ -92,15 +92,6 @@ class GradeCardView: UIView {
         addShadow()
     }
     
-    private func addShadow() {
-        layer.shadowColor = UIColor.black.cgColor
-        layer.shadowOffset = CGSize(width: 0, height: 2)
-        layer.shadowRadius = 6
-        layer.shadowOpacity = 0.2
-        layer.cornerRadius = 15
-        clipsToBounds = false
-    }
-    
     /// Configure the view with the information stored in the view model
     /// - Parameter viewModel: View Model that holds the view's information
     func configure(with viewModel: GradeCardViewModel) {

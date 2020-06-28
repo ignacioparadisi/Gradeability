@@ -77,12 +77,8 @@ class GradableCellPrimaryView: UIView {
     
     private func setupView() {
         backgroundColor = .secondarySystemGroupedBackground
-        layer.shadowColor = UIColor.black.cgColor
-        layer.shadowOffset = CGSize(width: 0, height: 2)
-        layer.shadowRadius = 6
-        layer.shadowOpacity = 0.2
         layer.cornerRadius = 15
-        clipsToBounds = false
+        addShadow()
         setupContentView()
         setupGradeRingView()
     }
@@ -249,6 +245,7 @@ class TermCollectionViewCell: UICollectionViewCell, ReusableView {
     }
     
     func setupView() {
+        addShadow()
         backgroundColor = UIColor(named: "cellSecondaryBackgroundColor")
         layer.cornerRadius = 15
         contentView.addSubview(primaryCellView)
