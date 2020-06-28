@@ -30,6 +30,7 @@ class AssignmentsViewController: GradablesViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.register(GradesCardCollectionViewCell.self)
+        collectionView.register(AssignmentCollectionViewCell.self)
     }
     
     override func createDataSource() -> UICollectionViewDiffableDataSource<Sections, AnyHashable> {
@@ -38,9 +39,9 @@ class AssignmentsViewController: GradablesViewController {
             switch section {
             case .gradables:
                 guard let gradable = gradable as? GradableCellViewModel else { return nil }
-                let cell = collectionView.dequeueReusableCell(for: indexPath) as TermCollectionViewCell
+                let cell = collectionView.dequeueReusableCell(for: indexPath) as AssignmentCollectionViewCell
                 let contextMenuInteraction = UIContextMenuInteraction(delegate: self)
-                cell.configure(with: gradable)
+                cell.configure(with: gradable, position: self.viewModel.positionForCell(at: indexPath))
                 cell.addInteraction(contextMenuInteraction)
                 return cell
             case .grade:

@@ -18,7 +18,6 @@ class GradeCardView: UIView {
     /// Label for the grade
     private var gradeLabel: UILabel = {
         let label = UILabel()
-        label.textColor = UIColor.white.withAlphaComponent(0.8)
         label.font = UIFont.boldSystemFont(ofSize: 70.0)
         return label
     }()
@@ -67,6 +66,9 @@ class GradeCardView: UIView {
         containerView.addSubview(gradeTypeLabel)
         containerView.addSubview(messageLabel)
         
+        cardTopView.backgroundColor = .systemBackground
+        backgroundColor = .systemBackground
+        
         gradeLabel.anchor
             .topToSuperview()
             .leadingToSuperview()
@@ -95,16 +97,16 @@ class GradeCardView: UIView {
     /// Configure the view with the information stored in the view model
     /// - Parameter viewModel: View Model that holds the view's information
     func configure(with viewModel: GradeCardViewModel) {
-        backgroundColor = viewModel.color
+        // backgroundColor = viewModel.color
         cardGradientView.color = viewModel.color
-        cardTopView.backgroundColor = viewModel.color
+        // cardTopView.backgroundColor = viewModel.color
         gradeLabel.text = viewModel.grade
         print(viewModel.grade)
         gradeTypeLabel.text = viewModel.type
         messageLabel.text = viewModel.message
-        gradeLabel.textColor = viewModel.color.lighter(by: 60)
-        gradeTypeLabel.textColor = viewModel.color.lighter(by: 60)
-        messageLabel.textColor = viewModel.color.lighter(by: 60)
+//        gradeLabel.textColor = viewModel.color.lighter(by: 60)
+//        gradeTypeLabel.textColor = viewModel.color.lighter(by: 60)
+//        messageLabel.textColor = viewModel.color.lighter(by: 60)
         
 //        let sizeMultiplier = frame.width / 300
 //        let multiplier = (sizeMultiplier > 1) ? 1 : sizeMultiplier

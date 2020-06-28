@@ -25,6 +25,29 @@ struct GradableCellPrimaryViewModel: GradableCellPrimaryViewRepresentable {
     }
 }
 
+struct AssignmentCellPrimaryViewModel: GradableCellPrimaryViewRepresentable {
+    enum CellPosition {
+        case first
+        case middle
+        case last
+    }
+    var name: String
+    var detail: String?
+    var accentText: String?
+    var systemImage: String?
+    var gradeRingViewModel: GradeRingViewModel
+    var isFinished: Bool
+    
+    init(name: String, detail: String, accentText: String? = nil, systemImage: String? = nil, gradeRingViewModel: GradeRingViewModel, isFinished: Bool) {
+        self.name = name
+        self.detail = detail
+        self.accentText = accentText
+        self.systemImage = systemImage
+        self.gradeRingViewModel = gradeRingViewModel
+        self.isFinished = isFinished
+    }
+}
+
 protocol GradableCellPrimaryViewRepresentable {
     var name: String { get }
     var detail: String? { get }
@@ -42,7 +65,7 @@ class GradableCellPrimaryView: UIView {
     // MARK: View Properties
     private var gradeRingView: GradeRingView!
     private lazy var iconImageView: UIImageView = UIImageView()
-    private let contentView: UIView = UIView()
+    let contentView: UIView = UIView()
     private let accentLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.preferredFont(forTextStyle: .caption1).bold
@@ -64,6 +87,7 @@ class GradableCellPrimaryView: UIView {
     
     // MARK: Properties
     private var nameLabelTopAnchor: NSLayoutConstraint?
+    var contentViewLeadingAnchor: Anchor?
     
     
     override init(frame: CGRect) {
@@ -75,7 +99,7 @@ class GradableCellPrimaryView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setupView() {
+    func setupView() {
         backgroundColor = .secondarySystemGroupedBackground
         layer.cornerRadius = 15
         addShadow()
@@ -93,9 +117,11 @@ class GradableCellPrimaryView: UIView {
         contentView.anchor
             .top(to: topAnchor, constant: verticalMargin)
             .bottom(to: bottomAnchor, constant: -verticalMargin)
-            .leadingToSuperview(constant: horizontalMargin, toSafeArea: true)
             .centerYToSuperview()
             .activate()
+        
+        contentViewLeadingAnchor = contentView.anchor.leadingToSuperview(constant: horizontalMargin)
+        contentViewLeadingAnchor?.activate()
         
         accentLabel.anchor
             .topToSuperview()
@@ -103,20 +129,25 @@ class GradableCellPrimaryView: UIView {
             .trailingToSuperview()
             .activate()
         
-        nameLabel.lineBreakMode = .byTruncatingTail
-               nameLabel.numberOfLines = 2
-               nameLabel.anchor
-                   .trailingToSuperview()
-                   .leadingToSuperview()
-                   .activate()
+       nameLabel.anchor
+           .trailingToSuperview()
+           .leadingToSuperview()
+           .activate()
        nameLabelTopAnchor = nameLabel.topAnchor.constraint(equalTo: accentLabel.bottomAnchor)
        nameLabelTopAnchor?.isActive = true
         
+        iconImageView.anchor
+            .top(to: detailLabel.topAnchor)
+            .bottom(to: detailLabel.bottomAnchor)
+            .leadingToSuperview()
+            .width(to: iconImageView.heightAnchor)
+            .activate()
+        
         detailLabel.anchor
             .top(to: nameLabel.bottomAnchor, constant: 5)
-            .leadingToSuperview()
             .trailingToSuperview()
             .bottomToSuperview()
+            .leading(to: iconImageView.trailingAnchor, constant: 3)
             .activate()
     }
     
@@ -139,17 +170,88 @@ class GradableCellPrimaryView: UIView {
         accentLabel.text = viewModel.accentText
         nameLabel.text = viewModel.name
         detailLabel.text = viewModel.detail
-        if let imageName = viewModel.systemImage, let image = UIImage(systemName: imageName) {
+        let imageConfigurations = UIImage.SymbolConfiguration(font: .preferredFont(forTextStyle: .caption1))
+        if let imageName = viewModel.systemImage, let image = UIImage(systemName: imageName, withConfiguration: imageConfigurations) {
             iconImageView.image = image
+            iconImageView.tintColor = .secondaryLabel
+            iconImageView.isHidden = false
+        } else {
+            iconImageView.isHidden = true
         }
         if viewModel.accentText != nil {
             nameLabelTopAnchor?.constant = 8
         } else {
             nameLabelTopAnchor?.constant = 0
         }
-        layoutSubviews()
+        layoutIfNeeded()
     }
 }
+
+class AssignmentCellPrimaryView: GradableCellPrimaryView {
+    let finishedImageView: UIImageView = UIImageView()
+    let topLine: UIView = UIView()
+    let bottomLine: UIView = UIView()
+    
+    override func setupView() {
+        super.setupView()
+        contentViewLeadingAnchor?.deactivate()
+        
+        topLine.backgroundColor = .secondaryLabel
+        bottomLine.backgroundColor = .secondaryLabel
+        
+        addSubview(finishedImageView)
+        addSubview(topLine)
+        addSubview(bottomLine)
+        
+        finishedImageView.anchor
+            .centerYToSuperview()
+            .width(constant: 20)
+            .height(to: finishedImageView.widthAnchor)
+            .leadingToSuperview(constant: 20)
+            .trailing(to: contentView.leadingAnchor, constant: -15)
+            .activate()
+        
+        topLine.anchor
+            .centerX(to: finishedImageView.centerXAnchor)
+            .width(constant: 1)
+            .topToSuperview()
+            .bottom(to: finishedImageView.topAnchor, constant: 1)
+            .activate()
+        
+        bottomLine.anchor
+            .centerX(to: finishedImageView.centerXAnchor)
+            .width(constant: 1)
+            .bottomToSuperview()
+            .top(to: finishedImageView.bottomAnchor, constant: -1)
+            .activate()
+    }
+    
+    func configure(with viewModel: AssignmentCellPrimaryViewModel, position: AssignmentCellPrimaryViewModel.CellPosition) {
+        super.configure(with: viewModel)
+        if viewModel.isFinished {
+            let image = UIImage(systemName: "checkmark.circle")!
+            finishedImageView.image = image
+            finishedImageView.tintColor = .systemGreen
+        } else {
+            let image = UIImage(systemName: "circle")!
+            finishedImageView.image = image
+            finishedImageView.tintColor = .secondaryLabel
+        }
+        
+        switch position {
+        case .first:
+            topLine.isHidden = true
+            bottomLine.isHidden = false
+        case .middle:
+            topLine.isHidden = false
+            bottomLine.isHidden = false
+        case .last:
+            topLine.isHidden = false
+            bottomLine.isHidden = true
+        }
+    }
+}
+
 
 // MARK: Secondary View
 class GradableCellSecondaryView: UIView {
@@ -229,14 +331,13 @@ class GradableCellSecondaryView: UIView {
 
 
 class TermCollectionViewCell: UICollectionViewCell, ReusableView {
-    
-    private let primaryCellView = GradableCellPrimaryView()
+    private let primaryCellView: GradableCellPrimaryView = GradableCellPrimaryView()
     private let secondaryCellView = GradableCellSecondaryView()
     private var primaryViewBottomAnchor: Anchor?
 
     // MARK: Initializers
     override init(frame: CGRect) {
-        super.init(frame: frame)
+        super.init(frame: .zero)
         setupView()
     }
     
@@ -268,19 +369,48 @@ class TermCollectionViewCell: UICollectionViewCell, ReusableView {
     }
     
     func configure(with viewModel: GradableCellViewModelRepresentable) {
-        let primaryViewModel = GradableCellPrimaryViewModel(name: viewModel.name, detail: viewModel.detail, accentText: viewModel.accentText, gradeRingViewModel: viewModel.gradeRingViewModel)
-        primaryCellView.configure(with: primaryViewModel)
+//        let primaryAssignmentViewModel = AssignmentCellPrimaryViewModel(name: viewModel.name, detail: viewModel.detail, accentText: viewModel.accentText, systemImage: "person.crop.circle", gradeRingViewModel: viewModel.gradeRingViewModel, isFinished: false, position: .middle)
+//        let primaryViewModel = GradableCellPrimaryViewModel(name: viewModel.name, detail: viewModel.detail, accentText: viewModel.accentText, systemImage: "person.crop.circle", gradeRingViewModel: viewModel.gradeRingViewModel)
+        primaryCellView.configure(with: viewModel.primaryViewModel)
         if viewModel.shouldShowSecondaryView {
             addShadow(height: 6)
             primaryViewBottomAnchor?.deactivate()
             setupSecondaryView()
-            secondaryCellView.configure(with: "Días restantes", progress: 0.3, progressText: "300 días")
+            secondaryCellView.configure(with: viewModel.secondaryViewTitle ?? "", progress: viewModel.secondaryViewProgress ?? 0.0, progressText: viewModel.secondaryViewProgressText ?? "")
         } else {
             removeShadow()
             primaryViewBottomAnchor?.activate()
             secondaryCellView.removeFromSuperview()
         }
-        layoutSubviews()
     }
     
 }
+
+class AssignmentCollectionViewCell: UICollectionViewCell, ReusableView {
+    
+    private let primaryCellView = AssignmentCellPrimaryView()
+
+    // MARK: Initializers
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupView()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setupView() {
+        layer.cornerRadius = 15
+        contentView.addSubview(primaryCellView)
+        primaryCellView.anchor
+            .edgesToSuperview()
+            .activate()
+    }
+    
+    func configure(with viewModel: GradableCellViewModelRepresentable, position: AssignmentCellPrimaryViewModel.CellPosition) {
+        primaryCellView.configure(with: viewModel.primaryViewModel as! AssignmentCellPrimaryViewModel, position: position)
+    }
+    
+}
+

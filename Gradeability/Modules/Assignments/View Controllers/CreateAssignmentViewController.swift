@@ -45,7 +45,7 @@ class FieldSectionView: UIView {
             .leading(to: titleLabel.leadingAnchor)
             .activate()
         
-        if let datePicker = control as? UIDatePicker {
+        if control is UIDatePicker {
             let button = UIButton()
             let date = Date()
             let dateFormatter = DateFormatter()

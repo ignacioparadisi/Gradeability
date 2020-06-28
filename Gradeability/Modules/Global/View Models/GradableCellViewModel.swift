@@ -9,6 +9,43 @@
 import UIKit
 
 struct GradableCellViewModel: GradableCellViewModelRepresentable, Hashable {
+    var primaryViewModel: GradableCellPrimaryViewRepresentable {
+        if let assignment = gradable as? Assignment {
+            if let deadline = assignment.deadline {
+                return AssignmentCellPrimaryViewModel(name: name, detail: detail, accentText: accentText, systemImage: "calendar", gradeRingViewModel: gradeRingViewModel, isFinished: deadline < Date())
+            }
+            return AssignmentCellPrimaryViewModel(name: name, detail: detail, accentText: accentText, systemImage: "calendar", gradeRingViewModel: gradeRingViewModel, isFinished: false)
+        }
+        return GradableCellPrimaryViewModel(name: name, detail: detail, accentText: accentText, systemImage: "person.crop.circle", gradeRingViewModel: gradeRingViewModel)
+    }
+    
+    var secondaryViewTitle: String? {
+        if gradable is Term {
+             return "Días restantes"
+        } else if gradable is Subject {
+            return "Porcentaje evaluado"
+        }
+        return nil
+    }
+    
+    var secondaryViewProgress: Float? {
+        if gradable is Term {
+            return 0.3
+        } else if gradable is Subject {
+            return 0.3
+        }
+        return nil
+    }
+    
+    var secondaryViewProgressText: String? {
+        if gradable is Term {
+             return "300 días"
+        } else if gradable is Subject {
+            return "30%"
+        }
+        return nil
+    }
+    
     
     // MARK: Private Properties
     /// Name of the `Term`, `Subject` or `Assignment`.

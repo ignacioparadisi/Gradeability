@@ -118,6 +118,16 @@ class AssignmentsViewModel: GradableViewModelRepresentable {
         return menu
     }
     
+    func positionForCell(at indexPath: IndexPath) -> AssignmentCellPrimaryViewModel.CellPosition {
+        if indexPath.item == 0 {
+            return .first
+        }
+        if indexPath.item == assignments.count - 1 {
+            return .last
+        }
+        return .middle
+    }
+    
     
     /// Create a new assignment
     func createAssignment() {

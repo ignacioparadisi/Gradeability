@@ -18,4 +18,9 @@ protocol GradableCellViewModelRepresentable {
     /// Accessory type for the cell.
     var shouldShowSecondaryView: Bool { get }
     var gradeRingViewModel: GradeRingViewModel { get }
+    var primaryViewModel: GradableCellPrimaryViewRepresentable { get }
+    var secondaryViewTitle: String? { get }
+    var secondaryViewProgress: Float? { get }
+    var secondaryViewProgressText: String? { get }
 }
+
