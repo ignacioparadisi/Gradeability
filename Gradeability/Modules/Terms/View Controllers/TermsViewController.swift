@@ -146,6 +146,7 @@ class TermsViewController: GradablesViewController {
 // MARK: - UICollectionViewDelegate
 extension TermsViewController {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        super.collectionView(collectionView, didSelectItemAt: indexPath)
         guard let nextViewModel = viewModel.nextViewModelForRow(at: indexPath) else { return }
         let viewController = SubjectsViewController(viewModel: nextViewModel as! SubjectsViewModel)
         navigationController?.pushViewController(viewController, animated: true)

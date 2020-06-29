@@ -13,6 +13,9 @@ class GradablesViewController: UIViewController {
     /// View Model that holds the data.
     private var viewModel: GradableViewModelRepresentable
     var collectionView: UICollectionView!
+    private var panGesture: UIPanGestureRecognizer!
+    private var currentSwipeCell: GradableCollectionViewCell?
+    private var currentGesture: UIGestureRecognizer?
     var dataSource: UICollectionViewDiffableDataSource<Sections, AnyHashable>!
     /// Sections displayed in the table view
     enum Sections: Int, CaseIterable {
@@ -50,6 +53,13 @@ class GradablesViewController: UIViewController {
         collectionView.backgroundColor = .systemGroupedBackground
         view.addSubview(collectionView)
         collectionView.anchor.edgesToSuperview().activate()
+        addGesture()
+    }
+    
+    func addGesture() {
+        panGesture = UIPanGestureRecognizer(target: self, action: #selector(onPan(_:)))
+        panGesture.delegate = self
+        collectionView.addGestureRecognizer(panGesture)
     }
     
     private func createLayout() -> UICollectionViewLayout {
@@ -119,12 +129,29 @@ class GradablesViewController: UIViewController {
         super.viewDidLayoutSubviews()
         collectionView.collectionViewLayout.invalidateLayout()
     }
+    
+    @objc func onPan(_ gesture: UIPanGestureRecognizer) {
+        let location = gesture.location(in: collectionView)
+        guard let indexPath = collectionView.indexPathForItem(at: location),
+            let cell = collectionView.cellForItem(at: indexPath) as? GradableCollectionViewCell else { return }
+        if currentSwipeCell != cell {
+            currentSwipeCell?.resetState()
+            currentSwipeCell = cell
+        }
+        cell.handleSwipe(gesture)
+        
+    }
 }
 
 // MARK: - UITableViewDelegate
 extension GradablesViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let currentSwipeCell = currentSwipeCell {
+            currentSwipeCell.resetState()
+            self.currentSwipeCell = nil
+            return
+        }
         
     }
     
@@ -132,5 +159,15 @@ extension GradablesViewController: UICollectionViewDelegate {
         return true
     }
     
+}
+
+extension GradablesViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
+    
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        return abs((panGesture.velocity(in: panGesture.view)).x) > abs((panGesture.velocity(in: panGesture.view)).y)
+    }
 }
 

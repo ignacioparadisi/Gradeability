@@ -172,6 +172,7 @@ class SubjectsViewController: GradablesViewController {
 extension SubjectsViewController {
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        super.collectionView(collectionView, didSelectItemAt: indexPath)
         guard Sections(rawValue: indexPath.section) != .grade else { return }
         guard let nextViewModel = viewModel.nextViewModelForRow(at: indexPath) else { return }
         let viewController = AssignmentsViewController(viewModel: nextViewModel as! AssignmentsViewModel)
