@@ -100,6 +100,7 @@
 		32E59DC62483330200B4F67C /* CoreDataManagerRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E59DC52483330200B4F67C /* CoreDataManagerRepresentable.swift */; };
 		32EF125D24903C6800B6C983 /* GradeRingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32EF125C24903C6800B6C983 /* GradeRingView.swift */; };
 		32EF125F24903EEF00B6C983 /* GradeRingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32EF125E24903EEF00B6C983 /* GradeRingViewModel.swift */; };
+		32F148DD24ABB08600F8AC37 /* SwipeCellKit in Frameworks */ = {isa = PBXBuildFile; productRef = 32F148DC24ABB08600F8AC37 /* SwipeCellKit */; };
 		32F86A102482CEC50058E56E /* TermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F86A0F2482CEC50058E56E /* TermsViewController.swift */; };
 		32F86A122482CF300058E56E /* SubjectsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F86A112482CF300058E56E /* SubjectsViewController.swift */; };
 		32F86A142482CF5E0058E56E /* AssignmentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F86A132482CF5E0058E56E /* AssignmentsViewController.swift */; };
@@ -237,6 +238,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				32F148DD24ABB08600F8AC37 /* SwipeCellKit in Frameworks */,
 				3297DF2D2491B06800CB22DD /* JTAppleCalendar in Frameworks */,
 				329C16F224A51651005B65A8 /* CloudKit.framework in Frameworks */,
 				327A170924A66A62006F39D0 /* IQKeyboardManagerSwift in Frameworks */,
@@ -691,6 +693,7 @@
 			packageProductDependencies = (
 				3297DF2C2491B06800CB22DD /* JTAppleCalendar */,
 				327A170824A66A62006F39D0 /* IQKeyboardManagerSwift */,
+				32F148DC24ABB08600F8AC37 /* SwipeCellKit */,
 			);
 			productName = Gradeability;
 			productReference = 32E34EFB247F383500BFD25A /* Gradeability.app */;
@@ -768,6 +771,7 @@
 			packageReferences = (
 				3297DF2B2491B06800CB22DD /* XCRemoteSwiftPackageReference "JTAppleCalendar" */,
 				327A170724A66A61006F39D0 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
+				32F148DB24ABB08600F8AC37 /* XCRemoteSwiftPackageReference "SwipeCellKit" */,
 			);
 			productRefGroup = 32E34EFC247F383500BFD25A /* Products */;
 			projectDirPath = "";
@@ -1283,6 +1287,14 @@
 				minimumVersion = 8.0.3;
 			};
 		};
+		32F148DB24ABB08600F8AC37 /* XCRemoteSwiftPackageReference "SwipeCellKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwipeCellKit/SwipeCellKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.7.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1295,6 +1307,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 3297DF2B2491B06800CB22DD /* XCRemoteSwiftPackageReference "JTAppleCalendar" */;
 			productName = JTAppleCalendar;
+		};
+		32F148DC24ABB08600F8AC37 /* SwipeCellKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 32F148DB24ABB08600F8AC37 /* XCRemoteSwiftPackageReference "SwipeCellKit" */;
+			productName = SwipeCellKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 
