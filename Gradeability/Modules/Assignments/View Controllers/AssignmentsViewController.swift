@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwipeCellKit
 
 class AssignmentsViewController: GradablesViewController {
     
@@ -42,6 +43,9 @@ class AssignmentsViewController: GradablesViewController {
                 let cell = collectionView.dequeueReusableCell(for: indexPath) as AssignmentCollectionViewCell
                 let contextMenuInteraction = UIContextMenuInteraction(delegate: self)
                 cell.configure(with: gradable, position: self.viewModel.positionForCell(at: indexPath))
+                #if !targetEnvironment(macCatalyst)
+                cell.delegate = self
+                #endif
                 cell.addInteraction(contextMenuInteraction)
                 return cell
             case .grade:
@@ -71,7 +75,6 @@ class AssignmentsViewController: GradablesViewController {
             self?.title = self?.viewModel.title
             #endif
             self?.reloadData()
-            self?.collectionView.reloadData()
         }
     }
     
@@ -129,36 +132,6 @@ class AssignmentsViewController: GradablesViewController {
     
 }
 
-//// MARK: - UITableViewDataSource
-//extension AssignmentsViewController {
-//
-//    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-//        <#code#>
-//    }
-//
-//    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        guard let section = Sections(rawValue: indexPath.section) else { return UITableViewCell() }
-//        switch section {
-//        case .grade:
-//            let cell = tableView.dequeueReusableCell(for: indexPath) as GradesCardTableViewCell
-//            guard let viewModel = self.viewModel.gradeCardViewModelForRow(at: indexPath) else { return UITableViewCell() }
-//            cell.configure(with: viewModel)
-//            return cell
-//        case .gradables:
-//            let cellViewModel = viewModel.gradableViewModelForRow(at: indexPath)
-//            let contextMenuInteraction = UIContextMenuInteraction(delegate: self)
-//            let cell = tableView.dequeueReusableCell(for: indexPath) as GradableTableViewCell
-//            cell.configure(with: cellViewModel)
-//            cell.addInteraction(contextMenuInteraction)
-//            return cell
-//        }
-//    }
-//
-//}
-
-extension AssignmentsViewController {
-}
-
 // MARK: - EmptyGradablesViewDelegate
 extension AssignmentsViewController: EmptyGradablesViewDelegate {
     
@@ -188,3 +161,40 @@ extension AssignmentsViewController: UIContextMenuInteractionDelegate {
     }
 
 }
+
+#if !targetEnvironment(macCatalyst)
+extension AssignmentsViewController: SwipeCollectionViewCellDelegate {
+    func collectionView(_ collectionView: UICollectionView, editActionsForItemAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
+        guard orientation == .right else { return nil }
+
+        let deleteAction = SwipeAction(style: .destructive, title: "Delete") { action, indexPath in
+            // handle action by updating model with deletion
+        }
+        deleteAction.transitionDelegate = ScaleTransition.default
+        // customize the action appearance
+        deleteAction.image = UIImage(systemName: "trash.circle.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 44))
+        deleteAction.textColor = .red
+        deleteAction.backgroundColor = .clear
+        
+        let editAction = SwipeAction(style: .default, title: "Edit") { action, indexPath in
+            // handle action by updating model with deletion
+        }
+        editAction.transitionDelegate = ScaleTransition.default
+        // customize the action appearance
+        editAction.image = UIImage(systemName: "pencil.circle.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 44))
+        editAction.textColor = .systemBlue
+        editAction.backgroundColor = .clear
+
+        return [deleteAction, editAction]
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, editActionsOptionsForItemAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> SwipeOptions {
+        var options = SwipeOptions()
+        options.transitionStyle = .reveal
+        options.backgroundColor = .clear
+        options.expansionDelegate = ScaleAndAlphaExpansion.default
+        options.expansionStyle = .fill
+        return options
+    }
+}
+#endif

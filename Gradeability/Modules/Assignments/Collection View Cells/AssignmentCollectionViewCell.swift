@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import SwipeCellKit
 
-class AssignmentCollectionViewCell: UICollectionViewCell, ReusableView {
+class AssignmentCollectionViewCell: SwipeCollectionViewCell, ReusableView {
     
     private let primaryCellView = AssignmentCellPrimaryView()
 

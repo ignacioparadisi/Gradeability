@@ -35,7 +35,7 @@ class GradeCardView: UIView {
     // MARK: Initializers
     override init(frame: CGRect) {
         super.init(frame: frame)
-        layer.cornerRadius = 15
+        layer.cornerRadius = 20
         
         addSubview(backgroundGradientView)
         backgroundGradientView.anchor.edgesToSuperview().activate()

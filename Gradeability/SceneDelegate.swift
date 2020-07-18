@@ -22,7 +22,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         setupWindowSize(scene: windowScene)
         window = UIWindow(windowScene: windowScene)
 //        #if targetEnvironment(macCatalyst)
-        window?.rootViewController = MainViewController()
+        window?.rootViewController = MainSplitViewController()
 //        #else
 //        window?.rootViewController = MainTabBarController()
 //        #endif

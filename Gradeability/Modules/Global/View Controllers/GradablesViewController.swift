@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwipeCellKit
 
 class GradablesViewController: UIViewController {
     // MARK: Properties
@@ -53,13 +54,6 @@ class GradablesViewController: UIViewController {
         collectionView.backgroundColor = .systemGroupedBackground
         view.addSubview(collectionView)
         collectionView.anchor.edgesToSuperview().activate()
-        addGesture()
-    }
-    
-    func addGesture() {
-        panGesture = UIPanGestureRecognizer(target: self, action: #selector(onPan(_:)))
-        panGesture.delegate = self
-        collectionView.addGestureRecognizer(panGesture)
     }
     
     private func createLayout() -> UICollectionViewLayout {
@@ -129,49 +123,14 @@ class GradablesViewController: UIViewController {
         super.viewDidLayoutSubviews()
         collectionView.collectionViewLayout.invalidateLayout()
     }
-    
-    @objc func onPan(_ gesture: UIPanGestureRecognizer) {
-        let location = gesture.location(in: collectionView)
-        guard let indexPath = collectionView.indexPathForItem(at: location),
-            let cell = collectionView.cellForItem(at: indexPath) as? GradableCollectionViewCell else { return }
-        if currentSwipeCell != cell {
-            currentSwipeCell?.resetState()
-            currentSwipeCell = cell
-        }
-        cell.handleSwipe(gesture)
-        
-    }
 }
 
 // MARK: - UITableViewDelegate
 extension GradablesViewController: UICollectionViewDelegate {
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let currentSwipeCell = currentSwipeCell {
-            currentSwipeCell.resetState()
-            self.currentSwipeCell = nil
-            return
-        }
-        
-    }
-    
     func collectionView(_ collectionView: UICollectionView, shouldSpringLoadItemAt indexPath: IndexPath, with context: UISpringLoadedInteractionContext) -> Bool {
         return true
     }
     
-}
-
-extension GradablesViewController: UIGestureRecognizerDelegate {
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        if gestureRecognizer.state == .changed {
-            return false
-        }
-        return false
-    }
-    
-    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-        return abs((panGesture.velocity(in: panGesture.view)).x) > abs((panGesture.velocity(in: panGesture.view)).y)
-    }
-
 }
 

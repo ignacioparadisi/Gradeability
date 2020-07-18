@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwipeCellKit
 
 class SubjectsViewController: GradablesViewController {
     
@@ -48,6 +49,9 @@ class SubjectsViewController: GradablesViewController {
                 let cell = collectionView.dequeueReusableCell(for: indexPath) as GradableCollectionViewCell
                 guard let gradable = gradable as? GradableCellViewModel else { return nil }
                 let contextMenuInteraction = UIContextMenuInteraction(delegate: self)
+                #if !targetEnvironment(macCatalyst)
+                cell.delegate = self
+                #endif
                 cell.configure(with: gradable)
                 cell.addInteraction(contextMenuInteraction)
                 return cell
@@ -145,34 +149,10 @@ class SubjectsViewController: GradablesViewController {
     
 }
 
-//// MARK: - UITableViewDataSource
-//extension SubjectsViewController {
-//
-//    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        guard let section = Sections(rawValue: indexPath.section) else { return UITableViewCell() }
-//        switch section {
-//        case .grade:
-//            let cell = tableView.dequeueReusableCell(for: indexPath) as GradesCardTableViewCell
-//            guard let viewModel = self.viewModel.gradeCardViewModelForRow(at: indexPath) else { return UITableViewCell() }
-//            cell.configure(with: viewModel)
-//            return cell
-//        case .gradables:
-//            let cellViewModel = viewModel.gradableViewModelForRow(at: indexPath)
-//            let contextMenuInteraction = UIContextMenuInteraction(delegate: self)
-//            let cell = tableView.dequeueReusableCell(for: indexPath) as GradableTableViewCell
-//            cell.configure(with: cellViewModel)
-//            cell.addInteraction(contextMenuInteraction)
-//            return cell
-//        }
-//    }
-//
-//}
-
 // MARK: - UITableViewDelegate
 extension SubjectsViewController {
     
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        super.collectionView(collectionView, didSelectItemAt: indexPath)
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard Sections(rawValue: indexPath.section) != .grade else { return }
         guard let nextViewModel = viewModel.nextViewModelForRow(at: indexPath) else { return }
         let viewController = AssignmentsViewController(viewModel: nextViewModel as! AssignmentsViewModel)
@@ -211,3 +191,40 @@ extension SubjectsViewController: UIContextMenuInteractionDelegate {
     }
 
 }
+
+#if !targetEnvironment(macCatalyst)
+extension SubjectsViewController: SwipeCollectionViewCellDelegate {
+    func collectionView(_ collectionView: UICollectionView, editActionsForItemAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
+        guard orientation == .right else { return nil }
+
+        let deleteAction = SwipeAction(style: .destructive, title: "Delete") { [weak self] action, indexPath in
+            self?.viewModel.deleteItem(at: indexPath)
+        }
+        deleteAction.transitionDelegate = ScaleTransition.default
+        // customize the action appearance
+        deleteAction.image = UIImage(systemName: "trash.circle.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 44))
+        deleteAction.textColor = .red
+        deleteAction.backgroundColor = .clear
+        
+        let editAction = SwipeAction(style: .default, title: "Edit") { action, indexPath in
+            // handle action by updating model with deletion
+        }
+        editAction.transitionDelegate = ScaleTransition.default
+        // customize the action appearance
+        editAction.image = UIImage(systemName: "pencil.circle.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 44))
+        editAction.textColor = .systemBlue
+        editAction.backgroundColor = .clear
+
+        return [deleteAction, editAction]
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, editActionsOptionsForItemAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> SwipeOptions {
+        var options = SwipeOptions()
+        options.transitionStyle = .reveal
+        options.backgroundColor = .clear
+        options.expansionDelegate = ScaleAndAlphaExpansion.default
+        options.expansionStyle = .destructive
+        return options
+    }
+}
+#endif

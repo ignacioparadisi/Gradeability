@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Combine
 
 protocol TermsViewModelDelegate: class {
     func didChangeCurrentTerm(_ term: Term)
@@ -18,13 +19,13 @@ class TermsViewModel: GradableViewModelRepresentable {
     
     // MARK: Private Properties
     /// Terms to be displayed.
-    private var terms: [Term] = []
-    var gradables: [GradableCellViewModel] = []
-    private var isLoading: Bool = false {
+    private var terms: [Term] = [] {
         didSet {
-            loadingDidChange?(isLoading)
+            guard !terms.isEmpty else { return }
+            gradables = terms.map { GradableCellViewModel(term: $0) }
         }
     }
+    @Published var gradables: [GradableCellViewModel] = []
     
     // MARK: Internal Properties
     weak var delegate: TermsViewModelDelegate?
@@ -42,15 +43,10 @@ class TermsViewModel: GradableViewModelRepresentable {
     // MARK: Functions
     /// Fetches the Subjects.
     func fetch() {
-        if isLoading { return }
-        isLoading = true
         TermCoreDataManager.shared.fetch { [weak self] result in
-            self?.isLoading = false
             switch result {
             case .success(let terms):
                 self?.terms = terms
-                self?.gradables = terms.map { GradableCellViewModel(term: $0) }
-                self?.dataDidChange?()
             case .failure:
                 break
             }
@@ -105,16 +101,15 @@ class TermsViewModel: GradableViewModelRepresentable {
             currentTerm?.isCurrent = false
             term.isCurrent = true
             CoreDataManager.shared.saveContext()
-            self?.dataDidChange?()
             self?.delegate?.didChangeCurrentTerm(term)
         }
         let editAction = UIAction(title: "Edit", image: UIImage(systemName: "square.and.pencil")) { _ in
             
         }
         let attributes: UIAction.Attributes = term.isCurrent ? [.destructive, .disabled] : .destructive
-        let deleteAction = UIAction(title: "Delete", image: UIImage(systemName: "trash"), attributes: attributes) { _ in
+        let deleteAction = UIAction(title: "Delete", image: UIImage(systemName: "trash"), attributes: attributes) { [weak self] _ in
             CoreDataManager.shared.delete(term)
-            self.fetch()
+            self?.terms.remove(at: indexPath.item)
         }
         if !term.isCurrent {
             rootChildren.append(currentAction)
