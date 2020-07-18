@@ -26,15 +26,16 @@ class TermsViewController: GradablesViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        collectionView.register(GradesCardCollectionViewCell.self)
         collectionView.register(GradableCollectionViewCell.self)
         viewModel.fetch()
     }
     
     override func createDataSource() -> UICollectionViewDiffableDataSource<Sections, AnyHashable> {
         return UICollectionViewDiffableDataSource<Sections, AnyHashable>(collectionView: collectionView) { collectionView, indexPath, gradable in
-//            guard let section = Sections(rawValue: indexPath.section) else { return nil }
-//            switch section {
-//            case .gradables:
+            guard let section = Sections(rawValue: indexPath.section) else { return nil }
+            switch section {
+            case .gradables:
                 guard let gradable = gradable as? GradableCellViewModel else { return nil }
                 let cell = collectionView.dequeueReusableCell(for: indexPath) as GradableCollectionViewCell
                 #if !targetEnvironment(macCatalyst)
@@ -44,15 +45,21 @@ class TermsViewController: GradablesViewController {
                 cell.configure(with: gradable)
                 cell.addInteraction(contextMenuInteraction)
                 return cell
-//            default:
-//                return nil
-//            }
+            case .grade:
+                let cell = collectionView.dequeueReusableCell(for: indexPath) as GradesCardCollectionViewCell
+                guard let viewModel = self.viewModel.gradeCardViewModel else { return nil }
+                cell.configure(with: viewModel)
+                return cell
+            }
         }
     }
     
     override func createSnapshot() -> NSDiffableDataSourceSnapshot<Sections, AnyHashable> {
         var snapshot = NSDiffableDataSourceSnapshot<Sections, AnyHashable>()
-        snapshot.appendSections([.gradables])
+        snapshot.appendSections(Sections.allCases)
+        if let cardViewModel = viewModel.gradeCardViewModel {
+           snapshot.appendItems([cardViewModel], toSection: .grade)
+       }
         snapshot.appendItems(viewModel.gradables, toSection: .gradables)
         return snapshot
     }
