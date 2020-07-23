@@ -19,7 +19,9 @@ extension UIColor {
     static func getColor(for gradable: Gradable) -> UIColor {
         let roundedGrade = gradable.grade.rounded()
         let minGreenGrade = gradable.maxGrade - ((gradable.maxGrade - gradable.minGrade) / 3)
-        if roundedGrade <= gradable.maxGrade, roundedGrade >= minGreenGrade {
+        if roundedGrade == gradable.maxGrade.rounded() {
+            return .systemBlue
+        } else if roundedGrade <= gradable.maxGrade, roundedGrade >= minGreenGrade {
             return .systemGreen
         } else if roundedGrade < minGreenGrade, roundedGrade >= gradable.minGrade {
             return .systemYellow

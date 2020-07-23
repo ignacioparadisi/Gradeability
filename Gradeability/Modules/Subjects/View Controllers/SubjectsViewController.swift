@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SwipeCellKit
 
 class SubjectsViewController: GradablesViewController {
     
@@ -49,9 +48,6 @@ class SubjectsViewController: GradablesViewController {
                 let cell = collectionView.dequeueReusableCell(for: indexPath) as GradableCollectionViewCell
                 guard let gradable = gradable as? GradableCellViewModel else { return nil }
                 let contextMenuInteraction = UIContextMenuInteraction(delegate: self)
-                #if !targetEnvironment(macCatalyst)
-                cell.delegate = self
-                #endif
                 cell.configure(with: gradable)
                 cell.addInteraction(contextMenuInteraction)
                 return cell
@@ -191,40 +187,3 @@ extension SubjectsViewController: UIContextMenuInteractionDelegate {
     }
 
 }
-
-#if !targetEnvironment(macCatalyst)
-extension SubjectsViewController: SwipeCollectionViewCellDelegate {
-    func collectionView(_ collectionView: UICollectionView, editActionsForItemAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
-        guard orientation == .right else { return nil }
-
-        let deleteAction = SwipeAction(style: .destructive, title: "Delete") { [weak self] action, indexPath in
-            self?.viewModel.deleteItem(at: indexPath)
-        }
-        deleteAction.transitionDelegate = ScaleTransition.default
-        // customize the action appearance
-        deleteAction.image = UIImage(systemName: "trash.circle.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 44))
-        deleteAction.textColor = .red
-        deleteAction.backgroundColor = .clear
-        
-        let editAction = SwipeAction(style: .default, title: "Edit") { action, indexPath in
-            // handle action by updating model with deletion
-        }
-        editAction.transitionDelegate = ScaleTransition.default
-        // customize the action appearance
-        editAction.image = UIImage(systemName: "pencil.circle.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 44))
-        editAction.textColor = .systemBlue
-        editAction.backgroundColor = .clear
-
-        return [deleteAction, editAction]
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, editActionsOptionsForItemAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> SwipeOptions {
-        var options = SwipeOptions()
-        options.transitionStyle = .reveal
-        options.backgroundColor = .clear
-        options.expansionDelegate = ScaleAndAlphaExpansion.default
-        options.expansionStyle = .destructive
-        return options
-    }
-}
-#endif

@@ -19,23 +19,12 @@ class TermsViewModel: GradableViewModelRepresentable {
     
     // MARK: Private Properties
     /// Terms to be displayed.
-    private var terms: [Term] = [] {
-        didSet {
-            guard !terms.isEmpty else { return }
-            gradables = terms.map { GradableCellViewModel(term: $0) }
-        }
-    }
-    @Published var gradables: [GradableCellViewModel] = []
+    private var terms: [Term] = []
+    var gradables: [GradableCellViewModel] = []
+    var dataDidChange: (() -> Void)?
     
     // MARK: Internal Properties
     weak var delegate: TermsViewModelDelegate?
-    /// Closure called when `terms` changes so the UI can be updated.
-    var dataDidChange: (() -> Void)?
-    /// Closure called when data loading changes so the UI can be updated.
-    var loadingDidChange: ((Bool) -> Void)?
-    var numberOfSections: Int {
-        return Sections.allCases.count
-    }
     /// Title for the `UIViewController`.
     var title: String {
         return "Terms"
@@ -47,19 +36,11 @@ class TermsViewModel: GradableViewModelRepresentable {
             switch result {
             case .success(let terms):
                 self?.terms = terms
+                self?.gradables = terms.map { GradableCellViewModel(term: $0) }
+                self?.dataDidChange?()
             case .failure:
                 break
             }
-        }
-    }
-    
-    func numberOfRows(in section: Int) -> Int {
-        guard let section = Sections(rawValue: section) else { return 0 }
-        switch section {
-        case .grade:
-            return 0
-        case .gradables:
-            return terms.count
         }
     }
     
@@ -74,18 +55,10 @@ class TermsViewModel: GradableViewModelRepresentable {
         }
     }
     
-    /// Gets the View Model for the `UITableViewCell` at the specified `IndexPath`.
-    /// - Parameter indexPath: IndexPath where the View Model belongs.
-    /// - Returns: The View Model for the specified `IndexPath`.
-    func gradableViewModelForRow(at indexPath: IndexPath) -> GradableCellViewModelRepresentable {
-        let term = terms[indexPath.row]
-        return GradableCellViewModel(term: term)
-    }
-    
     /// Gets the View Model for the `UIViewController` to be displayed next when the user selects a `UITableViewCell`.
     /// - Parameter indexPath: IndexPath for the cell selected.
     func nextViewModelForRow(at indexPath: IndexPath) -> GradableViewModelRepresentable? {
-        let term = terms[indexPath.row]
+        let term = terms[indexPath.item]
         let viewModel = SubjectsViewModel(term: term)
         viewModel.isMasterController = false
         return viewModel
@@ -109,7 +82,7 @@ class TermsViewModel: GradableViewModelRepresentable {
         let attributes: UIAction.Attributes = term.isCurrent ? [.destructive, .disabled] : .destructive
         let deleteAction = UIAction(title: "Delete", image: UIImage(systemName: "trash"), attributes: attributes) { [weak self] _ in
             CoreDataManager.shared.delete(term)
-            self?.terms.remove(at: indexPath.item)
+            self?.deleteItem(at: indexPath)
         }
         if !term.isCurrent {
             rootChildren.append(currentAction)
@@ -123,9 +96,11 @@ class TermsViewModel: GradableViewModelRepresentable {
     }
     
     func deleteItem(at indexPath: IndexPath) {
-        let term = terms[indexPath.row]
+        let term = terms[indexPath.item]
         CoreDataManager.shared.delete(term)
-        terms.remove(at: indexPath.row)
+        terms.remove(at: indexPath.item)
+        gradables.remove(at: indexPath.item)
+        dataDidChange?()
     }
     
     var gradeCardViewModel: GradesCardCollectionViewCellViewModel? {

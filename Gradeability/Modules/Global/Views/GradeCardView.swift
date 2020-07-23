@@ -35,7 +35,7 @@ class GradeCardView: UIView {
     // MARK: Initializers
     override init(frame: CGRect) {
         super.init(frame: frame)
-        layer.cornerRadius = 20
+        layer.cornerRadius = Constants.cornerRadius
         
         addSubview(backgroundGradientView)
         backgroundGradientView.anchor.edgesToSuperview().activate()
@@ -46,15 +46,18 @@ class GradeCardView: UIView {
         blurView.anchor.edgesToSuperview().activate()
         
         backgroundGradientView.addSubview(cardGradientView)
-        cardGradientView.layer.cornerRadius = 10
+        var margin: CGFloat = 8
+        let borderCornerRadius = Constants.cornerRadius - margin
+        cardGradientView.layer.cornerRadius = borderCornerRadius
         cardGradientView.anchor
-            .edgesToSuperview(insets: UIEdgeInsets(top: 8, left: 8, bottom: -8, right: -8))
+            .edgesToSuperview(insets: UIEdgeInsets(top: margin, left: margin, bottom: -margin, right: -margin))
             .activate()
         
         cardGradientView.addSubview(cardTopView)
-        cardTopView.layer.cornerRadius = 7
+        margin = 5
+        cardTopView.layer.cornerRadius = borderCornerRadius - margin
         cardTopView.anchor
-            .edgesToSuperview(insets: UIEdgeInsets(top: 5, left: 5, bottom: -5, right: -5))
+            .edgesToSuperview(insets: UIEdgeInsets(top: margin, left: margin, bottom: -margin, right: -margin))
             .activate()
         
         setupView()

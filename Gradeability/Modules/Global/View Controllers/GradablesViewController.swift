@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SwipeCellKit
 
 class GradablesViewController: UIViewController {
     // MARK: Properties
@@ -101,10 +100,6 @@ class GradablesViewController: UIViewController {
     
     /// Setup all View Model's closures to update the UI
     func setupViewModel() {
-        viewModel.dataDidChange = { [weak self] in
-            self?.title = self?.viewModel.title
-            self?.reloadData()
-        }
     }
     
     func reloadData() {

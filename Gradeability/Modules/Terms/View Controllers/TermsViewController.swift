@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SwipeCellKit
 import Combine
 
 class TermsViewController: GradablesViewController {
@@ -30,7 +29,7 @@ class TermsViewController: GradablesViewController {
         collectionView.register(GradableCollectionViewCell.self)
         viewModel.fetch()
     }
-    
+
     override func createDataSource() -> UICollectionViewDiffableDataSource<Sections, AnyHashable> {
         return UICollectionViewDiffableDataSource<Sections, AnyHashable>(collectionView: collectionView) { collectionView, indexPath, gradable in
             guard let section = Sections(rawValue: indexPath.section) else { return nil }
@@ -38,9 +37,6 @@ class TermsViewController: GradablesViewController {
             case .gradables:
                 guard let gradable = gradable as? GradableCellViewModel else { return nil }
                 let cell = collectionView.dequeueReusableCell(for: indexPath) as GradableCollectionViewCell
-                #if !targetEnvironment(macCatalyst)
-                cell.delegate = self
-                #endif
                 let contextMenuInteraction = UIContextMenuInteraction(delegate: self)
                 cell.configure(with: gradable)
                 cell.addInteraction(contextMenuInteraction)
@@ -77,16 +73,9 @@ class TermsViewController: GradablesViewController {
     
     override func setupViewModel() {
         viewModel.dataDidChange = { [weak self] in
-            self?.reloadData()
+            guard let self = self else { return }
+            self.reloadData()
         }
-        viewModel.$gradables
-            .map { $0.isEmpty }
-            .sink { [weak self] isEmpty in
-                if !isEmpty {
-                    self?.reloadData()
-                }
-            }
-            .store(in: &subscriptions)
     }
     
     override func setupNavigationBar() {
@@ -149,6 +138,7 @@ class TermsViewController: GradablesViewController {
 // MARK: - UICollectionViewDelegate
 extension TermsViewController {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let section = Sections(rawValue: indexPath.section), section == .gradables else { return }
         guard let nextViewModel = viewModel.nextViewModelForRow(at: indexPath) else { return }
         let viewController = SubjectsViewController(viewModel: nextViewModel as! SubjectsViewModel)
         navigationController?.pushViewController(viewController, animated: true)
@@ -168,49 +158,3 @@ extension TermsViewController: UIContextMenuInteractionDelegate {
     }
 
 }
-
-#if !targetEnvironment(macCatalyst)
-extension TermsViewController: SwipeCollectionViewCellDelegate {
-    func collectionView(_ collectionView: UICollectionView, editActionsForItemAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
-        guard orientation == .right else { return nil }
-
-        let deleteAction = SwipeAction(style: .destructive, title: "Delete") { [weak self] action, indexPath in
-            self?.viewModel.deleteItem(at: indexPath)
-        }
-        deleteAction.transitionDelegate = ScaleTransition.default
-        // customize the action appearance
-        deleteAction.image = UIImage(systemName: "trash.circle.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 44))
-        deleteAction.textColor = .red
-        deleteAction.backgroundColor = .clear
-        
-        let editAction = SwipeAction(style: .default, title: "Edit") { action, indexPath in
-            // handle action by updating model with deletion
-        }
-        editAction.transitionDelegate = ScaleTransition.default
-        // customize the action appearance
-        editAction.image = UIImage(systemName: "pencil.circle.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 44))
-        editAction.textColor = .systemBlue
-        editAction.backgroundColor = .clear
-        
-        let setCurrentAction = SwipeAction(style: .default, title: "Set Current") { action, indexPath in
-            // handle action by updating model with deletion
-        }
-        setCurrentAction.transitionDelegate = ScaleTransition.default
-        // customize the action appearance
-        setCurrentAction.image = UIImage(systemName: "pin.circle.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 44))
-        setCurrentAction.textColor = .systemGray
-        setCurrentAction.backgroundColor = .clear
-
-        return [deleteAction, setCurrentAction, editAction]
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, editActionsOptionsForItemAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> SwipeOptions {
-        var options = SwipeOptions()
-        options.transitionStyle = .reveal
-        options.backgroundColor = .clear
-        options.expansionDelegate = ScaleAndAlphaExpansion.default
-        options.expansionStyle = .destructive(automaticallyDelete: false)
-        return options
-    }
-}
-#endif

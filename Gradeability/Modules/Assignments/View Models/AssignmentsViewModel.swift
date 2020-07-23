@@ -22,9 +22,6 @@ class AssignmentsViewModel: GradableViewModelRepresentable {
     // MARK: Internal Properties
     /// Closure called when `assignments` changes so the UI can be updated.
     var dataDidChange: (() -> Void)?
-    var numberOfSections: Int {
-        return Sections.allCases.count
-    }
     /// Subject's name to be displayed as the `UIViewController` title.
     var title: String {
         return subject?.name ?? ""
@@ -55,19 +52,6 @@ class AssignmentsViewModel: GradableViewModelRepresentable {
             case .failure:
                 break
             }
-        }
-    }
-    
-    /// Get number of rows for a specific section of the table view
-    /// - Parameter section: Section where the number of rows belong
-    /// - Returns: The number of rows for the section
-    func numberOfRows(in section: Int) -> Int {
-        guard let section = Sections(rawValue: section) else { return 0 }
-        switch section {
-        case .grade:
-            return 1
-        case .gradables:
-            return assignments.count
         }
     }
     

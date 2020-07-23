@@ -7,9 +7,8 @@
 //
 
 import UIKit
-import SwipeCellKit
 
-class AssignmentCollectionViewCell: SwipeCollectionViewCell, ReusableView {
+class AssignmentCollectionViewCell: UICollectionViewCell, ReusableView {
     
     private let primaryCellView = AssignmentCellPrimaryView()
 
@@ -24,7 +23,7 @@ class AssignmentCollectionViewCell: SwipeCollectionViewCell, ReusableView {
     }
     
     func setupView() {
-        layer.cornerRadius = 15
+        layer.cornerRadius = Constants.cornerRadius
         contentView.addSubview(primaryCellView)
         primaryCellView.anchor
             .edgesToSuperview()

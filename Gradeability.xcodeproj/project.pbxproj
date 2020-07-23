@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		32478F0224B67B0700498958 /* SubjectsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32478F0124B67B0700498958 /* SubjectsDataSource.swift */; };
-		32478F0524B6981200498958 /* SwipeCellKit in Frameworks */ = {isa = PBXBuildFile; productRef = 32478F0424B6981200498958 /* SwipeCellKit */; };
 		324E14ED24812C060089ECFC /* GradableCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 324E14EC24812C060089ECFC /* GradableCellViewModel.swift */; };
 		324E14F224812E2E0089ECFC /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 324E14F124812E2E0089ECFC /* UITableView+Extension.swift */; };
 		324E14F524812E550089ECFC /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 324E14F424812E550089ECFC /* ReusableView.swift */; };
@@ -33,6 +32,7 @@
 		326427872487F144009A6112 /* CreateSubjectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326427862487F144009A6112 /* CreateSubjectViewModel.swift */; };
 		326AED402492640B0074CDB2 /* UICollectionView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326AED3F2492640B0074CDB2 /* UICollectionView+Extension.swift */; };
 		326AED422492BFF10074CDB2 /* BaseScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326AED412492BFF10074CDB2 /* BaseScrollViewController.swift */; };
+		32708DFB24C9E9940028605C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32708DFA24C9E9940028605C /* Constants.swift */; };
 		327A170924A66A62006F39D0 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 327A170824A66A62006F39D0 /* IQKeyboardManagerSwift */; };
 		32801D3C248BC7F900326C93 /* NSToolbarItemIdentifier+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32801D3B248BC7F900326C93 /* NSToolbarItemIdentifier+Extension.swift */; };
 		3293A88D247FFC9C0054D150 /* NSLayoutAnchor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3293A88C247FFC9C0054D150 /* NSLayoutAnchor+Extension.swift */; };
@@ -146,6 +146,7 @@
 		326427862487F144009A6112 /* CreateSubjectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSubjectViewModel.swift; sourceTree = "<group>"; };
 		326AED3F2492640B0074CDB2 /* UICollectionView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extension.swift"; sourceTree = "<group>"; };
 		326AED412492BFF10074CDB2 /* BaseScrollViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseScrollViewController.swift; sourceTree = "<group>"; };
+		32708DFA24C9E9940028605C /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		32801D3B248BC7F900326C93 /* NSToolbarItemIdentifier+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSToolbarItemIdentifier+Extension.swift"; sourceTree = "<group>"; };
 		3293A88C247FFC9C0054D150 /* NSLayoutAnchor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSLayoutAnchor+Extension.swift"; sourceTree = "<group>"; };
 		3296EA07247F570E00A04FE0 /* DummyTerms.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = DummyTerms.json; sourceTree = "<group>"; };
@@ -232,7 +233,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				329C16F224A51651005B65A8 /* CloudKit.framework in Frameworks */,
-				32478F0524B6981200498958 /* SwipeCellKit in Frameworks */,
 				327A170924A66A62006F39D0 /* IQKeyboardManagerSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -282,6 +282,14 @@
 				325AA8D424A80F9B00958D6A /* GradeCardCollectionViewCell.swift */,
 			);
 			path = "Collection View Cells";
+			sourceTree = "<group>";
+		};
+		32708DF924C9E9850028605C /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				32708DFA24C9E9940028605C /* Constants.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 		3293A88A247FFC5E0054D150 /* Modules */ = {
@@ -363,7 +371,6 @@
 		329D129D247FFF0F00A0173A /* Assignments */ = {
 			isa = PBXGroup;
 			children = (
-				32CC658924A8F0ED006A3783 /* Collection View Cells */,
 				32CC658424A8F075006A3783 /* Views */,
 				32F86A0C2482CEA50058E56E /* View Controllers */,
 				329D12A624812B2B00A0173A /* View Models */,
@@ -476,6 +483,7 @@
 		32CC658424A8F075006A3783 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				32CC658924A8F0ED006A3783 /* Collection View Cells */,
 				32CC658524A8F07D006A3783 /* AssignmentCellPrimaryView.swift */,
 			);
 			path = Views;
@@ -519,6 +527,7 @@
 				32E34F0A247F383600BFD25A /* Assets.xcassets */,
 				32E34F0C247F383600BFD25A /* LaunchScreen.storyboard */,
 				32E34F0F247F383600BFD25A /* Info.plist */,
+				32708DF924C9E9850028605C /* Utilities */,
 				329D1299247FFD4100A0173A /* Localizables */,
 				32E34F31247F389C00BFD25A /* Core Data */,
 				3293A88B247FFC690054D150 /* Extensions */,
@@ -633,7 +642,6 @@
 			name = Gradeability;
 			packageProductDependencies = (
 				327A170824A66A62006F39D0 /* IQKeyboardManagerSwift */,
-				32478F0424B6981200498958 /* SwipeCellKit */,
 			);
 			productName = Gradeability;
 			productReference = 32E34EFB247F383500BFD25A /* Gradeability.app */;
@@ -710,7 +718,6 @@
 			mainGroup = 32E34EF2247F383500BFD25A;
 			packageReferences = (
 				327A170724A66A61006F39D0 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
-				32478F0324B6981200498958 /* XCRemoteSwiftPackageReference "SwipeCellKit" */,
 			);
 			productRefGroup = 32E34EFC247F383500BFD25A /* Products */;
 			projectDirPath = "";
@@ -769,6 +776,7 @@
 				32E4CB80249119C7006F3A7C /* MainViewController.swift in Sources */,
 				324E14F224812E2E0089ECFC /* UITableView+Extension.swift in Sources */,
 				325AA8D524A80F9B00958D6A /* GradeCardCollectionViewCell.swift in Sources */,
+				32708DFB24C9E9940028605C /* Constants.swift in Sources */,
 				32A7F179248B2A5E00EFB7E4 /* Localizable.swift in Sources */,
 				325AA8D724A8286B00958D6A /* UIView+Extension.swift in Sources */,
 				32E34EFF247F383500BFD25A /* AppDelegate.swift in Sources */,
@@ -1207,14 +1215,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		32478F0324B6981200498958 /* XCRemoteSwiftPackageReference "SwipeCellKit" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SwipeCellKit/SwipeCellKit.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.7.1;
-			};
-		};
 		327A170724A66A61006F39D0 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager.git";
@@ -1226,11 +1226,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		32478F0424B6981200498958 /* SwipeCellKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 32478F0324B6981200498958 /* XCRemoteSwiftPackageReference "SwipeCellKit" */;
-			productName = SwipeCellKit;
-		};
 		327A170824A66A62006F39D0 /* IQKeyboardManagerSwift */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 327A170724A66A61006F39D0 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
