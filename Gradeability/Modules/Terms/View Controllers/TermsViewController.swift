@@ -76,6 +76,18 @@ class TermsViewController: GradablesViewController {
             guard let self = self else { return }
             self.reloadData()
         }
+        viewModel.showDeleteAlert = { [weak self] index in
+            guard let self = self else { return }
+            let term = self.viewModel.gradables[index]
+            let alertController = UIAlertController(title: "Delete \"\(term.name)\"?", message: "This will delete all subjects and assignments in this term.", preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { [weak self] _ in
+                self?.viewModel.deleteItem(at: index)
+            }
+            alertController.addAction(cancelAction)
+            alertController.addAction(deleteAction)
+            self.present(alertController, animated: true)
+        }
     }
     
     override func setupNavigationBar() {
@@ -96,7 +108,7 @@ class TermsViewController: GradablesViewController {
         dismiss(animated: true)
     }
     
-    override func didTapAddButton(_ sender: UIBarButtonItem?) {
+    override func didTapAddButton() {
         goToCreateTermViewController()
     }
     
@@ -110,7 +122,7 @@ class TermsViewController: GradablesViewController {
         let createAction = UIAlertAction(title: "New", imageName: "plus", style: .default, handler: { [weak self] _ in
             self?.goToCreateTermViewController()
         })
-        let seeDetailAction = UIAlertAction(title: "See Details", imageName: "info.circle", style: .default, handler: nil)
+        let seeDetailAction = UIAlertAction(title: "Details", imageName: "info.circle", style: .default, handler: nil)
         let cancelAction = UIAlertAction(title: ButtonStrings.cancel.localized, style: .cancel, handler: nil)
         
         alertSheet.addAction(createAction)

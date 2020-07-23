@@ -170,3 +170,63 @@ extension WelcomeViewController: UIScrollViewDelegate {
     }
     
 }
+
+class ButtonView: UIView {
+    private let button: UIButton = UIButton()
+    private let blurView: UIView = UIView()
+    var handleButtonTap: (() -> Void)?
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        addSubview(blurView)
+        blurView.anchor.edgesToSuperview().activate()
+        
+        button.setImage(UIImage(systemName: "plus.circle.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 0, weight: .bold, scale: .large)), for: .normal)
+        button.setTitle("New Term", for: .normal)
+        button.titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
+        button.setTitleColor(.systemBlue, for: .normal)
+        button.semanticContentAttribute = UIApplication.shared.userInterfaceLayoutDirection == .rightToLeft ? .forceLeftToRight : .forceRightToLeft
+        button.contentEdgeInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 10)
+        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: -10, bottom: 0, right: 10)
+        button.addTarget(self, action: #selector(didTapAddButton), for: .touchUpInside)
+        addSubview(button)
+        button.anchor
+            .topToSuperview(constant: 10)
+            .trailingToSuperview(constant: -20)
+            .bottomToSuperview(constant: -10, toSafeArea: true)
+            .activate()
+        
+        let effect = UIBlurEffect(style: .systemThinMaterial)
+        let blurEffectView = UIVisualEffectView(effect: effect)
+        blurEffectView.frame = bounds
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        blurView.addSubview(blurEffectView)
+    }
+    @objc private func didTapAddButton() {
+        handleButtonTap?()
+    }
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    /// Set `blurView`'s alfa to 1 or 0 depending on scroll position
+    /// - Parameter scrollView: UIScrollView that's been scrolled
+    func updateBackgroundView(scrollView: UIScrollView) {
+        let visibleHeight = scrollView.frame.height - frame.height
+        let contentHeight = scrollView.contentSize.height
+        let contentOffset = scrollView.contentOffset.y
+        var alpha: CGFloat = 0
+        
+        if contentHeight > visibleHeight + contentOffset {
+            alpha = 1
+        } else {
+            alpha = 0
+        }
+        
+        UIView.animate(withDuration: 0.1) {
+            self.blurView.alpha = alpha
+        }
+    }
+    
+    
+    
+}

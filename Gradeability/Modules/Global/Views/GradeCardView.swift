@@ -23,10 +23,15 @@ class GradeCardView: UIView {
         return label
     }()
     /// Label for the grade type. Grade or Max Grade
-    private var gradeTypeLabel: UILabel = UILabel()
+    private var gradeTypeLabel: UILabel = {
+        let label = UILabel()
+        label.adjustsFontForContentSizeCategory = true
+        return label
+    }()
     /// Label for the message
     private var messageLabel: UILabel = {
         let label = UILabel()
+        label.adjustsFontForContentSizeCategory = true
         label.font = UIFont.preferredFont(forTextStyle: .caption1)
         label.numberOfLines = 0
         return label

@@ -22,6 +22,7 @@ class TermsViewModel: GradableViewModelRepresentable {
     private var terms: [Term] = []
     var gradables: [GradableCellViewModel] = []
     var dataDidChange: (() -> Void)?
+    var showDeleteAlert: ((Int) -> Void)?
     
     // MARK: Internal Properties
     weak var delegate: TermsViewModelDelegate?
@@ -81,8 +82,7 @@ class TermsViewModel: GradableViewModelRepresentable {
         }
         let attributes: UIAction.Attributes = term.isCurrent ? [.destructive, .disabled] : .destructive
         let deleteAction = UIAction(title: "Delete", image: UIImage(systemName: "trash"), attributes: attributes) { [weak self] _ in
-            CoreDataManager.shared.delete(term)
-            self?.deleteItem(at: indexPath)
+            self?.showDeleteAlert?(indexPath.item)
         }
         if !term.isCurrent {
             rootChildren.append(currentAction)
@@ -95,11 +95,11 @@ class TermsViewModel: GradableViewModelRepresentable {
         return menu
     }
     
-    func deleteItem(at indexPath: IndexPath) {
-        let term = terms[indexPath.item]
+    func deleteItem(at index: Int) {
+        let term = terms[index]
         CoreDataManager.shared.delete(term)
-        terms.remove(at: indexPath.item)
-        gradables.remove(at: indexPath.item)
+        terms.remove(at: index)
+        gradables.remove(at: index)
         dataDidChange?()
     }
     

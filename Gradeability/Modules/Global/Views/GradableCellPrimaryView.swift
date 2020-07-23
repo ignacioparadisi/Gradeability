@@ -20,18 +20,21 @@ class GradableCellPrimaryView: UIView {
     let contentView: UIView = UIView()
     private let accentLabel: UILabel = {
         let label = UILabel()
+        label.adjustsFontForContentSizeCategory = true
         label.font = UIFont.preferredFont(forTextStyle: .caption1).bold
         label.textColor = .systemBlue
         return label
     }()
     private let nameLabel: UILabel = {
         let label = UILabel()
+        label.adjustsFontForContentSizeCategory = true
         label.lineBreakMode = .byTruncatingTail
         label.numberOfLines = 2
         return label
     }()
     private let detailLabel: UILabel = {
         let label = UILabel()
+        label.adjustsFontForContentSizeCategory = true
         label.font = UIFont.preferredFont(forTextStyle: .caption1)
         label.textColor = .secondaryLabel
         return label
@@ -53,7 +56,7 @@ class GradableCellPrimaryView: UIView {
     
     func setupView() {
         backgroundColor = .secondarySystemGroupedBackground
-        layer.cornerRadius = 15
+        layer.cornerRadius = Constants.cornerRadius
         addShadow()
         setupContentView()
         setupGradeRingView()

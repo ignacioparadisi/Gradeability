@@ -25,6 +25,7 @@ class GradableCollectionViewCell: UICollectionViewCell, ReusableView {
     }
     
     func setupView() {
+        layer.cornerRadius = Constants.cornerRadius
         contentView.backgroundColor = UIColor(named: "cellSecondaryBackgroundColor")
         contentView.layer.cornerRadius = Constants.cornerRadius
         contentView.addSubview(primaryCellView)

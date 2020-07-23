@@ -25,8 +25,7 @@ class GradeRingView: UIView {
     /// Label for the subject's grade
     private let gradeLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.preferredFont(forTextStyle: .title3)
-        label.adjustsFontForContentSizeCategory = true
+        label.font = UIFont.systemFont(ofSize: 20)
         return label
     }()
     private var gradeShapeLayer: CAShapeLayer = CAShapeLayer()

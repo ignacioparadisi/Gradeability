@@ -8,11 +8,11 @@
 
 import UIKit
 
-enum NavigationStyle {
-    case present
-    case push
-    case detail
-}
+//enum NavigationStyle {
+//    case present
+//    case push
+//    case detail
+//}
 
 protocol GradableViewModelRepresentable {
     // MARK: Properties
@@ -20,7 +20,7 @@ protocol GradableViewModelRepresentable {
     var title: String { get }
     /// Closure called when the data changes so the UI can be updated.
     var dataDidChange: (() -> Void)? { get set }
-    
+    var showDeleteAlert: ((Int) -> Void)? { get set }
     // MARK: Functions
     /// Fetches the data.
     func fetch()
@@ -33,5 +33,5 @@ protocol GradableViewModelRepresentable {
     func createContextualMenuForRow(at indexPath: IndexPath) -> UIMenu?
     /// Delete item at a specific index path.
     /// - Parameter indexPath: Index path of the cell.
-    func deleteItem(at indexPath: IndexPath)
+    func deleteItem(at index: Int)
 }

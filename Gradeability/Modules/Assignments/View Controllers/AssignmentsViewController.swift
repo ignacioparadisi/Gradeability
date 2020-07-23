@@ -73,6 +73,18 @@ class AssignmentsViewController: GradablesViewController {
             #endif
             self.reloadData()
         }
+        viewModel.showDeleteAlert = { [weak self] index in
+            guard let self = self else { return }
+            let assignment = self.viewModel.gradables[index]
+            let alertController = UIAlertController(title: "Delete \"\(assignment.name)\"?", message: "This will change you grades.", preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { [weak self] _ in
+                self?.viewModel.deleteItem(at: index)
+            }
+            alertController.addAction(cancelAction)
+            alertController.addAction(deleteAction)
+            self.present(alertController, animated: true)
+        }
     }
     
     /// Show view for creating an assignment in case there's no one created yet.
@@ -87,7 +99,7 @@ class AssignmentsViewController: GradablesViewController {
     
     /// Handle navigation button for creating a new assignment
     /// - Parameter sender: Tap gesture
-    override func didTapAddButton(_ sender: UIBarButtonItem?) {
+    override func didTapAddButton() {
         goToCreateAssignmentViewController()
     }
     
@@ -103,7 +115,7 @@ class AssignmentsViewController: GradablesViewController {
         let createAction = UIAlertAction(title: "New", imageName: "plus", style: .default, handler: { [weak self] _ in
             self?.goToCreateAssignmentViewController()
         })
-        let seeDetailAction = UIAlertAction(title: "See Details", imageName: "info.circle", style: .default, handler: nil)
+        let seeDetailAction = UIAlertAction(title: "Details", imageName: "info.circle", style: .default, handler: nil)
         let cancelAction = UIAlertAction(title: ButtonStrings.cancel.localized, style: .cancel, handler: nil)
         
         alertSheet.addAction(createAction)

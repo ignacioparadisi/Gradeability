@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Combine
 
 class AssignmentsViewModel: GradableViewModelRepresentable {
 
@@ -18,6 +19,8 @@ class AssignmentsViewModel: GradableViewModelRepresentable {
     /// Assignments to be displayed.
     private var assignments: [Assignment] = []
     var gradables: [GradableCellViewModel] = []
+    var showDeleteAlert: ((Int) -> Void)?
+    
     
     // MARK: Internal Properties
     /// Closure called when `assignments` changes so the UI can be updated.
@@ -84,14 +87,12 @@ class AssignmentsViewModel: GradableViewModelRepresentable {
     /// - Parameter indexPath: Index path of the cell
     /// - Returns: Contextual menu for selected cell
     func createContextualMenuForRow(at indexPath: IndexPath) -> UIMenu? {
-        let assignment = assignments[indexPath.row]
         var rootChildren: [UIMenuElement] = []
         let editAction = UIAction(title: ButtonStrings.edit.localized, image: UIImage(systemName: "square.and.pencil")) { _ in
             
         }
-        let deleteAction = UIAction(title: ButtonStrings.delete.localized, image: UIImage(systemName: "trash"), attributes: .destructive) { _ in
-            CoreDataManager.shared.delete(assignment)
-            self.fetch()
+        let deleteAction = UIAction(title: ButtonStrings.delete.localized, image: UIImage(systemName: "trash"), attributes: .destructive) { [weak self] _ in
+            self?.showDeleteAlert?(indexPath.item)
         }
         rootChildren.append(editAction)
         rootChildren.append(deleteAction)
@@ -121,10 +122,12 @@ class AssignmentsViewModel: GradableViewModelRepresentable {
     }
     
     /// Delete assignment
-    func deleteItem(at indexPath: IndexPath) {
-        let assignment = assignments[indexPath.row]
+    func deleteItem(at index: Int) {
+        let assignment = assignments[index]
         CoreDataManager.shared.delete(assignment)
-        assignments.remove(at: indexPath.row)
+        assignments.remove(at: index)
+        gradables.remove(at: index)
+        dataDidChange?()
     }
     
 }

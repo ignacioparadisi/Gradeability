@@ -82,6 +82,18 @@ class SubjectsViewController: GradablesViewController {
         viewModel.didDeleteTerm = { [weak self] in
             self?.navigationController?.popViewController(animated: true)
         }
+        viewModel.showDeleteAlert = { [weak self] index in
+            guard let self = self else { return }
+            let subject = self.viewModel.gradables[index]
+            let alertController = UIAlertController(title: "Delete \"\(subject.name)\"?", message: "This will delete all assignments in this subject.", preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { [weak self] _ in
+                self?.viewModel.deleteItem(at: index)
+            }
+            alertController.addAction(cancelAction)
+            alertController.addAction(deleteAction)
+            self.present(alertController, animated: true)
+        }
     }
     
     /// Show view for creating an assignment in case there's no one created yet.
@@ -103,7 +115,7 @@ class SubjectsViewController: GradablesViewController {
     
     /// Handle navigation button for creating a new subject
     /// - Parameter sender: Tap gesture
-    override func didTapAddButton(_ sender: UIBarButtonItem?) {
+    override func didTapAddButton() {
         let viewController = UINavigationController(rootViewController: CreateSubjectViewController())
         present(viewController, animated: true)
     }
@@ -111,7 +123,7 @@ class SubjectsViewController: GradablesViewController {
     override func didTapOptionsButton(_ sender: UIBarButtonItem?) {
         let alertSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let createAction = UIAlertAction(title: "New Subject", imageName: "plus", style: .default, handler: nil)
-        let seeDetailAction = UIAlertAction(title: "See Details", imageName: "info.circle", style: .default, handler: nil)
+        let seeDetailAction = UIAlertAction(title: "Details", imageName: "info.circle", style: .default, handler: nil)
         let cancelAction = UIAlertAction(title: ButtonStrings.cancel.localized, style: .cancel, handler: nil)
         
         alertSheet.addAction(createAction)

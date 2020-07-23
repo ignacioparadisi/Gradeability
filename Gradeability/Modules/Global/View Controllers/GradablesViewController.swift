@@ -16,6 +16,8 @@ class GradablesViewController: UIViewController {
     private var panGesture: UIPanGestureRecognizer!
     private var currentSwipeCell: GradableCollectionViewCell?
     private var currentGesture: UIGestureRecognizer?
+    private let buttonView = ButtonView()
+    private var didSetAddButton: Bool = false
     var dataSource: UICollectionViewDiffableDataSource<Sections, AnyHashable>!
     /// Sections displayed in the table view
     enum Sections: Int, CaseIterable {
@@ -53,6 +55,26 @@ class GradablesViewController: UIViewController {
         collectionView.backgroundColor = .systemGroupedBackground
         view.addSubview(collectionView)
         collectionView.anchor.edgesToSuperview().activate()
+        
+        view.addSubview(buttonView)
+        buttonView.handleButtonTap = { [weak self] in
+            self?.didTapAddButton()
+        }
+        buttonView.anchor
+            .trailingToSuperview()
+            .bottomToSuperview()
+            .leadingToSuperview()
+            .activate()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if !didSetAddButton {
+            let safeAreaHeight = view.safeAreaInsets.bottom
+            collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: buttonView.frame.height - safeAreaHeight, right: 0)
+            collectionView.scrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: buttonView.frame.height - safeAreaHeight, right: 0)
+            didSetAddButton = true
+        }
     }
     
     private func createLayout() -> UICollectionViewLayout {
@@ -86,12 +108,12 @@ class GradablesViewController: UIViewController {
         #if targetEnvironment(macCatalyst)
         optionsImage = optionsImage?.withTintColor(.systemGray, renderingMode: .alwaysOriginal)
         #endif
-        let addImage = UIImage(systemName: "plus.circle.fill", withConfiguration: UIImage.SymbolConfiguration(weight: .bold))
+        // let addImage = UIImage(systemName: "plus.circle.fill", withConfiguration: UIImage.SymbolConfiguration(weight: .bold))
         var barButtons: [UIBarButtonItem] = []
         #if !targetEnvironment(macCatalyst)
         title = viewModel.title
         optionsImage = UIImage(systemName: "ellipsis.circle")
-        barButtons.append(UIBarButtonItem(image: addImage, style: .plain, target: self, action: #selector(didTapAddButton(_:))))
+        // barButtons.append(UIBarButtonItem(image: addImage, style: .plain, target: self, action: #selector(didTapAddButton(_:))))
         #endif
         barButtons.append(UIBarButtonItem(image: optionsImage, style: .plain, target: self, action: #selector(didTapOptionsButton(_:))))
         
@@ -110,21 +132,26 @@ class GradablesViewController: UIViewController {
     @objc func didTapOptionsButton(_ sender: UIBarButtonItem?) {
     }
     
-    @objc func didTapAddButton(_ sender: UIBarButtonItem?) {
+    func didTapAddButton() {
     }
-    
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        collectionView.collectionViewLayout.invalidateLayout()
+        if !didSetAddButton {
+            collectionView.collectionViewLayout.invalidateLayout()
+        }
     }
 }
 
-// MARK: - UITableViewDelegate
+// MARK: - UICollectionViewDelegate
 extension GradablesViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, shouldSpringLoadItemAt indexPath: IndexPath, with context: UISpringLoadedInteractionContext) -> Bool {
         return true
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        buttonView.updateBackgroundView(scrollView: scrollView)
     }
     
 }
