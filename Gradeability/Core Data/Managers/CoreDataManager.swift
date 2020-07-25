@@ -11,6 +11,7 @@ import CoreData
 
 class CoreDataManager: CoreDataManagerRepresentable {
     
+    /// Singleton instance of `CoreDataManager`.
     static var shared: CoreDataManager = CoreDataManager()
     
     private init() {}
@@ -19,6 +20,7 @@ class CoreDataManager: CoreDataManagerRepresentable {
     
     lazy var persistentContainer: NSPersistentCloudKitContainer = {
         let container = NSPersistentCloudKitContainer(name: "Gradeability")
+        container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
                 fatalError("Unresolved error \(error), \(error.userInfo)")

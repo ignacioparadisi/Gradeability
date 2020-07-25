@@ -66,4 +66,9 @@ class TermCoreDataManager: TermCoreDataManagerRepresentable {
     func delete(_ term: Term) {
         CoreDataManagerFactory.createManager.delete(term)
     }
+    
+    // TODO: Delete this method
+    func createRandom() {
+        create(name: "Semestre", maxGrade: 10, minGrade: 20)
+    }
 }

@@ -93,7 +93,7 @@ class GradeCardView: UIView {
         cardTopView.backgroundColor = .clear // UIColor.systemBackground.withAlphaComponent(0.7)
         
         gradeLabel.anchor
-            .topToSuperview()
+            .top(greaterOrEqual: containerView.topAnchor)
             .leadingToSuperview()
             .trailingToSuperview()
             .activate()
@@ -106,7 +106,7 @@ class GradeCardView: UIView {
             .top(to: gradeTypeLabel.bottomAnchor)
             .leadingToSuperview()
             .trailingToSuperview()
-            .bottomToSuperview()
+            .bottom(lessOrEqual: containerView.bottomAnchor)
             .activate()
         
         let blurView = createBlurView(cornerRadius: cardTopView.layer.cornerRadius)
@@ -115,6 +115,7 @@ class GradeCardView: UIView {
         blurView.anchor.edgesToSuperview().activate()
         containerView.anchor
             .edgesToSuperview(insets: UIEdgeInsets(top: 10, left: 16, bottom: -20, right: -16))
+            .centerYToSuperview()
             .activate()
         
         addShadow()

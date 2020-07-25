@@ -8,18 +8,13 @@
 
 import UIKit
 
-//enum NavigationStyle {
-//    case present
-//    case push
-//    case detail
-//}
-
 protocol GradableViewModelRepresentable {
     // MARK: Properties
     /// Title for the `UIViewController`.
     var title: String { get }
     /// Closure called when the data changes so the UI can be updated.
     var dataDidChange: (() -> Void)? { get set }
+    /// Closure to handle when the user selects the delete option from the contextual menu.
     var showDeleteAlert: ((Int) -> Void)? { get set }
     // MARK: Functions
     /// Fetches the data.

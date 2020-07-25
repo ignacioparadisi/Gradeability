@@ -9,6 +9,7 @@
 import UIKit
 
 #if targetEnvironment(macCatalyst)
+/// Identifier for toolbar items
 extension NSToolbarItem.Identifier {
     static let showAllTerms = NSToolbarItem.Identifier("ShowAllTerms")
     static let addNote = NSToolbarItem.Identifier("AddNote")

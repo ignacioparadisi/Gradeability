@@ -9,6 +9,9 @@
 import UIKit
 
 extension UIView {
+
+    /// Add a shadow to a view
+    /// - Parameter height: Height offset for the shadow.
     func addShadow(height: CGFloat = 2) {
         layer.shadowColor = UIColor.black.cgColor
         layer.shadowOffset = CGSize(width: 0, height: height)
@@ -17,6 +20,7 @@ extension UIView {
         clipsToBounds = false
     }
     
+    /// Removes the shadow from a view.
     func removeShadow() {
         layer.shadowOpacity = 0.0
     }

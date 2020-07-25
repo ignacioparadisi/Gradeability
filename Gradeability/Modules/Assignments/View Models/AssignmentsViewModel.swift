@@ -73,8 +73,13 @@ class AssignmentsViewModel: GradableViewModelRepresentable {
     /// - Parameter indexPath: IndexPath where the View Model belongs.
     /// - Returns: The View Model for the specified `IndexPath`.
     func gradableViewModelForRow(at indexPath: IndexPath) -> GradableCellViewModelRepresentable {
-        let assignment = assignments[indexPath.row]
+        let assignment = assignments[indexPath.item]
         return GradableCellViewModel(assignment: assignment)
+    }
+    
+    func viewModelForItemSelected(at indexPath: IndexPath) -> AssignmentDetailViewModel {
+        let assignment = assignments[indexPath.item]
+        return AssignmentDetailViewModel(assignment)
     }
     
     /// Gets the View Model for the `UIViewController` to be displayed next when the user selects a `UITableViewCell`.
@@ -118,13 +123,13 @@ class AssignmentsViewModel: GradableViewModelRepresentable {
     
     /// Create a new assignment
     func createAssignment() {
-        AssignmentCoreDataManager.shared.createAssignment(name: "Prueba", maxGrade: 20, minGrade: 10, grade: 20, deadline: Date(), percentage: 0.5, subject: subject, assignment: nil, assignments: nil)
+        AssignmentCoreDataManager.shared.createRandom(subject: subject)
     }
     
     /// Delete assignment
     func deleteItem(at index: Int) {
         let assignment = assignments[index]
-        CoreDataManager.shared.delete(assignment)
+        AssignmentCoreDataManager.shared.delete(assignment)
         assignments.remove(at: index)
         gradables.remove(at: index)
         dataDidChange?()

@@ -115,7 +115,7 @@ class SubjectsViewController: GradablesViewController {
     
     /// Handle navigation button for creating a new subject
     /// - Parameter sender: Tap gesture
-    override func didTapAddButton() {
+    override func didTapAddButton(_ sender: UIBarButtonItem) {
         let viewController = UINavigationController(rootViewController: CreateSubjectViewController())
         present(viewController, animated: true)
     }

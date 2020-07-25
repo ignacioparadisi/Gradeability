@@ -9,6 +9,7 @@
 import UIKit
 
 extension UIColor {
+    static let cellSecondaryBackgroundColor = UIColor(named: "cellSecondaryBackgroundColor")
     /// Get color depending on grade
     /// Green if is a good grade
     /// Yellow if is a normal grade

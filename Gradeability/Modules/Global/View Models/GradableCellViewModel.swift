@@ -75,6 +75,9 @@ struct GradableCellViewModel: GradableCellViewModelRepresentable, Hashable {
         if let term = gradable as? Term, term.isCurrent {
             return true
         }
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            return false
+        }
         return gradable is Subject
     }
     var gradeRingViewModel: GradeRingViewModel {

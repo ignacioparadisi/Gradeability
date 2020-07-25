@@ -13,6 +13,26 @@ class GradableCollectionViewCell: UICollectionViewCell, ReusableView {
     private let secondaryCellView = GradableCellSecondaryView()
     private var currentLocation: CGPoint = CGPoint(x: 0, y: 0)
     private var primaryViewBottomAnchor: Anchor?
+    override var isHighlighted: Bool {
+        didSet {
+            primaryCellView.setHighlighted(isHighlighted)
+            if isHighlighted {
+                contentView.backgroundColor = .systemGray3
+            } else {
+                contentView.backgroundColor = .cellSecondaryBackgroundColor
+            }
+        }
+    }
+    override var isSelected: Bool {
+        didSet {
+            primaryCellView.setHighlighted(isSelected)
+            if isSelected {
+                contentView.backgroundColor = .systemGray3
+            } else {
+                contentView.backgroundColor = .cellSecondaryBackgroundColor
+            }
+        }
+    }
     
     // MARK: Initializers
     override init(frame: CGRect) {
@@ -26,7 +46,7 @@ class GradableCollectionViewCell: UICollectionViewCell, ReusableView {
     
     func setupView() {
         layer.cornerRadius = Constants.cornerRadius
-        contentView.backgroundColor = UIColor(named: "cellSecondaryBackgroundColor")
+        contentView.backgroundColor = .cellSecondaryBackgroundColor
         contentView.layer.cornerRadius = Constants.cornerRadius
         contentView.addSubview(primaryCellView)
         primaryCellView.anchor

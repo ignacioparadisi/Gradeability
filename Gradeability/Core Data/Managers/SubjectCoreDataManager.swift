@@ -56,4 +56,8 @@ class SubjectCoreDataManager: SubjectCoreDataManagerRepresentable {
     func delete(_ subject: Subject) {
         CoreDataManagerFactory.createManager.delete(subject)
     }
+    
+    func createRandom(term: Term) {
+        create(term: term, name: "Materia", maxGrade: 20, minGrade: 10, teacherName: "Luis")
+    }
 }

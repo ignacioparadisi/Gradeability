@@ -140,4 +140,12 @@ class GradableCellPrimaryView: UIView {
         }
         layoutIfNeeded()
     }
+    
+    func setHighlighted(_ isHighlighted: Bool) {
+        if isHighlighted {
+            backgroundColor = .systemGray4
+        } else {
+            backgroundColor = .secondarySystemGroupedBackground
+        }
+    }
 }

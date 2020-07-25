@@ -99,8 +99,10 @@ class AssignmentsViewController: GradablesViewController {
     
     /// Handle navigation button for creating a new assignment
     /// - Parameter sender: Tap gesture
-    override func didTapAddButton() {
-        goToCreateAssignmentViewController()
+    override func didTapAddButton(_ sender: UIBarButtonItem) {
+        // goToCreateAssignmentViewController()
+        viewModel.createAssignment()
+        viewModel.fetch()
     }
     
     @objc func goToCreateAssignmentViewController() {
@@ -139,6 +141,21 @@ class AssignmentsViewController: GradablesViewController {
     }
     #endif
     
+}
+
+// MARK: UICollectionViewDelegate
+extension AssignmentsViewController {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let section = Sections(rawValue: indexPath.section) else { return }
+        switch section {
+        case .grade:
+            return
+        case .gradables:
+            let viewModel = self.viewModel.viewModelForItemSelected(at: indexPath)
+            let viewController = UINavigationController(rootViewController: AssignmentDetailViewController(viewModel))
+            present(viewController, animated: true)
+        }
+    }
 }
 
 // MARK: - EmptyGradablesViewDelegate

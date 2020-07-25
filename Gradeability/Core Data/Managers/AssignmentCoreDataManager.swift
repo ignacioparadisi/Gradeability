@@ -52,7 +52,7 @@ class AssignmentCoreDataManager: AssignmentCoreDataManagerRepresentable {
     ///   - assignment: Parent assignment.
     ///   - assignments: Children assignments.
     ///   - dateCreated: Date when the assignment was created (in case the assignment already exists).
-    func createAssignment(name: String?, maxGrade: Float, minGrade: Float, grade: Float = 0, deadline: Date?, percentage: Float, subject: Subject?, assignment: Assignment? = nil, assignments: NSSet? = nil) {
+    func create(name: String?, maxGrade: Float, minGrade: Float, grade: Float = 0, deadline: Date?, percentage: Float, subject: Subject?, assignment: Assignment? = nil, assignments: NSSet? = nil) {
         let assignment = Assignment(context: CoreDataManagerFactory.createManager.context)
         assignment.id = UUID()
         assignment.subject = subject
@@ -70,6 +70,8 @@ class AssignmentCoreDataManager: AssignmentCoreDataManagerRepresentable {
         calculateGrade(for: subject)
     }
     
+    /// Calculates the grade for a subject depending on its assignments, assigns the grade and saves the context.
+    /// - Parameter subject: Subject to which the grade should be calculated
     func calculateGrade(for subject: Subject?) {
         let fetchRequest: NSFetchRequest<NSDictionary> = NSFetchRequest<NSDictionary>(entityName: "Assignment")
         fetchRequest.resultType = .dictionaryResultType
@@ -83,15 +85,18 @@ class AssignmentCoreDataManager: AssignmentCoreDataManagerRepresentable {
                         NSExpression(forKeyPath: #keyPath(Assignment.percentage))
                     ])
         expressionDescription.expression = multiplyExpression
-        expressionDescription.expressionResultType = .integer32AttributeType
+        expressionDescription.expressionResultType = .floatAttributeType
         fetchRequest.propertiesToFetch = [expressionDescription]
         
         do {
             let results = try CoreDataManagerFactory.createManager.context.fetch(fetchRequest)
             var grade: Float = 0
             for result in results {
-                grade += result["grade"] as! Float
+                if let number = result.value(forKey: "grade") as? NSNumber {
+                    grade += number.floatValue
+                }
             }
+            print(results)
             subject?.grade = grade
             CoreDataManagerFactory.createManager.saveContext()
         } catch let error as NSError {
@@ -102,6 +107,14 @@ class AssignmentCoreDataManager: AssignmentCoreDataManagerRepresentable {
     /// Deletes an assignment from `CoreData`.
     /// - Parameter assignment: Assignment to be deleted.
     func delete(_ assignment: Assignment) {
+        let subject = assignment.subject
         CoreDataManagerFactory.createManager.delete(assignment)
+        calculateGrade(for: subject)
+    }
+    
+    func createRandom(subject: Subject?) {
+        let randomGrade = Float.random(in: 0..<20)
+        print(randomGrade)
+        create(name: "Prueba", maxGrade: 20, minGrade: 10, grade: randomGrade, deadline: Date(), percentage: 0.1, subject: subject)
     }
 }

@@ -9,5 +9,6 @@
 import UIKit
 
 class Constants {
+    /// Corner radius for all views
     static let cornerRadius: CGFloat = 20
 }

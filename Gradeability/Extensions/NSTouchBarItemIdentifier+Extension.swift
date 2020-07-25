@@ -9,6 +9,7 @@
 import UIKit
 
 #if targetEnvironment(macCatalyst)
+/// Identifier for touch bar items.
 extension NSTouchBarItem.Identifier {
     static let newAssignment = NSTouchBarItem.Identifier("newAssignment")
     static let newSubject = NSTouchBarItem.Identifier("newSubject")

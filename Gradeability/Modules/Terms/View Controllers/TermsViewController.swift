@@ -108,7 +108,7 @@ class TermsViewController: GradablesViewController {
         dismiss(animated: true)
     }
     
-    override func didTapAddButton() {
+    override func didTapAddButton(_ sender: UIBarButtonItem) {
         goToCreateTermViewController()
     }
     

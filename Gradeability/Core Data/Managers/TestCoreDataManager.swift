@@ -11,6 +11,7 @@ import CoreData
 
 class TestCoreDataManager: CoreDataManagerRepresentable {
     
+    /// Singleton instance of `TestCoreDataManager` for testing.
     static var shared: TestCoreDataManager = TestCoreDataManager()
     
     private init() {}

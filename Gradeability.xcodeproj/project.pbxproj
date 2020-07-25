@@ -35,6 +35,7 @@
 		32708DFB24C9E9940028605C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32708DFA24C9E9940028605C /* Constants.swift */; };
 		327A170924A66A62006F39D0 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 327A170824A66A62006F39D0 /* IQKeyboardManagerSwift */; };
 		32801D3C248BC7F900326C93 /* NSToolbarItemIdentifier+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32801D3B248BC7F900326C93 /* NSToolbarItemIdentifier+Extension.swift */; };
+		32877BF524CC934B00075CCD /* AssignmentDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32877BF424CC934B00075CCD /* AssignmentDetailViewController.swift */; };
 		3293A88D247FFC9C0054D150 /* NSLayoutAnchor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3293A88C247FFC9C0054D150 /* NSLayoutAnchor+Extension.swift */; };
 		3296EA08247F570E00A04FE0 /* DummyTerms.json in Resources */ = {isa = PBXBuildFile; fileRef = 3296EA07247F570E00A04FE0 /* DummyTerms.json */; };
 		3296EA0A247F5BA400A04FE0 /* TermsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3296EA09247F5BA400A04FE0 /* TermsViewModel.swift */; };
@@ -148,6 +149,7 @@
 		326AED412492BFF10074CDB2 /* BaseScrollViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseScrollViewController.swift; sourceTree = "<group>"; };
 		32708DFA24C9E9940028605C /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		32801D3B248BC7F900326C93 /* NSToolbarItemIdentifier+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSToolbarItemIdentifier+Extension.swift"; sourceTree = "<group>"; };
+		32877BF424CC934B00075CCD /* AssignmentDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentDetailViewController.swift; sourceTree = "<group>"; };
 		3293A88C247FFC9C0054D150 /* NSLayoutAnchor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSLayoutAnchor+Extension.swift"; sourceTree = "<group>"; };
 		3296EA07247F570E00A04FE0 /* DummyTerms.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = DummyTerms.json; sourceTree = "<group>"; };
 		3296EA09247F5BA400A04FE0 /* TermsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsViewModel.swift; sourceTree = "<group>"; };
@@ -306,17 +308,17 @@
 		3293A88B247FFC690054D150 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				3293A88C247FFC9C0054D150 /* NSLayoutAnchor+Extension.swift */,
-				324E14F124812E2E0089ECFC /* UITableView+Extension.swift */,
-				3264276D2487082C009A6112 /* UIColor+Extension.swift */,
 				3264277A2487DB02009A6112 /* Float+Extension.swift */,
-				32A7F167248B0AE200EFB7E4 /* UIFont+Extension.swift */,
-				32801D3B248BC7F900326C93 /* NSToolbarItemIdentifier+Extension.swift */,
 				3297DF292491A73500CB22DD /* NotificationName+Extension.swift */,
-				326AED3F2492640B0074CDB2 /* UICollectionView+Extension.swift */,
+				3293A88C247FFC9C0054D150 /* NSLayoutAnchor+Extension.swift */,
+				32801D3B248BC7F900326C93 /* NSToolbarItemIdentifier+Extension.swift */,
 				32DD89C62492C69F00CBDE36 /* NSTouchBarItemIdentifier+Extension.swift */,
 				32A7F17A248B2A8B00EFB7E4 /* String+Extension.swift */,
 				325875BA2492F84B00A8759A /* UIAlertAction+Extension.swift */,
+				326AED3F2492640B0074CDB2 /* UICollectionView+Extension.swift */,
+				3264276D2487082C009A6112 /* UIColor+Extension.swift */,
+				32A7F167248B0AE200EFB7E4 /* UIFont+Extension.swift */,
+				324E14F124812E2E0089ECFC /* UITableView+Extension.swift */,
 				325AA8D624A8286B00958D6A /* UIView+Extension.swift */,
 			);
 			path = Extensions;
@@ -602,6 +604,7 @@
 			children = (
 				32F86A132482CF5E0058E56E /* AssignmentsViewController.swift */,
 				3264277C2487E19D009A6112 /* CreateAssignmentViewController.swift */,
+				32877BF424CC934B00075CCD /* AssignmentDetailViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -777,6 +780,7 @@
 				324E14F224812E2E0089ECFC /* UITableView+Extension.swift in Sources */,
 				325AA8D524A80F9B00958D6A /* GradeCardCollectionViewCell.swift in Sources */,
 				32708DFB24C9E9940028605C /* Constants.swift in Sources */,
+				32877BF524CC934B00075CCD /* AssignmentDetailViewController.swift in Sources */,
 				32A7F179248B2A5E00EFB7E4 /* Localizable.swift in Sources */,
 				325AA8D724A8286B00958D6A /* UIView+Extension.swift in Sources */,
 				32E34EFF247F383500BFD25A /* AppDelegate.swift in Sources */,
