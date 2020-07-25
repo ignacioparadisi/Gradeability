@@ -1,14 +1,14 @@
 //
-//  GradeCardView.swift
+//  GradeCardTextFieldView.swift
 //  Gradeability
 //
-//  Created by Ignacio Paradisi on 6/2/20.
+//  Created by Ignacio Paradisi on 7/25/20.
 //  Copyright © 2020 Ignacio Paradisi. All rights reserved.
 //
 
 import UIKit
 
-class GradeCardView: UIView {
+class GradeCardTextFieldView: UIView {
     
     // MARK: Properties
     /// View that holds the labels
@@ -17,23 +17,16 @@ class GradeCardView: UIView {
     private let backgroundGradientView = GradientView()
     private let cardGradientView = GradientView()
     /// Label for the grade
-    private var gradeLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 70.0)
-        return label
+    private var gradeTextField: UITextField = {
+        let textField = UITextField()
+        textField.font = UIFont.boldSystemFont(ofSize: 70.0)
+        textField.keyboardType = .decimalPad
+        return textField
     }()
     /// Label for the grade type. Grade or Max Grade
     private var gradeTypeLabel: UILabel = {
         let label = UILabel()
         label.adjustsFontForContentSizeCategory = true
-        return label
-    }()
-    /// Label for the message
-    private var messageLabel: UILabel = {
-        let label = UILabel()
-        label.adjustsFontForContentSizeCategory = true
-        label.font = UIFont.preferredFont(forTextStyle: .caption1)
-        label.numberOfLines = 0
         return label
     }()
     
@@ -86,24 +79,18 @@ class GradeCardView: UIView {
     /// Setup the subviews
     private func setupView() {
         let containerView = UIView()
-        containerView.addSubview(gradeLabel)
+        containerView.addSubview(gradeTextField)
         containerView.addSubview(gradeTypeLabel)
-        containerView.addSubview(messageLabel)
         
         cardTopView.backgroundColor = .clear // UIColor.systemBackground.withAlphaComponent(0.7)
         
-        gradeLabel.anchor
+        gradeTextField.anchor
             .topToSuperview()
             .leadingToSuperview()
             .trailingToSuperview()
             .activate()
         gradeTypeLabel.anchor
-            .top(to: gradeLabel.bottomAnchor)
-            .leadingToSuperview()
-            .trailingToSuperview()
-            .activate()
-        messageLabel.anchor
-            .top(to: gradeTypeLabel.bottomAnchor)
+            .top(to: gradeTextField.bottomAnchor)
             .leadingToSuperview()
             .trailingToSuperview()
             .bottomToSuperview()
@@ -114,11 +101,7 @@ class GradeCardView: UIView {
         cardTopView.addSubview(containerView)
         blurView.anchor.edgesToSuperview().activate()
         containerView.anchor
-            .top(greaterOrEqual: cardTopView.topAnchor, constant: 10)
-            .trailingToSuperview(constant: -16)
-            .bottom(lessOrEqual: cardTopView.bottomAnchor, constant: -10)
-            .leadingToSuperview(constant: 16)
-            .centerYToSuperview()
+            .edgesToSuperview(insets: UIEdgeInsets(top: 10, left: 16, bottom: -20, right: -16))
             .activate()
         
         addShadow()
@@ -129,9 +112,8 @@ class GradeCardView: UIView {
     func configure(with viewModel: GradeCardViewModel) {
         backgroundGradientView.color = viewModel.color
         cardGradientView.color = viewModel.color
-        gradeLabel.text = viewModel.grade
+        gradeTextField.text = viewModel.grade
         gradeTypeLabel.text = GlobalStrings.grade.localized
-        messageLabel.text = viewModel.message
         // backgroundColor = viewModel.color.withAlphaComponent(0.2)
         
 //        let sizeMultiplier = frame.width / 300

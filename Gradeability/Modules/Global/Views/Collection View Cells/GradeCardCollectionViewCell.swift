@@ -11,22 +11,7 @@ import UIKit
 class GradesCardCollectionViewCell: UICollectionViewCell, ReusableView {
     /// Card view for the current grade
     private let gradeCardView = GradeCardView()
-    private lazy var teacherNameLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.preferredFont(forTextStyle: .subheadline)
-        return label
-    }()
-    private lazy var teacherEmailLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.preferredFont(forTextStyle: .subheadline)
-        return label
-    }()
-    private lazy var classRoomNameLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.preferredFont(forTextStyle: .subheadline)
-        return label
-    }()
-    private lazy var progressLineView = ProgressLineView()
+    private lazy var subjectInformationView = SubjectInformationView()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -60,8 +45,49 @@ class GradesCardCollectionViewCell: UICollectionViewCell, ReusableView {
     }
     
     private func addInformationView() {
-        let informationView = UIView()
-        informationView.backgroundColor = .clear
+        contentView.addSubview(subjectInformationView)
+        
+        subjectInformationView.anchor
+            .topToSuperview(constant: 10)
+            .trailingToSuperview(constant: -20)
+            .bottomToSuperview(constant: -10)
+            .leading(to: gradeCardView.trailingAnchor, constant: 20)
+            .activate()
+    }
+}
+
+class SubjectInformationView: UIView {
+    private var teacherNameLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.preferredFont(forTextStyle: .subheadline)
+        label.adjustsFontForContentSizeCategory = true
+        return label
+    }()
+    private var teacherEmailLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.preferredFont(forTextStyle: .subheadline)
+        label.adjustsFontForContentSizeCategory = true
+        return label
+    }()
+    private var classRoomNameLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.preferredFont(forTextStyle: .subheadline)
+        label.adjustsFontForContentSizeCategory = true
+        return label
+    }()
+    private var progressLineView = ProgressLineView()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupView()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setupView() {
+        backgroundColor = .clear
         let teacherLabel = UILabel()
         teacherLabel.font = UIFont.preferredFont(forTextStyle: .caption1).bold
         teacherLabel.text = "Teacher".uppercased()
@@ -69,20 +95,12 @@ class GradesCardCollectionViewCell: UICollectionViewCell, ReusableView {
         classRoomLabel.font = UIFont.preferredFont(forTextStyle: .caption1).bold
         classRoomLabel.text = "Classroom".uppercased()
         
-        contentView.addSubview(informationView)
-        informationView.addSubview(teacherLabel)
-        informationView.addSubview(teacherNameLabel)
-        informationView.addSubview(teacherEmailLabel)
-        informationView.addSubview(classRoomLabel)
-        informationView.addSubview(classRoomNameLabel)
-        informationView.addSubview(progressLineView)
-        
-        informationView.anchor
-            .topToSuperview(constant: 10)
-            .trailingToSuperview(constant: -20)
-            .bottomToSuperview(constant: -10)
-            .leading(to: gradeCardView.trailingAnchor, constant: 20)
-            .activate()
+        addSubview(teacherLabel)
+        addSubview(teacherNameLabel)
+        addSubview(teacherEmailLabel)
+        addSubview(classRoomLabel)
+        addSubview(classRoomNameLabel)
+        addSubview(progressLineView)
         
         teacherLabel.anchor
             .topToSuperview()
@@ -122,6 +140,5 @@ class GradesCardCollectionViewCell: UICollectionViewCell, ReusableView {
         teacherNameLabel.text = "Pepito Perez"
         teacherEmailLabel.text = "pepitoperez@gmail.com"
         classRoomNameLabel.text = "A-13"
-        
     }
 }

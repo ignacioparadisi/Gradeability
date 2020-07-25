@@ -46,7 +46,7 @@ class SubjectsViewModel: GradableViewModelRepresentable {
     }
     var gradeCardViewModel: GradesCardCollectionViewCellViewModel? {
         guard let term = term else { return nil }
-        let gradeCardViewModel = GradeCardViewModel(gradable: term, type: "Grade", message: "You are doing great!")
+        let gradeCardViewModel = GradeCardViewModel(gradable: term, message: "You are doing great!")
         return GradesCardCollectionViewCellViewModel(gradeCardViewModel: gradeCardViewModel)
     }
     

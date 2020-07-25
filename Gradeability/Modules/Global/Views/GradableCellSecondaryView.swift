@@ -12,6 +12,7 @@ class ProgressLineView: UIView {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.preferredFont(forTextStyle: .caption1).bold
+        label.adjustsFontForContentSizeCategory = true
         return label
     }()
     private let progressView: UIProgressView = {
@@ -22,6 +23,7 @@ class ProgressLineView: UIView {
     private let progressLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.preferredFont(forTextStyle: .caption1)
+        label.adjustsFontForContentSizeCategory = true
         return label
     }()
     

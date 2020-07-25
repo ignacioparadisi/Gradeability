@@ -33,7 +33,7 @@ class AssignmentsViewModel: GradableViewModelRepresentable {
     /// View model for `GradesCardTableViewCell`
     var gradeCardViewModel: GradesCardCollectionViewCellViewModel? {
         guard let subject = subject else { return nil }
-        let gradeCardViewModel = GradeCardViewModel(gradable: subject, type: GlobalStrings.grade.localized, message: "You are doing great!")
+        let gradeCardViewModel = GradeCardViewModel(gradable: subject, message: "You are doing great!")
         return GradesCardCollectionViewCellViewModel(gradeCardViewModel: gradeCardViewModel)
     }
     

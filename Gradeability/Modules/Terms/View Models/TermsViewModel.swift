@@ -105,7 +105,7 @@ class TermsViewModel: GradableViewModelRepresentable {
     
     var gradeCardViewModel: GradesCardCollectionViewCellViewModel? {
         guard !terms.isEmpty else { return nil }
-        let gradeCardViewModel = GradeCardViewModel(gradable: terms[0], type: "Grade", message: "You are doing great!")
+        let gradeCardViewModel = GradeCardViewModel(gradable: terms[0], message: "You are doing great!")
         return GradesCardCollectionViewCellViewModel(gradeCardViewModel: gradeCardViewModel)
     }
     

@@ -13,8 +13,6 @@ struct GradeCardViewModel: Hashable {
     // MARK: Properties
     /// Gradable
     private let gradable: Gradable
-    /// Type of grade. Grade or Max Grade
-    let type: String
     /// Message to show
     let message: String
     /// Color of the card depending on grade
@@ -27,9 +25,8 @@ struct GradeCardViewModel: Hashable {
     }
     
     // MARK: Initializer
-    init(gradable: Gradable, type: String, message: String) {
+    init(gradable: Gradable, message: String) {
         self.gradable = gradable
-        self.type = type
         self.message = message
     }
     
