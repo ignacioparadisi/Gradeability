@@ -25,9 +25,10 @@ class AssignmentDetailViewModel {
         return GradeCardViewModel(gradable: assignment, message: "")
     }
     
-    private var combineGrades: AnyPublisher<(Float, Float, Float, Float)?, Never> {
+    var combineGrades: AnyPublisher<(Float, Float, Float, Float)?, Never> {
         return Publishers.CombineLatest4($minGrade, $maxGrade, $grade, $percentage)
-            .map { minGrade, maxGrade, grade, percentage in
+            .map { [weak self] minGrade, maxGrade, grade, percentage in
+                guard let self = self else { return nil }
                 // Check if all fields are filled
                 guard let minGradeStr = minGrade,
                     let maxGradeStr = maxGrade,
@@ -40,11 +41,13 @@ class AssignmentDetailViewModel {
                 guard let minGrade = Float(minGradeStr),
                     let maxGrade = Float(maxGradeStr),
                     let grade = Float(gradeStr),
-                    let percentage = Float(percentageStr) else {
+                    var percentage = Float(percentageStr) else {
                         return nil
                 }
-                if minGrade <= maxGrade || grade < 0 || grade > maxGrade { return nil }
-                
+                if minGrade >= maxGrade || grade < 0 || grade > maxGrade { return nil }
+                let accumulatedPercentage = SubjectCoreDataManager.shared.getAccumulatedPercentage(assignment: self.assignment)
+                percentage = percentage / 100
+                if accumulatedPercentage + percentage > 1 { return nil }
                 return (minGrade, maxGrade, grade, percentage)
             }
             .eraseToAnyPublisher()

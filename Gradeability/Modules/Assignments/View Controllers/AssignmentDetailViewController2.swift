@@ -25,7 +25,18 @@ class AssignmentDetailViewController2: BaseScrollViewController {
         stackView.axis = .vertical
         return stackView
     }()
+    private var deleteButton: UIButton = {
+        let button = UIButton()
+        button.layer.cornerRadius = Constants.cornerRadius
+        button.setTitle("Delete", for: .normal)
+        // button.setTitleColor(.systemRed, for: .normal)
+        button.contentEdgeInsets = UIEdgeInsets(top: 15, left: 30, bottom: 15, right: 30)
+        button.backgroundColor = .systemRed
+        button.titleLabel?.font = UIFont.preferredFont(forTextStyle: .body).bold
+        return button
+    }()
     private let stackBackgroundView = UIView()
+    private var saveButton: UIBarButtonItem!
     private let gradeCardTextFieldView = GradeCardTextFieldView()
     private let viewModel: AssignmentDetailViewModel
     private var subscriptions = Set<AnyCancellable>()
@@ -54,19 +65,14 @@ class AssignmentDetailViewController2: BaseScrollViewController {
         
         setupStackView()
         
-        let deleteButton = UIButton()
-        // Light: FFE5E3
-        // Dark: #3D2220
-        deleteButton.layer.cornerRadius = Constants.cornerRadius
-        deleteButton.setTitle("Delete", for: .normal)
-        deleteButton.setTitleColor(.systemRed, for: .normal)
         contentView.addSubview(deleteButton)
         deleteButton.anchor
-            .top(to: stackBackgroundView.bottomAnchor, constant: 20)
-            .trailingToSuperview(constant: -16, toSafeArea: true)
-            .bottomToSuperview(constant: -20, toSafeArea: true)
-            .leadingToSuperview(constant: 16, toSafeArea: true)
-            .height(constant: 50)
+            .top(to: stackBackgroundView.bottomAnchor, constant: 10)
+        .centerXToSuperview()
+            // .trailingToSuperview(constant: -16, toSafeArea: true)
+            .bottomToSuperview()
+            // .leadingToSuperview(constant: 16, toSafeArea: true)
+            // .height(constant: 50)
             .activate()
     }
     
@@ -76,9 +82,18 @@ class AssignmentDetailViewController2: BaseScrollViewController {
             .assign(to: \.title, on: self)
             .store(in: &subscriptions)
         let closeButton = UIBarButtonItem(title: "Close", style: .plain, target: self, action: #selector(dismissView))
-        let editButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: nil)
-        navigationItem.setRightBarButton(editButton, animated: false)
+        saveButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: nil)
+        navigationItem.setRightBarButton(saveButton, animated: false)
         navigationItem.setLeftBarButton(closeButton, animated: false)
+        setupViewModel()
+    }
+    
+    private func setupViewModel() {
+        viewModel.combineGrades
+            .map { $0 != nil }
+            .receive(on: RunLoop.main)
+            .assign(to: \.isEnabled, on: saveButton)
+            .store(in: &subscriptions)
     }
     
     private func setupStackView() {
