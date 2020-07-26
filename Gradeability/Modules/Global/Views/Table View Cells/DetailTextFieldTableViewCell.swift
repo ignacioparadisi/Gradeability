@@ -7,8 +7,51 @@
 //
 
 import UIKit
+import Combine
 
-class DetailTextFieldTableViewCell: UITableViewCell, ReusableView {
+protocol StringCoder {
+    associatedtype T
+    static func decode(string: String?) -> T?
+    static func encode(value: T?) -> String?
+}
+
+extension String: StringCoder {
+    typealias T = String
+    static func decode(string: String?) -> String? {
+        return string
+    }
+    static func encode(value: String?) -> String? {
+        return value
+    }
+}
+
+extension Float: StringCoder {
+    typealias T = Float
+    static func decode(string: String?) -> Float? {
+        guard let string = string else { return nil }
+        return Float(string)
+    }
+    static func encode(value: Float?) -> String? {
+        guard let value = value else { return nil }
+        return "\(value)"
+    }
+}
+
+extension Date: StringCoder {
+    typealias T = Date
+    static func decode(string: String?) -> Date? {
+        guard let string = string else { return nil }
+        let dateFormatter: DateFormatter = .longDateShortTimeDateFormatter
+        return dateFormatter.date(from: string)
+    }
+    static func encode(value: Date?) -> String? {
+        guard let value = value else { return nil }
+        let dateFormatter: DateFormatter = .longDateShortTimeDateFormatter
+        return dateFormatter.string(from: value)
+    }
+}
+
+class DetailTextFieldTableViewCell<Coder: StringCoder>: UITableViewCell, ReusableView {
     
     // MARK: Properties
     var textField: UITextField = {
@@ -23,7 +66,15 @@ class DetailTextFieldTableViewCell: UITableViewCell, ReusableView {
         label.textColor = .secondaryLabel
         return label
     }()
+    private lazy var datePicker: UIDatePicker = {
+        let datePicker = UIDatePicker()
+        datePicker.datePickerMode = .dateAndTime
+        datePicker.addTarget(self, action: #selector(changeDate), for: .valueChanged)
+        return datePicker
+    }()
     private var verticalMargin: CGFloat = 20
+    private var subscriptions = Set<AnyCancellable>()
+    @Published var value: Coder.T?
     
     // MARK: Initializers
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -53,11 +104,34 @@ class DetailTextFieldTableViewCell: UITableViewCell, ReusableView {
             .leadingToSuperview(constant: verticalMargin)
             .bottomToSuperview(constant: -10)
             .activate()
+        
+        textField
+            .publisher(for: \.text)
+            .map { Coder.decode(string: $0) }
+            .assign(to: \.value, on: self)
+            .store(in: &subscriptions)
     }
     
-    func configure(with title: String, text: String?, keyboardType: UIKeyboardType = .default) {
+    func configure(with title: String, value: Coder.T?, keyboardType: UIKeyboardType = .default) {
         titleLabel.text = title.uppercased()
-        textField.text = text
+        textField.text = Coder.encode(value: value)
         textField.keyboardType = keyboardType
+        
+        if let date = value as? Date {
+            textField.tintColor = .clear
+            
+            if UIDevice.current.userInterfaceIdiom == .phone {
+                datePicker.date = date
+                textField.inputView = datePicker
+            } else {
+                textField.isUserInteractionEnabled = false
+            }
+        }
+        
+        print(subscriptions.count)
+    }
+    
+    @objc private func changeDate() {
+        textField.text = DateFormatter.longDateShortTimeDateFormatter.string(from: datePicker.date)
     }
 }

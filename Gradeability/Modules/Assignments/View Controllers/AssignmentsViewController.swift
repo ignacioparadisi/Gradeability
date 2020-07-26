@@ -151,12 +151,6 @@ extension AssignmentsViewController {
         case .grade:
             return
         case .gradables:
-            if indexPath.item == 0 {
-                let viewModel = self.viewModel.viewModelForItemSelected(at: indexPath)
-                let viewController = UINavigationController(rootViewController: AssignmentDetailViewController2(viewModel))
-                present(viewController, animated: true)
-                return
-            }
             let viewModel = self.viewModel.viewModelForItemSelected(at: indexPath)
             let viewController = UINavigationController(rootViewController: AssignmentDetailViewController(viewModel))
             present(viewController, animated: true)

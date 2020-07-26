@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		321E1FD924CDF14A00B8B6B6 /* DateFormatter+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321E1FD824CDF14A00B8B6B6 /* DateFormatter+Extension.swift */; };
 		32478F0224B67B0700498958 /* SubjectsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32478F0124B67B0700498958 /* SubjectsDataSource.swift */; };
 		324E14ED24812C060089ECFC /* GradableCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 324E14EC24812C060089ECFC /* GradableCellViewModel.swift */; };
 		324E14F224812E2E0089ECFC /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 324E14F124812E2E0089ECFC /* UITableView+Extension.swift */; };
@@ -134,6 +135,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		321E1FD824CDF14A00B8B6B6 /* DateFormatter+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Extension.swift"; sourceTree = "<group>"; };
 		32478F0124B67B0700498958 /* SubjectsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectsDataSource.swift; sourceTree = "<group>"; };
 		324E14EC24812C060089ECFC /* GradableCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradableCellViewModel.swift; sourceTree = "<group>"; };
 		324E14F124812E2E0089ECFC /* UITableView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
@@ -370,6 +372,7 @@
 				32A7F167248B0AE200EFB7E4 /* UIFont+Extension.swift */,
 				324E14F124812E2E0089ECFC /* UITableView+Extension.swift */,
 				325AA8D624A8286B00958D6A /* UIView+Extension.swift */,
+				321E1FD824CDF14A00B8B6B6 /* DateFormatter+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -892,6 +895,7 @@
 				32A7F177248B2A4100EFB7E4 /* AlertStrings.swift in Sources */,
 				325AA8D224A7C0F800958D6A /* GradableCollectionViewCell.swift in Sources */,
 				324E14F7248133CD0089ECFC /* GradableCellViewModelRepresentable.swift in Sources */,
+				321E1FD924CDF14A00B8B6B6 /* DateFormatter+Extension.swift in Sources */,
 				32E34F40247F3A1100BFD25A /* Assignment+CoreDataProperties.swift in Sources */,
 				32877C0B24CCEC6200075CCD /* GradeCardTableViewCell.swift in Sources */,
 				32CC658624A8F07D006A3783 /* AssignmentCellPrimaryView.swift in Sources */,

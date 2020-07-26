@@ -7,10 +7,42 @@
 //
 
 import UIKit
+import Combine
+
+class CircularSliderTableViewCellViewModel {
+    @Published var grade: Float = 0.0 {
+        didSet {
+            updateView?()
+        }
+    }
+    var minGrade: Float = 0.0 {
+        didSet {
+            updateView?()
+        }
+    }
+    var maxGrade: Float = 0.0 {
+        didSet {
+            updateView?()
+        }
+    }
+    var updateView: (() -> Void)?
+    var title: String {
+        return GlobalStrings.grade.localized
+    }
+    var tintColor: UIColor {
+        return UIColor.getColor(for: grade, minGrade: minGrade, maxGrade: maxGrade)
+    }
+    
+    init(grade: Float) {
+        self.grade = grade
+    }
+}
 
 class CircularSliderTableViewCell: UITableViewCell, ReusableView {
     
+    private var viewModel: CircularSliderTableViewCellViewModel!
     private let circularSlider = CircularSlider()
+    private var subscriptions = Set<AnyCancellable>()
     var gestureDelegate: UIGestureRecognizerDelegate?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -40,9 +72,27 @@ class CircularSliderTableViewCell: UITableViewCell, ReusableView {
     private func setupSlider() {
         circularSlider.lineWidth = 40
         circularSlider.minimumValue = 0
-        circularSlider.maximumValue = 20
         circularSlider.knobRadius = 46
         circularSlider.bgColor = .systemGray4
-        circularSlider.title = "Grade".uppercased()
+    }
+    
+    func configure(with viewModel: CircularSliderTableViewCellViewModel) {
+        self.viewModel = viewModel
+        circularSlider.title = viewModel.title
+        circularSlider.setValue(viewModel.grade, animated: true)
+        if subscriptions.isEmpty {
+            circularSlider.$publishedValue
+                .receive(on: RunLoop.main)
+                .assign(to: \.grade, on: viewModel)
+                .store(in: &subscriptions)
+        }
+        viewModel.updateView = { [weak self] in
+            self?.updateView()
+        }
+    }
+    
+    private func updateView() {
+        circularSlider.maximumValue = viewModel.maxGrade
+        circularSlider.pgHighlightedColor = viewModel.tintColor
     }
 }

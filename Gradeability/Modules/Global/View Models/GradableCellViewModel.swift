@@ -105,9 +105,7 @@ struct GradableCellViewModel: GradableCellViewModelRepresentable, Hashable {
     /// - Parameter assignment: Assignment to be displayed.
     init(assignment: Assignment) {
         gradable = assignment
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .long
-        dateFormatter.timeStyle = .short
+        let dateFormatter: DateFormatter = .longDateShortTimeDateFormatter
         gradableName = assignment.name ?? ""
         if let deadline = assignment.deadline {
             gradableDetail = dateFormatter.string(from: deadline)

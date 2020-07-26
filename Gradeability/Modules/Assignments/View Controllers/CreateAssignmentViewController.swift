@@ -48,9 +48,7 @@ class FieldSectionView: UIView {
         if control is UIDatePicker {
             let button = UIButton()
             let date = Date()
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateStyle = .full
-            dateFormatter.timeStyle = .short
+            let dateFormatter: DateFormatter = .longDateShortTimeDateFormatter
             button.setTitle(dateFormatter.string(from: date), for: .normal)
             button.backgroundColor = .systemGray5
             button.layer.cornerRadius = 10

@@ -11,12 +11,13 @@ import Combine
 
 class AssignmentDetailViewModel {
     private let assignment: Assignment
+    private let dateFormatter: DateFormatter = .longDateShortTimeDateFormatter
     @Published var name: String?
-    @Published var grade: String?
-    @Published var percentage: String?
-    @Published var maxGrade: String?
-    @Published var minGrade: String?
-    @Published var deadline: String?
+    @Published var grade: Float?
+    @Published var percentage: Float?
+    @Published var maxGrade: Float?
+    @Published var minGrade: Float?
+    @Published var deadline: Date?
     var gradeCardViewModel: GradesCardCollectionViewCellRepresentable {
         let cardViewModel = GradeCardViewModel(gradable: assignment, message: "You are doing great!")
         return GradesCardCollectionViewCellViewModel(gradeCardViewModel: cardViewModel)
@@ -30,19 +31,12 @@ class AssignmentDetailViewModel {
             .map { [weak self] minGrade, maxGrade, grade, percentage in
                 guard let self = self else { return nil }
                 // Check if all fields are filled
-                guard let minGradeStr = minGrade,
-                    let maxGradeStr = maxGrade,
-                    let gradeStr = grade,
-                    let percentageStr = percentage else {
+                guard let minGrade = minGrade,
+                    let maxGrade = maxGrade,
+                    let grade = grade,
+                    var percentage = percentage else {
                         return nil
                         
-                }
-                // Check if all fields are Float
-                guard let minGrade = Float(minGradeStr),
-                    let maxGrade = Float(maxGradeStr),
-                    let grade = Float(gradeStr),
-                    var percentage = Float(percentageStr) else {
-                        return nil
                 }
                 if minGrade >= maxGrade || grade < 0 || grade > maxGrade { return nil }
                 let accumulatedPercentage = SubjectCoreDataManager.shared.getAccumulatedPercentage(assignment: self.assignment)
@@ -52,31 +46,48 @@ class AssignmentDetailViewModel {
             }
             .eraseToAnyPublisher()
     }
-//    private var combineLast: AnyPublisher<(String?, String?, String?)?, Never> {
-//        return Publishers.CombineLatest($name, $deadline)
-//    }
-//
-//    private var readyToSubmit: AnyPublisher<(Bool, Bool)?, Never> {
-//
-//    }
+    private var combineLast: AnyPublisher<(String, Date)?, Never> {
+        return Publishers.CombineLatest($name, $deadline)
+            .map { name, deadline in
+                guard let name = name, !name.isEmpty , let deadline = deadline else { return nil }
+                return (name, deadline)
+            }
+            .eraseToAnyPublisher()
+    }
+
+    var readyToSubmit: AnyPublisher<(Bool, Bool)?, Never> {
+        return Publishers.CombineLatest(combineGrades, combineLast)
+            .map { combineGrades, combineLast in
+                if combineGrades == nil || combineLast == nil { return nil }
+                return (true, true)
+            }
+            .eraseToAnyPublisher()
+    }
     
     init(_ assignment: Assignment) {
         self.assignment = assignment
         self.name = assignment.name
-        self.percentage = "\(assignment.percentage * 100)"
-        self.minGrade = "\(assignment.minGrade)"
-        self.maxGrade = "\(assignment.maxGrade)"
-        self.grade = "\(grade)"
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .long
-        dateFormatter.timeStyle = .short
-        if let deadline = assignment.deadline {
-            self.deadline = dateFormatter.string(from: deadline)
-        }
+        self.percentage = assignment.percentage * 100
+        self.minGrade = assignment.minGrade
+        self.maxGrade = assignment.maxGrade
+        self.grade = assignment.grade
+        self.deadline = assignment.deadline
     }
     
     func save() {
+        guard let name = name,
+            let percentage = percentage,
+            let minGrade = minGrade,
+            let maxGrade = maxGrade else { return }
         
+        print(grade)
+        
+        assignment.name = name
+        assignment.percentage = percentage / 100
+        assignment.minGrade = minGrade
+        assignment.maxGrade = maxGrade
+        assignment.grade = grade ?? 0
+        assignment.deadline = deadline
+        CoreDataManagerFactory.createManager.saveContext()
     }
 }

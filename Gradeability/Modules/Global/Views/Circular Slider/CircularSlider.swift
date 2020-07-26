@@ -11,10 +11,9 @@ import UIKit
 
 
 @objc public protocol CircularSliderDelegate: NSObjectProtocol {
-    @objc optional func circularSlider(_ circularSlider: CircularSlider, valueForValue value: Float) -> Float
+    @objc optional func circularSlider(_ circularSlider: CircularSlider, valueDidChange value: Float) -> Float
     @objc optional func circularSlider(_ circularSlider: CircularSlider, didBeginEditing textfield: UITextField)
     @objc optional func circularSlider(_ circularSlider: CircularSlider, didEndEditing textfield: UITextField)
-    //  optional func circularSlider(circularSlider: CircularSlider, attributeTextForValue value: Float) -> NSAttributedString
 }
 
 
@@ -24,11 +23,7 @@ open class CircularSlider: UIView {
     // MARK: - outlets
     @IBOutlet fileprivate weak var centeredView: UIView!
     @IBOutlet fileprivate weak var titleLabel: UILabel!
-    @IBOutlet fileprivate weak var textfield: UITextField! {
-        didSet {
-            addDoneButtonOnKeyboard()
-        }
-    }
+    @IBOutlet fileprivate weak var textfield: UITextField!
     
     
     // MARK: - properties
@@ -101,6 +96,7 @@ open class CircularSlider: UIView {
             backingValue = min(maximumValue, max(minimumValue, newValue))
         }
     }
+    @Published public var publishedValue: Float = 0.0
     @IBInspectable
     open var minimumValue: Float = 0
     @IBInspectable
@@ -128,6 +124,7 @@ open class CircularSlider: UIView {
     open var pgHighlightedColor: UIColor = UIColor.green {
         didSet {
             appearanceProgressLayer()
+            appearanceKnobLayer()
         }
     }
     @IBInspectable
@@ -239,7 +236,7 @@ open class CircularSlider: UIView {
         configureProgressLayer()
         configureKnobLayer()
         configureGesture()
-        // configureFont()
+        configureFont()
     }
     
     fileprivate func configureBackgroundLayer() {
@@ -296,8 +293,8 @@ open class CircularSlider: UIView {
     
     // MARK: - update
     open func setValue(_ value: Float, animated: Bool) {
-        self.value = delegate?.circularSlider?(self, valueForValue: value) ?? value
-        
+        self.value = delegate?.circularSlider?(self, valueDidChange: value) ?? value
+        publishedValue = value
         updateLabels()
         
         setStrokeEnd(animated: animated)
@@ -387,18 +384,18 @@ open class CircularSlider: UIView {
         return textfield.resignFirstResponder()
     }
     
-    fileprivate func addDoneButtonOnKeyboard() {
-        let doneToolbar: UIToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 320, height: 50))
-        let flexSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
-        let doneButton: UIBarButtonItem = UIBarButtonItem(title: "Done", style: UIBarButtonItem.Style.done, target: self, action: #selector(resignFirstResponder))
-        
-        doneToolbar.barStyle = UIBarStyle.default
-        doneToolbar.items = [flexSpace, doneButton]
-        doneToolbar.sizeToFit()
-        
-        textfield.inputAccessoryView = doneToolbar
-    }
-    
+//    fileprivate func addDoneButtonOnKeyboard() {
+//        let doneToolbar: UIToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 320, height: 50))
+//        let flexSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
+//        let doneButton: UIBarButtonItem = UIBarButtonItem(title: "Done", style: UIBarButtonItem.Style.done, target: self, action: #selector(resignFirstResponder))
+//
+//        doneToolbar.barStyle = UIBarStyle.default
+//        doneToolbar.items = [flexSpace, doneButton]
+//        doneToolbar.sizeToFit()
+//
+//        textfield.inputAccessoryView = doneToolbar
+//    }
+//
     open override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         appearanceBackgroundLayer()
         appearanceProgressLayer()
