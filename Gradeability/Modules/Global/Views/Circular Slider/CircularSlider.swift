@@ -1,346 +1,461 @@
 //
 //  CircularSlider.swift
-//  Pods
+//  CircularSliderExample
 //
-//  Created by Hamza Ghazouani on 19/10/2016.
-//
+//  Created by Matteo Tagliafico on 02/09/16.
+//  Copyright © 2016 Matteo Tagliafico. All rights reserved.
 //
 
+import Foundation
 import UIKit
 
-/**
- * A visual control used to select a single value from a continuous range of values.
- * Can also be used like a circular progress view
- * CircularSlider uses the target-action mechanism to report changes made during the course of editing:
- * ValueChanged, EditingDidBegin and EditingDidEnd
- */
+
+@objc public protocol CircularSliderDelegate: NSObjectProtocol {
+    @objc optional func circularSlider(_ circularSlider: CircularSlider, valueForValue value: Float) -> Float
+    @objc optional func circularSlider(_ circularSlider: CircularSlider, didBeginEditing textfield: UITextField)
+    @objc optional func circularSlider(_ circularSlider: CircularSlider, didEndEditing textfield: UITextField)
+    //  optional func circularSlider(circularSlider: CircularSlider, attributeTextForValue value: Float) -> NSAttributedString
+}
+
+
 @IBDesignable
-open class CircularSlider: UIControl {
+open class CircularSlider: UIView {
     
-    // MARK: Changing the Slider’s Appearance
-    
-    /**
-     * The color shown for the selected portion of the slider disk. (between start and end values)
-     * The default value is a transparent color.
-     */
-    @IBInspectable
-    open var diskFillColor: UIColor = .clear
-    
-    /**
-     * The color shown for the unselected portion of the slider disk. (outside start and end values)
-     * The default value of this property is the black color with alpha = 0.3.
-     */
-    @IBInspectable
-    open var diskColor: UIColor = .gray
-    
-    /**
-     * The color shown for the selected track portion. (between start and end values)
-     * The default value of this property is the tint color.
-     */
-    @IBInspectable
-    open var trackFillColor: UIColor = .clear
-    
-    /**
-     * The color shown for the unselected track portion. (outside start and end values)
-     * The default value of this property is the white color.
-     */
-    @IBInspectable
-    open var trackColor: UIColor = .white
-    
-    /**
-     * The width of the circular line
-     *
-     * The default value of this property is 5.0.
-     */
-    @IBInspectable
-    open var lineWidth: CGFloat = 5.0
-
-    /**
-     * The width of the unselected track portion of the slider
-     *
-     * The default value of this property is 5.0.
-     */
-    @IBInspectable
-    open var backtrackLineWidth: CGFloat = 5.0
-
-    /**
-     * The shadow offset of the slider
-     *
-     * The default value of this property is .zero.
-     */
-    @IBInspectable
-    open var trackShadowOffset: CGPoint = .zero
-
-    /**
-     * The color of the shadow offset of the slider
-     *
-     * The default value of this property is .gray.
-     */
-    @IBInspectable
-    open var trackShadowColor: UIColor = .gray
-
-    /**
-     * The width of the thumb stroke line
-     *
-     * The default value of this property is 4.0.
-     */
-    @IBInspectable
-    open var thumbLineWidth: CGFloat = 4.0
-    
-    /**
-     * The radius of the thumb
-     *
-     * The default value of this property is 13.0.
-     */
-    @IBInspectable
-    open var thumbRadius: CGFloat = 13.0
-    
-    /**
-     * The color used to tint the thumb
-     * Ignored if the endThumbImage != nil
-     *
-     * The default value of this property is the groupTableViewBackgroundColor.
-     */
-    @IBInspectable
-    open var endThumbTintColor: UIColor = .groupTableViewBackground
-    
-    /**
-     * The stroke highlighted color of the end thumb
-     * The default value of this property is blue
-     */
-    @IBInspectable
-    open var endThumbStrokeHighlightedColor: UIColor = .blue
-    
-    /**
-     * The color used to tint the stroke of the end thumb
-     * Ignored if the endThumbImage != nil
-     *
-     * The default value of this property is red.
-     */
-    @IBInspectable
-    open var endThumbStrokeColor: UIColor = .red
-    
-    /**
-     * The image of the end thumb
-     * Clears any custom color you may have provided for the end thumb.
-     *
-     * The default value of this property is nil
-     */
-    open var endThumbImage: UIImage?
-    
-    // MARK: Accessing the Slider’s Value Limits
-    
-    /**
-     * Fixed number of rounds - how many circles has user to do to reach max value (like apple bedtime clock - which have 2)
-     * the default value if this property is 1
-     */
-    @IBInspectable
-    open var numberOfRounds: Int = 1 {
+    // MARK: - outlets
+    @IBOutlet fileprivate weak var centeredView: UIView!
+    @IBOutlet fileprivate weak var titleLabel: UILabel!
+    @IBOutlet fileprivate weak var textfield: UITextField! {
         didSet {
-            assert(numberOfRounds > 0, "Number of rounds has to be positive value!")
-            setNeedsDisplay()
+            addDoneButtonOnKeyboard()
         }
     }
     
-    /**
-     * The minimum value of the receiver.
-     *
-     * If you change the value of this property, and the end value of the receiver is below the new minimum, the end point value is adjusted to match the new minimum value automatically.
-     * The default value of this property is 0.0.
-     */
-    @IBInspectable
-    open var minimumValue: CGFloat = 0.0 {
-        didSet {
-            if endPointValue < minimumValue {
-                endPointValue = minimumValue
-            }
-        }
-    }
     
-    /**
-     * The maximum value of the receiver.
-     *
-     * If you change the value of this property, and the end value of the receiver is above the new maximum, the end value is adjusted to match the new maximum value automatically.
-     * The default value of this property is 1.0.
-     */
+    // MARK: - properties
+    open weak var delegate: CircularSliderDelegate?
+    
+    fileprivate var containerView: UIView!
+    fileprivate var nibName = "CircularSlider"
+    fileprivate var backgroundCircleLayer = CAShapeLayer()
+    fileprivate var progressCircleLayer = CAShapeLayer()
+    fileprivate var knobLayer = CAShapeLayer()
+    fileprivate var backingValue: Float = 0
+    fileprivate var backingKnobAngle: CGFloat = 0
+    var rotationGesture: RotationGestureRecognizer?
+    fileprivate var backingFractionDigits: NSInteger = 2
+    fileprivate let maxFractionDigits: NSInteger = 4
+    fileprivate var startAngle: CGFloat {
+        // return -.pi/2 + radiansOffset
+        return 5/6 * CGFloat.pi
+    }
+    fileprivate var endAngle: CGFloat {
+        // return 3 * .pi/2 - radiansOffset
+        return 13/6 * CGFloat.pi
+    }
+    fileprivate var angleRange: CGFloat {
+        return endAngle - startAngle
+    }
+    fileprivate var valueRange: Float {
+        return maximumValue - minimumValue
+    }
+    fileprivate var arcCenter: CGPoint {
+        return CGPoint(x: frame.width / 2, y: frame.height / 2)
+    }
+    fileprivate var arcRadius: CGFloat {
+        return min(frame.width,frame.height) / 2 - lineWidth / 2
+    }
+    fileprivate var normalizedValue: Float {
+        return (value - minimumValue) / (maximumValue - minimumValue)
+    }
+    fileprivate var knobAngle: CGFloat {
+        return CGFloat(normalizedValue) * angleRange + startAngle
+    }
+    fileprivate var knobMidAngle: CGFloat {
+        return (2 * .pi + startAngle - endAngle) / 2 + endAngle
+    }
+    fileprivate var knobRotationTransform: CATransform3D {
+        return CATransform3DMakeRotation(knobAngle, 0.0, 0.0, 1)
+    }
+    fileprivate var intFont = UIFont.systemFont(ofSize: 42)
+    fileprivate var decimalFont = UIFont.systemFont(ofSize: 42)
+    
+    
     @IBInspectable
-    open var maximumValue: CGFloat = 1.0 {
+    open var title: String = "Title" {
         didSet {
-            if endPointValue > maximumValue {
-                endPointValue = maximumValue
-            }
+            titleLabel.text = title
         }
     }
-
-    /**
-    * The offset of the thumb centre from the circle.
-    *
-    * You can use this to move the thumb inside or outside the circle of the slider
-    * If the value is grather than 0 the thumb will be displayed outside the cirlce
-    * And if the value is negative, the thumb will be displayed inside the circle 
-    */
     @IBInspectable
-    open var thumbOffset: CGFloat = 0.0 {
+    open var radiansOffset: CGFloat = 0 {
         didSet {
             setNeedsDisplay()
         }
     }
-
-    /**
-    * Stop the thumb going beyond the min/max.
-    *
-    */
     @IBInspectable
-    open var stopThumbAtMinMax: Bool = false
-
-
-    /**
-     * The value of the endThumb (changed when the user change the position of the end thumb)
-     *
-     * If you try to set a value that is above the maximum value, the property automatically resets to the maximum value.
-     * And if you try to set a value that is below the minimum value, the property automatically resets  to the minimum value.
-     *
-     * The default value of this property is 0.5
-     */
-    open var endPointValue: CGFloat = 0.5 {
-        didSet {
-            if oldValue == endPointValue {
-                return
-            }
-            if endPointValue > maximumValue {
-                endPointValue = maximumValue
-            }
-            if endPointValue < minimumValue {
-                endPointValue = minimumValue
-            }
-
-            setNeedsDisplay()
-        }
-    }
-    
-    /**
-     * The radius of circle
-     */
-    internal var radius: CGFloat {
+    open var value: Float {
         get {
-            // the minimum between the height/2 and the width/2
-            var radius =  min(bounds.center.x, bounds.center.y)
-            
-            // if we use an image for the thumb, the radius of the image will be used
-            let maxThumbRadius = max(thumbRadius, (self.endThumbImage?.size.height ?? 0) / 2)
-
-            // all elements should be inside the view rect, for that we should subtract the highest value between the radius of thumb and the line width
-            radius -= max(lineWidth, (maxThumbRadius + thumbLineWidth + thumbOffset))
-            return radius
+            return backingValue
+        }
+        set {
+            backingValue = min(maximumValue, max(minimumValue, newValue))
         }
     }
-    
-    ///  See superclass documentation
-    override open var isHighlighted: Bool {
+    @IBInspectable
+    open var minimumValue: Float = 0
+    @IBInspectable
+    open var maximumValue: Float = 500
+    @IBInspectable
+    open var lineWidth: CGFloat = 5 {
         didSet {
-            setNeedsDisplay()
+            appearanceBackgroundLayer()
+            appearanceProgressLayer()
+        }
+    }
+    @IBInspectable
+    open var bgColor: UIColor = UIColor.lightGray {
+        didSet {
+            appearanceBackgroundLayer()
+        }
+    }
+    @IBInspectable
+    open var pgNormalColor: UIColor = UIColor.darkGray {
+        didSet {
+            appearanceProgressLayer()
+        }
+    }
+    @IBInspectable
+    open var pgHighlightedColor: UIColor = UIColor.green {
+        didSet {
+            appearanceProgressLayer()
+        }
+    }
+    @IBInspectable
+    open var knobRadius: CGFloat = 20 {
+        didSet {
+            appearanceKnobLayer()
+        }
+    }
+    @IBInspectable
+    open var highlighted: Bool = true {
+        didSet {
+            appearanceProgressLayer()
+            appearanceKnobLayer()
+        }
+    }
+    @IBInspectable
+    open var hideLabels: Bool = false {
+        didSet {
+            setLabelsHidden(self.hideLabels)
+        }
+    }
+    @IBInspectable
+    open var fractionDigits: NSInteger {
+        get {
+            return backingFractionDigits
+        }
+        set {
+            backingFractionDigits = min(maxFractionDigits, max(0, newValue))
+        }
+    }
+    @IBInspectable
+    open var customDecimalSeparator: String? = nil {
+        didSet {
+            if let c = self.customDecimalSeparator, c.count > 1 {
+                self.customDecimalSeparator = nil
+            }
         }
     }
     
-    // MARK: init methods
     
-    /**
-     See superclass documentation
-     */
-    override public init(frame: CGRect) {
+    // MARK: - init
+    public override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        setup()
+        xibSetup()
+        configure()
     }
     
-    /**
-     See superclass documentation
-     */
-    required public init?(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        
-        setup()
+        xibSetup()
+        configure()
     }
     
-    internal func setup() {
-        trackFillColor = tintColor
+    fileprivate func xibSetup() {
+        containerView = loadViewFromNib()
+        containerView.frame = bounds
+        containerView.autoresizingMask = [UIView.AutoresizingMask.flexibleWidth, UIView.AutoresizingMask.flexibleHeight]
+        addSubview(containerView)
     }
-
-
-    // MARK: Drawing methods
     
-    /**
-     See superclass documentation
-     */
+    fileprivate func loadViewFromNib() -> UIView {
+        let bundle = Bundle(for: type(of: self))
+        let nib = UINib(nibName: nibName, bundle: bundle)
+        let view = nib.instantiate(withOwner: self, options: nil).first as! UIView
+        return view
+    }
+    
+    
+    // MARK: - drawing methods
     override open func draw(_ rect: CGRect) {
-        guard let context = UIGraphicsGetCurrentContext() else { return }
+        print("drawRect")
+        backgroundCircleLayer.bounds = bounds
+        progressCircleLayer.bounds = bounds
+        knobLayer.bounds = bounds
         
-        drawCircularSlider(inContext: context)
+        backgroundCircleLayer.position = arcCenter
+        progressCircleLayer.position = arcCenter
+        knobLayer.position = arcCenter
         
-        let valuesInterval = Interval(min: minimumValue, max: maximumValue, rounds: numberOfRounds)
-        // get end angle from end value
-        let endAngle = CircularSliderHelper.scaleToAngle(value: endPointValue, inInterval: valuesInterval) + CircularSliderHelper.circleInitialAngle
+        rotationGesture?.arcRadius = arcRadius
         
-        drawFilledArc(fromAngle: CircularSliderHelper.circleInitialAngle, toAngle: endAngle, inContext: context)
+        backgroundCircleLayer.path = getCirclePath()
+        progressCircleLayer.path = getCirclePath()
+        knobLayer.path = getKnobPath()
         
-        // draw end thumb
-        endThumbTintColor.setFill()
-        (isHighlighted == true) ? endThumbStrokeHighlightedColor.setStroke() : endThumbStrokeColor.setStroke()
-        
-        drawThumbAt(endAngle, with: endThumbImage, inContext: context)
+        setValue(value, animated: false)
     }
     
-    // MARK: User interaction methods
     
-    /**
-     See superclass documentation
-     */
-    override open func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
-        sendActions(for: .editingDidBegin)
-        
-        return true
+    fileprivate func getCirclePath() -> CGPath {
+        return UIBezierPath(arcCenter: arcCenter,
+                            radius: arcRadius,
+                            startAngle: startAngle,
+                            endAngle: endAngle,
+                            clockwise: true).cgPath
     }
     
-    /**
-     See superclass documentation
-     */
-    override open func continueTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
-        // the position of the pan gesture
-        let touchPosition = touch.location(in: self)
-        let startPoint = CGPoint(x: bounds.center.x, y: 0)
-        let value = newValue(from: endPointValue, touch: touchPosition, start: startPoint)
-        
-        endPointValue = value
-        sendActions(for: .valueChanged)
-        
-        return true
+    fileprivate func getKnobPath() -> CGPath {
+        return UIBezierPath(roundedRect:
+            CGRect(x: arcCenter.x + arcRadius - knobRadius / 2, y: arcCenter.y - knobRadius / 2, width: knobRadius, height: knobRadius),
+                            cornerRadius: knobRadius / 2).cgPath
     }
     
-    /**
-     See superclass documentation
-     */
-    open override func endTracking(_ touch: UITouch?, with event: UIEvent?) {
-        sendActions(for: .editingDidEnd)
+    
+    // MARK: - configure
+    fileprivate func configure() {
+        clipsToBounds = false
+        configureBackgroundLayer()
+        configureProgressLayer()
+        configureKnobLayer()
+        configureGesture()
+        // configureFont()
     }
+    
+    fileprivate func configureBackgroundLayer() {
+        backgroundCircleLayer.frame = bounds
+        layer.addSublayer(backgroundCircleLayer)
+        appearanceBackgroundLayer()
+    }
+    
+    fileprivate func configureProgressLayer() {
+        progressCircleLayer.frame = bounds
+        progressCircleLayer.strokeEnd = 0
+        layer.addSublayer(progressCircleLayer)
+        appearanceProgressLayer()
+    }
+    
+    fileprivate func configureKnobLayer() {
+        knobLayer.frame = bounds
+        knobLayer.position = arcCenter
+        layer.addSublayer(knobLayer)
+        appearanceKnobLayer()
+    }
+    
+    fileprivate func configureGesture() {
+        rotationGesture = RotationGestureRecognizer(target: self, action: #selector(handleRotationGesture(_:)), arcRadius: arcRadius, knobRadius:  knobRadius)
+        addGestureRecognizer(rotationGesture!)
+    }
+    
+    fileprivate func configureFont() {
+        intFont = UIFont.systemFont(ofSize: 42, weight: UIFont.Weight.regular)
+        decimalFont = UIFont.systemFont(ofSize: 42, weight: UIFont.Weight.thin)
+    }
+    
+    
+    // MARK: - appearance
+    fileprivate func appearanceBackgroundLayer() {
+        backgroundCircleLayer.lineWidth = lineWidth
+        backgroundCircleLayer.fillColor = UIColor.clear.cgColor
+        backgroundCircleLayer.strokeColor = bgColor.cgColor
+        backgroundCircleLayer.lineCap = CAShapeLayerLineCap.round
+    }
+    
+    fileprivate func appearanceProgressLayer() {
+        progressCircleLayer.lineWidth = lineWidth
+        progressCircleLayer.fillColor = UIColor.clear.cgColor
+        progressCircleLayer.strokeColor = highlighted ? pgHighlightedColor.cgColor : pgNormalColor.cgColor
+        progressCircleLayer.lineCap = CAShapeLayerLineCap.round
+    }
+    
+    fileprivate func appearanceKnobLayer() {
+        knobLayer.lineWidth = 5
+        knobLayer.fillColor = highlighted ? pgHighlightedColor.cgColor : pgNormalColor.cgColor
+        knobLayer.strokeColor = UIColor.systemBackground.cgColor
+    }
+    
+    // MARK: - update
+    open func setValue(_ value: Float, animated: Bool) {
+        self.value = delegate?.circularSlider?(self, valueForValue: value) ?? value
+        
+        updateLabels()
+        
+        setStrokeEnd(animated: animated)
+        setKnobRotation(animated: animated)
+    }
+    
+    fileprivate func setStrokeEnd(animated: Bool) {
+        
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
+        
+        let strokeAnimation = CABasicAnimation(keyPath: "strokeEnd")
+        strokeAnimation.duration = animated ? 0.66 : 0
+        strokeAnimation.repeatCount = 1
+        strokeAnimation.fromValue = progressCircleLayer.strokeEnd
+        strokeAnimation.toValue = CGFloat(normalizedValue)
+        strokeAnimation.isRemovedOnCompletion = false
+        strokeAnimation.fillMode = CAMediaTimingFillMode.removed
+        strokeAnimation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+        progressCircleLayer.add(strokeAnimation, forKey: "strokeAnimation")
+        progressCircleLayer.strokeEnd = CGFloat(normalizedValue)
+        CATransaction.commit()
+    }
+    
+    fileprivate func setKnobRotation(animated: Bool) {
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
+        
+        let animation = CAKeyframeAnimation(keyPath: "transform.rotation.z")
+        animation.duration = animated ? 0.66 : 0
+        animation.values = [backingKnobAngle, knobAngle]
+        knobLayer.add(animation, forKey: "knobRotationAnimation")
+        knobLayer.transform = knobRotationTransform
+        
+        CATransaction.commit()
+        
+        backingKnobAngle = knobAngle
+    }
+    
+    fileprivate func setLabelsHidden(_ isHidden: Bool) {
+        centeredView.isHidden = isHidden
+    }
+    
+    fileprivate func updateLabels() {
+        updateValueLabel()
+    }
+    
+    fileprivate func updateValueLabel() {
+        textfield.attributedText = value.formatWithFractionDigits(fractionDigits, customDecimalSeparator: customDecimalSeparator).sliderAttributeString(intFont: intFont, decimalFont: decimalFont, customDecimalSeparator: customDecimalSeparator )
+    }
+    
+    
+    // MARK: - gesture handler
+    @objc fileprivate func handleRotationGesture(_ sender: AnyObject) {
+        guard let gesture = sender as? RotationGestureRecognizer else { return }
+        
+        if gesture.state == UIGestureRecognizer.State.began {
+            cancelAnimation()
+        }
+        
+        var rotationAngle = gesture.rotation
+        if rotationAngle > knobMidAngle {
+            rotationAngle -= 2 * .pi
+        } else if rotationAngle < (knobMidAngle - 2 * .pi) {
+            rotationAngle += 2 * .pi
+        }
+        rotationAngle = min(endAngle, max(startAngle, rotationAngle))
+        
+        guard abs(Double(rotationAngle - knobAngle)) < .pi / 2 else { return }
+        
+        let valueForAngle = Float(rotationAngle - startAngle) / Float(angleRange) * valueRange + minimumValue
+        setValue(valueForAngle, animated: false)
+    }
+    
+    func cancelAnimation() {
+        progressCircleLayer.removeAllAnimations()
+        knobLayer.removeAllAnimations()
+    }
+    
+    
+    // MARK:- methods
+    open override func becomeFirstResponder() -> Bool {
+        return textfield.becomeFirstResponder()
+    }
+    
+    open override func resignFirstResponder() -> Bool {
+        return textfield.resignFirstResponder()
+    }
+    
+    fileprivate func addDoneButtonOnKeyboard() {
+        let doneToolbar: UIToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 320, height: 50))
+        let flexSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
+        let doneButton: UIBarButtonItem = UIBarButtonItem(title: "Done", style: UIBarButtonItem.Style.done, target: self, action: #selector(resignFirstResponder))
+        
+        doneToolbar.barStyle = UIBarStyle.default
+        doneToolbar.items = [flexSpace, doneButton]
+        doneToolbar.sizeToFit()
+        
+        textfield.inputAccessoryView = doneToolbar
+    }
+    
+    open override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        appearanceBackgroundLayer()
+        appearanceProgressLayer()
+        appearanceKnobLayer()
+    }
+}
 
-    // MARK: Utilities methods
-    internal func newValue(from oldValue: CGFloat, touch touchPosition: CGPoint, start startPosition: CGPoint) -> CGFloat {
-        let angle = CircularSliderHelper.angle(betweenFirstPoint: startPosition, secondPoint: touchPosition, inCircleWithCenter: bounds.center)
-        let interval = Interval(min: minimumValue, max: maximumValue, rounds: numberOfRounds)
-        let deltaValue = CircularSliderHelper.delta(in: interval, for: angle, oldValue: oldValue)
-        
-        var newValue = oldValue + deltaValue - minimumValue
-        let range = maximumValue - minimumValue
 
-        if !stopThumbAtMinMax {
-            if newValue > maximumValue {
-                newValue -= range
+// MARK: - UITextFieldDelegate
+extension CircularSlider: UITextFieldDelegate {
+    
+    public func textFieldDidBeginEditing(_ textField: UITextField) {
+        delegate?.circularSlider?(self, didBeginEditing: textfield)
+    }
+    
+    public func textFieldDidEndEditing(_ textField: UITextField) {
+        delegate?.circularSlider?(self, didEndEditing: textfield)
+        layoutIfNeeded()
+        setValue(textfield.text!.toFloat(), animated: true)
+    }
+    
+    public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        let newString = (textField.text! as NSString).replacingCharacters(in: range, with: string)
+        
+        if newString.count > 0 {
+            
+            let fmt = NumberFormatter()
+            let scanner: Scanner = Scanner(string:newString.replacingOccurrences(of: customDecimalSeparator ?? fmt.decimalSeparator, with: "."))
+            let isNumeric = scanner.scanDecimal(nil) && scanner.isAtEnd
+            
+            if isNumeric {
+                var decimalFound = false
+                var charactersAfterDecimal = 0
+                
+                
+                
+                for ch in newString.reversed() {
+                    if ch == fmt.decimalSeparator.first {
+                        decimalFound = true
+                        break
+                    }
+                    charactersAfterDecimal += 1
+                }
+                if decimalFound && charactersAfterDecimal > fractionDigits {
+                    return false
+                }
+                else {
+                    return true
+                }
             }
-            else if newValue < minimumValue {
-                newValue += range
+            else {
+                return false
             }
         }
-
-        return newValue
+        else {
+            return true
+        }
     }
 }

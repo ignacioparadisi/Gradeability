@@ -52,6 +52,7 @@ class AssignmentDetailViewController: UIViewController {
         tableView.register(GradeCardTableViewCell.self)
         tableView.register(LargeTextFieldTableViewCell.self)
         tableView.register(DetailTextFieldTableViewCell.self)
+        tableView.register(CircularSliderTableViewCell.self)
     }
     
     func setupViewModel() {
@@ -89,8 +90,11 @@ extension AssignmentDetailViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
-            let cell = tableView.dequeueReusableCell(for: indexPath) as GradeCardTableViewCell
-            cell.configure(with: viewModel.gradeCardViewModel)
+//            let cell = tableView.dequeueReusableCell(for: indexPath) as GradeCardTableViewCell
+//            cell.configure(with: viewModel.gradeCardViewModel)
+//            return cell
+            let cell = tableView.dequeueReusableCell(for: indexPath) as CircularSliderTableViewCell
+            cell.gestureDelegate = self
             return cell
         } else if indexPath.item == Row.allCases.count {
             let deleteButton = UIButton()
@@ -158,3 +162,9 @@ extension AssignmentDetailViewController: UITableViewDataSource {
 }
 
 
+extension AssignmentDetailViewController: UIGestureRecognizerDelegate {
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
+}

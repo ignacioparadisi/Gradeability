@@ -43,11 +43,11 @@
 		32877C0924CCEC5A00075CCD /* DetailTextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32877C0824CCEC5A00075CCD /* DetailTextFieldTableViewCell.swift */; };
 		32877C0B24CCEC6200075CCD /* GradeCardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32877C0A24CCEC6200075CCD /* GradeCardTableViewCell.swift */; };
 		32877C0D24CCEC6700075CCD /* LargeTextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32877C0C24CCEC6700075CCD /* LargeTextFieldTableViewCell.swift */; };
-		32877C1424CD09E800075CCD /* MidPointCircularSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32877C0F24CD09E800075CCD /* MidPointCircularSlider.swift */; };
-		32877C1524CD09E800075CCD /* CircularSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32877C1024CD09E800075CCD /* CircularSlider.swift */; };
-		32877C1624CD09E800075CCD /* CircularSliderHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32877C1124CD09E800075CCD /* CircularSliderHelper.swift */; };
-		32877C1724CD09E800075CCD /* RangeCircularSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32877C1224CD09E800075CCD /* RangeCircularSlider.swift */; };
-		32877C1824CD09E800075CCD /* CircularSlider+Draw.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32877C1324CD09E800075CCD /* CircularSlider+Draw.swift */; };
+		32877C1A24CD0AD700075CCD /* CircularSliderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32877C1924CD0AD700075CCD /* CircularSliderTableViewCell.swift */; };
+		32877C2E24CD13E700075CCD /* CircularSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32877C2A24CD13E700075CCD /* CircularSlider.swift */; };
+		32877C2F24CD13E700075CCD /* RotationGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32877C2B24CD13E700075CCD /* RotationGesture.swift */; };
+		32877C3024CD13E700075CCD /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32877C2C24CD13E700075CCD /* Utils.swift */; };
+		32877C3124CD13E700075CCD /* CircularSlider.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32877C2D24CD13E700075CCD /* CircularSlider.xib */; };
 		3293A88D247FFC9C0054D150 /* NSLayoutAnchor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3293A88C247FFC9C0054D150 /* NSLayoutAnchor+Extension.swift */; };
 		3296EA08247F570E00A04FE0 /* DummyTerms.json in Resources */ = {isa = PBXBuildFile; fileRef = 3296EA07247F570E00A04FE0 /* DummyTerms.json */; };
 		3296EA0A247F5BA400A04FE0 /* TermsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3296EA09247F5BA400A04FE0 /* TermsViewModel.swift */; };
@@ -169,11 +169,11 @@
 		32877C0824CCEC5A00075CCD /* DetailTextFieldTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailTextFieldTableViewCell.swift; sourceTree = "<group>"; };
 		32877C0A24CCEC6200075CCD /* GradeCardTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradeCardTableViewCell.swift; sourceTree = "<group>"; };
 		32877C0C24CCEC6700075CCD /* LargeTextFieldTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LargeTextFieldTableViewCell.swift; sourceTree = "<group>"; };
-		32877C0F24CD09E800075CCD /* MidPointCircularSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MidPointCircularSlider.swift; sourceTree = "<group>"; };
-		32877C1024CD09E800075CCD /* CircularSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularSlider.swift; sourceTree = "<group>"; };
-		32877C1124CD09E800075CCD /* CircularSliderHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularSliderHelper.swift; sourceTree = "<group>"; };
-		32877C1224CD09E800075CCD /* RangeCircularSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RangeCircularSlider.swift; sourceTree = "<group>"; };
-		32877C1324CD09E800075CCD /* CircularSlider+Draw.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CircularSlider+Draw.swift"; sourceTree = "<group>"; };
+		32877C1924CD0AD700075CCD /* CircularSliderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularSliderTableViewCell.swift; sourceTree = "<group>"; };
+		32877C2A24CD13E700075CCD /* CircularSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularSlider.swift; sourceTree = "<group>"; };
+		32877C2B24CD13E700075CCD /* RotationGesture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RotationGesture.swift; sourceTree = "<group>"; };
+		32877C2C24CD13E700075CCD /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		32877C2D24CD13E700075CCD /* CircularSlider.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CircularSlider.xib; sourceTree = "<group>"; };
 		3293A88C247FFC9C0054D150 /* NSLayoutAnchor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSLayoutAnchor+Extension.swift"; sourceTree = "<group>"; };
 		3296EA07247F570E00A04FE0 /* DummyTerms.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = DummyTerms.json; sourceTree = "<group>"; };
 		3296EA09247F5BA400A04FE0 /* TermsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsViewModel.swift; sourceTree = "<group>"; };
@@ -328,6 +328,7 @@
 				32877C0C24CCEC6700075CCD /* LargeTextFieldTableViewCell.swift */,
 				32877C0A24CCEC6200075CCD /* GradeCardTableViewCell.swift */,
 				32877C0824CCEC5A00075CCD /* DetailTextFieldTableViewCell.swift */,
+				32877C1924CD0AD700075CCD /* CircularSliderTableViewCell.swift */,
 			);
 			path = "Table View Cells";
 			sourceTree = "<group>";
@@ -335,11 +336,10 @@
 		32877C0E24CD09D000075CCD /* Circular Slider */ = {
 			isa = PBXGroup;
 			children = (
-				32877C1024CD09E800075CCD /* CircularSlider.swift */,
-				32877C1324CD09E800075CCD /* CircularSlider+Draw.swift */,
-				32877C1124CD09E800075CCD /* CircularSliderHelper.swift */,
-				32877C0F24CD09E800075CCD /* MidPointCircularSlider.swift */,
-				32877C1224CD09E800075CCD /* RangeCircularSlider.swift */,
+				32877C2A24CD13E700075CCD /* CircularSlider.swift */,
+				32877C2D24CD13E700075CCD /* CircularSlider.xib */,
+				32877C2B24CD13E700075CCD /* RotationGesture.swift */,
+				32877C2C24CD13E700075CCD /* Utils.swift */,
 			);
 			path = "Circular Slider";
 			sourceTree = "<group>";
@@ -795,6 +795,7 @@
 				32A7F18D248B2E9E00EFB7E4 /* Button.strings in Resources */,
 				32E34F0B247F383600BFD25A /* Assets.xcassets in Resources */,
 				32A7F185248B2BE000EFB7E4 /* Assignment.strings in Resources */,
+				32877C3124CD13E700075CCD /* CircularSlider.xib in Resources */,
 				32A7F17F248B2B0300EFB7E4 /* Global.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -842,13 +843,13 @@
 				32E34F41247F3A1100BFD25A /* Gradable+CoreDataClass.swift in Sources */,
 				32478F0224B67B0700498958 /* SubjectsDataSource.swift in Sources */,
 				326427832487F119009A6112 /* CreateTermViewController.swift in Sources */,
+				32877C2F24CD13E700075CCD /* RotationGesture.swift in Sources */,
+				32877C3024CD13E700075CCD /* Utils.swift in Sources */,
 				32CC658324A8F05F006A3783 /* GradableCellPrimaryView.swift in Sources */,
 				32877BFE24CCC72B00075CCD /* AssignmentDetailViewModel.swift in Sources */,
 				32E34F42247F3A1100BFD25A /* Gradable+CoreDataProperties.swift in Sources */,
 				32E34F09247F383500BFD25A /* Gradeability.xcdatamodeld in Sources */,
-				32877C1824CD09E800075CCD /* CircularSlider+Draw.swift in Sources */,
 				32CC657F24A8F01D006A3783 /* AssignmentCellPrimaryViewModel.swift in Sources */,
-				32877C1624CD09E800075CCD /* CircularSliderHelper.swift in Sources */,
 				32E34F3C247F3A1100BFD25A /* Term+CoreDataProperties.swift in Sources */,
 				32E59DBB2483314600B4F67C /* AssignmentCoreDataManagerRepresentable.swift in Sources */,
 				3264277B2487DB02009A6112 /* Float+Extension.swift in Sources */,
@@ -887,7 +888,7 @@
 				326427812487F0F4009A6112 /* CreateSubjectViewController.swift in Sources */,
 				3297DF3C2491BCA600CB22DD /* MainTabBarController.swift in Sources */,
 				32801D3C248BC7F900326C93 /* NSToolbarItemIdentifier+Extension.swift in Sources */,
-				32877C1524CD09E800075CCD /* CircularSlider.swift in Sources */,
+				32877C2E24CD13E700075CCD /* CircularSlider.swift in Sources */,
 				32A7F177248B2A4100EFB7E4 /* AlertStrings.swift in Sources */,
 				325AA8D224A7C0F800958D6A /* GradableCollectionViewCell.swift in Sources */,
 				324E14F7248133CD0089ECFC /* GradableCellViewModelRepresentable.swift in Sources */,
@@ -899,6 +900,7 @@
 				3264277524870C8F009A6112 /* GradeCardViewModel.swift in Sources */,
 				32A7F175248B2A3900EFB7E4 /* AssignmentStrings.swift in Sources */,
 				32E34F01247F383500BFD25A /* SceneDelegate.swift in Sources */,
+				32877C1A24CD0AD700075CCD /* CircularSliderTableViewCell.swift in Sources */,
 				324E14F524812E550089ECFC /* ReusableView.swift in Sources */,
 				32E34F3B247F3A1100BFD25A /* Term+CoreDataClass.swift in Sources */,
 				32877C0424CCDEB600075CCD /* DetailTextFieldView.swift in Sources */,
@@ -910,12 +912,10 @@
 				32877C0924CCEC5A00075CCD /* DetailTextFieldTableViewCell.swift in Sources */,
 				324E14ED24812C060089ECFC /* GradableCellViewModel.swift in Sources */,
 				32B54D8A24841E170083B734 /* TestCoreDataManager.swift in Sources */,
-				32877C1724CD09E800075CCD /* RangeCircularSlider.swift in Sources */,
 				3293A88D247FFC9C0054D150 /* NSLayoutAnchor+Extension.swift in Sources */,
 				32A7F16F248B2A1F00EFB7E4 /* GlobalStrings.swift in Sources */,
 				3296EA0A247F5BA400A04FE0 /* TermsViewModel.swift in Sources */,
 				32E59DC4248332D000B4F67C /* CoreDataManager.swift in Sources */,
-				32877C1424CD09E800075CCD /* MidPointCircularSlider.swift in Sources */,
 				32E34F3F247F3A1100BFD25A /* Assignment+CoreDataClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
