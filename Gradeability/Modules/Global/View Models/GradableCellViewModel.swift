@@ -8,7 +8,17 @@
 
 import UIKit
 
-struct GradableCellViewModel: GradableCellViewModelRepresentable, Hashable {
+extension GradableCellViewModel: Hashable {
+    static func == (lhs: GradableCellViewModel, rhs: GradableCellViewModel) -> Bool {
+        return lhs.gradable == rhs.gradable
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(gradable)
+    }
+}
+
+class GradableCellViewModel: GradableCellViewModelRepresentable {
     var primaryViewModel: GradableCellPrimaryViewRepresentable {
         if let assignment = gradable as? Assignment {
             if let deadline = assignment.deadline {

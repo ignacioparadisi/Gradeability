@@ -411,10 +411,12 @@ extension CircularSlider: UITextFieldDelegate {
     
     public func textFieldDidBeginEditing(_ textField: UITextField) {
         delegate?.circularSlider?(self, didBeginEditing: textfield)
+        titleLabel.textColor = .systemBlue
     }
     
     public func textFieldDidEndEditing(_ textField: UITextField) {
         delegate?.circularSlider?(self, didEndEditing: textfield)
+        titleLabel.textColor = .secondaryLabel
         layoutIfNeeded()
         setValue(textfield.text!.toFloat(), animated: true)
     }

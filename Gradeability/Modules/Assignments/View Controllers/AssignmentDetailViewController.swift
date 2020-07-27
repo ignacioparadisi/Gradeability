@@ -21,6 +21,7 @@ class AssignmentDetailViewController: UIViewController {
         case maxGrade
         case percentage
         case deadline
+        case createEvent
     }
     // MARK: Properties
     private let tableView: UITableView = UITableView(frame: .zero, style: .insetGrouped)
@@ -60,6 +61,7 @@ class AssignmentDetailViewController: UIViewController {
         tableView.register(LargeTextFieldTableViewCell.self)
         tableView.register(DetailTextFieldTableViewCell<Float>.self)
         tableView.register(DetailTextFieldTableViewCell<Date>.self)
+        tableView.register(SwitchTableViewCell.self)
     }
     
     func setupViewModel() {
@@ -67,11 +69,11 @@ class AssignmentDetailViewController: UIViewController {
             .receive(on: RunLoop.main)
             .assign(to: \.title, on: self)
             .store(in: &subscriptions)
-        viewModel.readyToSubmit
-            .map { $0 != nil }
-            .receive(on: RunLoop.main)
-            .assign(to: \.isEnabled, on: saveButton)
-            .store(in: &subscriptions)
+//        viewModel.readyToSubmit
+//            .map { $0 != nil }
+//            .receive(on: RunLoop.main)
+//            .assign(to: \.isEnabled, on: saveButton)
+//            .store(in: &subscriptions)
     }
     
     func setupNavigationBar() {
@@ -166,7 +168,7 @@ extension AssignmentDetailViewController: UITableViewDataSource {
                 return cell
             } else {
                 let cell = tableView.dequeueReusableCell(for: indexPath) as LargeTextFieldTableViewCell
-                cell.configure(with: viewModel.name)
+                cell.configure(with: viewModel.name, placeholder: GlobalStrings.name.localized)
                 if shouldCreateSubscription {
                     cell.textField.publisher(for: \.text)
                         .assign(to: \.name, on: viewModel)
@@ -231,6 +233,15 @@ extension AssignmentDetailViewController: UITableViewDataSource {
                 cell.$value
                     .assign(to: \.deadline, on: viewModel)
                     .store(in: &cellSubscriptions)
+            }
+            return cell
+        case .createEvent:
+            let cell = tableView.dequeueReusableCell(for: indexPath) as SwitchTableViewCell
+            cell.configure(with: AssignmentString.createEventInCalendar.localized)
+            if shouldCreateSubscription {
+                cell.$value
+                    .assign(to: \.createEvent, on: viewModel)
+                    .store(in: &subscriptions)
             }
             return cell
         }

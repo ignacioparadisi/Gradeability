@@ -35,6 +35,7 @@
 		326AED422492BFF10074CDB2 /* BaseScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326AED412492BFF10074CDB2 /* BaseScrollViewController.swift */; };
 		326F88ED24CF114900B0D3EF /* Term.strings in Resources */ = {isa = PBXBuildFile; fileRef = 326F88EF24CF114900B0D3EF /* Term.strings */; };
 		326F88F324CF11F500B0D3EF /* Subject.strings in Resources */ = {isa = PBXBuildFile; fileRef = 326F88F524CF11F500B0D3EF /* Subject.strings */; };
+		326F88F824CF2E8500B0D3EF /* SwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326F88F724CF2E8500B0D3EF /* SwitchTableViewCell.swift */; };
 		32708DFB24C9E9940028605C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32708DFA24C9E9940028605C /* Constants.swift */; };
 		327A170924A66A62006F39D0 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 327A170824A66A62006F39D0 /* IQKeyboardManagerSwift */; };
 		32801D3C248BC7F900326C93 /* NSToolbarItemIdentifier+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32801D3B248BC7F900326C93 /* NSToolbarItemIdentifier+Extension.swift */; };
@@ -164,6 +165,7 @@
 		326F88F024CF114B00B0D3EF /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/Term.strings"; sourceTree = "<group>"; };
 		326F88F424CF11F500B0D3EF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Subject.strings; sourceTree = "<group>"; };
 		326F88F624CF11F600B0D3EF /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/Subject.strings"; sourceTree = "<group>"; };
+		326F88F724CF2E8500B0D3EF /* SwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchTableViewCell.swift; sourceTree = "<group>"; };
 		32708DFA24C9E9940028605C /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		32801D3B248BC7F900326C93 /* NSToolbarItemIdentifier+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSToolbarItemIdentifier+Extension.swift"; sourceTree = "<group>"; };
 		32877BFD24CCC72B00075CCD /* AssignmentDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentDetailViewModel.swift; sourceTree = "<group>"; };
@@ -329,6 +331,7 @@
 				32877C0A24CCEC6200075CCD /* GradeCardTableViewCell.swift */,
 				32877C0824CCEC5A00075CCD /* DetailTextFieldTableViewCell.swift */,
 				32877C1924CD0AD700075CCD /* CircularSliderTableViewCell.swift */,
+				326F88F724CF2E8500B0D3EF /* SwitchTableViewCell.swift */,
 			);
 			path = "Table View Cells";
 			sourceTree = "<group>";
@@ -887,6 +890,7 @@
 				32E59DC62483330200B4F67C /* CoreDataManagerRepresentable.swift in Sources */,
 				32A7F173248B2A2F00EFB7E4 /* SubjectStrings.swift in Sources */,
 				32877C0D24CCEC6700075CCD /* LargeTextFieldTableViewCell.swift in Sources */,
+				326F88F824CF2E8500B0D3EF /* SwitchTableViewCell.swift in Sources */,
 				326427812487F0F4009A6112 /* CreateSubjectViewController.swift in Sources */,
 				3297DF3C2491BCA600CB22DD /* MainTabBarController.swift in Sources */,
 				32801D3C248BC7F900326C93 /* NSToolbarItemIdentifier+Extension.swift in Sources */,

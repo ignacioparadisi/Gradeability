@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct GradeCardViewModel: Hashable {
+class GradeCardViewModel {
     
     // MARK: Properties
     /// Gradable
@@ -34,4 +34,10 @@ struct GradeCardViewModel: Hashable {
         lhs.gradable == rhs.gradable
     }
     
+}
+
+extension GradeCardViewModel: Hashable {
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(gradable)
+    }
 }

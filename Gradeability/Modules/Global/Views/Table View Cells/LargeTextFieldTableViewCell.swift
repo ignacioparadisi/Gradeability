@@ -36,7 +36,8 @@ class LargeTextFieldTableViewCell: UITableViewCell, ReusableView {
         textField.anchor.edgesToSuperview(insets: UIEdgeInsets(top: 10, left: verticalMargin, bottom: -10, right: -verticalMargin)).activate()
     }
     
-    func configure(with text: String?) {
+    func configure(with text: String?, placeholder: String? = nil) {
         textField.text = text
+        textField.placeholder = placeholder
     }
 }

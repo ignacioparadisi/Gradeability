@@ -9,20 +9,34 @@
 import Foundation
 import Combine
 
+protocol AssignmentDetailViewModelDelegate: class {
+    func didSave(_ assignment: Assignment)
+}
+
 class AssignmentDetailViewModel {
     private let assignment: Assignment
     private let dateFormatter: DateFormatter = .longDateShortTimeDateFormatter
+    weak var delegate: AssignmentDetailViewModelDelegate?
     @Published var name: String?
     @Published var grade: Float?
     @Published var percentage: Float?
     @Published var maxGrade: Float?
     @Published var minGrade: Float?
     @Published var deadline: Date?
+    @Published var createEvent: Bool = true
     var gradeCardViewModel: GradesCardCollectionViewCellRepresentable {
         let cardViewModel = GradeCardViewModel(gradable: assignment, message: "You are doing great!")
         return GradesCardCollectionViewCellViewModel(gradeCardViewModel: cardViewModel)
     }
     
+    // MARK: Field Validations
+    var validateName: AnyPublisher<Bool, Never> {
+        return $name
+            .map { $0 != nil && $0 != "" }
+            .eraseToAnyPublisher()
+    }
+    
+    // TODO: Revisar estas variables
     var combineGrades: AnyPublisher<(Float, Float, Float, Float)?, Never> {
         return Publishers.CombineLatest4($minGrade, $maxGrade, $grade, $percentage)
             .map { [weak self] minGrade, maxGrade, grade, percentage in
@@ -89,5 +103,6 @@ class AssignmentDetailViewModel {
         assignment.grade = grade ?? 0
         assignment.deadline = deadline
         CoreDataManagerFactory.createManager.saveContext()
+        delegate?.didSave(assignment)
     }
 }

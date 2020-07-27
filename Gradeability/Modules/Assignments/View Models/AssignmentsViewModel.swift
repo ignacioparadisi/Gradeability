@@ -51,6 +51,9 @@ class AssignmentsViewModel: GradableViewModelRepresentable {
             case .success(let assignments):
                 self?.assignments = assignments
                 self?.gradables = assignments.map { GradableCellViewModel(assignment: $0) }
+                if assignments.isEmpty {
+                    self?.subject = assignments[0].subject
+                }
                 self?.dataDidChange?()
             case .failure:
                 break
@@ -79,7 +82,9 @@ class AssignmentsViewModel: GradableViewModelRepresentable {
     
     func viewModelForItemSelected(at indexPath: IndexPath) -> AssignmentDetailViewModel {
         let assignment = assignments[indexPath.item]
-        return AssignmentDetailViewModel(assignment)
+        let viewModel = AssignmentDetailViewModel(assignment)
+        viewModel.delegate = self
+        return viewModel
     }
     
     /// Gets the View Model for the `UIViewController` to be displayed next when the user selects a `UITableViewCell`.
@@ -133,6 +138,13 @@ class AssignmentsViewModel: GradableViewModelRepresentable {
         assignments.remove(at: index)
         gradables.remove(at: index)
         dataDidChange?()
+        fetch()
     }
     
+}
+
+extension AssignmentsViewModel: AssignmentDetailViewModelDelegate {
+    func didSave(_ assignment: Assignment) {
+        fetch()
+    }
 }
