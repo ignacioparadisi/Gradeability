@@ -11,7 +11,7 @@
 "noSubjectSelectedTitle" = "No tienes ninguna materia seleccionada";
 "noSubjectSelectedMessage" = "Por favor selecciona una materia para ver las asignaciones.";
 "teacher" = "Profesor";
-"classrooms" = "Salón de clases";
+"classroom" = "Salón de clases";
 "deleteTitle" = "¿Eliminar \"%@\"?";
 "deleteMessage" = "Se eliminarán todas las asignaciones de esta materia.";
 "emptySubjects" = "Parece que no tienes ninguna materia en este período.";

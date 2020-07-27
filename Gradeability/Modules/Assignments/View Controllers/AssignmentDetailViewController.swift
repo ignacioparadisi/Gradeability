@@ -75,11 +75,10 @@ class AssignmentDetailViewController: UIViewController {
             title = AssignmentString.createAssignment.localized
         }
         
-//        viewModel.readyToSubmit
-//            .map { $0 != nil }
-//            .receive(on: RunLoop.main)
-//            .assign(to: \.isEnabled, on: saveButton)
-//            .store(in: &subscriptions)
+        viewModel.readyToSubmit
+            .receive(on: RunLoop.main)
+            .assign(to: \.isEnabled, on: saveButton)
+            .store(in: &subscriptions)
     }
     
     func setupNavigationBar() {
@@ -95,17 +94,21 @@ class AssignmentDetailViewController: UIViewController {
     }
     
     @objc private func showDiscardChangesAlert(_ sender: UIBarButtonItem) {
-        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        let dismissAction = UIAlertAction(title: "Discard Changes", style: .destructive) { [weak self] _ in
-            self?.dismiss(animated: true)
+        if viewModel.isDataChanged {
+            let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+            let dismissAction = UIAlertAction(title: "Discard Changes", style: .destructive) { [weak self] _ in
+                self?.dismiss(animated: true)
+            }
+            let cancelAction = UIAlertAction(title: ButtonStrings.cancel.localized, style: .cancel)
+            alertController.addAction(dismissAction)
+            alertController.addAction(cancelAction)
+            if let popoverController = alertController.popoverPresentationController {
+                popoverController.barButtonItem = cancelButton
+            }
+            present(alertController, animated: true)
+        } else {
+            dismiss(animated: true)
         }
-        let cancelAction = UIAlertAction(title: ButtonStrings.cancel.localized, style: .cancel)
-        alertController.addAction(dismissAction)
-        alertController.addAction(cancelAction)
-        if let popoverController = alertController.popoverPresentationController {
-            popoverController.barButtonItem = cancelButton
-        }
-        present(alertController, animated: true)
     }
     
     private func showDatePickerPopover(_ sender: UITableViewCell) {
@@ -163,103 +166,105 @@ extension AssignmentDetailViewController: UITableViewDataSource {
         guard let section = Section(rawValue: indexPath.section) else { return UITableViewCell() }
         switch section {
         case .grade:
-            let shouldCreateSubscription = gradeSubscriptions.count <= 3
             if indexPath.row == 1 {
                 let cell = tableView.dequeueReusableCell(for: indexPath) as CircularSliderTableViewCell
                 cell.gestureDelegate = self
                 let circularSliderViewModel = CircularSliderTableViewCellViewModel(grade: viewModel.grade ?? 0.0)
-                if shouldCreateSubscription {
-                    circularSliderViewModel.$grade
-                        .map { $0 as Float? }
-                        .assign(to: \.grade, on: viewModel)
-                        .store(in: &gradeSubscriptions)
-                    viewModel.$maxGrade
-                        .replaceNil(with: 0.0)
-                        .assign(to: \.maxGrade, on: circularSliderViewModel)
-                        .store(in: &gradeSubscriptions)
-                    viewModel.$minGrade
-                        .replaceNil(with: 0.0)
-                        .assign(to: \.minGrade, on: circularSliderViewModel)
-                        .store(in: &gradeSubscriptions)
-                }
+                circularSliderViewModel.$grade
+                    .map { $0 as Float? }
+                    .assign(to: \.grade, on: viewModel)
+                    .store(in: &gradeSubscriptions)
+                viewModel.$maxGrade
+                    .replaceNil(with: 0.0)
+                    .assign(to: \.maxGrade, on: circularSliderViewModel)
+                    .store(in: &gradeSubscriptions)
+                viewModel.$minGrade
+                    .replaceNil(with: 0.0)
+                    .assign(to: \.minGrade, on: circularSliderViewModel)
+                    .store(in: &gradeSubscriptions)
+                viewModel.areValidGrades
+                    .map { isGradeValid, _, _ in
+                        return isGradeValid
+                    }
+                    .assign(to: \.isValid, on: cell)
+                    .store(in: &subscriptions)
                 cell.configure(with: circularSliderViewModel)
                 return cell
             } else {
                 let cell = tableView.dequeueReusableCell(for: indexPath) as LargeTextFieldTableViewCell
                 cell.configure(with: viewModel.name, placeholder: GlobalStrings.name.localized)
-                if shouldCreateSubscription {
-                    cell.textField.publisher(for: \.text)
-                        .assign(to: \.name, on: viewModel)
-                        .store(in: &cellSubscriptions)
-                }
+                cell.textField.publisher(for: \.text)
+                    .assign(to: \.name, on: viewModel)
+                    .store(in: &cellSubscriptions)
                 return cell
             }
             
         case .fields :
             return createFieldRow(for: indexPath)
         case .delete:
-            let deleteButton = UIButton()
-            deleteButton.setTitleColor(.systemRed, for: .normal)
-            deleteButton.setTitle(ButtonStrings.delete.localized, for: .normal)
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellIdentifier", for: indexPath)
-            cell.contentView.addSubview(deleteButton)
-            deleteButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .body).bold
-            deleteButton.anchor
-                .height(constant: 50)
-                .edgesToSuperview()
-                .activate()
+            cell.textLabel?.textAlignment = .center
+            cell.textLabel?.textColor = .systemRed
+            cell.textLabel?.text = ButtonStrings.delete.localized
             return cell
         }
     }
     
     func createFieldRow(for indexPath: IndexPath) -> UITableViewCell {
         guard let row = FieldRow(rawValue: indexPath.row) else { return UITableViewCell() }
-        let shouldCreateSubscription = cellSubscriptions.count <= row.rawValue
         switch row {
         case .minGrade:
             let cell = tableView.dequeueReusableCell(for: indexPath) as DetailTextFieldTableViewCell<Float>
             cell.configure(with: GlobalStrings.minGrade.localized, value: viewModel.minGrade, keyboardType: .decimalPad)
-            if shouldCreateSubscription {
-                cell.$value
-                    .assign(to: \.minGrade, on: viewModel)
-                    .store(in: &cellSubscriptions)
-            }
+            cell.$value
+                .assign(to: \.minGrade, on: viewModel)
+                .store(in: &cellSubscriptions)
+            viewModel.areValidGrades
+                .map { _, isValidMinGrade, _ in
+                    return isValidMinGrade
+                }
+                .assign(to: \.isValid, on: cell)
+                .store(in: &subscriptions)
             return cell
         case .maxGrade:
             let cell = tableView.dequeueReusableCell(for: indexPath) as DetailTextFieldTableViewCell<Float>
             cell.configure(with: GlobalStrings.maxGrade.localized, value: viewModel.maxGrade, keyboardType: .decimalPad)
-            if shouldCreateSubscription {
-                cell.$value
-                    .assign(to: \.maxGrade, on: viewModel)
-                    .store(in: &cellSubscriptions)
-            }
+            cell.$value
+                .assign(to: \.maxGrade, on: viewModel)
+                .store(in: &cellSubscriptions)
+            viewModel.areValidGrades
+                .map { _, _, isValidMaxGrade in
+                    return isValidMaxGrade
+                }
+                .assign(to: \.isValid, on: cell)
+                .store(in: &subscriptions)
             return cell
         case .percentage:
             let cell = tableView.dequeueReusableCell(for: indexPath) as DetailTextFieldTableViewCell<Float>
             cell.configure(with: AssignmentString.percentage.localized, value: viewModel.percentage, keyboardType: .decimalPad)
-            if shouldCreateSubscription {
-                cell.$value
-                    .assign(to: \.percentage, on: viewModel)
-                    .store(in: &cellSubscriptions)
-            }
+            cell.$value
+                .assign(to: \.percentage, on: viewModel)
+                .store(in: &cellSubscriptions)
+            viewModel.isValidPercentage
+                .assign(to: \.isValid, on: cell)
+                .store(in: &subscriptions)
             return cell
         case .deadline:
             let cell = tableView.dequeueReusableCell(for: indexPath) as DetailTextFieldTableViewCell<Date>
             cell.configure(with: AssignmentString.deadline.localized, value: viewModel.deadline)
-            if shouldCreateSubscription {
-                cell.$value
-                    .assign(to: \.deadline, on: viewModel)
-                    .store(in: &cellSubscriptions)
-            }
+            cell.$value
+                .assign(to: \.deadline, on: viewModel)
+                .store(in: &cellSubscriptions)
+            viewModel.isValidDeadline
+                .assign(to: \.isValid, on: cell)
+                .store(in: &subscriptions)
             return cell
         case .createEvent:
             let cell = tableView.dequeueReusableCell(for: indexPath) as SwitchTableViewCell
             cell.configure(with: AssignmentString.createEventInCalendar.localized)
-            if shouldCreateSubscription {
-                cell.$value
-                    .assign(to: \.createEvent, on: viewModel)
-                    .store(in: &subscriptions)
-            }
+            cell.$value
+                .assign(to: \.createEvent, on: viewModel)
+                .store(in: &subscriptions)
             return cell
         }
     }
@@ -287,7 +292,11 @@ extension AssignmentDetailViewController: UITableViewDelegate {
 
 extension AssignmentDetailViewController: UIAdaptivePresentationControllerDelegate {
     func presentationControllerDidAttemptToDismiss(_ presentationController: UIPresentationController) {
-       showDiscardChangesAlert(cancelButton)
+        showDiscardChangesAlert(cancelButton)
+    }
+    
+    func presentationControllerShouldDismiss(_ presentationController: UIPresentationController) -> Bool {
+        return !viewModel.isDataChanged
     }
 }
 

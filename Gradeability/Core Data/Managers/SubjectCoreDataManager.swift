@@ -89,4 +89,32 @@ class SubjectCoreDataManager: SubjectCoreDataManagerRepresentable {
         }
         return 0.0
     }
+    
+    func getAccumulatedPercentage(subject: Subject) -> Float {
+        let fetchRequest: NSFetchRequest<NSDictionary> = NSFetchRequest<NSDictionary>(entityName: "Assignment")
+        fetchRequest.resultType = .dictionaryResultType
+        let predicate = NSPredicate(format: "%K == %@" , #keyPath(Assignment.subject.id), subject.id! as CVarArg)
+        fetchRequest.predicate = predicate
+        let expressionDescription = NSExpressionDescription()
+        expressionDescription.name = "percentage"
+        let multiplyExpression = NSExpression(forFunction: "sum:",
+                     arguments: [
+                        NSExpression(forKeyPath: #keyPath(Assignment.percentage))
+                    ])
+        expressionDescription.expression = multiplyExpression
+        expressionDescription.expressionResultType = .floatAttributeType
+        fetchRequest.propertiesToFetch = [expressionDescription]
+        
+        do {
+            let results = try CoreDataManagerFactory.createManager.context.fetch(fetchRequest)
+            if results.isEmpty { return 0.0 }
+            guard let percentage = results[0].value(forKey: "percentage") as? NSNumber else {
+                return 0.0
+            }
+            return percentage.floatValue
+        } catch let error as NSError {
+            print("count not fetched \(error), \(error.userInfo)")
+        }
+        return 0.0
+    }
 }

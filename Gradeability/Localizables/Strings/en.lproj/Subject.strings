@@ -11,7 +11,7 @@
 "noSubjectSelectedTitle" = "No Subject Selected";
 "noSubjectSelectedMessage" = "Please select a subject to see it's assignments.";
 "teacher" = "Teacher";
-"classrooms" = "Classroom";
+"classroom" = "Classroom";
 "deleteTitle" = "Delete \"%@\"?";
 "deleteMessage" = "This will delete all assignments in this subject.";
 "emptySubjects" = "It seems that you don't have any subject in this term.";

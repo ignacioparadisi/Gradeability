@@ -44,6 +44,15 @@ class CircularSliderTableViewCell: UITableViewCell, ReusableView {
     private let circularSlider = CircularSlider()
     private var subscriptions = Set<AnyCancellable>()
     var gestureDelegate: UIGestureRecognizerDelegate?
+    var isValid: Bool? {
+        didSet {
+            guard let isValid = isValid else {
+                circularSlider.setTitleColor(.secondaryLabel)
+                return
+            }
+            circularSlider.setTitleColor(isValid ? .systemBlue : .systemRed)
+        }
+    }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

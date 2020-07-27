@@ -96,7 +96,7 @@ class GradablesViewController: UIViewController {
         #endif
         barButtons.append(UIBarButtonItem(image: optionsImage, style: .plain, target: self, action: #selector(didTapOptionsButton(_:))))
         
-        navigationItem.setRightBarButtonItems(barButtons, animated: false)
+        navigationItem.rightBarButtonItems = barButtons
     }
     
     /// Setup all View Model's closures to update the UI

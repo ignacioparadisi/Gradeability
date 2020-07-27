@@ -303,6 +303,10 @@ open class CircularSlider: UIView {
         setKnobRotation(animated: animated)
     }
     
+    open func setTitleColor(_ color: UIColor) {
+        titleLabel.textColor = color
+    }
+    
     fileprivate func setStrokeEnd(animated: Bool) {
         
         CATransaction.begin()
@@ -411,12 +415,10 @@ extension CircularSlider: UITextFieldDelegate {
     
     public func textFieldDidBeginEditing(_ textField: UITextField) {
         delegate?.circularSlider?(self, didBeginEditing: textfield)
-        titleLabel.textColor = .systemBlue
     }
     
     public func textFieldDidEndEditing(_ textField: UITextField) {
         delegate?.circularSlider?(self, didEndEditing: textfield)
-        titleLabel.textColor = .secondaryLabel
         layoutIfNeeded()
         setValue(textfield.text!.toFloat(), animated: true)
     }

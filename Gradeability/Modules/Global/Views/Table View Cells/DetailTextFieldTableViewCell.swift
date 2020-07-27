@@ -75,6 +75,15 @@ class DetailTextFieldTableViewCell<Coder: StringCoder>: UITableViewCell, Reusabl
     private var verticalMargin: CGFloat = 20
     private var subscriptions = Set<AnyCancellable>()
     @Published var value: Coder.T?
+    var isValid: Bool? {
+        didSet {
+            guard let isValid = isValid else {
+                titleLabel.textColor = .secondaryLabel
+                return
+            }
+            titleLabel.textColor = isValid ? .systemBlue : .systemRed
+        }
+    }
     
     // MARK: Initializers
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -140,9 +149,5 @@ class DetailTextFieldTableViewCell<Coder: StringCoder>: UITableViewCell, Reusabl
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         titleLabel.textColor = .systemBlue
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        titleLabel.textColor = .secondaryLabel
     }
 }

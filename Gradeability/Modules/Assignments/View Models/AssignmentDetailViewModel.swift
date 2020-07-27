@@ -28,59 +28,22 @@ class AssignmentDetailViewModel {
     var isEditing: Bool {
         return assignment != nil
     }
-    
-    // MARK: Field Validations
-    var validateName: AnyPublisher<Bool, Never> {
-        return $name
-            .map { $0 != nil && $0 != "" }
-            .eraseToAnyPublisher()
-    }
-    
-    // TODO: Revisar estas variables
-    var combineGrades: AnyPublisher<(Float, Float, Float, Float)?, Never> {
-        return Publishers.CombineLatest4($minGrade, $maxGrade, $grade, $percentage)
-            .map { [weak self] minGrade, maxGrade, grade, percentage in
-                guard let self = self else { return nil }
-                // Check if all fields are filled
-                guard let minGrade = minGrade,
-                    let maxGrade = maxGrade,
-                    let grade = grade,
-                    var percentage = percentage else {
-                        return nil
-                        
-                }
-                if let assignment = self.assignment,
-                    grade == assignment.grade &&
-                    minGrade == assignment.minGrade &&
-                    maxGrade == assignment.maxGrade &&
-                    percentage == assignment.percentage { return nil }
-                if minGrade >= maxGrade || grade < 0 || grade > maxGrade { return nil }
-                if let assignment = self.assignment {
-                    let accumulatedPercentage = SubjectCoreDataManager.shared.getAccumulatedPercentage(assignment: assignment)
-                    percentage = percentage / 100
-                    if accumulatedPercentage + percentage > 1 { return nil }
-                }
-                return (minGrade, maxGrade, grade, percentage)
-            }
-            .eraseToAnyPublisher()
-    }
-    private var combineLast: AnyPublisher<(String, Date)?, Never> {
-        return Publishers.CombineLatest($name, $deadline)
-            .map { [weak self] name, deadline in
-                guard let name = name, !name.isEmpty , let deadline = deadline else { return nil }
-                if let assignment = self?.assignment, name == assignment.name && deadline == assignment.deadline { return nil }
-                return (name, deadline)
-            }
-            .eraseToAnyPublisher()
-    }
-
-    var readyToSubmit: AnyPublisher<(Bool, Bool)?, Never> {
-        return Publishers.CombineLatest(combineGrades, combineLast)
-            .map { combineGrades, combineLast in
-                if combineGrades == nil || combineLast == nil { return nil }
-                return (true, true)
-            }
-            .eraseToAnyPublisher()
+    var isDataChanged: Bool {
+        if let assignment = assignment {
+            return assignment.name != name ||
+                assignment.grade as Float? != grade ||
+                assignment.minGrade as Float? != minGrade ||
+                assignment.maxGrade as Float? != maxGrade ||
+                assignment.deadline != deadline ||
+                assignment.percentage as Float? != (percentage ?? 0) / 100
+        } else {
+            return name != nil ||
+                grade != nil ||
+                minGrade != nil ||
+                maxGrade != nil ||
+                percentage != nil ||
+                deadline != nil
+        }
     }
     
     init(assignment: Assignment) {
@@ -118,5 +81,86 @@ class AssignmentDetailViewModel {
         }
         
         
+    }
+}
+
+// MARK: - Validations
+extension AssignmentDetailViewModel {
+    var isValidName: AnyPublisher<Bool, Never> {
+        return $name
+            .map { $0 != nil && $0 != "" }
+            .eraseToAnyPublisher()
+    }
+    var isValidGrade: AnyPublisher<Bool?, Never> {
+        return $grade
+            .map { [weak self] grade in
+                guard let grade = grade else { return nil }
+                guard let maxGrade = self?.maxGrade else { return nil }
+                return grade >= 0 && grade <= maxGrade
+            }
+            .eraseToAnyPublisher()
+    }
+    var isValidMinGrade: AnyPublisher<Bool?, Never> {
+        return $minGrade
+            .map { [weak self] minGrade in
+                guard let minGrade = minGrade else { return nil }
+                guard let maxGrade = self?.maxGrade else { return nil }
+                return minGrade >= 0 && minGrade < maxGrade
+            }
+            .eraseToAnyPublisher()
+    }
+    var isValidMaxGrade: AnyPublisher<Bool?, Never> {
+        return $maxGrade
+            .map { [weak self] maxGrade in
+                guard let maxGrade = maxGrade else { return nil }
+                guard let minGrade = self?.minGrade else { return nil }
+                return maxGrade > minGrade
+            }
+            .eraseToAnyPublisher()
+    }
+    var areValidGrades: AnyPublisher<(Bool?, Bool?, Bool?), Never> {
+        return Publishers.CombineLatest3(isValidGrade, isValidMinGrade, isValidMaxGrade)
+            .eraseToAnyPublisher()
+    }
+    var isValidPercentage: AnyPublisher<Bool?, Never> {
+        return $percentage
+            .map { [weak self] percentage in
+                guard var percentage = percentage else { return nil }
+                if let assignment = self?.assignment {
+                    let accumulatedPercentage = SubjectCoreDataManager.shared.getAccumulatedPercentage(assignment: assignment)
+                    percentage = percentage / 100 + accumulatedPercentage
+                } else if let subject = self?.subject {
+                    let accumulatedPercentage = SubjectCoreDataManager.shared.getAccumulatedPercentage(subject: subject)
+                    percentage = percentage / 100 + accumulatedPercentage
+                }
+                print(percentage)
+                return percentage <= 1
+            }
+            .eraseToAnyPublisher()
+    }
+    var isValidDeadline: AnyPublisher<Bool?, Never> {
+        return $deadline
+            .map {
+                if $0 == nil {
+                    return nil
+                } else {
+                    return true
+                }
+            }
+            .eraseToAnyPublisher()
+    }
+    
+    var readyToSubmit: AnyPublisher<Bool, Never> {
+        return Publishers.CombineLatest4(isValidName, areValidGrades, isValidPercentage, isValidDeadline)
+            .map { [weak self] isValidName, areValidGrades, isValidPercentage, isValidDeadline in
+                guard let self = self else { return false }
+                guard let isValidGrade = areValidGrades.0,
+                    let isValidMinGrade = areValidGrades.1,
+                    let isValidMaxGrade = areValidGrades.2,
+                    let isValidPercentage = isValidPercentage,
+                    let isValidDeadline = isValidDeadline else { return false }
+                return isValidName && isValidGrade && isValidMinGrade && isValidMaxGrade && isValidPercentage && isValidDeadline && self.isDataChanged
+            }
+            .eraseToAnyPublisher()
     }
 }

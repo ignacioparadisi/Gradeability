@@ -108,7 +108,6 @@ class AssignmentsViewController: GradablesViewController {
     @objc func goToCreateAssignmentViewController() {
         let viewModel = self.viewModel.newAssignmentViewModel
         let newAssignmentViewController = AssignmentDetailViewController(viewModel)
-        newAssignmentViewController.isModalInPresentation = true
         let viewController = UINavigationController(rootViewController: newAssignmentViewController)
         present(viewController, animated: true)
     }
@@ -153,7 +152,8 @@ extension AssignmentsViewController {
             return
         case .gradables:
             let viewModel = self.viewModel.viewModelForItemSelected(at: indexPath)
-            let viewController = UINavigationController(rootViewController: AssignmentDetailViewController(viewModel))
+            let detailViewController = AssignmentDetailViewController(viewModel)
+            let viewController = UINavigationController(rootViewController: detailViewController)
             present(viewController, animated: true)
         }
     }
