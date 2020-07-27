@@ -139,6 +139,18 @@ class AssignmentDetailViewController: UIViewController {
         cell.textField.text = DateFormatter.longDateShortTimeDateFormatter.string(from: sender.date)
     }
     
+    private func showDeleteAlert() {
+        let alertController = UIAlertController(title: viewModel.deleteTitle, message: AssignmentString.deleteMessage.localized, preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: ButtonStrings.cancel.localized, style: .cancel)
+        let deleteAction = UIAlertAction(title: ButtonStrings.delete.localized, style: .destructive) { [weak self] _ in
+            self?.viewModel.delete()
+            self?.dismiss(animated: true)
+        }
+        alertController.addAction(cancelAction)
+        alertController.addAction(deleteAction)
+        self.present(alertController, animated: true)
+    }
+    
     
 }
 
@@ -206,6 +218,7 @@ extension AssignmentDetailViewController: UITableViewDataSource {
             cell.textLabel?.textAlignment = .center
             cell.textLabel?.textColor = .systemRed
             cell.textLabel?.text = ButtonStrings.delete.localized
+            cell.selectionStyle = .none
             return cell
         }
     }
@@ -274,7 +287,8 @@ extension AssignmentDetailViewController: UITableViewDataSource {
 extension AssignmentDetailViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let section = Section(rawValue: indexPath.section) else { return }
-        if section == .fields {
+        switch section {
+        case .fields:
             let cell = tableView.cellForRow(at: indexPath)
             if let cell = cell as? DetailTextFieldTableViewCell<Float> {
                 cell.textField.becomeFirstResponder()
@@ -285,6 +299,10 @@ extension AssignmentDetailViewController: UITableViewDelegate {
                     cell.textField.becomeFirstResponder()
                 }
             }
+        case .delete:
+            showDeleteAlert()
+        default:
+            break
         }
         
     }

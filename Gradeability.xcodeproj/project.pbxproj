@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		321E1FD924CDF14A00B8B6B6 /* DateFormatter+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321E1FD824CDF14A00B8B6B6 /* DateFormatter+Extension.swift */; };
+		32286B1824CF7E9B0081A156 /* StringCoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32286B1724CF7E9B0081A156 /* StringCoder.swift */; };
 		32478F0224B67B0700498958 /* SubjectsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32478F0124B67B0700498958 /* SubjectsDataSource.swift */; };
 		324E14ED24812C060089ECFC /* GradableCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 324E14EC24812C060089ECFC /* GradableCellViewModel.swift */; };
 		324E14F224812E2E0089ECFC /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 324E14F124812E2E0089ECFC /* UITableView+Extension.swift */; };
@@ -130,6 +131,7 @@
 
 /* Begin PBXFileReference section */
 		321E1FD824CDF14A00B8B6B6 /* DateFormatter+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Extension.swift"; sourceTree = "<group>"; };
+		32286B1724CF7E9B0081A156 /* StringCoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringCoder.swift; sourceTree = "<group>"; };
 		32478F0124B67B0700498958 /* SubjectsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectsDataSource.swift; sourceTree = "<group>"; };
 		324E14EC24812C060089ECFC /* GradableCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradableCellViewModel.swift; sourceTree = "<group>"; };
 		324E14F124812E2E0089ECFC /* UITableView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
@@ -469,6 +471,7 @@
 				324E14F6248133CD0089ECFC /* GradableCellViewModelRepresentable.swift */,
 				3264277624870CFC009A6112 /* GradesCardTableViewCellRepresentable.swift */,
 				32CC658024A8F039006A3783 /* GradableCellPrimaryViewRepresentable.swift */,
+				32286B1724CF7E9B0081A156 /* StringCoder.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -848,6 +851,7 @@
 				32A7F168248B0AE200EFB7E4 /* UIFont+Extension.swift in Sources */,
 				32877C0724CCEC5300075CCD /* AssignmentDetailViewController.swift in Sources */,
 				32E34F3E247F3A1100BFD25A /* Subject+CoreDataProperties.swift in Sources */,
+				32286B1824CF7E9B0081A156 /* StringCoder.swift in Sources */,
 				32CC658B24A8F0F5006A3783 /* AssignmentCollectionViewCell.swift in Sources */,
 				32B54D8624841AA60083B734 /* LoadingView.swift in Sources */,
 				326427792487121A009A6112 /* GradesCardTableViewCellViewModel.swift in Sources */,

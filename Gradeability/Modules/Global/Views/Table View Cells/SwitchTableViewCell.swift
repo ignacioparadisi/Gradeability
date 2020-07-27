@@ -13,7 +13,14 @@ class SwitchTableViewCell: UITableViewCell, ReusableView {
     
     // MARK: Properties
     private let `switch`: UISwitch = UISwitch()
-    private let titleLabel: UILabel = UILabel()
+    private var titleLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.preferredFont(forTextStyle: .caption1).bold
+        label.adjustsFontForContentSizeCategory = true
+        label.textColor = .systemBlue
+        label.numberOfLines = 0
+        return label
+    }()
     private var subscription: AnyCancellable?
     @Published var value: Bool = true
     
@@ -31,7 +38,6 @@ class SwitchTableViewCell: UITableViewCell, ReusableView {
     // MARK: Functions
     private func setupView() {
         selectionStyle = .none
-        titleLabel.numberOfLines = 0
         contentView.addSubview(`switch`)
         contentView.addSubview(titleLabel)
         
@@ -54,7 +60,7 @@ class SwitchTableViewCell: UITableViewCell, ReusableView {
     }
     
     func configure(with title: String, value: Bool = true) {
-        self.titleLabel.text = title
+        self.titleLabel.text = title.uppercased()
         self.`switch`.isOn = value
     }
     

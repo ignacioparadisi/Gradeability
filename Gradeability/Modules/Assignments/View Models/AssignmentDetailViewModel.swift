@@ -45,6 +45,9 @@ class AssignmentDetailViewModel {
                 deadline != nil
         }
     }
+    var deleteTitle: String {
+        return String(format: AssignmentString.deleteTitle.localized, assignment?.name ?? "")
+    }
     
     init(assignment: Assignment) {
         self.assignment = assignment
@@ -79,8 +82,11 @@ class AssignmentDetailViewModel {
             AssignmentCoreDataManager.shared.create(name: name, maxGrade: maxGrade, minGrade: minGrade, deadline: deadline, percentage: percentage, subject: subject)
             delegate?.didSave(nil)
         }
-        
-        
+    }
+    
+    func delete() {
+        guard let assignment = assignment else { return }
+        AssignmentCoreDataManager.shared.delete(assignment)
     }
 }
 

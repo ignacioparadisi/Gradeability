@@ -9,48 +9,6 @@
 import UIKit
 import Combine
 
-protocol StringCoder {
-    associatedtype T
-    static func decode(string: String?) -> T?
-    static func encode(value: T?) -> String?
-}
-
-extension String: StringCoder {
-    typealias T = String
-    static func decode(string: String?) -> String? {
-        return string
-    }
-    static func encode(value: String?) -> String? {
-        return value
-    }
-}
-
-extension Float: StringCoder {
-    typealias T = Float
-    static func decode(string: String?) -> Float? {
-        guard let string = string else { return nil }
-        return Float(string)
-    }
-    static func encode(value: Float?) -> String? {
-        guard let value = value else { return nil }
-        return "\(value)"
-    }
-}
-
-extension Date: StringCoder {
-    typealias T = Date
-    static func decode(string: String?) -> Date? {
-        guard let string = string else { return nil }
-        let dateFormatter: DateFormatter = .longDateShortTimeDateFormatter
-        return dateFormatter.date(from: string)
-    }
-    static func encode(value: Date?) -> String? {
-        guard let value = value else { return nil }
-        let dateFormatter: DateFormatter = .longDateShortTimeDateFormatter
-        return dateFormatter.string(from: value)
-    }
-}
-
 class DetailTextFieldTableViewCell<Coder: StringCoder>: UITableViewCell, ReusableView, UITextFieldDelegate {
     
     // MARK: Properties
