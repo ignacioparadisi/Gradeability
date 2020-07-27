@@ -11,7 +11,7 @@ import UIKit
 class GradesCardCollectionViewCell: UICollectionViewCell, ReusableView {
     /// Card view for the current grade
     private let gradeCardView = GradeCardView()
-    private lazy var subjectInformationView = SubjectInformationView()
+    private var subjectInformationView: SubjectInformationView?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -42,18 +42,47 @@ class GradesCardCollectionViewCell: UICollectionViewCell, ReusableView {
     /// - Parameter representable: View model for the cell.
     func configure(with representable: GradesCardCollectionViewCellRepresentable) {
         gradeCardView.configure(with: representable.gradeCardViewModel)
+        if let subjectInformationViewModel = representable.subjectInformationViewModel {
+            subjectInformationView?.configure(with: subjectInformationViewModel)
+        }
     }
     
     private func addInformationView() {
-        contentView.addSubview(subjectInformationView)
+        subjectInformationView = SubjectInformationView()
+        contentView.addSubview(subjectInformationView!)
         
-        subjectInformationView.anchor
+        subjectInformationView?.anchor
             .topToSuperview(constant: 10)
             .trailingToSuperview(constant: -20)
             .bottomToSuperview(constant: -10)
             .leading(to: gradeCardView.trailingAnchor, constant: 20)
             .activate()
     }
+}
+
+class SubjectInformationViewModel: Hashable {
+    static func == (lhs: SubjectInformationViewModel, rhs: SubjectInformationViewModel) -> Bool {
+        return lhs.subject == rhs.subject
+    }
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(subject)
+    }
+    private let subject: Subject
+    
+    init(subject: Subject) {
+        self.subject = subject
+    }
+    
+    var evaluatedPercentage: Float {
+        return SubjectCoreDataManager.shared.getEvaluatedPercentage(subject: subject)
+    }
+    var evaluatedPercentageText: String {
+        return "\(evaluatedPercentage * 100)%"
+    }
+    var teacherName: String {
+        return subject.teacherName ?? ""
+    }
+
 }
 
 class SubjectInformationView: UIView {
@@ -135,9 +164,11 @@ class SubjectInformationView: UIView {
             .leadingToSuperview()
             .bottomToSuperview()
             .activate()
-        
-        progressLineView.configure(with: SubjectStrings.evaluatedPercentage.localized, progress: 0.3, progressText: "30%")
-        teacherNameLabel.text = "Pepito Perez"
+    }
+    
+    func configure(with viewModel: SubjectInformationViewModel) {
+        progressLineView.configure(with: SubjectStrings.evaluatedPercentage.localized, progress: viewModel.evaluatedPercentage, progressText: viewModel.evaluatedPercentageText)
+        teacherNameLabel.text = viewModel.teacherName
         teacherEmailLabel.text = "pepitoperez@gmail.com"
         classRoomNameLabel.text = "A-13"
     }

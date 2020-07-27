@@ -57,9 +57,10 @@ class AssignmentDetailViewModel {
         self.maxGrade = assignment.maxGrade
         self.grade = assignment.grade
         self.deadline = assignment.deadline
+        self.subject = assignment.subject
     }
     
-    init(subject: Subject?) {
+    init(subject: Subject) {
         self.subject = subject
     }
     
@@ -68,20 +69,12 @@ class AssignmentDetailViewModel {
             let percentage = percentage,
             let minGrade = minGrade,
             let maxGrade = maxGrade else { return }
-        
-        if let assignment = assignment {
-            assignment.name = name
-            assignment.percentage = percentage / 100
-            assignment.minGrade = minGrade
-            assignment.maxGrade = maxGrade
-            assignment.grade = grade ?? 0
-            assignment.deadline = deadline
-            CoreDataManagerFactory.createManager.saveContext()
-            delegate?.didSave(assignment)
-        } else if let subject = subject {
-            AssignmentCoreDataManager.shared.create(name: name, maxGrade: maxGrade, minGrade: minGrade, deadline: deadline, percentage: percentage, subject: subject)
-            delegate?.didSave(nil)
+        var assignment: Assignment?
+        if self.assignment != nil {
+            assignment = self.assignment
         }
+        AssignmentCoreDataManager.shared.save(existingAssignment: assignment, name: name, maxGrade: maxGrade, minGrade: minGrade, grade: grade, deadline: deadline, percentage: percentage / 100, subject: subject)
+        delegate?.didSave(nil)
     }
     
     func delete() {

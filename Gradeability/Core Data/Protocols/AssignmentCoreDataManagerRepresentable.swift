@@ -25,7 +25,7 @@ protocol AssignmentCoreDataManagerRepresentable {
     ///   - subject: Subject where the assignment belongs.
     ///   - assignment: Parent assignment.
     ///   - assignments: Children assignments.
-    func create(name: String?, maxGrade: Float, minGrade: Float, grade: Float, deadline: Date?, percentage: Float, subject: Subject?, assignment: Assignment?, assignments: NSSet?)
+    func save(existingAssignment: Assignment?, name: String?, maxGrade: Float, minGrade: Float, grade: Float?, deadline: Date?, percentage: Float, subject: Subject?, parentAssignment: Assignment?, assignments: NSSet?)
     /// Deletes an assignment from `CoreData`.
     /// - Parameter assignment: Assignment to be deleted.
     func delete(_ assignment: Assignment)

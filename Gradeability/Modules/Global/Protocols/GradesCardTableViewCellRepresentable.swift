@@ -11,4 +11,5 @@ import UIKit
 protocol GradesCardCollectionViewCellRepresentable {
     /// View model for the `GradeCardView` that shows the current grade
     var gradeCardViewModel: GradeCardViewModel { get }
+    var subjectInformationViewModel: SubjectInformationViewModel? { get }
 }

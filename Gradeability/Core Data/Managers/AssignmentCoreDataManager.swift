@@ -52,19 +52,24 @@ class AssignmentCoreDataManager: AssignmentCoreDataManagerRepresentable {
     ///   - assignment: Parent assignment.
     ///   - assignments: Children assignments.
     ///   - dateCreated: Date when the assignment was created (in case the assignment already exists).
-    func create(name: String?, maxGrade: Float, minGrade: Float, grade: Float = 0, deadline: Date?, percentage: Float, subject: Subject?, assignment: Assignment? = nil, assignments: NSSet? = nil) {
-        let assignment = Assignment(context: CoreDataManagerFactory.createManager.context)
+    func save(existingAssignment: Assignment? = nil, name: String?, maxGrade: Float, minGrade: Float, grade: Float? = 0, deadline: Date?, percentage: Float, subject: Subject?, parentAssignment: Assignment? = nil, assignments: NSSet? = nil) {
+        var assignment: Assignment!
+        if existingAssignment != nil {
+            assignment = existingAssignment
+        } else {
+           assignment = Assignment(context: CoreDataManagerFactory.createManager.context)
+            assignment.subject = subject
+            assignment.dateCreated = Date()
+            assignment.assignment = parentAssignment
+        }
         assignment.id = UUID()
-        assignment.subject = subject
         assignment.name = name
-        assignment.grade = grade
+        assignment.grade = grade ?? 0
         assignment.maxGrade = maxGrade
         assignment.minGrade = minGrade
         assignment.percentage = percentage
         assignment.deadline = deadline
-        assignment.assignment = assignment
         assignment.assignments = assignments
-        assignment.dateCreated = Date()
         CoreDataManagerFactory.createManager.saveContext()
         
         calculateGrade(for: subject)
@@ -115,6 +120,6 @@ class AssignmentCoreDataManager: AssignmentCoreDataManagerRepresentable {
     func createRandom(subject: Subject?) {
         let randomGrade = Float.random(in: 0..<20)
         print(randomGrade)
-        create(name: "Prueba", maxGrade: 20, minGrade: 10, grade: randomGrade, deadline: Date(), percentage: 0.1, subject: subject)
+        save(name: "Prueba", maxGrade: 20, minGrade: 10, grade: randomGrade, deadline: Date(), percentage: 0.1, subject: subject)
     }
 }

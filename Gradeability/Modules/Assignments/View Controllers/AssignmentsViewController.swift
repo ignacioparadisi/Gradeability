@@ -106,7 +106,7 @@ class AssignmentsViewController: GradablesViewController {
     }
     
     @objc func goToCreateAssignmentViewController() {
-        let viewModel = self.viewModel.newAssignmentViewModel
+        guard let viewModel = self.viewModel.newAssignmentViewModel else { return }
         let newAssignmentViewController = AssignmentDetailViewController(viewModel)
         let viewController = UINavigationController(rootViewController: newAssignmentViewController)
         present(viewController, animated: true)

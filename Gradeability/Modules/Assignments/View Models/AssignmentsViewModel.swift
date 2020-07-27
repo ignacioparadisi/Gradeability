@@ -34,10 +34,12 @@ class AssignmentsViewModel: GradableViewModelRepresentable {
     var gradeCardViewModel: GradesCardCollectionViewCellViewModel? {
         guard let subject = subject else { return nil }
         let gradeCardViewModel = GradeCardViewModel(gradable: subject, message: "You are doing great!")
-        return GradesCardCollectionViewCellViewModel(gradeCardViewModel: gradeCardViewModel)
+        let subjectInformationViewModel = SubjectInformationViewModel(subject: subject)
+        return GradesCardCollectionViewCellViewModel(gradeCardViewModel: gradeCardViewModel, subjectInformationViewModel: subjectInformationViewModel)
     }
     
-    var newAssignmentViewModel: AssignmentDetailViewModel {
+    var newAssignmentViewModel: AssignmentDetailViewModel? {
+        guard let subject = subject else { return nil }
         return AssignmentDetailViewModel(subject: subject)
     }
     
@@ -86,6 +88,7 @@ class AssignmentsViewModel: GradableViewModelRepresentable {
     
     func viewModelForItemSelected(at indexPath: IndexPath) -> AssignmentDetailViewModel {
         let assignment = assignments[indexPath.item]
+
         let viewModel = AssignmentDetailViewModel(assignment: assignment)
         viewModel.delegate = self
         return viewModel
