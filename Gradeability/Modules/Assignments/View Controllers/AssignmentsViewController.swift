@@ -76,9 +76,9 @@ class AssignmentsViewController: GradablesViewController {
         viewModel.showDeleteAlert = { [weak self] index in
             guard let self = self else { return }
             let assignment = self.viewModel.gradables[index]
-            let alertController = UIAlertController(title: "Delete \"\(assignment.name)\"?", message: "This will change you grades.", preferredStyle: .alert)
-            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-            let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { [weak self] _ in
+            let alertController = UIAlertController(title: String(format: AssignmentString.deleteTitle.localized, assignment.name), message: AssignmentString.deleteMessage.localized, preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: ButtonStrings.cancel.localized, style: .cancel, handler: nil)
+            let deleteAction = UIAlertAction(title: ButtonStrings.delete.localized, style: .destructive) { [weak self] _ in
                 self?.viewModel.deleteItem(at: index)
             }
             alertController.addAction(cancelAction)

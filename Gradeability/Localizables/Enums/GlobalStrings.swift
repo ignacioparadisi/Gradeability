@@ -16,4 +16,9 @@ enum GlobalStrings: String, Localizable {
     case name
     case grade
     case maxGrade
+    case minGrade
+    case welcomeTitle
+    case welcomeMessage
+    case loading
+    case details
 }

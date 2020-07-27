@@ -26,7 +26,7 @@ class LoadingView: UIView {
         let activityIndicator = UIActivityIndicatorView()
         let loadingLabel = UILabel()
         loadingLabel.font = UIFont.preferredFont(forTextStyle: .footnote)
-        loadingLabel.text = "LOADING"
+        loadingLabel.text = GlobalStrings.loading.localized.uppercased()
         
         centerView.addSubview(activityIndicator)
         centerView.addSubview(loadingLabel)

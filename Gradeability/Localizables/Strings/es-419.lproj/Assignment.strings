@@ -11,7 +11,12 @@
 // MARK: Assignments List
 "createAssignment" = "Crear Asignación";
 "emptyAssignments" = "Parece que no tienes asignaciones para esta materia.";
+"deleteTitle" = "¿Eliminar \"%@\"?";
+"deleteMessage" = "Esta acción va a cambiar tus calificaciones.";
 
 // MARK: Create Assignment
 "insertName" = "Ingresa el nombre de la asignación.";
 "assignmentsName" = "Nombre de la asignación";
+"deadline" = "Fecha de entrega";
+"createEventInCalendar" = "Crear Evento en el Calendario";
+"percentage" = "Porcentaje";

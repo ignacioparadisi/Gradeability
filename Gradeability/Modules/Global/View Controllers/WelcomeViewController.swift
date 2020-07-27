@@ -66,12 +66,10 @@ class WelcomeViewController: UIViewController {
         titleLabel.textAlignment = .center
         titleLabel.numberOfLines = 2
         titleLabel.font = UIFont.preferredFont(forTextStyle: .largeTitle).bold
-        titleLabel.text = "Welcome to\nGradeability"
+        titleLabel.text = GlobalStrings.welcomeTitle.localized
         
         let descriptionLabel = UILabel()
-        descriptionLabel.text = """
-        Description
-        """
+        descriptionLabel.text = GlobalStrings.welcomeMessage.localized
         descriptionLabel.numberOfLines = 0
         
         contentView.addSubview(titleLabel)
@@ -94,7 +92,7 @@ class WelcomeViewController: UIViewController {
     /// Add the `buttonBackgroundView` and setup the button and `blurView`
     private func setupCreateButton() {
         let createButton = UIButton()
-        createButton.setTitle("Create Term", for: .normal)
+        createButton.setTitle(TermStrings.createTerm.localized, for: .normal)
         createButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: createButton.titleLabel?.font.pointSize ?? 17)
         createButton.setTitleColor(.white, for: .normal)
         createButton.layer.cornerRadius = 10
@@ -104,7 +102,7 @@ class WelcomeViewController: UIViewController {
         
         let descriptionLabel = UILabel()
         descriptionLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
-        descriptionLabel.text = "To get started, you first need to create a new Term."
+        descriptionLabel.text = TermStrings.getStartedMessage.localized
         descriptionLabel.numberOfLines = 0
         
         buttonBackgroundView.addSubview(blurView)

@@ -30,11 +30,11 @@ class SubjectsViewModel: GradableViewModelRepresentable {
     }
     /// Term's name to be displayed as the `UIViewController` title.
     var title: String {
-        return term?.name ?? "Subjects"
+        return term?.name ?? SubjectStrings.subjects.localized
     }
     /// Title for the gradables section
     var sectionTitle: String {
-        return "Subjects"
+        return SubjectStrings.subjects.localized
     }
     var termsViewModel: TermsViewModel {
         let viewModel = TermsViewModel()
@@ -93,7 +93,7 @@ class SubjectsViewModel: GradableViewModelRepresentable {
         case .grade:
             return nil
         case .gradables:
-            return "Subjects"
+            return SubjectStrings.subjects.localized
         }
     }
     
@@ -116,10 +116,10 @@ class SubjectsViewModel: GradableViewModelRepresentable {
     
     func createContextualMenuForRow(at indexPath: IndexPath) -> UIMenu? {
         var rootChildren: [UIMenuElement] = []
-        let editAction = UIAction(title: "Edit", image: UIImage(systemName: "square.and.pencil")) { _ in
+        let editAction = UIAction(title: ButtonStrings.edit.localized, image: UIImage(systemName: "square.and.pencil")) { _ in
             
         }
-        let deleteAction = UIAction(title: "Delete", image: UIImage(systemName: "trash"), attributes: .destructive) { [weak self] _ in
+        let deleteAction = UIAction(title: ButtonStrings.delete.localized, image: UIImage(systemName: "trash"), attributes: .destructive) { [weak self] _ in
             self?.showDeleteAlert?(indexPath.item)
         }
         rootChildren.append(editAction)

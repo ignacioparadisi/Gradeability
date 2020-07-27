@@ -34,7 +34,7 @@ class SubjectsViewController: GradablesViewController {
         #if !targetEnvironment(macCatalyst)
         if viewModel.isMasterController {
             navigationItem.setLeftBarButton(
-                UIBarButtonItem(title: "All Terms", style: .plain, target: self, action: #selector(showAllTerms)),
+                UIBarButtonItem(title: ButtonStrings.allTerms.localized, style: .plain, target: self, action: #selector(showAllTerms)),
             animated: false)
         }
         #endif
@@ -85,9 +85,9 @@ class SubjectsViewController: GradablesViewController {
         viewModel.showDeleteAlert = { [weak self] index in
             guard let self = self else { return }
             let subject = self.viewModel.gradables[index]
-            let alertController = UIAlertController(title: "Delete \"\(subject.name)\"?", message: "This will delete all assignments in this subject.", preferredStyle: .alert)
-            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-            let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { [weak self] _ in
+            let alertController = UIAlertController(title: String(format: SubjectStrings.deleteTitle.localized, subject.name), message: SubjectStrings.deleteMessage.localized, preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: ButtonStrings.cancel.localized, style: .cancel, handler: nil)
+            let deleteAction = UIAlertAction(title: ButtonStrings.delete.localized, style: .destructive) { [weak self] _ in
                 self?.viewModel.deleteItem(at: index)
             }
             alertController.addAction(cancelAction)
@@ -99,8 +99,8 @@ class SubjectsViewController: GradablesViewController {
     /// Show view for creating an assignment in case there's no one created yet.
     private func showEmptyView() {
         emptyView = EmptyGradablesView(imageName: "book.circle.fill",
-                                       description: "It seems that you don't have any subject in this term.",
-                                       buttonTitle: "Create Subject")
+                                       description: SubjectStrings.emptySubjects.localized,
+                                       buttonTitle: SubjectStrings.createSubject.localized)
         emptyView?.delegate = self
         view.addSubview(emptyView!)
         emptyView?.anchor.edgesToSuperview().activate()
@@ -122,8 +122,8 @@ class SubjectsViewController: GradablesViewController {
     
     override func didTapOptionsButton(_ sender: UIBarButtonItem?) {
         let alertSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        let createAction = UIAlertAction(title: "New Subject", imageName: "plus", style: .default, handler: nil)
-        let seeDetailAction = UIAlertAction(title: "Details", imageName: "info.circle", style: .default, handler: nil)
+        let createAction = UIAlertAction(title: SubjectStrings.newSubject.localized, imageName: "plus", style: .default, handler: nil)
+        let seeDetailAction = UIAlertAction(title: GlobalStrings.details.localized, imageName: "info.circle", style: .default, handler: nil)
         let cancelAction = UIAlertAction(title: ButtonStrings.cancel.localized, style: .cancel, handler: nil)
         
         alertSheet.addAction(createAction)
@@ -149,7 +149,7 @@ class SubjectsViewController: GradablesViewController {
     override func makeTouchBar() -> NSTouchBar? {
         let touchBar = NSTouchBar()
         touchBar.defaultItemIdentifiers = [.newSubject]
-        let button = NSButtonTouchBarItem(identifier: .newSubject, title: "New Subject", image: UIImage(systemName: "plus")!, target: self, action: nil)
+        let button = NSButtonTouchBarItem(identifier: .newSubject, title: SubjectStrings.newSubject.localized, image: UIImage(systemName: "plus")!, target: self, action: nil)
         touchBar.templateItems = [button]
         return touchBar
     }
