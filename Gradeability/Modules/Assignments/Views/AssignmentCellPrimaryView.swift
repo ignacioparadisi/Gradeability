@@ -49,6 +49,7 @@ class AssignmentCellPrimaryView: GradableCellPrimaryView {
     
     func configure(with viewModel: AssignmentCellPrimaryViewModel, position: AssignmentCellPrimaryViewModel.CellPosition) {
         super.configure(with: viewModel)
+        iconImageView.tintColor = viewModel.iconColor
         if viewModel.isFinished {
             let image = UIImage(systemName: "checkmark.circle")!
             finishedImageView.image = image

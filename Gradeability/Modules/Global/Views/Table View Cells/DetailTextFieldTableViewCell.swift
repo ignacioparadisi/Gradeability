@@ -51,7 +51,7 @@ extension Date: StringCoder {
     }
 }
 
-class DetailTextFieldTableViewCell<Coder: StringCoder>: UITableViewCell, ReusableView {
+class DetailTextFieldTableViewCell<Coder: StringCoder>: UITableViewCell, ReusableView, UITextFieldDelegate {
     
     // MARK: Properties
     var textField: UITextField = {
@@ -92,6 +92,7 @@ class DetailTextFieldTableViewCell<Coder: StringCoder>: UITableViewCell, Reusabl
         contentView.addSubview(titleLabel)
         contentView.addSubview(textField)
 
+        textField.delegate = self
         titleLabel.anchor
             .topToSuperview(constant: 10)
             .trailingToSuperview(constant: -verticalMargin)
@@ -133,5 +134,13 @@ class DetailTextFieldTableViewCell<Coder: StringCoder>: UITableViewCell, Reusabl
     
     @objc private func changeDate() {
         textField.text = DateFormatter.longDateShortTimeDateFormatter.string(from: datePicker.date)
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        titleLabel.textColor = .systemBlue
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        titleLabel.textColor = .secondaryLabel
     }
 }

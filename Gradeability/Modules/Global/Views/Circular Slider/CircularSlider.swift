@@ -286,9 +286,12 @@ open class CircularSlider: UIView {
     }
     
     fileprivate func appearanceKnobLayer() {
-        knobLayer.lineWidth = 5
+        // knobLayer.lineWidth = 4
         knobLayer.fillColor = highlighted ? pgHighlightedColor.cgColor : pgNormalColor.cgColor
-        knobLayer.strokeColor = UIColor.systemBackground.cgColor
+        // knobLayer.strokeColor = UIColor.secondarySystemGroupedBackground.cgColor
+        knobLayer.shadowColor = UIColor.black.cgColor
+        knobLayer.shadowRadius = 5
+        knobLayer.shadowOpacity = 0.2
     }
     
     // MARK: - update

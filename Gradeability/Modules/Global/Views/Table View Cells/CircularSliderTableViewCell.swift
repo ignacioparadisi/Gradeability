@@ -72,13 +72,13 @@ class CircularSliderTableViewCell: UITableViewCell, ReusableView {
     private func setupSlider() {
         circularSlider.lineWidth = 40
         circularSlider.minimumValue = 0
-        circularSlider.knobRadius = 46
+        circularSlider.knobRadius = 50
         circularSlider.bgColor = .systemGray4
     }
     
     func configure(with viewModel: CircularSliderTableViewCellViewModel) {
         self.viewModel = viewModel
-        circularSlider.title = viewModel.title
+        circularSlider.title = viewModel.title.uppercased()
         circularSlider.setValue(viewModel.grade, animated: true)
         if subscriptions.isEmpty {
             circularSlider.$publishedValue

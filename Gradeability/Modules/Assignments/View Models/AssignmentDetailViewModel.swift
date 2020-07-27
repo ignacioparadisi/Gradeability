@@ -22,9 +22,6 @@ class AssignmentDetailViewModel {
         let cardViewModel = GradeCardViewModel(gradable: assignment, message: "You are doing great!")
         return GradesCardCollectionViewCellViewModel(gradeCardViewModel: cardViewModel)
     }
-    var gradeCardViewModel2: GradeCardViewModel {
-        return GradeCardViewModel(gradable: assignment, message: "")
-    }
     
     var combineGrades: AnyPublisher<(Float, Float, Float, Float)?, Never> {
         return Publishers.CombineLatest4($minGrade, $maxGrade, $grade, $percentage)
@@ -38,6 +35,10 @@ class AssignmentDetailViewModel {
                         return nil
                         
                 }
+                if grade == self.assignment.grade &&
+                    minGrade == self.assignment.minGrade &&
+                    maxGrade == self.assignment.maxGrade &&
+                    percentage == self.assignment.percentage { return nil }
                 if minGrade >= maxGrade || grade < 0 || grade > maxGrade { return nil }
                 let accumulatedPercentage = SubjectCoreDataManager.shared.getAccumulatedPercentage(assignment: self.assignment)
                 percentage = percentage / 100
@@ -48,8 +49,9 @@ class AssignmentDetailViewModel {
     }
     private var combineLast: AnyPublisher<(String, Date)?, Never> {
         return Publishers.CombineLatest($name, $deadline)
-            .map { name, deadline in
+            .map { [weak self] name, deadline in
                 guard let name = name, !name.isEmpty , let deadline = deadline else { return nil }
+                if name == self?.assignment.name && deadline == self?.assignment.deadline { return nil }
                 return (name, deadline)
             }
             .eraseToAnyPublisher()

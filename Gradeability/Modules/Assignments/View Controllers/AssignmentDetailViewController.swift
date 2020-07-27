@@ -17,14 +17,13 @@ class AssignmentDetailViewController: UIViewController {
         case delete
     }
     private enum FieldRow: Int, CaseIterable {
-        case name
         case minGrade
         case maxGrade
         case percentage
         case deadline
     }
     // MARK: Properties
-    private let tableView: UITableView = UITableView()
+    private let tableView: UITableView = UITableView(frame: .zero, style: .insetGrouped)
     private let viewModel: AssignmentDetailViewModel
     private var saveButton: UIBarButtonItem!
     private var subscriptions = Set<AnyCancellable>()
@@ -53,7 +52,7 @@ class AssignmentDetailViewController: UIViewController {
     private func setupTableView() {
         view.addSubview(tableView)
         tableView.anchor.edgesToSuperview().activate()
-        tableView.separatorStyle = .none
+        // tableView.separatorStyle = .none
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cellIdentifier")
@@ -132,7 +131,7 @@ extension AssignmentDetailViewController: UITableViewDataSource {
         guard let section = Section(rawValue: section) else { return 0 }
         switch section {
         case .grade:
-            return 1
+            return 2
         case .fields:
             return FieldRow.allCases.count
         case .delete:
@@ -144,37 +143,51 @@ extension AssignmentDetailViewController: UITableViewDataSource {
         guard let section = Section(rawValue: indexPath.section) else { return UITableViewCell() }
         switch section {
         case .grade:
-            let cell = tableView.dequeueReusableCell(for: indexPath) as CircularSliderTableViewCell
-            cell.gestureDelegate = self
-            let circularSliderViewModel = CircularSliderTableViewCellViewModel(grade: viewModel.grade ?? 0.0)
-            if gradeSubscriptions.count < 3 {
-                circularSliderViewModel.$grade
-                    .map { $0 as Float? }
-                    .assign(to: \.grade, on: viewModel)
-                    .store(in: &gradeSubscriptions)
-                viewModel.$maxGrade
-                    .replaceNil(with: 0.0)
-                    .assign(to: \.maxGrade, on: circularSliderViewModel)
-                    .store(in: &gradeSubscriptions)
-                viewModel.$minGrade
-                    .replaceNil(with: 0.0)
-                    .assign(to: \.minGrade, on: circularSliderViewModel)
-                    .store(in: &gradeSubscriptions)
+            let shouldCreateSubscription = gradeSubscriptions.count <= 3
+            if indexPath.row == 1 {
+                let cell = tableView.dequeueReusableCell(for: indexPath) as CircularSliderTableViewCell
+                cell.gestureDelegate = self
+                let circularSliderViewModel = CircularSliderTableViewCellViewModel(grade: viewModel.grade ?? 0.0)
+                if shouldCreateSubscription {
+                    circularSliderViewModel.$grade
+                        .map { $0 as Float? }
+                        .assign(to: \.grade, on: viewModel)
+                        .store(in: &gradeSubscriptions)
+                    viewModel.$maxGrade
+                        .replaceNil(with: 0.0)
+                        .assign(to: \.maxGrade, on: circularSliderViewModel)
+                        .store(in: &gradeSubscriptions)
+                    viewModel.$minGrade
+                        .replaceNil(with: 0.0)
+                        .assign(to: \.minGrade, on: circularSliderViewModel)
+                        .store(in: &gradeSubscriptions)
+                }
+                cell.configure(with: circularSliderViewModel)
+                return cell
+            } else {
+                let cell = tableView.dequeueReusableCell(for: indexPath) as LargeTextFieldTableViewCell
+                cell.configure(with: viewModel.name)
+                if shouldCreateSubscription {
+                    cell.textField.publisher(for: \.text)
+                        .assign(to: \.name, on: viewModel)
+                        .store(in: &cellSubscriptions)
+                }
+                return cell
             }
-            cell.configure(with: circularSliderViewModel)
-            return cell
+            
         case .fields :
             return createFieldRow(for: indexPath)
         case .delete:
             let deleteButton = UIButton()
-            deleteButton.layer.cornerRadius = Constants.cornerRadius
             deleteButton.setTitleColor(.systemRed, for: .normal)
             deleteButton.setTitle("Delete", for: .normal)
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellIdentifier", for: indexPath)
             cell.contentView.addSubview(deleteButton)
+            deleteButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .body).bold
             deleteButton.anchor
                 .height(constant: 50)
-                .edgesToSuperview(insets: UIEdgeInsets(top: 10, left: 16, bottom: -10, right: -16))
+//                .edgesToSuperview(insets: UIEdgeInsets(top: 10, left: 16, bottom: -10, right: -16))
+                .edgesToSuperview()
                 .activate()
             return cell
         }
@@ -184,15 +197,6 @@ extension AssignmentDetailViewController: UITableViewDataSource {
         guard let row = FieldRow(rawValue: indexPath.row) else { return UITableViewCell() }
         let shouldCreateSubscription = cellSubscriptions.count <= row.rawValue
         switch row {
-        case .name:
-            let cell = tableView.dequeueReusableCell(for: indexPath) as LargeTextFieldTableViewCell
-            cell.configure(with: viewModel.name)
-            if shouldCreateSubscription {
-                cell.textField.publisher(for: \.text)
-                    .assign(to: \.name, on: viewModel)
-                    .store(in: &cellSubscriptions)
-            }
-            return cell
         case .minGrade:
             let cell = tableView.dequeueReusableCell(for: indexPath) as DetailTextFieldTableViewCell<Float>
             cell.configure(with: "Minimum grade to approve", value: viewModel.minGrade, keyboardType: .decimalPad)
@@ -204,7 +208,7 @@ extension AssignmentDetailViewController: UITableViewDataSource {
             return cell
         case .maxGrade:
             let cell = tableView.dequeueReusableCell(for: indexPath) as DetailTextFieldTableViewCell<Float>
-            cell.configure(with: "Maximum grade", value: viewModel.minGrade, keyboardType: .decimalPad)
+            cell.configure(with: "Maximum grade", value: viewModel.maxGrade, keyboardType: .decimalPad)
             if shouldCreateSubscription {
                 cell.$value
                     .assign(to: \.maxGrade, on: viewModel)

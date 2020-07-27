@@ -16,7 +16,7 @@ class GradableCellPrimaryView: UIView {
     
     // MARK: View Properties
     private var gradeRingView: GradeRingView!
-    private lazy var iconImageView: UIImageView = UIImageView()
+    lazy var iconImageView: UIImageView = UIImageView()
     let contentView: UIView = UIView()
     private let accentLabel: UILabel = {
         let label = UILabel()
