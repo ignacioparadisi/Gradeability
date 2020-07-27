@@ -37,8 +37,8 @@ class AssignmentDetailViewModel {
                 assignment.deadline != deadline ||
                 assignment.percentage as Float? != (percentage ?? 0) / 100
         } else {
-            return name != nil ||
-                grade != nil ||
+            return (name != nil && name != "") ||
+                (grade != nil && grade != 0) ||
                 minGrade != nil ||
                 maxGrade != nil ||
                 percentage != nil ||
