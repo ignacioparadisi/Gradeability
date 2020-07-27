@@ -47,7 +47,7 @@ extension Date: StringCoder {
     static func encode(value: Date?) -> String? {
         guard let value = value else { return nil }
         let dateFormatter: DateFormatter = .longDateShortTimeDateFormatter
-        return dateFormatter.string(from: value)
+        return dateFormatter.string(from: value).capitalized
     }
 }
 

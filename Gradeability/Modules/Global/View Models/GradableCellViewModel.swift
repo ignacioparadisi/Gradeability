@@ -118,7 +118,7 @@ class GradableCellViewModel: GradableCellViewModelRepresentable {
         let dateFormatter: DateFormatter = .longDateShortTimeDateFormatter
         gradableName = assignment.name ?? ""
         if let deadline = assignment.deadline {
-            gradableDetail = dateFormatter.string(from: deadline)
+            gradableDetail = dateFormatter.string(from: deadline).capitalized
         }
     }
 

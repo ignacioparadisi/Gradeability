@@ -11,7 +11,7 @@ import Foundation
 extension DateFormatter {
     static var longDateShortTimeDateFormatter: DateFormatter {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .long
+        dateFormatter.dateStyle = .full
         dateFormatter.timeStyle = .short
         return dateFormatter
     }

@@ -10,11 +10,12 @@ import Foundation
 import Combine
 
 protocol AssignmentDetailViewModelDelegate: class {
-    func didSave(_ assignment: Assignment)
+    func didSave(_ assignment: Assignment?)
 }
 
 class AssignmentDetailViewModel {
-    private let assignment: Assignment
+    private var assignment: Assignment?
+    private var subject: Subject?
     private let dateFormatter: DateFormatter = .longDateShortTimeDateFormatter
     weak var delegate: AssignmentDetailViewModelDelegate?
     @Published var name: String?
@@ -24,10 +25,6 @@ class AssignmentDetailViewModel {
     @Published var minGrade: Float?
     @Published var deadline: Date?
     @Published var createEvent: Bool = true
-    var gradeCardViewModel: GradesCardCollectionViewCellRepresentable {
-        let cardViewModel = GradeCardViewModel(gradable: assignment, message: "You are doing great!")
-        return GradesCardCollectionViewCellViewModel(gradeCardViewModel: cardViewModel)
-    }
     
     // MARK: Field Validations
     var validateName: AnyPublisher<Bool, Never> {
@@ -49,14 +46,17 @@ class AssignmentDetailViewModel {
                         return nil
                         
                 }
-                if grade == self.assignment.grade &&
-                    minGrade == self.assignment.minGrade &&
-                    maxGrade == self.assignment.maxGrade &&
-                    percentage == self.assignment.percentage { return nil }
+                if let assignment = self.assignment,
+                    grade == assignment.grade &&
+                    minGrade == assignment.minGrade &&
+                    maxGrade == assignment.maxGrade &&
+                    percentage == assignment.percentage { return nil }
                 if minGrade >= maxGrade || grade < 0 || grade > maxGrade { return nil }
-                let accumulatedPercentage = SubjectCoreDataManager.shared.getAccumulatedPercentage(assignment: self.assignment)
-                percentage = percentage / 100
-                if accumulatedPercentage + percentage > 1 { return nil }
+                if let assignment = self.assignment {
+                    let accumulatedPercentage = SubjectCoreDataManager.shared.getAccumulatedPercentage(assignment: assignment)
+                    percentage = percentage / 100
+                    if accumulatedPercentage + percentage > 1 { return nil }
+                }
                 return (minGrade, maxGrade, grade, percentage)
             }
             .eraseToAnyPublisher()
@@ -65,7 +65,7 @@ class AssignmentDetailViewModel {
         return Publishers.CombineLatest($name, $deadline)
             .map { [weak self] name, deadline in
                 guard let name = name, !name.isEmpty , let deadline = deadline else { return nil }
-                if name == self?.assignment.name && deadline == self?.assignment.deadline { return nil }
+                if let assignment = self?.assignment, name == assignment.name && deadline == assignment.deadline { return nil }
                 return (name, deadline)
             }
             .eraseToAnyPublisher()
@@ -80,7 +80,7 @@ class AssignmentDetailViewModel {
             .eraseToAnyPublisher()
     }
     
-    init(_ assignment: Assignment) {
+    init(assignment: Assignment) {
         self.assignment = assignment
         self.name = assignment.name
         self.percentage = assignment.percentage * 100
@@ -90,19 +90,30 @@ class AssignmentDetailViewModel {
         self.deadline = assignment.deadline
     }
     
+    init(subject: Subject?) {
+        self.subject = subject
+    }
+    
     func save() {
         guard let name = name,
             let percentage = percentage,
             let minGrade = minGrade,
             let maxGrade = maxGrade else { return }
         
-        assignment.name = name
-        assignment.percentage = percentage / 100
-        assignment.minGrade = minGrade
-        assignment.maxGrade = maxGrade
-        assignment.grade = grade ?? 0
-        assignment.deadline = deadline
-        CoreDataManagerFactory.createManager.saveContext()
-        delegate?.didSave(assignment)
+        if let assignment = assignment {
+            assignment.name = name
+            assignment.percentage = percentage / 100
+            assignment.minGrade = minGrade
+            assignment.maxGrade = maxGrade
+            assignment.grade = grade ?? 0
+            assignment.deadline = deadline
+            CoreDataManagerFactory.createManager.saveContext()
+            delegate?.didSave(assignment)
+        } else if let subject = subject {
+            AssignmentCoreDataManager.shared.create(name: name, maxGrade: maxGrade, minGrade: minGrade, deadline: deadline, percentage: percentage, subject: subject)
+            delegate?.didSave(nil)
+        }
+        
+        
     }
 }

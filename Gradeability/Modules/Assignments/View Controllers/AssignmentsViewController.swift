@@ -106,9 +106,10 @@ class AssignmentsViewController: GradablesViewController {
     }
     
     @objc func goToCreateAssignmentViewController() {
-        let createAssignmentViewController = CreateAssignmentViewController()
-        createAssignmentViewController.isModalInPresentation = true
-        let viewController = UINavigationController(rootViewController: createAssignmentViewController)
+        let viewModel = self.viewModel.newAssignmentViewModel
+        let newAssignmentViewController = AssignmentDetailViewController(viewModel)
+        newAssignmentViewController.isModalInPresentation = true
+        let viewController = UINavigationController(rootViewController: newAssignmentViewController)
         present(viewController, animated: true)
     }
     
