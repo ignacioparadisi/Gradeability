@@ -1,0 +1,19 @@
+/* 
+  Subject.strings
+  Gradeability
+
+  Created by Ignacio Paradisi on 7/27/20.
+  Copyright © 2020 Ignacio Paradisi. All rights reserved.
+*/
+
+"subjects" = "Subjects";
+"evaluatedPercentage" = "Evaluated percentage";
+"noSubjectSelectedTitle" = "No Subject Selected";
+"noSubjectSelectedMessage" = "Please select a subject to see it's assignments.";
+"teacher" = "Teacher";
+"classrooms" = "Classroom";
+"deleteTitle" = "Delete \"%@\"?";
+"deleteMessage" = "This will delete all assignments in this subject.";
+"emptySubjects" = "It seems that you don't have any subject in this term.";
+"createSubject" = "Create Subject";
+"newSubject" = "New Subject";

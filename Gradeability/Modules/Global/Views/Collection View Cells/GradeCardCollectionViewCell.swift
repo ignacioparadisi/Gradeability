@@ -90,10 +90,10 @@ class SubjectInformationView: UIView {
         backgroundColor = .clear
         let teacherLabel = UILabel()
         teacherLabel.font = UIFont.preferredFont(forTextStyle: .caption1).bold
-        teacherLabel.text = "Teacher".uppercased()
+        teacherLabel.text = SubjectStrings.teacher.localized.uppercased()
         let classRoomLabel = UILabel()
         classRoomLabel.font = UIFont.preferredFont(forTextStyle: .caption1).bold
-        classRoomLabel.text = "Classroom".uppercased()
+        classRoomLabel.text = SubjectStrings.classroom.localized.uppercased()
         
         addSubview(teacherLabel)
         addSubview(teacherNameLabel)
@@ -136,7 +136,7 @@ class SubjectInformationView: UIView {
             .bottomToSuperview()
             .activate()
         
-        progressLineView.configure(with: "Porcentaje evaluado", progress: 0.3, progressText: "30%")
+        progressLineView.configure(with: SubjectStrings.evaluatedPercentage.localized, progress: 0.3, progressText: "30%")
         teacherNameLabel.text = "Pepito Perez"
         teacherEmailLabel.text = "pepitoperez@gmail.com"
         classRoomNameLabel.text = "A-13"

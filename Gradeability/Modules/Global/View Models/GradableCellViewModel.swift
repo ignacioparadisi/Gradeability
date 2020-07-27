@@ -22,9 +22,9 @@ struct GradableCellViewModel: GradableCellViewModelRepresentable, Hashable {
     
     var secondaryViewTitle: String? {
         if gradable is Term {
-             return "Días restantes"
+            return TermStrings.daysLeft.localized
         } else if gradable is Subject {
-            return "Porcentaje evaluado"
+            return SubjectStrings.evaluatedPercentage.localized
         }
         return nil
     }
@@ -66,7 +66,7 @@ struct GradableCellViewModel: GradableCellViewModelRepresentable, Hashable {
     }
     var accentText: String? {
         if let term = gradable as? Term, term.isCurrent {
-            return "Período actual".uppercased()
+            return TermStrings.currentTerm.localized.uppercased()
         }
         return nil
     }

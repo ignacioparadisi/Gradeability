@@ -75,7 +75,7 @@ class AssignmentDetailViewController: UIViewController {
     }
     
     func setupNavigationBar() {
-        let closeButton = UIBarButtonItem(title: "Close", style: .plain, target: self, action: #selector(dismissView))
+        let closeButton = UIBarButtonItem(title: ButtonStrings.close.localized, style: .plain, target: self, action: #selector(dismissView))
         saveButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(save))
         navigationItem.setRightBarButton(saveButton, animated: false)
         navigationItem.setLeftBarButton(closeButton, animated: false)
@@ -180,7 +180,7 @@ extension AssignmentDetailViewController: UITableViewDataSource {
         case .delete:
             let deleteButton = UIButton()
             deleteButton.setTitleColor(.systemRed, for: .normal)
-            deleteButton.setTitle("Delete", for: .normal)
+            deleteButton.setTitle(ButtonStrings.delete.localized, for: .normal)
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellIdentifier", for: indexPath)
             cell.contentView.addSubview(deleteButton)
             deleteButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .body).bold
@@ -199,7 +199,7 @@ extension AssignmentDetailViewController: UITableViewDataSource {
         switch row {
         case .minGrade:
             let cell = tableView.dequeueReusableCell(for: indexPath) as DetailTextFieldTableViewCell<Float>
-            cell.configure(with: "Minimum grade to approve", value: viewModel.minGrade, keyboardType: .decimalPad)
+            cell.configure(with: GlobalStrings.minGrade.localized, value: viewModel.minGrade, keyboardType: .decimalPad)
             if shouldCreateSubscription {
                 cell.$value
                     .assign(to: \.minGrade, on: viewModel)
@@ -208,7 +208,7 @@ extension AssignmentDetailViewController: UITableViewDataSource {
             return cell
         case .maxGrade:
             let cell = tableView.dequeueReusableCell(for: indexPath) as DetailTextFieldTableViewCell<Float>
-            cell.configure(with: "Maximum grade", value: viewModel.maxGrade, keyboardType: .decimalPad)
+            cell.configure(with: GlobalStrings.maxGrade.localized, value: viewModel.maxGrade, keyboardType: .decimalPad)
             if shouldCreateSubscription {
                 cell.$value
                     .assign(to: \.maxGrade, on: viewModel)
@@ -217,7 +217,7 @@ extension AssignmentDetailViewController: UITableViewDataSource {
             return cell
         case .percentage:
             let cell = tableView.dequeueReusableCell(for: indexPath) as DetailTextFieldTableViewCell<Float>
-            cell.configure(with: "Percentage", value: viewModel.percentage, keyboardType: .decimalPad)
+            cell.configure(with: AssignmentString.percentage.localized, value: viewModel.percentage, keyboardType: .decimalPad)
             if shouldCreateSubscription {
                 cell.$value
                     .assign(to: \.percentage, on: viewModel)
@@ -226,7 +226,7 @@ extension AssignmentDetailViewController: UITableViewDataSource {
             return cell
         case .deadline:
             let cell = tableView.dequeueReusableCell(for: indexPath) as DetailTextFieldTableViewCell<Date>
-            cell.configure(with: "Deadline", value: viewModel.deadline)
+            cell.configure(with: AssignmentString.deadline.localized, value: viewModel.deadline)
             if shouldCreateSubscription {
                 cell.$value
                     .assign(to: \.deadline, on: viewModel)

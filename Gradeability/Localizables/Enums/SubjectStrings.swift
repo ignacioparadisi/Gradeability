@@ -7,3 +7,21 @@
 //
 
 import Foundation
+
+enum SubjectStrings: String, Localizable {
+    var tableName: String {
+        return "Subject"
+    }
+    // MARK: Cases
+    case subjects
+    case evaluatedPercentage
+    case noSubjectSelectedTitle
+    case noSubjectSelectedMessage
+    case teacher
+    case classroom
+    case deleteTitle
+    case deleteMessage
+    case emptySubjects
+    case createSubject
+    case newSubject
+}

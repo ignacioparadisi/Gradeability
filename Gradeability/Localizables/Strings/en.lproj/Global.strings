@@ -8,4 +8,9 @@
 
 "name" = "Name";
 "grade" = "Grade";
-"maxGrade" = "Max. Grade";
+"maxGrade" = "Maximum grade";
+"minGrade" = "Minimum grade to approve";
+"welcomeTitle" = "Welcome to\nGradeability";
+"welcomeMessage" = "Description";
+"loading" = "Loading";
+"details" = "Details";

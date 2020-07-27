@@ -82,8 +82,6 @@ class AssignmentDetailViewModel {
             let minGrade = minGrade,
             let maxGrade = maxGrade else { return }
         
-        print(grade)
-        
         assignment.name = name
         assignment.percentage = percentage / 100
         assignment.minGrade = minGrade

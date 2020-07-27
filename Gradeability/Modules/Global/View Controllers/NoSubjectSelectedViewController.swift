@@ -14,7 +14,7 @@ class NoSubjectSelectedViewController: UIViewController {
         let label = UILabel()
         label.font = UIFont.preferredFont(forTextStyle: .title3).bold
         label.textAlignment = .center
-        label.text = "No Subject Selected"
+        label.text = SubjectStrings.noSubjectSelectedTitle.localized
         return label
     }()
     /// Detail label for the view
@@ -22,7 +22,7 @@ class NoSubjectSelectedViewController: UIViewController {
         let label = UILabel()
         label.textAlignment = .center
         label.textColor = .secondaryLabel
-        label.text = "Please select a subject to see it's assignments."
+        label.text = SubjectStrings.noSubjectSelectedMessage.localized
         return label
     }()
     

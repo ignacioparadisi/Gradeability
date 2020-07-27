@@ -14,8 +14,13 @@ enum AssignmentString: String, Localizable {
     }
     // MARK: Localizable keys
     case assignments
+    case assignmentsName
     case createAssignment
+    case createEventInCalendar
+    case deadline
+    case deleteMessage
+    case deleteTitle
     case emptyAssignments
     case insertName
-    case assignmentsName
+    case percentage
 }

@@ -69,7 +69,7 @@ class TermsViewModel: GradableViewModelRepresentable {
         // Get the new current Term
         let term = terms[indexPath.row]
         var rootChildren: [UIMenuElement] = []
-        let currentAction = UIAction(title: "Set Current", image: UIImage(systemName: "pin")) { [weak self] _ in
+        let currentAction = UIAction(title: TermStrings.setCurrent.localized, image: UIImage(systemName: "pin")) { [weak self] _ in
             // Set current Term to not be the current
             let currentTerm = self?.terms.filter { $0.isCurrent }.first
             currentTerm?.isCurrent = false
@@ -77,11 +77,11 @@ class TermsViewModel: GradableViewModelRepresentable {
             CoreDataManager.shared.saveContext()
             self?.delegate?.didChangeCurrentTerm(term)
         }
-        let editAction = UIAction(title: "Edit", image: UIImage(systemName: "square.and.pencil")) { _ in
+        let editAction = UIAction(title: ButtonStrings.edit.localized, image: UIImage(systemName: "square.and.pencil")) { _ in
             
         }
         let attributes: UIAction.Attributes = term.isCurrent ? [.destructive, .disabled] : .destructive
-        let deleteAction = UIAction(title: "Delete", image: UIImage(systemName: "trash"), attributes: attributes) { [weak self] _ in
+        let deleteAction = UIAction(title: ButtonStrings.delete.localized, image: UIImage(systemName: "trash"), attributes: attributes) { [weak self] _ in
             self?.showDeleteAlert?(indexPath.item)
         }
         if !term.isCurrent {

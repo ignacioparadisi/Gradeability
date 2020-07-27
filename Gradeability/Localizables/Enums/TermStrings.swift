@@ -7,3 +7,18 @@
 //
 
 import Foundation
+
+enum TermStrings: String, Localizable {
+    var tableName: String {
+        return "Term"
+    }
+    // MARK: Cases
+    case daysLeft
+    case currentTerm
+    case createTerm
+    case getStartedMessage
+    case deleteTitle
+    case deleteMessage
+    case newTerm
+    case setCurrent
+}

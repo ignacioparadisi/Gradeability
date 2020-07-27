@@ -156,7 +156,7 @@ class CreateAssignmentViewController: BaseScrollViewController {
     
     private func setupDeadlineSection() {
         let datePicker = UIDatePicker()
-        deadlineFieldSection =  FieldSectionView(title: "Deadline", description: AssignmentString.assignmentsName.localized, control: datePicker)
+        deadlineFieldSection =  FieldSectionView(title: AssignmentString.deadline.localized, description: AssignmentString.assignmentsName.localized, control: datePicker)
         contentView.addSubview(deadlineFieldSection)
         deadlineFieldSection.anchor
             .top(to: nameFieldSection.bottomAnchor)
@@ -165,7 +165,7 @@ class CreateAssignmentViewController: BaseScrollViewController {
             .activate()
         
         let switchLabel = UILabel()
-        switchLabel.text = "Create event in Calendar"
+        switchLabel.text = AssignmentString.createEventInCalendar.localized
         let calendarSwitch = UISwitch()
         calendarSwitch.isOn = true
         

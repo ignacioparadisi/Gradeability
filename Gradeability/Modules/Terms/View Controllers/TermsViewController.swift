@@ -79,9 +79,9 @@ class TermsViewController: GradablesViewController {
         viewModel.showDeleteAlert = { [weak self] index in
             guard let self = self else { return }
             let term = self.viewModel.gradables[index]
-            let alertController = UIAlertController(title: "Delete \"\(term.name)\"?", message: "This will delete all subjects and assignments in this term.", preferredStyle: .alert)
-            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-            let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { [weak self] _ in
+            let alertController = UIAlertController(title: String(format: TermStrings.deleteTitle.localized, term.name), message: TermStrings.deleteMessage.localized, preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: ButtonStrings.cancel.localized, style: .cancel, handler: nil)
+            let deleteAction = UIAlertAction(title: ButtonStrings.delete.localized, style: .destructive) { [weak self] _ in
                 self?.viewModel.deleteItem(at: index)
             }
             alertController.addAction(cancelAction)
@@ -100,7 +100,7 @@ class TermsViewController: GradablesViewController {
             UIBarButtonItem(image: ellipsisImage, style: .plain, target: self, action: #selector(super.didTapOptionsButton(_:)))
         ], animated: false)
         #else
-        navigationItem.setLeftBarButton(UIBarButtonItem(title: "Close", style: .plain, target: self, action: #selector(dismissView)), animated: false)
+        navigationItem.setLeftBarButton(UIBarButtonItem(title: ButtonStrings.close.localized, style: .plain, target: self, action: #selector(dismissView)), animated: false)
         #endif
     }
     
@@ -119,10 +119,10 @@ class TermsViewController: GradablesViewController {
     
     override func didTapOptionsButton(_ sender: UIBarButtonItem?) {
         let alertSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        let createAction = UIAlertAction(title: "New", imageName: "plus", style: .default, handler: { [weak self] _ in
+        let createAction = UIAlertAction(title: TermStrings.newTerm.localized, imageName: "plus", style: .default, handler: { [weak self] _ in
             self?.goToCreateTermViewController()
         })
-        let seeDetailAction = UIAlertAction(title: "Details", imageName: "info.circle", style: .default, handler: nil)
+        let seeDetailAction = UIAlertAction(title: GlobalStrings.details.localized, imageName: "info.circle", style: .default, handler: nil)
         let cancelAction = UIAlertAction(title: ButtonStrings.cancel.localized, style: .cancel, handler: nil)
         
         alertSheet.addAction(createAction)
@@ -140,7 +140,7 @@ class TermsViewController: GradablesViewController {
     override func makeTouchBar() -> NSTouchBar? {
         let touchBar = NSTouchBar()
         touchBar.defaultItemIdentifiers = [.newTerm]
-        let button = NSButtonTouchBarItem(identifier: .newTerm, title: "New Term", image: UIImage(systemName: "plus")!, target: self, action: nil)
+        let button = NSButtonTouchBarItem(identifier: .newTerm, title: TermStrings.newTerm.localized, image: UIImage(systemName: "plus")!, target: self, action: nil)
         touchBar.templateItems = [button]
         return touchBar
     }
