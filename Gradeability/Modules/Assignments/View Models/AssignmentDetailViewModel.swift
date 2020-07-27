@@ -25,6 +25,9 @@ class AssignmentDetailViewModel {
     @Published var minGrade: Float?
     @Published var deadline: Date?
     @Published var createEvent: Bool = true
+    var isEditing: Bool {
+        return assignment != nil
+    }
     
     // MARK: Field Validations
     var validateName: AnyPublisher<Bool, Never> {

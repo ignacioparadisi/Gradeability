@@ -37,6 +37,10 @@ class AssignmentsViewModel: GradableViewModelRepresentable {
         return GradesCardCollectionViewCellViewModel(gradeCardViewModel: gradeCardViewModel)
     }
     
+    var newAssignmentViewModel: AssignmentDetailViewModel {
+        return AssignmentDetailViewModel(subject: subject)
+    }
+    
     // MARK: Initializers
     init(subject: Subject? = nil) {
         self.subject = subject
@@ -82,7 +86,7 @@ class AssignmentsViewModel: GradableViewModelRepresentable {
     
     func viewModelForItemSelected(at indexPath: IndexPath) -> AssignmentDetailViewModel {
         let assignment = assignments[indexPath.item]
-        let viewModel = AssignmentDetailViewModel(assignment)
+        let viewModel = AssignmentDetailViewModel(assignment: assignment)
         viewModel.delegate = self
         return viewModel
     }
@@ -144,7 +148,7 @@ class AssignmentsViewModel: GradableViewModelRepresentable {
 }
 
 extension AssignmentsViewModel: AssignmentDetailViewModelDelegate {
-    func didSave(_ assignment: Assignment) {
+    func didSave(_ assignment: Assignment?) {
         fetch()
     }
 }

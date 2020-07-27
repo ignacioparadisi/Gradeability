@@ -25,6 +25,7 @@ class AssignmentDetailViewController: UIViewController {
     }
     // MARK: Properties
     private let tableView: UITableView = UITableView(frame: .zero, style: .insetGrouped)
+    private var cancelButton: UIBarButtonItem!
     private let viewModel: AssignmentDetailViewModel
     private var saveButton: UIBarButtonItem!
     private var subscriptions = Set<AnyCancellable>()
@@ -45,6 +46,7 @@ class AssignmentDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
+        navigationController?.presentationController?.delegate = self
         setupNavigationBar()
         setupTableView()
         setupViewModel()
@@ -53,7 +55,6 @@ class AssignmentDetailViewController: UIViewController {
     private func setupTableView() {
         view.addSubview(tableView)
         tableView.anchor.edgesToSuperview().activate()
-        // tableView.separatorStyle = .none
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cellIdentifier")
@@ -65,10 +66,15 @@ class AssignmentDetailViewController: UIViewController {
     }
     
     func setupViewModel() {
-        viewModel.$name
-            .receive(on: RunLoop.main)
-            .assign(to: \.title, on: self)
-            .store(in: &subscriptions)
+        if viewModel.isEditing {
+            viewModel.$name
+                .receive(on: RunLoop.main)
+                .assign(to: \.title, on: self)
+                .store(in: &subscriptions)
+        } else {
+            title = AssignmentString.createAssignment.localized
+        }
+        
 //        viewModel.readyToSubmit
 //            .map { $0 != nil }
 //            .receive(on: RunLoop.main)
@@ -77,22 +83,32 @@ class AssignmentDetailViewController: UIViewController {
     }
     
     func setupNavigationBar() {
-        let closeButton = UIBarButtonItem(title: ButtonStrings.close.localized, style: .plain, target: self, action: #selector(dismissView))
+        cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(showDiscardChangesAlert(_:)))
         saveButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(save))
         navigationItem.setRightBarButton(saveButton, animated: false)
-        navigationItem.setLeftBarButton(closeButton, animated: false)
-    }
-    
-    @objc private func dismissView() {
-        dismiss(animated: true)
+        navigationItem.setLeftBarButton(cancelButton, animated: false)
     }
     
     @objc private func save() {
         viewModel.save()
-        dismissView()
+        dismiss(animated: true)
     }
     
-    func showDatePickerPopover(_ sender: UITableViewCell) {
+    @objc private func showDiscardChangesAlert(_ sender: UIBarButtonItem) {
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let dismissAction = UIAlertAction(title: "Discard Changes", style: .destructive) { [weak self] _ in
+            self?.dismiss(animated: true)
+        }
+        let cancelAction = UIAlertAction(title: ButtonStrings.cancel.localized, style: .cancel)
+        alertController.addAction(dismissAction)
+        alertController.addAction(cancelAction)
+        if let popoverController = alertController.popoverPresentationController {
+            popoverController.barButtonItem = cancelButton
+        }
+        present(alertController, animated: true)
+    }
+    
+    private func showDatePickerPopover(_ sender: UITableViewCell) {
         let datePicker = UIDatePicker()
         let datePickerSize = CGSize(width: 320, height: 200)
         datePicker.frame = CGRect(x: 0, y: 0, width: datePickerSize.width, height: datePickerSize.height)
@@ -112,7 +128,6 @@ class AssignmentDetailViewController: UIViewController {
         popoverViewController.popoverPresentationController?.sourceView = sender
         popoverViewController.popoverPresentationController?.sourceRect = sender.bounds
         self.present(popoverViewController, animated: true, completion: nil)
-        
     }
     
     @objc private func dateChanged(_ sender: UIDatePicker) {
@@ -120,13 +135,16 @@ class AssignmentDetailViewController: UIViewController {
         guard let cell = tableView.cellForRow(at: indexPath) as? DetailTextFieldTableViewCell<Date> else { return }
         cell.textField.text = DateFormatter.longDateShortTimeDateFormatter.string(from: sender.date)
     }
+    
+    
 }
 
 // MARK: - UITableViewDataSource
 extension AssignmentDetailViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return Section.allCases.count
+        // Don't show the delete button if it's not editing
+        return viewModel.isEditing ? Section.allCases.count : Section.allCases.count - 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -137,7 +155,7 @@ extension AssignmentDetailViewController: UITableViewDataSource {
         case .fields:
             return FieldRow.allCases.count
         case .delete:
-            return 1
+            return viewModel.isEditing ? 1 : 0
         }
     }
     
@@ -188,7 +206,6 @@ extension AssignmentDetailViewController: UITableViewDataSource {
             deleteButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .body).bold
             deleteButton.anchor
                 .height(constant: 50)
-//                .edgesToSuperview(insets: UIEdgeInsets(top: 10, left: 16, bottom: -10, right: -16))
                 .edgesToSuperview()
                 .activate()
             return cell
@@ -265,6 +282,12 @@ extension AssignmentDetailViewController: UITableViewDelegate {
             }
         }
         
+    }
+}
+
+extension AssignmentDetailViewController: UIAdaptivePresentationControllerDelegate {
+    func presentationControllerDidAttemptToDismiss(_ presentationController: UIPresentationController) {
+       showDiscardChangesAlert(cancelButton)
     }
 }
 

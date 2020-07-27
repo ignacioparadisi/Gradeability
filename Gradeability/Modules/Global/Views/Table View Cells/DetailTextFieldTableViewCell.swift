@@ -47,7 +47,7 @@ extension Date: StringCoder {
     static func encode(value: Date?) -> String? {
         guard let value = value else { return nil }
         let dateFormatter: DateFormatter = .longDateShortTimeDateFormatter
-        return dateFormatter.string(from: value).capitalized
+        return dateFormatter.string(from: value)
     }
 }
 
@@ -118,11 +118,13 @@ class DetailTextFieldTableViewCell<Coder: StringCoder>: UITableViewCell, Reusabl
         textField.text = Coder.encode(value: value)
         textField.keyboardType = keyboardType
         
-        if let date = value as? Date {
+        if Coder.self == Date.self {
             textField.tintColor = .clear
             
             if UIDevice.current.userInterfaceIdiom == .phone {
-                datePicker.date = date
+                if let date = value as? Date {
+                    datePicker.date = date
+                }
                 textField.inputView = datePicker
             } else {
                 textField.isUserInteractionEnabled = false

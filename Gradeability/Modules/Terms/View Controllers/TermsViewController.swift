@@ -100,7 +100,7 @@ class TermsViewController: GradablesViewController {
             UIBarButtonItem(image: ellipsisImage, style: .plain, target: self, action: #selector(super.didTapOptionsButton(_:)))
         ], animated: false)
         #else
-        navigationItem.setLeftBarButton(UIBarButtonItem(title: ButtonStrings.close.localized, style: .plain, target: self, action: #selector(dismissView)), animated: false)
+        navigationItem.setLeftBarButton(UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(dismissView)), animated: false)
         #endif
     }
     
@@ -113,8 +113,7 @@ class TermsViewController: GradablesViewController {
     }
     
     @objc func goToCreateTermViewController() {
-        let viewController = UINavigationController(rootViewController: CreateTermViewController())
-        present(viewController, animated: true)
+
     }
     
     override func didTapOptionsButton(_ sender: UIBarButtonItem?) {
