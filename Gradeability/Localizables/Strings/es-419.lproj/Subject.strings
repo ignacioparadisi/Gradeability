@@ -1,0 +1,19 @@
+/* 
+  Subject.strings
+  Gradeability
+
+  Created by Ignacio Paradisi on 7/27/20.
+  Copyright © 2020 Ignacio Paradisi. All rights reserved.
+*/
+
+"subjects" = "Materias";
+"evaluatedPercentage" = "Porcentaje evaluado";
+"noSubjectSelectedTitle" = "No tienes ninguna materia seleccionada";
+"noSubjectSelectedMessage" = "Por favor selecciona una materia para ver las asignaciones.";
+"teacher" = "Profesor";
+"classrooms" = "Salón de clases";
+"deleteTitle" = "¿Eliminar \"%@\"?";
+"deleteMessage" = "Se eliminarán todas las asignaciones de esta materia.";
+"emptySubjects" = "Parece que no tienes ninguna materia en este período.";
+"createSubject" = "Crear Materia";
+"newSubject" = "Nueva Materia";
