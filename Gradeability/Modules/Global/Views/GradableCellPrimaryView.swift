@@ -37,6 +37,7 @@ class GradableCellPrimaryView: UIView {
         label.adjustsFontForContentSizeCategory = true
         label.font = UIFont.preferredFont(forTextStyle: .caption1)
         label.textColor = .secondaryLabel
+        label.numberOfLines = 2
         return label
     }()
     

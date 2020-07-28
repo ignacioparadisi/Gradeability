@@ -9,27 +9,6 @@
 /* Begin PBXBuildFile section */
 		321E1FD924CDF14A00B8B6B6 /* DateFormatter+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321E1FD824CDF14A00B8B6B6 /* DateFormatter+Extension.swift */; };
 		32286B1824CF7E9B0081A156 /* StringCoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32286B1724CF7E9B0081A156 /* StringCoder.swift */; };
-		3235DADE24D0463C00F425D1 /* Gradeability.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 32E34F07247F383500BFD25A /* Gradeability.xcdatamodeld */; };
-		3235DADF24D0464100F425D1 /* Gradable+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E34F3A247F3A1100BFD25A /* Gradable+CoreDataProperties.swift */; };
-		3235DAE024D0464500F425D1 /* Gradable+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E34F39247F3A1100BFD25A /* Gradable+CoreDataClass.swift */; };
-		3235DAE124D0464800F425D1 /* Assignment+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E34F38247F3A1100BFD25A /* Assignment+CoreDataProperties.swift */; };
-		3235DAE224D0464B00F425D1 /* Assignment+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E34F37247F3A1100BFD25A /* Assignment+CoreDataClass.swift */; };
-		3235DAE324D0464E00F425D1 /* Subject+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E34F36247F3A1100BFD25A /* Subject+CoreDataProperties.swift */; };
-		3235DAE424D0465100F425D1 /* Subject+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E34F35247F3A1100BFD25A /* Subject+CoreDataClass.swift */; };
-		3235DAE524D0465400F425D1 /* Term+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E34F34247F3A1100BFD25A /* Term+CoreDataProperties.swift */; };
-		3235DAE624D0465700F425D1 /* Term+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E34F33247F3A1100BFD25A /* Term+CoreDataClass.swift */; };
-		3235DAE724D04C8C00F425D1 /* CoreDataManagerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E59DB324832C9C00B4F67C /* CoreDataManagerFactory.swift */; };
-		3235DAE824D04C8E00F425D1 /* TestCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B54D8924841E170083B734 /* TestCoreDataManager.swift */; };
-		3235DAE924D04C9100F425D1 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E59DC3248332D000B4F67C /* CoreDataManager.swift */; };
-		3235DAEA24D04C9600F425D1 /* TermCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E59DBD2483316300B4F67C /* TermCoreDataManager.swift */; };
-		3235DAEB24D04C9900F425D1 /* SubjectCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E59DBF2483316D00B4F67C /* SubjectCoreDataManager.swift */; };
-		3235DAEC24D04C9B00F425D1 /* AssignmentCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E59DC12483317700B4F67C /* AssignmentCoreDataManager.swift */; };
-		3235DAED24D04CCE00F425D1 /* CoreDataManagerRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E59DC52483330200B4F67C /* CoreDataManagerRepresentable.swift */; };
-		3235DAEE24D04CD400F425D1 /* SubjectCoreDataManagerRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E59DB82483313E00B4F67C /* SubjectCoreDataManagerRepresentable.swift */; };
-		3235DAEF24D04CD800F425D1 /* TermCoreDataManagerRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E59DB62483313400B4F67C /* TermCoreDataManagerRepresentable.swift */; };
-		3235DAF024D04CDC00F425D1 /* AssignmentCoreDataManagerRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E59DBA2483314600B4F67C /* AssignmentCoreDataManagerRepresentable.swift */; };
-		3235DAF424D04F3000F425D1 /* SubjectsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3235DAF324D04F3000F425D1 /* SubjectsView.swift */; };
-		3235DAF624D04F3B00F425D1 /* SubjectsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3235DAF524D04F3B00F425D1 /* SubjectsViewModel.swift */; };
 		32478F0224B67B0700498958 /* SubjectsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32478F0124B67B0700498958 /* SubjectsDataSource.swift */; };
 		324E14ED24812C060089ECFC /* GradableCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 324E14EC24812C060089ECFC /* GradableCellViewModel.swift */; };
 		324E14F224812E2E0089ECFC /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 324E14F124812E2E0089ECFC /* UITableView+Extension.swift */; };
@@ -53,17 +32,6 @@
 		326F88F324CF11F500B0D3EF /* Subject.strings in Resources */ = {isa = PBXBuildFile; fileRef = 326F88F524CF11F500B0D3EF /* Subject.strings */; };
 		326F88F824CF2E8500B0D3EF /* SwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326F88F724CF2E8500B0D3EF /* SwitchTableViewCell.swift */; };
 		32708DFB24C9E9940028605C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32708DFA24C9E9940028605C /* Constants.swift */; };
-		32768AAC24D04523003C82F3 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32768AAA24D04523003C82F3 /* Interface.storyboard */; };
-		32768AAE24D04524003C82F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 32768AAD24D04524003C82F3 /* Assets.xcassets */; };
-		32768AB524D04524003C82F3 /* Gradeability WatchKit App Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 32768AB424D04524003C82F3 /* Gradeability WatchKit App Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		32768ABA24D04524003C82F3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32768AB924D04524003C82F3 /* ContentView.swift */; };
-		32768ABC24D04524003C82F3 /* HostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32768ABB24D04524003C82F3 /* HostingController.swift */; };
-		32768ABE24D04524003C82F3 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32768ABD24D04524003C82F3 /* ExtensionDelegate.swift */; };
-		32768AC024D04524003C82F3 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32768ABF24D04524003C82F3 /* NotificationController.swift */; };
-		32768AC224D04524003C82F3 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32768AC124D04524003C82F3 /* NotificationView.swift */; };
-		32768AC424D04524003C82F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 32768AC324D04524003C82F3 /* Assets.xcassets */; };
-		32768AC724D04524003C82F3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 32768AC624D04524003C82F3 /* Preview Assets.xcassets */; };
-		32768ACC24D04524003C82F3 /* Gradeability WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 32768AA824D04523003C82F3 /* Gradeability WatchKit App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		327A170924A66A62006F39D0 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 327A170824A66A62006F39D0 /* IQKeyboardManagerSwift */; };
 		32801D3C248BC7F900326C93 /* NSToolbarItemIdentifier+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32801D3B248BC7F900326C93 /* NSToolbarItemIdentifier+Extension.swift */; };
 		32877BFE24CCC72B00075CCD /* AssignmentDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32877BFD24CCC72B00075CCD /* AssignmentDetailViewModel.swift */; };
@@ -145,20 +113,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		32768AB624D04524003C82F3 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 32E34EF3247F383500BFD25A /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 32768AB324D04524003C82F3;
-			remoteInfo = "Gradeability WatchKit App Extension";
-		};
-		32768ACA24D04524003C82F3 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 32E34EF3247F383500BFD25A /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 32768AA724D04523003C82F3;
-			remoteInfo = "Gradeability WatchKit App";
-		};
 		32E34F15247F383600BFD25A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 32E34EF3247F383500BFD25A /* Project object */;
@@ -182,20 +136,8 @@
 			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
 			dstSubfolderSpec = 16;
 			files = (
-				32768ACC24D04524003C82F3 /* Gradeability WatchKit App.app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		32768AD024D04524003C82F3 /* Embed App Extensions */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 13;
-			files = (
-				32768AB524D04524003C82F3 /* Gradeability WatchKit App Extension.appex in Embed App Extensions */,
-			);
-			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -203,8 +145,6 @@
 /* Begin PBXFileReference section */
 		321E1FD824CDF14A00B8B6B6 /* DateFormatter+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Extension.swift"; sourceTree = "<group>"; };
 		32286B1724CF7E9B0081A156 /* StringCoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringCoder.swift; sourceTree = "<group>"; };
-		3235DAF324D04F3000F425D1 /* SubjectsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectsView.swift; sourceTree = "<group>"; };
-		3235DAF524D04F3B00F425D1 /* SubjectsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectsViewModel.swift; sourceTree = "<group>"; };
 		32478F0124B67B0700498958 /* SubjectsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectsDataSource.swift; sourceTree = "<group>"; };
 		324E14EC24812C060089ECFC /* GradableCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradableCellViewModel.swift; sourceTree = "<group>"; };
 		324E14F124812E2E0089ECFC /* UITableView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
@@ -230,20 +170,6 @@
 		326F88F624CF11F600B0D3EF /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/Subject.strings"; sourceTree = "<group>"; };
 		326F88F724CF2E8500B0D3EF /* SwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchTableViewCell.swift; sourceTree = "<group>"; };
 		32708DFA24C9E9940028605C /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		32768AA824D04523003C82F3 /* Gradeability WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Gradeability WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		32768AAB24D04523003C82F3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
-		32768AAD24D04524003C82F3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		32768AAF24D04524003C82F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		32768AB424D04524003C82F3 /* Gradeability WatchKit App Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Gradeability WatchKit App Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
-		32768AB924D04524003C82F3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		32768ABB24D04524003C82F3 /* HostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingController.swift; sourceTree = "<group>"; };
-		32768ABD24D04524003C82F3 /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
-		32768ABF24D04524003C82F3 /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
-		32768AC124D04524003C82F3 /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
-		32768AC324D04524003C82F3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		32768AC624D04524003C82F3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		32768AC824D04524003C82F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		32768AC924D04524003C82F3 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
 		32801D3B248BC7F900326C93 /* NSToolbarItemIdentifier+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSToolbarItemIdentifier+Extension.swift"; sourceTree = "<group>"; };
 		32877BFD24CCC72B00075CCD /* AssignmentDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentDetailViewModel.swift; sourceTree = "<group>"; };
 		32877C0624CCEC5300075CCD /* AssignmentDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssignmentDetailViewController.swift; sourceTree = "<group>"; };
@@ -335,13 +261,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		32768AB124D04524003C82F3 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		32E34EF8247F383500BFD25A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -368,22 +287,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3235DAF124D04E2C00F425D1 /* View Models */ = {
-			isa = PBXGroup;
-			children = (
-				3235DAF524D04F3B00F425D1 /* SubjectsViewModel.swift */,
-			);
-			path = "View Models";
-			sourceTree = "<group>";
-		};
-		3235DAF224D04F2200F425D1 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				3235DAF324D04F3000F425D1 /* SubjectsView.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
 		324E14EE24812DE00089ECFC /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -422,42 +325,6 @@
 				32708DFA24C9E9940028605C /* Constants.swift */,
 			);
 			path = Utilities;
-			sourceTree = "<group>";
-		};
-		32768AA924D04523003C82F3 /* Gradeability WatchKit App */ = {
-			isa = PBXGroup;
-			children = (
-				32768AAA24D04523003C82F3 /* Interface.storyboard */,
-				32768AAD24D04524003C82F3 /* Assets.xcassets */,
-				32768AAF24D04524003C82F3 /* Info.plist */,
-			);
-			path = "Gradeability WatchKit App";
-			sourceTree = "<group>";
-		};
-		32768AB824D04524003C82F3 /* Gradeability WatchKit App Extension */ = {
-			isa = PBXGroup;
-			children = (
-				3235DAF224D04F2200F425D1 /* Views */,
-				3235DAF124D04E2C00F425D1 /* View Models */,
-				32768AB924D04524003C82F3 /* ContentView.swift */,
-				32768ABB24D04524003C82F3 /* HostingController.swift */,
-				32768ABD24D04524003C82F3 /* ExtensionDelegate.swift */,
-				32768ABF24D04524003C82F3 /* NotificationController.swift */,
-				32768AC124D04524003C82F3 /* NotificationView.swift */,
-				32768AC324D04524003C82F3 /* Assets.xcassets */,
-				32768AC824D04524003C82F3 /* Info.plist */,
-				32768AC924D04524003C82F3 /* PushNotificationPayload.apns */,
-				32768AC524D04524003C82F3 /* Preview Content */,
-			);
-			path = "Gradeability WatchKit App Extension";
-			sourceTree = "<group>";
-		};
-		32768AC524D04524003C82F3 /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				32768AC624D04524003C82F3 /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 		32877C0524CCEC3600075CCD /* Table View Cells */ = {
@@ -696,8 +563,6 @@
 				32E34EFD247F383500BFD25A /* Gradeability */,
 				32E34F17247F383600BFD25A /* GradeabilityTests */,
 				32E34F22247F383600BFD25A /* GradeabilityUITests */,
-				32768AA924D04523003C82F3 /* Gradeability WatchKit App */,
-				32768AB824D04524003C82F3 /* Gradeability WatchKit App Extension */,
 				32E34EFC247F383500BFD25A /* Products */,
 				329C16F024A51651005B65A8 /* Frameworks */,
 			);
@@ -709,8 +574,6 @@
 				32E34EFB247F383500BFD25A /* Gradeability.app */,
 				32E34F14247F383600BFD25A /* GradeabilityTests.xctest */,
 				32E34F1F247F383600BFD25A /* GradeabilityUITests.xctest */,
-				32768AA824D04523003C82F3 /* Gradeability WatchKit App.app */,
-				32768AB424D04524003C82F3 /* Gradeability WatchKit App Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -822,40 +685,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		32768AA724D04523003C82F3 /* Gradeability WatchKit App */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 32768AD424D04524003C82F3 /* Build configuration list for PBXNativeTarget "Gradeability WatchKit App" */;
-			buildPhases = (
-				32768AA624D04523003C82F3 /* Resources */,
-				32768AD024D04524003C82F3 /* Embed App Extensions */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				32768AB724D04524003C82F3 /* PBXTargetDependency */,
-			);
-			name = "Gradeability WatchKit App";
-			productName = "Gradeability WatchKit App";
-			productReference = 32768AA824D04523003C82F3 /* Gradeability WatchKit App.app */;
-			productType = "com.apple.product-type.application.watchapp2";
-		};
-		32768AB324D04524003C82F3 /* Gradeability WatchKit App Extension */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 32768AD324D04524003C82F3 /* Build configuration list for PBXNativeTarget "Gradeability WatchKit App Extension" */;
-			buildPhases = (
-				32768AB024D04524003C82F3 /* Sources */,
-				32768AB124D04524003C82F3 /* Frameworks */,
-				32768AB224D04524003C82F3 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "Gradeability WatchKit App Extension";
-			productName = "Gradeability WatchKit App Extension";
-			productReference = 32768AB424D04524003C82F3 /* Gradeability WatchKit App Extension.appex */;
-			productType = "com.apple.product-type.watchkit2-extension";
-		};
 		32E34EFA247F383500BFD25A /* Gradeability */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 32E34F28247F383600BFD25A /* Build configuration list for PBXNativeTarget "Gradeability" */;
@@ -868,7 +697,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				32768ACB24D04524003C82F3 /* PBXTargetDependency */,
 			);
 			name = Gradeability;
 			packageProductDependencies = (
@@ -924,12 +752,6 @@
 				LastUpgradeCheck = 1150;
 				ORGANIZATIONNAME = "Ignacio Paradisi";
 				TargetAttributes = {
-					32768AA724D04523003C82F3 = {
-						CreatedOnToolsVersion = 11.6;
-					};
-					32768AB324D04524003C82F3 = {
-						CreatedOnToolsVersion = 11.6;
-					};
 					32E34EFA247F383500BFD25A = {
 						CreatedOnToolsVersion = 11.5;
 					};
@@ -963,31 +785,11 @@
 				32E34EFA247F383500BFD25A /* Gradeability */,
 				32E34F13247F383600BFD25A /* GradeabilityTests */,
 				32E34F1E247F383600BFD25A /* GradeabilityUITests */,
-				32768AA724D04523003C82F3 /* Gradeability WatchKit App */,
-				32768AB324D04524003C82F3 /* Gradeability WatchKit App Extension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		32768AA624D04523003C82F3 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				32768AAE24D04524003C82F3 /* Assets.xcassets in Resources */,
-				32768AAC24D04523003C82F3 /* Interface.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		32768AB224D04524003C82F3 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				32768AC724D04524003C82F3 /* Preview Assets.xcassets in Resources */,
-				32768AC424D04524003C82F3 /* Assets.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		32E34EF9247F383500BFD25A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1021,39 +823,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		32768AB024D04524003C82F3 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3235DAEB24D04C9900F425D1 /* SubjectCoreDataManager.swift in Sources */,
-				3235DAEC24D04C9B00F425D1 /* AssignmentCoreDataManager.swift in Sources */,
-				3235DAE224D0464B00F425D1 /* Assignment+CoreDataClass.swift in Sources */,
-				3235DADE24D0463C00F425D1 /* Gradeability.xcdatamodeld in Sources */,
-				3235DAE824D04C8E00F425D1 /* TestCoreDataManager.swift in Sources */,
-				32768ABC24D04524003C82F3 /* HostingController.swift in Sources */,
-				3235DAE924D04C9100F425D1 /* CoreDataManager.swift in Sources */,
-				3235DAE124D0464800F425D1 /* Assignment+CoreDataProperties.swift in Sources */,
-				32768ABA24D04524003C82F3 /* ContentView.swift in Sources */,
-				3235DAE524D0465400F425D1 /* Term+CoreDataProperties.swift in Sources */,
-				3235DAEA24D04C9600F425D1 /* TermCoreDataManager.swift in Sources */,
-				3235DADF24D0464100F425D1 /* Gradable+CoreDataProperties.swift in Sources */,
-				3235DAE424D0465100F425D1 /* Subject+CoreDataClass.swift in Sources */,
-				32768AC024D04524003C82F3 /* NotificationController.swift in Sources */,
-				3235DAEF24D04CD800F425D1 /* TermCoreDataManagerRepresentable.swift in Sources */,
-				3235DAE724D04C8C00F425D1 /* CoreDataManagerFactory.swift in Sources */,
-				3235DAE024D0464500F425D1 /* Gradable+CoreDataClass.swift in Sources */,
-				32768ABE24D04524003C82F3 /* ExtensionDelegate.swift in Sources */,
-				3235DAF024D04CDC00F425D1 /* AssignmentCoreDataManagerRepresentable.swift in Sources */,
-				3235DAE624D0465700F425D1 /* Term+CoreDataClass.swift in Sources */,
-				3235DAEE24D04CD400F425D1 /* SubjectCoreDataManagerRepresentable.swift in Sources */,
-				3235DAF424D04F3000F425D1 /* SubjectsView.swift in Sources */,
-				32768AC224D04524003C82F3 /* NotificationView.swift in Sources */,
-				3235DAF624D04F3B00F425D1 /* SubjectsViewModel.swift in Sources */,
-				3235DAE324D0464E00F425D1 /* Subject+CoreDataProperties.swift in Sources */,
-				3235DAED24D04CCE00F425D1 /* CoreDataManagerRepresentable.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		32E34EF7247F383500BFD25A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1170,16 +939,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		32768AB724D04524003C82F3 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 32768AB324D04524003C82F3 /* Gradeability WatchKit App Extension */;
-			targetProxy = 32768AB624D04524003C82F3 /* PBXContainerItemProxy */;
-		};
-		32768ACB24D04524003C82F3 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 32768AA724D04523003C82F3 /* Gradeability WatchKit App */;
-			targetProxy = 32768ACA24D04524003C82F3 /* PBXContainerItemProxy */;
-		};
 		32E34F16247F383600BFD25A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 32E34EFA247F383500BFD25A /* Gradeability */;
@@ -1209,14 +968,6 @@
 				326F88F624CF11F600B0D3EF /* es-419 */,
 			);
 			name = Subject.strings;
-			sourceTree = "<group>";
-		};
-		32768AAA24D04523003C82F3 /* Interface.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				32768AAB24D04523003C82F3 /* Base */,
-			);
-			name = Interface.storyboard;
 			sourceTree = "<group>";
 		};
 		32A7F181248B2B0300EFB7E4 /* Global.strings */ = {
@@ -1258,96 +1009,6 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		32768ACE24D04524003C82F3 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8T85WESY64;
-				IBSC_MODULE = Gradeability_WatchKit_App_Extension;
-				INFOPLIST_FILE = "Gradeability WatchKit App/Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ignacioparadisi.Gradeability.watchkitapp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 6.0;
-			};
-			name = Debug;
-		};
-		32768ACF24D04524003C82F3 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8T85WESY64;
-				IBSC_MODULE = Gradeability_WatchKit_App_Extension;
-				INFOPLIST_FILE = "Gradeability WatchKit App/Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ignacioparadisi.Gradeability.watchkitapp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 6.0;
-			};
-			name = Release;
-		};
-		32768AD124D04524003C82F3 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"Gradeability WatchKit App Extension/Preview Content\"";
-				DEVELOPMENT_TEAM = 8T85WESY64;
-				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = "Gradeability WatchKit App Extension/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ignacioparadisi.Gradeability.watchkitapp.watchkitextension;
-				PRODUCT_NAME = "${TARGET_NAME}";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 6.0;
-			};
-			name = Debug;
-		};
-		32768AD224D04524003C82F3 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"Gradeability WatchKit App Extension/Preview Content\"";
-				DEVELOPMENT_TEAM = 8T85WESY64;
-				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = "Gradeability WatchKit App Extension/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ignacioparadisi.Gradeability.watchkitapp.watchkitextension;
-				PRODUCT_NAME = "${TARGET_NAME}";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 6.0;
-			};
-			name = Release;
-		};
 		32E34F26247F383600BFD25A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1601,24 +1262,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		32768AD324D04524003C82F3 /* Build configuration list for PBXNativeTarget "Gradeability WatchKit App Extension" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				32768AD124D04524003C82F3 /* Debug */,
-				32768AD224D04524003C82F3 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		32768AD424D04524003C82F3 /* Build configuration list for PBXNativeTarget "Gradeability WatchKit App" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				32768ACE24D04524003C82F3 /* Debug */,
-				32768ACF24D04524003C82F3 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		32E34EF6247F383500BFD25A /* Build configuration list for PBXProject "Gradeability" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

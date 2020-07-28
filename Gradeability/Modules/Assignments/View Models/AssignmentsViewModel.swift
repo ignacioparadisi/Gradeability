@@ -140,7 +140,8 @@ class AssignmentsViewModel: GradableViewModelRepresentable {
         AssignmentCoreDataManager.shared.createRandom(subject: subject)
     }
     
-    /// Delete assignment
+    /// Deletes an assignment at a specified index
+    /// - Parameter index: Index of the assignment to be deleted
     func deleteItem(at index: Int) {
         let assignment = assignments[index]
         AssignmentCoreDataManager.shared.delete(assignment)
