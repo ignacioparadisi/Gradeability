@@ -19,4 +19,5 @@
 "assignmentsName" = "Nombre de la asignación";
 "deadline" = "Fecha de entrega";
 "createEventInCalendar" = "Crear Evento en Calendario";
+"openEventInCalendar" = "Abrir Evento en Calendario";
 "percentage" = "Porcentaje";

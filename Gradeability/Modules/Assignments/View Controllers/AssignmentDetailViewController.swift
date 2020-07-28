@@ -12,16 +12,20 @@ import Combine
 class AssignmentDetailViewController: UIViewController {
     
     private enum Section: Int, CaseIterable {
-        case grade
-        case fields
+        case title
+        case grades
+        case date
         case delete
     }
-    private enum FieldRow: Int, CaseIterable {
+    private enum GradeRow: Int, CaseIterable {
+        case grade
         case minGrade
         case maxGrade
         case percentage
+    }
+    private enum DateRow: Int, CaseIterable {
         case deadline
-        case createEvent
+        case calendarEvent
     }
     // MARK: Properties
     private let tableView: UITableView = UITableView(frame: .zero, style: .insetGrouped)
@@ -134,7 +138,7 @@ class AssignmentDetailViewController: UIViewController {
     }
     
     @objc private func dateChanged(_ sender: UIDatePicker) {
-        let indexPath = IndexPath(row: FieldRow.deadline.rawValue, section: Section.fields.rawValue)
+        let indexPath = IndexPath(row: DateRow.deadline.rawValue, section: Section.date.rawValue)
         guard let cell = tableView.cellForRow(at: indexPath) as? DetailTextFieldTableViewCell<Date> else { return }
         cell.textField.text = DateFormatter.longDateShortTimeDateFormatter.string(from: sender.date)
     }
@@ -165,10 +169,12 @@ extension AssignmentDetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let section = Section(rawValue: section) else { return 0 }
         switch section {
-        case .grade:
-            return 2
-        case .fields:
-            return FieldRow.allCases.count
+        case .title:
+            return 1
+        case .grades:
+            return GradeRow.allCases.count
+        case .date:
+            return viewModel.canOpenEvent ? DateRow.allCases.count : DateRow.allCases.count - 1
         case .delete:
             return viewModel.isEditing ? 1 : 0
         }
@@ -177,42 +183,17 @@ extension AssignmentDetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let section = Section(rawValue: indexPath.section) else { return UITableViewCell() }
         switch section {
-        case .grade:
-            if indexPath.row == 1 {
-                let cell = tableView.dequeueReusableCell(for: indexPath) as CircularSliderTableViewCell
-                cell.gestureDelegate = self
-                let circularSliderViewModel = CircularSliderTableViewCellViewModel(grade: viewModel.grade ?? 0.0)
-                circularSliderViewModel.$grade
-                    .map { $0 as Float? }
-                    .assign(to: \.grade, on: viewModel)
-                    .store(in: &gradeSubscriptions)
-                viewModel.$maxGrade
-                    .replaceNil(with: 0.0)
-                    .assign(to: \.maxGrade, on: circularSliderViewModel)
-                    .store(in: &gradeSubscriptions)
-                viewModel.$minGrade
-                    .replaceNil(with: 0.0)
-                    .assign(to: \.minGrade, on: circularSliderViewModel)
-                    .store(in: &gradeSubscriptions)
-                viewModel.areValidGrades
-                    .map { isGradeValid, _, _ in
-                        return isGradeValid
-                    }
-                    .assign(to: \.isValid, on: cell)
-                    .store(in: &subscriptions)
-                cell.configure(with: circularSliderViewModel)
-                return cell
-            } else {
-                let cell = tableView.dequeueReusableCell(for: indexPath) as LargeTextFieldTableViewCell
-                cell.configure(with: viewModel.name, placeholder: GlobalStrings.name.localized)
-                cell.textField.publisher(for: \.text)
-                    .assign(to: \.name, on: viewModel)
-                    .store(in: &cellSubscriptions)
-                return cell
-            }
-            
-        case .fields :
-            return createFieldRow(for: indexPath)
+        case .title:
+            let cell = tableView.dequeueReusableCell(for: indexPath) as LargeTextFieldTableViewCell
+            cell.configure(with: viewModel.name, placeholder: GlobalStrings.name.localized)
+            cell.textField.publisher(for: \.text)
+                .assign(to: \.name, on: viewModel)
+                .store(in: &cellSubscriptions)
+            return cell
+        case .grades :
+            return createGradeRow(for: indexPath)
+        case .date:
+            return createDateRow(for: indexPath)
         case .delete:
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellIdentifier", for: indexPath)
             cell.textLabel?.textAlignment = .center
@@ -223,9 +204,33 @@ extension AssignmentDetailViewController: UITableViewDataSource {
         }
     }
     
-    func createFieldRow(for indexPath: IndexPath) -> UITableViewCell {
-        guard let row = FieldRow(rawValue: indexPath.row) else { return UITableViewCell() }
+    func createGradeRow(for indexPath: IndexPath) -> UITableViewCell {
+        guard let row = GradeRow(rawValue: indexPath.row) else { return UITableViewCell() }
         switch row {
+        case .grade:
+            let cell = tableView.dequeueReusableCell(for: indexPath) as CircularSliderTableViewCell
+            cell.gestureDelegate = self
+            let circularSliderViewModel = CircularSliderTableViewCellViewModel(grade: viewModel.grade ?? 0.0)
+            circularSliderViewModel.$grade
+                .map { $0 as Float? }
+                .assign(to: \.grade, on: viewModel)
+                .store(in: &gradeSubscriptions)
+            viewModel.$maxGrade
+                .replaceNil(with: 0.0)
+                .assign(to: \.maxGrade, on: circularSliderViewModel)
+                .store(in: &gradeSubscriptions)
+            viewModel.$minGrade
+                .replaceNil(with: 0.0)
+                .assign(to: \.minGrade, on: circularSliderViewModel)
+                .store(in: &gradeSubscriptions)
+            viewModel.areValidGrades
+                .map { isGradeValid, _, _ in
+                    return isGradeValid
+                }
+                .assign(to: \.isValid, on: cell)
+                .store(in: &subscriptions)
+            cell.configure(with: circularSliderViewModel)
+            return cell
         case .minGrade:
             let cell = tableView.dequeueReusableCell(for: indexPath) as DetailTextFieldTableViewCell<Float>
             cell.configure(with: GlobalStrings.minGrade.localized, value: viewModel.minGrade, keyboardType: .decimalPad)
@@ -262,6 +267,12 @@ extension AssignmentDetailViewController: UITableViewDataSource {
                 .assign(to: \.isValid, on: cell)
                 .store(in: &subscriptions)
             return cell
+        }
+    }
+    
+    func createDateRow(for indexPath: IndexPath) -> UITableViewCell {
+        guard let row = DateRow(rawValue: indexPath.row) else { return UITableViewCell() }
+        switch row {
         case .deadline:
             let cell = tableView.dequeueReusableCell(for: indexPath) as DetailTextFieldTableViewCell<Date>
             cell.configure(with: AssignmentString.deadline.localized, value: viewModel.deadline)
@@ -272,7 +283,14 @@ extension AssignmentDetailViewController: UITableViewDataSource {
                 .assign(to: \.isValid, on: cell)
                 .store(in: &subscriptions)
             return cell
-        case .createEvent:
+        case .calendarEvent:
+            if viewModel.isEditing {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "cellIdentifier", for: indexPath)
+                cell.textLabel?.text = AssignmentString.openEventInCalendar.localized
+                cell.textLabel?.textColor = .systemBlue
+                cell.textLabel?.textAlignment = .natural
+                return cell
+            }
             let cell = tableView.dequeueReusableCell(for: indexPath) as SwitchTableViewCell
             cell.configure(with: AssignmentString.createEventInCalendar.localized)
             cell.$value
@@ -288,7 +306,7 @@ extension AssignmentDetailViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let section = Section(rawValue: indexPath.section) else { return }
         switch section {
-        case .fields:
+        case .grades:
             let cell = tableView.cellForRow(at: indexPath)
             if let cell = cell as? DetailTextFieldTableViewCell<Float> {
                 cell.textField.becomeFirstResponder()
@@ -298,6 +316,10 @@ extension AssignmentDetailViewController: UITableViewDelegate {
                 } else {
                     cell.textField.becomeFirstResponder()
                 }
+            }
+        case .date:
+            if indexPath.row == DateRow.calendarEvent.rawValue && viewModel.isEditing {
+                viewModel.openEventInCalendar()
             }
         case .delete:
             showDeleteAlert()

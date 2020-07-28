@@ -2,7 +2,7 @@
 //  Assignment+CoreDataProperties.swift
 //  Gradeability
 //
-//  Created by Ignacio Paradisi on 5/31/20.
+//  Created by Ignacio Paradisi on 7/27/20.
 //  Copyright © 2020 Ignacio Paradisi. All rights reserved.
 //
 //
@@ -19,6 +19,7 @@ extension Assignment {
 
     @NSManaged public var deadline: Date?
     @NSManaged public var percentage: Float
+    @NSManaged public var eventIdentifier: String?
     @NSManaged public var assignment: Assignment?
     @NSManaged public var assignments: NSSet?
     @NSManaged public var subject: Subject?

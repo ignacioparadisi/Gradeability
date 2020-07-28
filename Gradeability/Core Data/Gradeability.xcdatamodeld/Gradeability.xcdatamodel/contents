@@ -2,6 +2,7 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19G73" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
     <entity name="Assignment" representedClassName="Assignment" parentEntity="Gradable" syncable="YES">
         <attribute name="deadline" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="eventIdentifier" optional="YES" attributeType="String"/>
         <attribute name="percentage" optional="YES" attributeType="Float" minValueString="0" maxValueString="1" defaultValueString="0.0" usesScalarValueType="YES"/>
         <relationship name="assignment" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Assignment" inverseName="assignments" inverseEntity="Assignment"/>
         <relationship name="assignments" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Assignment" inverseName="assignment" inverseEntity="Assignment"/>
@@ -25,7 +26,7 @@
         <relationship name="subjects" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Subject" inverseName="term" inverseEntity="Subject"/>
     </entity>
     <elements>
-        <element name="Assignment" positionX="225.7734375" positionY="176.5078125" width="128" height="118"/>
+        <element name="Assignment" positionX="225.7734375" positionY="176.5078125" width="128" height="133"/>
         <element name="Gradable" positionX="61.7734375" positionY="-1.5703125" width="128" height="133"/>
         <element name="Subject" positionX="60.6328125" positionY="209.73828125" width="128" height="88"/>
         <element name="Term" positionX="-119.59765625" positionY="206.9765625" width="128" height="73"/>

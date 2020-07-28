@@ -19,4 +19,5 @@
 "assignmentsName" = "Assignment's name";
 "deadline" = "Deadline";
 "createEventInCalendar" = "Create Event in Calendar";
+"openEventInCalendar" = "Open Event in Calendar";
 "percentage" = "Percentage";

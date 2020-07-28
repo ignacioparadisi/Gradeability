@@ -23,4 +23,5 @@ enum AssignmentString: String, Localizable {
     case emptyAssignments
     case insertName
     case percentage
+    case openEventInCalendar
 }

@@ -52,7 +52,7 @@ class AssignmentCoreDataManager: AssignmentCoreDataManagerRepresentable {
     ///   - assignment: Parent assignment.
     ///   - assignments: Children assignments.
     ///   - dateCreated: Date when the assignment was created (in case the assignment already exists).
-    func save(existingAssignment: Assignment? = nil, name: String?, maxGrade: Float, minGrade: Float, grade: Float? = 0, deadline: Date?, percentage: Float, subject: Subject?, parentAssignment: Assignment? = nil, assignments: NSSet? = nil) {
+    func save(existingAssignment: Assignment? = nil, name: String?, maxGrade: Float, minGrade: Float, grade: Float? = 0, deadline: Date?, percentage: Float, subject: Subject?, parentAssignment: Assignment? = nil, assignments: NSSet? = nil) -> Assignment {
         var assignment: Assignment!
         if existingAssignment != nil {
             assignment = existingAssignment
@@ -71,8 +71,8 @@ class AssignmentCoreDataManager: AssignmentCoreDataManagerRepresentable {
         assignment.deadline = deadline
         assignment.assignments = assignments
         CoreDataManagerFactory.createManager.saveContext()
-        
         calculateGrade(for: subject)
+        return assignment
     }
     
     /// Calculates the grade for a subject depending on its assignments, assigns the grade and saves the context.
