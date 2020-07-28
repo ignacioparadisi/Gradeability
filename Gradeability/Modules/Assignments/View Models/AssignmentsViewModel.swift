@@ -40,7 +40,9 @@ class AssignmentsViewModel: GradableViewModelRepresentable {
     
     var newAssignmentViewModel: AssignmentDetailViewModel? {
         guard let subject = subject else { return nil }
-        return AssignmentDetailViewModel(subject: subject)
+        let viewModel = AssignmentDetailViewModel(subject: subject)
+        viewModel.delegate = self
+        return viewModel
     }
     
     // MARK: Initializers
