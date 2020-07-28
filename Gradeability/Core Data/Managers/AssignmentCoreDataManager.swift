@@ -120,6 +120,6 @@ class AssignmentCoreDataManager: AssignmentCoreDataManagerRepresentable {
     func createRandom(subject: Subject?) {
         let randomGrade = Float.random(in: 0..<20)
         print(randomGrade)
-        save(name: "Prueba", maxGrade: 20, minGrade: 10, grade: randomGrade, deadline: Date(), percentage: 0.1, subject: subject)
+        _ = save(name: "Prueba", maxGrade: 20, minGrade: 10, grade: randomGrade, deadline: Date(), percentage: 0.1, subject: subject)
     }
 }
