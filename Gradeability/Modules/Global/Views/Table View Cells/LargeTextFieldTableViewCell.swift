@@ -7,11 +7,14 @@
 //
 
 import UIKit
+import Combine
 
 class LargeTextFieldTableViewCell: UITableViewCell, ReusableView {
     
     // MARK: Properties
+    private var field: FieldRepresentable?
     private let verticalMargin: CGFloat = 20
+    private var subscription: AnyCancellable?
     var textField: UITextField = {
         let textField = UITextField()
         textField.font = UIFont.preferredFont(forTextStyle: .largeTitle).bold
@@ -39,5 +42,16 @@ class LargeTextFieldTableViewCell: UITableViewCell, ReusableView {
     func configure(with text: String?, placeholder: String? = nil) {
         textField.text = text
         textField.placeholder = placeholder
+    }
+    
+    func configure(with field: FieldRepresentable) {
+        self.field = field
+        textField.text = field.stringValue
+        textField.placeholder = field.title
+    }
+    
+    func createSubscription() {
+        subscription = textField.publisher(for: \.text)
+            .assign(to: \.stringValue, on: field)
     }
 }

@@ -49,3 +49,15 @@ extension Date: StringCoder {
         return dateFormatter.string(from: value)
     }
 }
+
+extension Bool: StringCoder {
+    typealias T = Bool
+    static func decode(string: String?) -> Bool? {
+        guard let string = string else { return nil }
+        return string == "1"
+    }
+    static func encode(value: Bool?) -> String? {
+        guard let value = value else { return nil }
+        return value ? "1" : "0"
+    }
+}

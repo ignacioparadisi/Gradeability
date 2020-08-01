@@ -77,6 +77,7 @@
 		32CC658624A8F07D006A3783 /* AssignmentCellPrimaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32CC658524A8F07D006A3783 /* AssignmentCellPrimaryView.swift */; };
 		32CC658824A8F0A8006A3783 /* GradableCellSecondaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32CC658724A8F0A8006A3783 /* GradableCellSecondaryView.swift */; };
 		32CC658B24A8F0F5006A3783 /* AssignmentCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32CC658A24A8F0F5006A3783 /* AssignmentCollectionViewCell.swift */; };
+		32D8ADC724D229D30055D577 /* Field.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D8ADC624D229D30055D577 /* Field.swift */; };
 		32DD89C72492C69F00CBDE36 /* NSTouchBarItemIdentifier+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32DD89C62492C69F00CBDE36 /* NSTouchBarItemIdentifier+Extension.swift */; };
 		32E34EFF247F383500BFD25A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E34EFE247F383500BFD25A /* AppDelegate.swift */; };
 		32E34F01247F383500BFD25A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E34F00247F383500BFD25A /* SceneDelegate.swift */; };
@@ -218,6 +219,7 @@
 		32CC658524A8F07D006A3783 /* AssignmentCellPrimaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentCellPrimaryView.swift; sourceTree = "<group>"; };
 		32CC658724A8F0A8006A3783 /* GradableCellSecondaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradableCellSecondaryView.swift; sourceTree = "<group>"; };
 		32CC658A24A8F0F5006A3783 /* AssignmentCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentCollectionViewCell.swift; sourceTree = "<group>"; };
+		32D8ADC624D229D30055D577 /* Field.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Field.swift; sourceTree = "<group>"; };
 		32DD89C62492C69F00CBDE36 /* NSTouchBarItemIdentifier+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSTouchBarItemIdentifier+Extension.swift"; sourceTree = "<group>"; };
 		32E34EFB247F383500BFD25A /* Gradeability.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gradeability.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		32E34EFE247F383500BFD25A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -325,6 +327,14 @@
 				32708DFA24C9E9940028605C /* Constants.swift */,
 			);
 			path = Utilities;
+			sourceTree = "<group>";
+		};
+		328481BF24D1B61300089054 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				32D8ADC624D229D30055D577 /* Field.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		32877C0524CCEC3600075CCD /* Table View Cells */ = {
@@ -440,6 +450,7 @@
 		329D12A224812ADC00A0173A /* Global */ = {
 			isa = PBXGroup;
 			children = (
+				328481BF24D1B61300089054 /* Models */,
 				329D12A524812B1E00A0173A /* Protocols */,
 				329D12A324812B0B00A0173A /* View Models */,
 				329D12A424812B1000A0173A /* View Controllers */,
@@ -860,6 +871,7 @@
 				324E14F924813DC50089ECFC /* MainSplitViewController.swift in Sources */,
 				32E59DB424832C9C00B4F67C /* CoreDataManagerFactory.swift in Sources */,
 				32CC657D24A8EFF8006A3783 /* GradableCellPrimaryViewModel.swift in Sources */,
+				32D8ADC724D229D30055D577 /* Field.swift in Sources */,
 				32DD89C72492C69F00CBDE36 /* NSTouchBarItemIdentifier+Extension.swift in Sources */,
 				32F86A102482CEC50058E56E /* TermsViewController.swift in Sources */,
 				32A7F168248B0AE200EFB7E4 /* UIFont+Extension.swift in Sources */,

@@ -18,6 +18,14 @@ class AssignmentDetailViewModel {
     
     // MARK: Properties
     
+    struct Sections {
+        static var name = 0
+        static var grades = 1
+        static var deadline = 2
+        static var delete = 3
+    }
+
+    private var fields: [[FieldRepresentable]] = []
     /// Assignment to show the details.
     private var assignment: Assignment?
     /// Subject where the assignment belongs.
@@ -68,6 +76,9 @@ class AssignmentDetailViewModel {
         }
         return isEditing && assignment?.eventIdentifier != nil
     }
+    var numberOfSections: Int {
+        return fields.count
+    }
     
     // MARK: Initializers
     
@@ -81,15 +92,51 @@ class AssignmentDetailViewModel {
         self.deadline = assignment.deadline
         self.subject = assignment.subject
         self.isEditing = true
+        setupFields()
     }
     
     init(subject: Subject) {
         self.subject = subject
         self.isEditing = false
         self.createEvent = !accessToCalendarIsDenied
+        setupFields()
     }
     
     // MARK: Functions
+    private func setupFields() {
+        fields = [
+            [
+                Field<String>(title: GlobalStrings.name.localized, value: assignment?.name, type: .largeTextField)
+            ],
+            [
+                Field<Float>(title: GlobalStrings.grade.localized, value: assignment?.grade, type: .circularPicker),
+                Field<Float>(title: GlobalStrings.minGrade.localized, value: assignment?.minGrade, type: .decimalTextField),
+                Field<Float>(title: GlobalStrings.maxGrade.localized, value: assignment?.maxGrade, type: .decimalTextField)
+            ],
+            [
+                Field<Date>(title: AssignmentString.deadline.localized, value: assignment?.deadline, type: .datePicker)
+            ]
+        ]
+        
+        if isEditing {
+            fields[Sections.deadline].append(ButtonField(title: AssignmentString.openEventInCalendar.localized))
+            fields.append([
+                ButtonField(title: ButtonStrings.delete.localized, type: .destructiveButton)
+            ])
+        } else {
+            fields[Sections.deadline].append(Field<Bool>(title: AssignmentString.createEventInCalendar.localized, value: !accessToCalendarIsDenied, type: .switch))
+        }
+    }
+    
+    func numberOfRows(in section: Int) -> Int {
+        return fields[section].count
+    }
+    
+    func field(for indexPath: IndexPath) -> FieldRepresentable {
+        let section = indexPath.section
+        let row = indexPath.row
+        return fields[section][row]
+    }
     
     /// Updates or creates an assignments in `CoreData`.
     func save() {

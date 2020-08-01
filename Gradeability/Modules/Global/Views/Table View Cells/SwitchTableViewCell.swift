@@ -64,6 +64,14 @@ class SwitchTableViewCell: UITableViewCell, ReusableView {
         self.`switch`.isOn = value
     }
     
+    func configure(with field: FieldRepresentable) {
+        titleLabel.text = field.title.uppercased()
+        if let field = field as? Field<Bool> {
+            `switch`.isOn = field.value ?? true
+        }
+        
+    }
+    
     func toggle() {
         `switch`.isOn.toggle()
     }

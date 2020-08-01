@@ -9,9 +9,10 @@
 import UIKit
 import Combine
 
-class DetailTextFieldTableViewCell<Coder: StringCoder>: UITableViewCell, ReusableView, UITextFieldDelegate {
+class DetailTextFieldTableViewCell: UITableViewCell, ReusableView, UITextFieldDelegate {
     
     // MARK: Properties
+    private var field: FieldRepresentable?
     var textField: UITextField = {
         let textField = UITextField()
         textField.adjustsFontForContentSizeCategory = true
@@ -32,7 +33,7 @@ class DetailTextFieldTableViewCell<Coder: StringCoder>: UITableViewCell, Reusabl
     }()
     private var verticalMargin: CGFloat = 20
     private var subscriptions = Set<AnyCancellable>()
-    @Published var value: Coder.T?
+    @Published var value: String?
     var isValid: Bool? {
         didSet {
             guard let isValid = isValid else {
@@ -48,7 +49,7 @@ class DetailTextFieldTableViewCell<Coder: StringCoder>: UITableViewCell, Reusabl
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupView()
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -75,30 +76,32 @@ class DetailTextFieldTableViewCell<Coder: StringCoder>: UITableViewCell, Reusabl
         
         textField
             .publisher(for: \.text)
-            .map { Coder.decode(string: $0) }
             .assign(to: \.value, on: self)
             .store(in: &subscriptions)
     }
     
-    func configure(with title: String, value: Coder.T?, keyboardType: UIKeyboardType = .default) {
-        titleLabel.text = title.uppercased()
-        textField.text = Coder.encode(value: value)
-        textField.keyboardType = keyboardType
-        
-        if Coder.self == Date.self {
+    func configure(with field: FieldRepresentable) {
+        self.field = field
+        titleLabel.text = field.title.uppercased()
+        textField.text = field.stringValue
+        textField.placeholder = field.placeholder
+        switch field.type {
+        case .decimalTextField:
+            textField.keyboardType = .decimalPad
+        case .datePicker:
             textField.tintColor = .clear
             
             if UIDevice.current.userInterfaceIdiom == .phone {
-                if let date = value as? Date {
+                if let field = field as? Field<Date>, let date = field.value {
                     datePicker.date = date
                 }
                 textField.inputView = datePicker
             } else {
                 textField.isUserInteractionEnabled = false
             }
+        default:
+            break
         }
-        
-        print(subscriptions.count)
     }
     
     @objc private func changeDate() {
