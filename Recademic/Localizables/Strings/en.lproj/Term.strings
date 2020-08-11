@@ -1,0 +1,16 @@
+/* 
+  Term.strings
+  Recademic
+
+  Created by Ignacio Paradisi on 7/27/20.
+  Copyright © 2020 Ignacio Paradisi. All rights reserved.
+*/
+
+"daysLeft" = "Days left";
+"currentTerm" = "Current Term";
+"createTerm" = "Create Term";
+"getStartedMessage" = "To get started, you first need to create a new Term.";
+"deleteTitle" = "Delete \"%@\"?";
+"deleteMessage" = "This will delete all subjects and assignments in this term.";
+"newTerm" = "New Term";
+"setCurrent" = "Set Current";
