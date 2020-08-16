@@ -1,0 +1,23 @@
+/* 
+  Assignment.strings
+  Recademic
+
+  Created by Ignacio Paradisi on 6/5/20.
+  Copyright © 2020 Ignacio Paradisi. All rights reserved.
+*/
+
+"assignments" = "Asignaciones";
+
+// MARK: Assignments List
+"createAssignment" = "Crear Asignación";
+"emptyAssignments" = "Parece que no tienes asignaciones para esta materia.";
+"deleteTitle" = "¿Eliminar \"%@\"?";
+"deleteMessage" = "Esta acción va a cambiar tus calificaciones.";
+
+// MARK: Create Assignment
+"insertName" = "Ingresa el nombre de la asignación.";
+"assignmentsName" = "Nombre de la asignación";
+"deadline" = "Fecha de entrega";
+"createEventInCalendar" = "Crear Evento en Calendario";
+"openEventInCalendar" = "Abrir Evento en Calendario";
+"percentage" = "Porcentaje";

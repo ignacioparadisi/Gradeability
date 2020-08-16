@@ -1,0 +1,16 @@
+/* 
+  Global.strings
+  Recademic
+
+  Created by Ignacio Paradisi on 6/5/20.
+  Copyright © 2020 Ignacio Paradisi. All rights reserved.
+*/
+
+"name" = "Name";
+"grade" = "Grade";
+"maxGrade" = "Maximum grade";
+"minGrade" = "Minimum grade to approve";
+"welcomeTitle" = "Welcome to\nRecademic";
+"welcomeMessage" = "Description";
+"loading" = "Loading";
+"details" = "Details";
