@@ -19,7 +19,7 @@ class CoreDataManager: CoreDataManagerRepresentable {
     // MARK: - Core Data stack
     
     lazy var persistentContainer: NSPersistentCloudKitContainer = {
-        let container = NSPersistentCloudKitContainer(name: "Gradeability")
+        let container = NSPersistentCloudKitContainer(name: "Recademic")
         container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {

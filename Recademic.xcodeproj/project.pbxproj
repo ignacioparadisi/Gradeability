@@ -81,7 +81,7 @@
 		32E34EFF247F383500BFD25A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E34EFE247F383500BFD25A /* AppDelegate.swift */; };
 		32E34F01247F383500BFD25A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E34F00247F383500BFD25A /* SceneDelegate.swift */; };
 		32E34F03247F383500BFD25A /* GradablesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E34F02247F383500BFD25A /* GradablesViewController.swift */; };
-		32E34F09247F383500BFD25A /* Gradeability.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 32E34F07247F383500BFD25A /* Gradeability.xcdatamodeld */; };
+		32E34F09247F383500BFD25A /* Recademic.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 32E34F07247F383500BFD25A /* Recademic.xcdatamodeld */; };
 		32E34F0B247F383600BFD25A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 32E34F0A247F383600BFD25A /* Assets.xcassets */; };
 		32E34F0E247F383600BFD25A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32E34F0C247F383600BFD25A /* LaunchScreen.storyboard */; };
 		32E34F19247F383600BFD25A /* GradeabilityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E34F18247F383600BFD25A /* GradeabilityTests.swift */; };
@@ -628,7 +628,7 @@
 				32E34F38247F3A1100BFD25A /* Assignment+CoreDataProperties.swift */,
 				32E34F39247F3A1100BFD25A /* Gradable+CoreDataClass.swift */,
 				32E34F3A247F3A1100BFD25A /* Gradable+CoreDataProperties.swift */,
-				32E34F07247F383500BFD25A /* Gradeability.xcdatamodeld */,
+				32E34F07247F383500BFD25A /* Recademic.xcdatamodeld */,
 			);
 			path = "Core Data";
 			sourceTree = "<group>";
@@ -849,7 +849,7 @@
 				32CC658324A8F05F006A3783 /* GradableCellPrimaryView.swift in Sources */,
 				32877BFE24CCC72B00075CCD /* AssignmentDetailViewModel.swift in Sources */,
 				32E34F42247F3A1100BFD25A /* Gradable+CoreDataProperties.swift in Sources */,
-				32E34F09247F383500BFD25A /* Gradeability.xcdatamodeld in Sources */,
+				32E34F09247F383500BFD25A /* Recademic.xcdatamodeld in Sources */,
 				32CC657F24A8F01D006A3783 /* AssignmentCellPrimaryViewModel.swift in Sources */,
 				32E34F3C247F3A1100BFD25A /* Term+CoreDataProperties.swift in Sources */,
 				32E59DBB2483314600B4F67C /* AssignmentCoreDataManagerRepresentable.swift in Sources */,
@@ -1320,13 +1320,13 @@
 /* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
-		32E34F07247F383500BFD25A /* Gradeability.xcdatamodeld */ = {
+		32E34F07247F383500BFD25A /* Recademic.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
 				32E34F08247F383500BFD25A /* Gradeability.xcdatamodel */,
 			);
 			currentVersion = 32E34F08247F383500BFD25A /* Gradeability.xcdatamodel */;
-			path = Gradeability.xcdatamodeld;
+			path = Recademic.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

@@ -27,7 +27,7 @@ class TestCoreDataManager: CoreDataManagerRepresentable {
         */
         let description = NSPersistentStoreDescription()
         description.type = NSInMemoryStoreType
-        let container = NSPersistentCloudKitContainer(name: "Gradeability")
+        let container = NSPersistentCloudKitContainer(name: "Recademic")
         container.persistentStoreDescriptions = [description]
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
