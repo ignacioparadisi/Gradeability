@@ -14,16 +14,8 @@ protocol SubjectCoreDataManagerRepresentable {
     ///   - term: Term where the assignments belong.
     ///   - result: Result with the error or subjects fetched
     func fetch(for term: Term, result: @escaping (Result<[Subject], Error>) -> Void)
-    /// Creates a `Subject` into CoreData.
-    /// - Parameters:
-    ///   - term: Term where the subject belongs.
-    ///   - name: Name for the subject.
-    ///   - maxGrade: Maximum grade for the subject.
-    ///   - minGrade: Minimum grade for the subject.
-    ///   - teacherName: Name of the teacher that dictates the subject.
-    func create(term: Term, name: String, maxGrade: Float, minGrade: Float, teacherName: String?)
+    func save(existingSubject: Subject?, name: String?, maxGrade: Float, minGrade: Float, teacherName: String, term: Term?) -> Subject
     /// Deletes a subject from `CoreData`
     /// - Parameter subject: Subject to be deleted
     func delete(_ subject: Subject)
-    func createRandom(term: Term)
 }

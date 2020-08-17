@@ -39,26 +39,29 @@ class SubjectCoreDataManager: SubjectCoreDataManagerRepresentable {
         }
     }
     
-    func create(term: Term, name: String, maxGrade: Float, minGrade: Float, teacherName: String?) {
-        let subject = Subject(context: CoreDataManagerFactory.createManager.context)
-        subject.term = term
+    func save(existingSubject: Subject? = nil, name: String?, maxGrade: Float, minGrade: Float, teacherName: String, term: Term?) -> Subject {
+        var subject: Subject!
+        if existingSubject != nil {
+            subject = existingSubject
+        } else {
+            subject = Subject(context: CoreDataManagerFactory.createManager.context)
+            subject.term = term
+            subject.dateCreated = Date()
+        }
         subject.id = UUID()
         subject.name = name
-        subject.maxGrade = maxGrade
-        subject.minGrade = minGrade
         subject.teacherName = teacherName
-        subject.dateCreated = Date()
+        subject.minGrade = minGrade
+        subject.maxGrade = maxGrade
         CoreDataManagerFactory.createManager.saveContext()
+        return subject
+        // TODO: Calculate Term grade
     }
     
     /// Deletes a subject from `CoreData`.
     /// - Parameter subject: Subject to be deleted.
     func delete(_ subject: Subject) {
         CoreDataManagerFactory.createManager.delete(subject)
-    }
-    
-    func createRandom(term: Term) {
-        create(term: term, name: "Materia", maxGrade: 20, minGrade: 10, teacherName: "Luis")
     }
     
     func getAccumulatedPercentage(assignment: Assignment) -> Float {

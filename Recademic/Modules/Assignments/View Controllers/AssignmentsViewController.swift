@@ -164,14 +164,9 @@ extension AssignmentsViewController: EmptyGradablesViewDelegate {
     
     /// Handle create button tap when there's no assignment created
     func didTapButton() {
-        viewModel.createAssignment()
-        viewModel.fetch()
-        UIView.animate(withDuration: 0.1, animations: { [weak self] in
-            self?.emptyView?.alpha = 0
-        }, completion: { [weak self] _ in
-            self?.emptyView?.removeFromSuperview()
-            self?.emptyView = nil
-        })
+        guard let viewModel = self.viewModel.newAssignmentViewModel else { return }
+        let viewController = AssignmentDetailViewController(viewModel)
+        present(UINavigationController(rootViewController: viewController), animated: true)
     }
     
 }

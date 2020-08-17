@@ -19,6 +19,10 @@ class SubjectsViewModel: GradableViewModelRepresentable {
     private var subjects: [Subject] = []
     var gradables: [GradableCellViewModel] = []
     var showDeleteAlert: ((Int) -> Void)?
+    var goToSubjectDetail: ((SubjectDetailViewModel) -> Void)?
+    var newSubjectViewModel: SubjectDetailViewModel {
+        return SubjectDetailViewModel(term: term)
+    }
     
     // MARK: Internal Properties
     var isMasterController: Bool = true
@@ -116,8 +120,10 @@ class SubjectsViewModel: GradableViewModelRepresentable {
     
     func createContextualMenuForRow(at indexPath: IndexPath) -> UIMenu? {
         var rootChildren: [UIMenuElement] = []
-        let editAction = UIAction(title: ButtonStrings.edit.localized, image: UIImage(systemName: "square.and.pencil")) { _ in
-            
+        let editAction = UIAction(title: ButtonStrings.edit.localized, image: UIImage(systemName: "square.and.pencil")) { [weak self] _ in
+            guard let self = self else { return }
+            let viewModel = SubjectDetailViewModel(subject: self.subjects[indexPath.row])
+            self.goToSubjectDetail?(viewModel)
         }
         let deleteAction = UIAction(title: ButtonStrings.delete.localized, image: UIImage(systemName: "trash"), attributes: .destructive) { [weak self] _ in
             self?.showDeleteAlert?(indexPath.item)
@@ -127,10 +133,6 @@ class SubjectsViewModel: GradableViewModelRepresentable {
         
         let menu = UIMenu(title: "", children: rootChildren)
         return menu
-    }
-    
-    func createSubject() {
-        SubjectCoreDataManager.shared.create(term: term!, name: "Materia", maxGrade: 20, minGrade: 10, teacherName: "Carlitos Perez")
     }
     
     func deleteItem(at index: Int) {
