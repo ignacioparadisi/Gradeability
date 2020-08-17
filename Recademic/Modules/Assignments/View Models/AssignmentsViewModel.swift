@@ -59,9 +59,9 @@ class AssignmentsViewModel: GradableViewModelRepresentable {
             case .success(let assignments):
                 self?.assignments = assignments
                 self?.gradables = assignments.map { GradableCellViewModel(assignment: $0) }
-                if assignments.isEmpty {
-                    self?.subject = assignments[0].subject
-                }
+//                if assignments.isEmpty {
+//                    self?.subject = assignments[0].subject
+//                }
                 self?.dataDidChange?()
             case .failure:
                 break

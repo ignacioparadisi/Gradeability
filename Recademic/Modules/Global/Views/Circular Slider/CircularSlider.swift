@@ -164,6 +164,14 @@ open class CircularSlider: UIView {
         }
     }
     
+    open override var isUserInteractionEnabled: Bool {
+        didSet {
+            if !isUserInteractionEnabled {
+                knobLayer.removeFromSuperlayer()
+            }
+        }
+    }
+    
     
     // MARK: - init
     public override init(frame: CGRect) {

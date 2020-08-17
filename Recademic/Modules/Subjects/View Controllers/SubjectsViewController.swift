@@ -94,6 +94,10 @@ class SubjectsViewController: GradablesViewController {
             alertController.addAction(deleteAction)
             self.present(alertController, animated: true)
         }
+        viewModel.goToSubjectDetail = { [weak self] viewModel in
+            let viewController = SubjectDetailViewController(viewModel)
+            self?.present(UINavigationController(rootViewController: viewController), animated: true)
+        }
     }
     
     /// Show view for creating an assignment in case there's no one created yet.
@@ -116,7 +120,9 @@ class SubjectsViewController: GradablesViewController {
     /// Handle navigation button for creating a new subject
     /// - Parameter sender: Tap gesture
     override func didTapAddButton(_ sender: UIBarButtonItem) {
-
+        let viewModel = self.viewModel.newSubjectViewModel
+        let viewController = SubjectDetailViewController(viewModel)
+        present(UINavigationController(rootViewController: viewController), animated: true)
     }
     
     override func didTapOptionsButton(_ sender: UIBarButtonItem?) {
@@ -175,7 +181,6 @@ extension SubjectsViewController {
 // MARK: - EmptyGradablesViewDelegate
 extension SubjectsViewController: EmptyGradablesViewDelegate {
     func didTapButton() {
-        viewModel.createSubject()
         viewModel.fetch()
         UIView.animate(withDuration: 0.1, animations: { [weak self] in
             self?.emptyView?.alpha = 0

@@ -71,8 +71,11 @@ class TermsViewModel: GradableViewModelRepresentable {
         var rootChildren: [UIMenuElement] = []
         let currentAction = UIAction(title: TermStrings.setCurrent.localized, image: UIImage(systemName: "pin")) { [weak self] _ in
             // Set current Term to not be the current
-            let currentTerm = self?.terms.filter { $0.isCurrent }.first
-            currentTerm?.isCurrent = false
+            if let currentTerms = self?.terms.filter({ $0.isCurrent }) {
+                for term in currentTerms {
+                    term.isCurrent = false
+                }
+            }
             term.isCurrent = true
             CoreDataManager.shared.saveContext()
             self?.delegate?.didChangeCurrentTerm(term)
