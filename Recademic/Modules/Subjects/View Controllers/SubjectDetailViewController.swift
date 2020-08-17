@@ -164,6 +164,10 @@ extension SubjectDetailViewController: UITableViewDataSource {
             cell.textField.publisher(for: \.text)
                 .assign(to: \.teacherName, on: viewModel)
                 .store(in: &cellSubscriptions)
+            viewModel.isValidTeacherName
+                .map { $0 as Bool? }
+                .assign(to: \.isValid, on: cell)
+                .store(in: &cellSubscriptions)
             return cell
         case .delete:
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellIdentifier", for: indexPath)
@@ -202,9 +206,9 @@ extension SubjectDetailViewController: UITableViewDataSource {
             viewModel.areValidGrades
                 .map { isValidMinGrade, _ in
                     return isValidMinGrade
-            }
-            .assign(to: \.isValid, on: cell)
-            .store(in: &subscriptions)
+                }
+                .assign(to: \.isValid, on: cell)
+                .store(in: &subscriptions)
             return cell
         case .maxGrade:
             let cell = tableView.dequeueReusableCell(for: indexPath) as DetailTextFieldTableViewCell<Float>
