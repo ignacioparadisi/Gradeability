@@ -19,9 +19,8 @@ protocol TermCoreDataManagerRepresentable {
     ///   - name: Name for the term.
     ///   - maxGrade: Maximum grade for the term.
     ///   - minGrade: Minimum grade for the term.
-    func create(name: String, maxGrade: Float, minGrade: Float)
+    func save(existingTerm: Term?, name: String, maxGrade: Float, minGrade: Float) -> Term
     /// Deletes a term from `CoreData`.
     /// - Parameter term: Term to be deleted.
     func delete(_ term: Term)
-    func createRandom()
 }

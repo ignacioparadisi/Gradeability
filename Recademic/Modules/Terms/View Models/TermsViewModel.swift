@@ -30,6 +30,9 @@ class TermsViewModel: GradableViewModelRepresentable {
     var title: String {
         return "Terms"
     }
+    var newTermViewModel: TermDetailViewModel {
+        return TermDetailViewModel()
+    }
     // MARK: Functions
     /// Fetches the Subjects.
     func fetch() {

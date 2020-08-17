@@ -48,27 +48,28 @@ class TermCoreDataManager: TermCoreDataManagerRepresentable {
         
     }
     
-    func create(name: String, maxGrade: Float, minGrade: Float) {
-        let term = Term(context: CoreDataManagerFactory.createManager.context)
-        if getCurrent() == nil {
-            term.isCurrent = true
+    func save(existingTerm: Term? = nil, name: String, maxGrade: Float, minGrade: Float) -> Term {
+        var term: Term!
+        if existingTerm != nil {
+            term = existingTerm
+        } else {
+            term = Term(context: CoreDataManagerFactory.createManager.context)
+            term.id = UUID()
+            term.dateCreated = Date()
+            if getCurrent() == nil {
+                term.isCurrent = true
+            }
         }
-        term.id = UUID()
         term.name = name
         term.maxGrade = maxGrade
         term.minGrade = minGrade
-        term.dateCreated = Date()
         CoreDataManagerFactory.createManager.saveContext()
+        return term
     }
     
     /// Deletes a term from `CoreData`.
     /// - Parameter term: Term to be deleted.
     func delete(_ term: Term) {
         CoreDataManagerFactory.createManager.delete(term)
-    }
-    
-    // TODO: Delete this method
-    func createRandom() {
-        create(name: "Semestre", maxGrade: 10, minGrade: 20)
     }
 }

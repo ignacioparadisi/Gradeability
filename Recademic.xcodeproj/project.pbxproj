@@ -52,6 +52,8 @@
 		3297DF2A2491A73500CB22DD /* NotificationName+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3297DF292491A73500CB22DD /* NotificationName+Extension.swift */; };
 		3297DF3C2491BCA600CB22DD /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3297DF3B2491BCA600CB22DD /* MainTabBarController.swift */; };
 		329C16F224A51651005B65A8 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 329C16F124A51651005B65A8 /* CloudKit.framework */; };
+		329CD51324EB3EB200268693 /* TermDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329CD51224EB3EB200268693 /* TermDetailViewController.swift */; };
+		329CD51524EB3EBB00268693 /* TermDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329CD51424EB3EBB00268693 /* TermDetailViewModel.swift */; };
 		329D129B247FFDBC00A0173A /* GradableViewModelRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329D129A247FFDBC00A0173A /* GradableViewModelRepresentable.swift */; };
 		329D129F247FFF2300A0173A /* SubjectsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329D129E247FFF2300A0173A /* SubjectsViewModel.swift */; };
 		329D12A1247FFF3100A0173A /* AssignmentsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329D12A0247FFF3100A0173A /* AssignmentsViewModel.swift */; };
@@ -191,6 +193,8 @@
 		3297DF292491A73500CB22DD /* NotificationName+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationName+Extension.swift"; sourceTree = "<group>"; };
 		3297DF3B2491BCA600CB22DD /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		329C16F124A51651005B65A8 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		329CD51224EB3EB200268693 /* TermDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermDetailViewController.swift; sourceTree = "<group>"; };
+		329CD51424EB3EBB00268693 /* TermDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermDetailViewModel.swift; sourceTree = "<group>"; };
 		329D129A247FFDBC00A0173A /* GradableViewModelRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradableViewModelRepresentable.swift; sourceTree = "<group>"; };
 		329D129E247FFF2300A0173A /* SubjectsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectsViewModel.swift; sourceTree = "<group>"; };
 		329D12A0247FFF3100A0173A /* AssignmentsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentsViewModel.swift; sourceTree = "<group>"; };
@@ -516,6 +520,7 @@
 			isa = PBXGroup;
 			children = (
 				3296EA09247F5BA400A04FE0 /* TermsViewModel.swift */,
+				329CD51424EB3EBB00268693 /* TermDetailViewModel.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -684,6 +689,7 @@
 			isa = PBXGroup;
 			children = (
 				32F86A0F2482CEC50058E56E /* TermsViewController.swift */,
+				329CD51224EB3EB200268693 /* TermDetailViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -836,6 +842,7 @@
 				32F86A142482CF5E0058E56E /* AssignmentsViewController.swift in Sources */,
 				32A7F17B248B2A8B00EFB7E4 /* String+Extension.swift in Sources */,
 				32CC658124A8F039006A3783 /* GradableCellPrimaryViewRepresentable.swift in Sources */,
+				329CD51524EB3EBB00268693 /* TermDetailViewModel.swift in Sources */,
 				32E59DC22483317700B4F67C /* AssignmentCoreDataManager.swift in Sources */,
 				32E59DB92483313E00B4F67C /* SubjectCoreDataManagerRepresentable.swift in Sources */,
 				32E34F03247F383500BFD25A /* GradablesViewController.swift in Sources */,
@@ -912,6 +919,7 @@
 				32E34F01247F383500BFD25A /* SceneDelegate.swift in Sources */,
 				32877C1A24CD0AD700075CCD /* CircularSliderTableViewCell.swift in Sources */,
 				324E14F524812E550089ECFC /* ReusableView.swift in Sources */,
+				329CD51324EB3EB200268693 /* TermDetailViewController.swift in Sources */,
 				32E34F3B247F3A1100BFD25A /* Term+CoreDataClass.swift in Sources */,
 				32B54D84248404E80083B734 /* EmptyGradablesViewController.swift in Sources */,
 				32E59DC02483316D00B4F67C /* SubjectCoreDataManager.swift in Sources */,

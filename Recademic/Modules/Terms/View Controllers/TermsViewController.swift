@@ -113,7 +113,10 @@ class TermsViewController: GradablesViewController {
     }
     
     @objc func goToCreateTermViewController() {
-
+        let viewModel = self.viewModel.newTermViewModel
+        let viewController = TermDetailViewController(viewModel)
+        let navigationController = UINavigationController(rootViewController: viewController)
+        present(navigationController, animated: true)
     }
     
     override func didTapOptionsButton(_ sender: UIBarButtonItem?) {

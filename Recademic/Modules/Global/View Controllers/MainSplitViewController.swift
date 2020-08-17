@@ -60,15 +60,20 @@ class MainSplitViewController: UISplitViewController {
     
     /// Go to `CreateTermViewController`
     private func goToCreateTerm() {
-        TermCoreDataManager.shared.create(name: "Semestre", maxGrade: 20, minGrade: 10)
-        subjectsViewModel?.setTerm(TermCoreDataManager.shared.getCurrent())
-        UIView.animate(withDuration: 0.1, animations: { [weak self] in
-            self?.emptyView?.alpha = 0
-        }, completion: { [weak self] _ in
-            self?.emptyView?.removeFromSuperview()
-            self?.emptyView = nil
-            self?.subjectsViewModel = nil
-        })
+        let viewModel = TermDetailViewModel()
+        let viewController = TermDetailViewController(viewModel)
+        let navigationController = UINavigationController(rootViewController: viewController)
+        present(navigationController, animated: true)
+        // TODO: Go to term detail
+//        TermCoreDataManager.shared.create(name: "Semestre", maxGrade: 20, minGrade: 10)
+//        subjectsViewModel?.setTerm(TermCoreDataManager.shared.getCurrent())
+//        UIView.animate(withDuration: 0.1, animations: { [weak self] in
+//            self?.emptyView?.alpha = 0
+//        }, completion: { [weak self] _ in
+//            self?.emptyView?.removeFromSuperview()
+//            self?.emptyView = nil
+//            self?.subjectsViewModel = nil
+//        })
     }
     
     /// Show `WelcomeViewController` if it's the first time the user enters the app.

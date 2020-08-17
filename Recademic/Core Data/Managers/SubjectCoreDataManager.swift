@@ -45,10 +45,10 @@ class SubjectCoreDataManager: SubjectCoreDataManagerRepresentable {
             subject = existingSubject
         } else {
             subject = Subject(context: CoreDataManagerFactory.createManager.context)
+            subject.id = UUID()
             subject.term = term
             subject.dateCreated = Date()
         }
-        subject.id = UUID()
         subject.name = name
         subject.teacherName = teacherName
         subject.minGrade = minGrade
