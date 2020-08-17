@@ -134,12 +134,6 @@ class AssignmentsViewModel: GradableViewModelRepresentable {
         return .middle
     }
     
-    
-    /// Create a new assignment
-    func createAssignment() {
-        AssignmentCoreDataManager.shared.createRandom(subject: subject)
-    }
-    
     /// Deletes an assignment at a specified index
     /// - Parameter index: Index of the assignment to be deleted
     func deleteItem(at index: Int) {

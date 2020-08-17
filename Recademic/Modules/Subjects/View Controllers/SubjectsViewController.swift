@@ -181,13 +181,10 @@ extension SubjectsViewController {
 // MARK: - EmptyGradablesViewDelegate
 extension SubjectsViewController: EmptyGradablesViewDelegate {
     func didTapButton() {
-        viewModel.fetch()
-        UIView.animate(withDuration: 0.1, animations: { [weak self] in
-            self?.emptyView?.alpha = 0
-        }, completion: { [weak self] _ in
-            self?.emptyView?.removeFromSuperview()
-            self?.emptyView = nil
-        })
+        let viewModel = self.viewModel.newSubjectViewModel
+        let viewController = SubjectDetailViewController(viewModel)
+        let navigationController = UINavigationController(rootViewController: viewController)
+        present(navigationController, animated: true)
     }
 }
 
